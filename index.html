@@ -285,40 +285,6 @@
       filter: grayscale(1);
     }
 
-    .hero-details {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.6s var(--ease-out), opacity 0.6s var(--ease-out);
-      opacity: 0;
-    }
-
-    .hero-details.active {
-      max-height: 500px;
-      opacity: 1;
-    }
-
-    .btn-toggle-hero {
-      background: none;
-      border: none;
-      padding: 0;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-bottom: var(--sp-6);
-      transition: color 0.3s;
-    }
-
-    .btn-toggle-hero:hover {
-      color: var(--text);
-    }
-
     /* Unified Project/Lab Styling */
     .project-panel,
     .lab-panel {
@@ -1040,18 +1006,11 @@
           Turning complex systems into clear products, brands, and stories.
         </h1>
         <div style="margin-top: var(--sp-5); max-width: 840px;">
-          <p class="t-body-lg" style="margin-bottom: var(--sp-5);">
-            Tomi Abe Studio is an independent, systems-driven creative and digital practice working with organizations
-            navigating complexity across product, brand, and media.
+          <p class="t-body-lg" style="margin-bottom: var(--sp-6);">
+            Tomi Abe Studio is an independent, systems-driven creative and digital practice partnering with early-stage
+            ventures, growth-stage companies, and established institutions to translate strategy, information, and
+            infrastructure into coherent digital products, brand systems, and media platforms that scale with clarity.
           </p>
-          <div class="hero-details" id="heroDetails">
-            <p class="t-body" style="font-size: 18px; line-height: 1.6; margin-top: 0; margin-bottom: var(--sp-4);">
-              I partner with early-stage ventures, growth-stage companies, and established institutions across Africa,
-              Europe, and North America to translate strategy, information, and infrastructure into coherent digital
-              products, brand systems, and media platforms that scale with clarity.
-            </p>
-          </div>
-          <button class="btn-toggle-hero" onclick="toggleHeroReadMore()" id="heroToggle">Read More</button>
           <div style="margin-top: var(--sp-6);">
             <a href="#contact" class="btn btn-primary">Let's Work →</a>
           </div>
@@ -1729,13 +1688,6 @@
         navLinks.classList.toggle('active');
         menuToggle.textContent = navLinks.classList.contains('active') ? 'Close' : 'Menu';
       }
-    }
-
-    function toggleHeroReadMore() {
-      const details = document.getElementById('heroDetails');
-      const btn = document.getElementById('heroToggle');
-      const isActive = details.classList.toggle('active');
-      btn.textContent = isActive ? 'Read Less' : 'Read More';
     }
   </script>
 </body>
