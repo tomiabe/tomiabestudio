@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomi Abe Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <style>
+    /* ══════════════════════════════════════════════════════════════
+       TOMI ABE STUDIO — OFFICIAL SITE
+       Built on Master Design System v2.0
+       ══════════════════════════════════════════════════════════════ */
+
+    :root {
+      --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Geist Mono', SFMono-Regular, monospace;
+
+      --sz-xs: 12px;
+      --sz-sm: 14px;
+      --sz-base: 16px;
+      --sz-md: 20px;
+      --sz-lg: 32px;
+      --sz-xl: 48px;
+      --sz-2xl: 64px;
+      --sz-3xl: 80px;
+      --sz-4xl: 112px;
+
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 16px;
+      --sp-4: 24px;
+      --sp-5: 32px;
+      --sp-6: 48px;
+      --sp-7: 64px;
+      --sp-8: 80px;
+      --sp-9: 120px;
+      --sp-10: 100px;
+      /* Reduced from 160px to shrink section gaps */
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --dur-mode: 1200ms;
+      --max-w: 1200px;
+      /* Precise fixed width for site */
+      --page-pad: clamp(32px, 8vw, 120px);
+      --glass: blur(20px) saturate(1.2);
+
+      /* Mode defaults */
+      --bg: #F9F9F7;
+      --surface: #FFFFFF;
+      --border: rgba(0, 0, 0, 0.08);
+      --text: #111110;
+      --muted: #666662;
+      --accent: #2A5C45;
+      --accent-muted: rgba(42, 92, 69, 0.08);
+    }
+
+    .mode-morning {
+      --bg: #F9F9F7;
+      --surface: #FFFFFF;
+      --border: rgba(0, 0, 0, 0.06);
+      --text: #111110;
+      --muted: #666662;
+      --accent: #2A5C45;
+      --accent-muted: rgba(42, 92, 69, 0.08);
+    }
+
+    .mode-afternoon {
+      --bg: #F7F3EF;
+      --surface: #FFFFFF;
+      --border: rgba(0, 0, 0, 0.06);
+      --text: #1C1814;
+      --muted: #7A6E62;
+      --accent: #B05A2A;
+      --accent-muted: rgba(176, 90, 42, 0.08);
+    }
+
+    .mode-evening {
+      --bg: #1A1412;
+      --surface: #261E1B;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #F2EBE4;
+      --muted: #9E8B82;
+      --accent: #E8904A;
+      --accent-muted: rgba(232, 144, 74, 0.12);
+    }
+
+    .mode-night {
+      --bg: #0A0A0A;
+      --surface: #141414;
+      --border: rgba(255, 255, 255, 0.06);
+      --text: #E8E8E8;
+      --muted: #777777;
+      --accent: #8FA7FF;
+      --accent-muted: rgba(143, 167, 255, 0.12);
+    }
+
+    /* Reset & Base */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      transition: background var(--dur-mode) var(--ease-out), color var(--dur-mode) var(--ease-out);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+
+    #shaderCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Layout Structure */
+    .site-wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      padding: 0 var(--page-pad);
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      transition: transform 0.4s var(--ease-out);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+      /* Reduced from 100px for a sleeker look */
+      padding: 0 var(--page-pad);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--sp-6);
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 18px;
+      /* Matched to logo size */
+      font-weight: 500;
+      /* Matched to logo weight */
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* Typography */
+    .t-display {
+      font-size: clamp(38px, 6vw, 64px);
+      /* Further reduced for refinement */
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .t-heading {
+      font-size: var(--sz-xl);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .t-subheading {
+      font-size: var(--sz-md);
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .t-body-lg {
+      font-size: var(--sz-md);
+      line-height: 1.5;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .t-body {
+      font-size: var(--sz-base);
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .t-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    /* Sections */
+    .section {
+      padding: var(--sp-10) 0;
+      border-bottom: 1px solid var(--border);
+      width: 100%;
+    }
+
+    .hero {
+      padding-top: 200px;
+      border-bottom: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-immersive-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      opacity: 0.15;
+      mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    }
+
+    .hero-immersive-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1);
+    }
+
+    /* Unified Project/Lab Styling */
+    .project-panel,
+    .lab-panel {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      /* Reverted to original height */
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: var(--sp-5);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+    }
+
+    .project-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s var(--ease-out);
+      z-index: 1;
+    }
+
+    .project-panel:hover .project-img,
+    .lab-panel:hover .project-img {
+      transform: scale(1.05);
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: var(--sp-6);
+      color: #fff;
+      z-index: 2;
+      transition: background 0.4s var(--ease-out);
+    }
+
+    .project-overlay .t-label {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .project-overlay .t-subheading {
+      color: #fff;
+    }
+
+    .project-content {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: var(--sp-8);
+      align-items: flex-end;
+    }
+
+    .project-meta h3 {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    /* Info Section Redesign */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      /* Text left, Image right */
+      gap: var(--sp-9);
+      align-items: start;
+      /* Align to top for better flow */
+      margin-bottom: var(--sp-10);
+    }
+
+    .profile-img-box {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .profile-img-blend {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .profile-info-below {
+      margin-top: var(--sp-4);
+    }
+
+    .profile-name-below {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+      padding-left: 5px;
+    }
+
+    .profile-title-below {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      padding-left: 5px;
+    }
+
+    /* Grid Layouts for Info Components */
+    .op-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-6);
+      margin-top: var(--sp-4);
+    }
+
+    .op-item {
+      padding: var(--sp-5);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: all 0.4s var(--ease-out);
+    }
+
+    .op-item:hover,
+    .focus-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-4);
+      margin-top: var(--sp-4);
+    }
+
+    .focus-card {
+      padding: var(--sp-5);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+      transition: all 0.4s var(--ease-out);
+    }
+
+    .focus-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    /* Bento Grid for Speaking Section */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: minmax(240px, auto);
+      gap: 20px;
+      margin-top: var(--sp-6);
+    }
+
+    .bento-item {
+      background: var(--surface);
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.4s var(--ease-out);
+    }
+
+    .bento-item:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .bento-item.large {
+      grid-column: span 2;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+    }
+
+    .bento-item.large .bento-date,
+    .bento-item.large .bento-desc {
+      color: var(--bg);
+      opacity: 0.8;
+    }
+
+    .bento-item.large .t-subheading {
+      color: var(--bg);
+    }
+
+    .bento-date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .bento-desc {
+      font-size: 16px;
+      /* User requested 16px */
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+      }
+
+      .bento-item.large {
+        grid-column: span 1;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .info-grid {
+        display: flex;
+        flex-direction: column;
+        gap: var(--sp-6);
+      }
+
+      .info-text .t-label {
+        position: absolute;
+        top: -48px;
+        left: 0;
+      }
+
+      .info-text {
+        position: relative;
+        margin-top: 48px;
+      }
+
+      .profile-img-container {
+        order: -1;
+      }
+
+      /* Image on top for mobile */
+      .op-grid,
+      .focus-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .op-grid,
+      .focus-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .speaking-item {
+        grid-template-columns: 1fr;
+        gap: var(--sp-2);
+      }
+
+      .btn-contact {
+        font-size: 18px !important;
+        padding: 18px 40px !important;
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+        word-break: break-all;
+      }
+    }
+
+    /* Reduced Rounding */
+    /* .project-panel {
+      position: relative;
+      width: 100%;
+      height: 50vh;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: var(--sp-4);
+      cursor: pointer;
+    } */
+
+    .lab-card {
+      padding: var(--sp-5);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.4s var(--ease-out);
+    }
+
+    /* .profile-img-box {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--border);
+      position: sticky;
+      top: 140px;
+    } */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: var(--sz-sm);
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      gap: 8px;
+    }
+
+    /* .lab-panel {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: var(--sp-4);
+      cursor: pointer;
+      border: 1px solid var(--border);
+    } */
+
+    /* .lab-panel:hover .project-img {
+      transform: scale(1.05);
+    } */
+
+    /* Mobile Menu */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text);
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 300;
+      /* Ensure toggle stays above full-screen menu */
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: var(--surface);
+        flex-direction: column;
+        padding: var(--page-pad);
+        border-bottom: 1px solid var(--border);
+        gap: var(--sp-4);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+    }
+
+    /* Info Layout Alignment */
+    .info-layout {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: var(--sp-10);
+      align-items: start;
+      margin-top: var(--sp-6);
+    }
+
+    .profile-img-box {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--border);
+      position: sticky;
+      top: 140px;
+      border: 1px solid var(--border);
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .tag {
+      padding: 4px 12px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-right: 6px;
+    }
+
+    /* Mode Switcher Pill */
+    .mode-pill {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: color-mix(in srgb, var(--surface) 65%, transparent);
+      border: 1px solid var(--border);
+      padding: 8px 20px;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      z-index: 120;
+      backdrop-filter: var(--glass);
+      white-space: nowrap;
+      width: max-content;
+    }
+
+    .mode-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      box-shadow: 0 0 0 1px var(--border);
+      transition: 0.3s;
+    }
+
+    .mode-dot.active {
+      border-color: var(--text);
+      transform: scale(1.2);
+    }
+
+    .clock {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      opacity: 0.6;
+    }
+
+    .btn-scroll-top {
+      position: fixed;
+      bottom: 40px;
+      right: var(--page-pad);
+      width: 48px;
+      height: 48px;
+      background: color-mix(in srgb, var(--surface) 65%, transparent);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      cursor: pointer;
+      z-index: 120;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.4s var(--ease-out);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      backdrop-filter: var(--glass);
+    }
+
+    .btn-scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .btn-scroll-top:hover {
+      transform: translateY(-4px);
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    @media (max-width: 768px) {
+      .btn-scroll-top {
+        bottom: 100px;
+        /* Offset to not overlap with mode pill if needed, or keeping it higher */
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--sp-6);
+      margin-top: var(--sp-8);
+    }
+
+    .social-icon {
+      color: var(--muted);
+      transition: all 0.3s var(--ease-out);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .social-icon:hover {
+      color: var(--text);
+      border-color: var(--text);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    footer {
+      padding: var(--sp-10) 0;
+      opacity: 0.5;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 1024px) {
+      .project-content {
+        grid-template-columns: 1fr;
+        gap: var(--sp-4);
+      }
+
+      .info-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-img-box {
+        position: relative;
+        top: 0;
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: var(--sp-6);
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --page-pad: 24px;
+        --sp-10: 64px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--surface);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: var(--page-pad);
+        z-index: 200;
+        gap: var(--sp-6);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        font-size: 24px;
+      }
+
+      .hero {
+        padding-top: 140px;
+      }
+
+      .t-display {
+        font-size: 36px;
+      }
+
+      .project-panel,
+      .lab-panel {
+        height: auto;
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        background: var(--surface);
+        border: 1px solid var(--border);
+      }
+
+      .project-img {
+        position: relative;
+        height: 240px;
+        width: 100%;
+      }
+
+      .project-overlay {
+        position: relative;
+        background: var(--surface);
+        color: var(--text);
+        padding: var(--sp-5);
+        height: auto;
+        display: block;
+      }
+
+      .project-overlay .t-label {
+        color: var(--accent) !important;
+        opacity: 1 !important;
+      }
+
+      .project-overlay .t-subheading {
+        color: var(--text) !important;
+      }
+
+      .project-overlay .t-body {
+        color: var(--muted) !important;
+        opacity: 1 !important;
+      }
+
+      .project-content {
+        grid-template-columns: 1fr;
+        gap: var(--sp-4);
+        display: block;
+      }
+
+      .project-meta {
+        margin-bottom: var(--sp-5);
+      }
+
+      .project-meta h3 {
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+
+      .project-desc {
+        color: var(--muted);
+        opacity: 1;
+        margin-top: 12px;
+      }
+
+      .tag {
+        background: var(--accent-muted);
+        color: var(--accent);
+        border: 1px solid var(--accent-muted);
+      }
+
+      .lab-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body class="mode-morning" id="body">
+
+  <canvas id="shaderCanvas"></canvas>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Tomi Abe Studio</a>
+      <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#work" onclick="toggleMenu()">Work</a></li>
+        <li><a href="#lab" onclick="toggleMenu()">Lab</a></li>
+        <li><a href="#info" onclick="toggleMenu()">Info</a></li>
+        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="site-wrapper">
+    <!-- HERO -->
+    <header class="section hero">
+      <div class="hero-immersive-bg" id="heroBg">
+        <img src="assets/images/pawel-czerwinski-V5vtlId8sKw-unsplash.jpg" class="hero-immersive-img">
+      </div>
+      <div class="container">
+        <h1 class="t-display" style="max-width: 900px;">
+          Turning complex systems into clear products, brands, and stories.
+        </h1>
+        <div style="margin-top: var(--sp-8); max-width: 840px;">
+          <p class="t-body-lg" style="margin-bottom: var(--sp-4);">
+            Tomi Abe Studio is an independent, systems-driven creative and digital practice working with organizations
+            navigating complexity across product, brand, and media.
+          </p>
+          <p class="t-body" style="margin-bottom: var(--sp-6); font-size: 18px; line-height: 1.6;">
+            I partner with early-stage ventures, growth-stage companies, and established institutions across Africa,
+            Europe, and North America to translate strategy, information, and infrastructure into coherent digital
+            products, brand systems, and media platforms that scale with clarity.
+          </p>
+          <a href="#contact" class="btn btn-primary">Let's Work →</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- WORK -->
+    <section class="section" id="work">
+      <div class="container">
+        <p class="t-label" style="margin-bottom: var(--sp-6);">Selected Work</p>
+
+        <!-- Susinsight -->
+        <div class="project-panel">
+          <img src="https://picsum.photos/id/48/1600/900" class="project-img">
+          <div class="project-overlay">
+            <div class="project-content">
+              <div class="project-meta">
+                <div style="margin-bottom: 12px;">
+                  <span class="tag">Media</span><span class="tag">Research</span><span class="tag">Sustainability</span>
+                </div>
+                <h3>Susinsight</h3>
+                <p class="t-label">Co-Publisher & Platform Lead</p>
+              </div>
+              <div class="project-info-block">
+                <p class="t-subheading" style="margin-bottom: 8px;">Advancing sustainability journalism
+                  across Africa through data-driven storytelling.</p>
+                <div class="project-desc">
+                  I shape editorial strategy and creative direction, leading the optimization of our digital platform
+                  and content systems. I build and manage multidisciplinary teams to position Susinsight as a
+                  continent-wide reference for clarity-driven reporting.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WeCollect -->
+        <div class="project-panel">
+          <img src="https://picsum.photos/id/60/1600/900" class="project-img">
+          <div class="project-overlay">
+            <div class="project-content">
+              <div class="project-meta">
+                <div style="margin-bottom: 12px;">
+                  <span class="tag">Infrastructure</span><span class="tag">B2B</span><span class="tag">Analytics</span>
+                </div>
+                <h3>WeCollect</h3>
+                <p class="t-label">Brand & Digital Consultant</p>
+              </div>
+              <div class="project-info-block">
+                <p class="t-subheading" style="margin-bottom: 8px;">Developing tools for offline data
+                  capture and real-time analytics across African markets.</p>
+                <div class="project-desc">
+                  I led brand and digital strategy, redefining WeCollect’s story so complex technical capabilities were
+                  communicated simply to governments and enterprises. I also helped grow the Insights newsletter and
+                  webinar series to refine strategic positioning and lead quality.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zeproc -->
+        <div class="project-panel">
+          <img src="https://picsum.photos/id/107/1600/900" class="project-img">
+          <div class="project-overlay">
+            <div class="project-content">
+              <div class="project-meta">
+                <div style="margin-bottom: 12px;">
+                  <span class="tag">Marketplace</span><span class="tag">Industrial</span><span
+                    class="tag">Product</span>
+                </div>
+                <h3>Zeproc</h3>
+                <p class="t-label">Product Design Consultant</p>
+              </div>
+              <div class="project-info-block">
+                <p class="t-subheading" style="margin-bottom: 8px;">Simplifying industrial procurement in a
+                  traditionally complex and fragmented ecosystem.</p>
+                <div class="project-desc">
+                  I translated user research into focused refinements that reduced friction in buying workflows and
+                  enhanced buyer confidence. My work helped establish a cohesive, user-centered design direction that
+                  directly impacts revenue and retention.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Translayte -->
+        <div class="project-panel">
+          <img src="https://picsum.photos/id/119/1600/900" class="project-img">
+          <div class="project-overlay">
+            <div class="project-content">
+              <div class="project-meta">
+                <div style="margin-bottom: 12px;">
+                  <span class="tag">Growth</span><span class="tag">E-Translation</span><span class="tag">UX</span>
+                </div>
+                <h3>Translayte</h3>
+                <p class="t-label">Growth Design Consultant</p>
+              </div>
+              <div class="project-info-block">
+                <p class="t-subheading" style="margin-bottom: 8px;">Certified translation services across
+                  borders, legal systems, and regulatory environments.</p>
+                <div class="project-desc">
+                  I focused on the intersection of UX and conversion, identifying growth opportunities that scale
+                  sustainably. I designed trustworthiness-focused upsell moments and optimized end-to-end customer
+                  journeys to strengthen brand consistency.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fairbnb -->
+        <div class="project-panel">
+          <img src="https://picsum.photos/id/122/1600/900" class="project-img">
+          <div class="project-overlay">
+            <div class="project-content">
+              <div class="project-meta">
+                <div style="margin-bottom: 12px;">
+                  <span class="tag">Social Impact</span><span class="tag">Travel</span><span
+                    class="tag">Cooperative</span>
+                </div>
+                <h3>Fairbnb</h3>
+                <p class="t-label">Brand & Product Consultant</p>
+              </div>
+              <div class="project-info-block">
+                <p class="t-subheading" style="margin-bottom: 8px;">Sustainable travel marketplace aligning
+                  tourism with local community impact.</p>
+                <div class="project-desc">
+                  I redefined Fairbnb’s verbal identity to project trust and transparency across product and marketing.
+                  I unified communication and conversion strategies and designed improvements to the booking experience
+                  to ensure user journeys remained intuitive and socially aligned.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Eze -->
+        <div class="project-panel">
+          <img src="https://picsum.photos/id/160/1600/900" class="project-img">
+          <div class="project-overlay">
+            <div class="project-content">
+              <div class="project-meta">
+                <div style="margin-bottom: 12px;">
+                  <span class="tag">B2B</span><span class="tag">Electronics</span><span class="tag">Marketplace</span>
+                </div>
+                <h3>Eze</h3>
+                <p class="t-label">Brand & Product Design Lead</p>
+              </div>
+              <div class="project-info-block">
+                <p class="t-subheading" style="margin-bottom: 8px;">YC-backed B2B electronics marketplace
+                  connecting global buyers and sellers through a trusted platform.</p>
+                <div class="project-desc">
+                  I established and led the in-house design function, redesigning core interfaces and streamlining the
+                  buyer–seller journey. I created a cohesive visual identity across all digital channels that directly
+                  supported investor readiness and market expansion.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB -->
+    <section class="section" id="lab">
+      <div class="container">
+        <p class="t-label" style="margin-bottom: var(--sp-6);">The Lab</p>
+        <p class="t-body-lg" style="margin-bottom: var(--sp-8); max-width: 600px;">
+          The Lab is where Tomi Abe explores independent projects, tools, and ideas that turn complex systems into
+          clear, usable experiences and resources.
+        </p>
+        <div class="lab-grid">
+          <!-- NairaWatch -->
+          <div class="lab-panel">
+            <img src="https://picsum.photos/id/180/1200/600" class="project-img">
+            <div class="project-overlay">
+              <div class="project-content">
+                <div class="project-meta">
+                  <div style="margin-bottom:8px;"><span class="tag">Web App</span></div>
+                  <h3>NairaWatch</h3>
+                  <p class="t-body" style="font-size:13px; max-width:300px;">Aggregating
+                    Nigerian parallel market exchange rates using a hybrid of official data and AI-interpreted signals.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- WebHunt -->
+          <div class="lab-panel">
+            <img src="https://picsum.photos/id/164/1200/600" class="project-img">
+            <div class="project-overlay">
+              <div class="project-content">
+                <div class="project-meta">
+                  <div style="margin-bottom:8px;"><span class="tag">Curated Gallery</span></div>
+                  <h3>WebHunt</h3>
+                  <p class="t-body" style="font-size:13px; max-width:300px;">A digital gallery
+                    showcasing innovative web designs pushing the boundaries of storytelling and interaction.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Alphabetics -->
+          <div class="lab-panel">
+            <img src="https://picsum.photos/id/175/1200/600" class="project-img">
+            <div class="project-overlay">
+              <div class="project-content">
+                <div class="project-meta">
+                  <div style="margin-bottom:8px;"><span class="tag">Typography</span></div>
+                  <h3>Alphabetics</h3>
+                  <p class="t-body" style="font-size:13px; max-width:300px;">Typographic
+                    exploration transforming letterforms into minimalist marks that blend clarity with conceptual
+                    storytelling.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Yoruba Trad Wedding -->
+          <div class="lab-panel">
+            <img src="https://picsum.photos/id/102/1200/600" class="project-img">
+            <div class="project-overlay">
+              <div class="project-content">
+                <div class="project-meta">
+                  <div style="margin-bottom:8px;"><span class="tag">AI Animation</span></div>
+                  <h3>Yoruba Trad Wedding</h3>
+                  <p class="t-body" style="font-size:13px; max-width:300px;">An AI-animated
+                    short celebrating the symbolism, color, and ceremony of traditional Yoruba weddings.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- JTF23 -->
+          <div class="lab-panel">
+            <img src="https://picsum.photos/id/111/1200/600" class="project-img">
+            <div class="project-overlay">
+              <div class="project-content">
+                <div class="project-meta">
+                  <div style="margin-bottom:8px;"><span class="tag">Interactive Site</span></div>
+                  <h3>JTF23</h3>
+                  <p class="t-body" style="font-size:13px; max-width:300px;">A personalized
+                    wedding website telling a couple’s story through an intimate, interactive digital experience.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Acquario -->
+          <div class="lab-panel">
+            <img src="https://picsum.photos/id/158/1200/600" class="project-img">
+            <div class="project-overlay">
+              <div class="project-content">
+                <div class="project-meta">
+                  <div style="margin-bottom:8px;"><span class="tag">Data Simulation</span></div>
+                  <h3>Acquario</h3>
+                  <p class="t-body" style="font-size:13px; max-width:300px;">A virtual aquarium
+                    visualizing aquatic migration patterns through multisensory, data-driven simulations.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO / ABOUT -->
+    <section class="section" id="info">
+      <div class="container">
+        <div class="info-grid">
+          <div class="info-text">
+            <p class="t-label" style="margin-bottom: var(--sp-4);">info</p>
+            <p class="t-body-lg"
+              style="font-size: 28px; font-weight: 600; line-height: 1.3; margin-bottom: var(--sp-5);">
+              Tomi Abe is a strategic creative and digital leader working at the intersection of design, technology,
+              media, and research.
+            </p>
+            <p class="t-body" style="margin-bottom: var(--sp-4);">
+              Over the past decade, he has partnered with YC-backed startups, Fortune 500 ecosystems, and impact-driven
+              organizations, building systems that help teams communicate clearly, ship confidently, and scale with
+              coherence.
+            </p>
+            <p class="t-body" style="margin-bottom: var(--sp-6);">
+              Beyond client work, he speaks, trains, and mentors on emerging technologies, systems thinking, and
+              responsible innovation. With foundations in computer science, design, and creative technology, and
+              experience spanning in-house, agency, and consulting environments, he believes knowledge should empower,
+              not overwhelm.
+            </p>
+          </div>
+          <div class="profile-img-container">
+            <div class="profile-img-box">
+              <img src="assets/images/tomi-profile.jpg" class="profile-img-blend" alt="Tomi Abe">
+            </div>
+            <div class="profile-info-below">
+              <h3 class="profile-name-below">Tomi Abe</h3>
+              <p class="profile-title-below">Principal Consultant</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: var(--sp-10);">
+          <!-- Operating Model -->
+          <div style="margin-top: var(--sp-8);">
+            <p class="t-label">Operating Model</p>
+            <div class="op-grid">
+              <div class="op-item">
+                <h4 class="t-subheading" style="margin-bottom: 8px;">Strategic Advisory</h4>
+                <p class="t-body" style="font-size: 14px;">Providing direction, systems thinking, and decision
+                  frameworks for organizations navigating complexity, growth, or transformation.</p>
+              </div>
+              <div class="op-item">
+                <h4 class="t-subheading" style="margin-bottom: 8px;">Independent Execution</h4>
+                <p class="t-body" style="font-size: 14px;">Leading the design and development of product, brand, or
+                  digital systems from concept through implementation and launch.</p>
+              </div>
+              <div class="op-item">
+                <h4 class="t-subheading" style="margin-bottom: 8px;">Embedded Collaboration</h4>
+                <p class="t-body" style="font-size: 14px;">Working closely with internal teams as an integrated partner
+                  to accelerate clarity, alignment, and execution.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Focus Areas -->
+          <div style="margin-top: var(--sp-10);">
+            <p class="t-label">Focus Areas</p>
+            <div class="focus-grid">
+              <div class="focus-card">
+                <svg class="focus-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+                <h4 class="t-subheading" style="font-size: 16px;">Brand & Digital Strategy</h4>
+                <p class="t-body" style="font-size: 13px;">Defining the narrative, structure, and digital foundation
+                  that helps organizations communicate clearly, differentiate meaningfully, and scale with coherence
+                  across platforms and touchpoints.</p>
+              </div>
+              <div class="focus-card">
+                <svg class="focus-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+                <h4 class="t-subheading" style="font-size: 16px;">Product & Experience Design</h4>
+                <p class="t-body" style="font-size: 13px;">Designing and building intuitive, scalable digital products
+                  and interfaces that align user needs, business goals, and technical systems into usable, effective,
+                  and enduring experiences.</p>
+              </div>
+              <div class="focus-card">
+                <svg class="focus-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 3v18h18" />
+                  <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
+                </svg>
+                <h4 class="t-subheading" style="font-size: 16px;">Data Visualization & Storytelling</h4>
+                <p class="t-body" style="font-size: 13px;">Transforming complex data, research, and information into
+                  clear visual and interactive narratives that improve understanding, support decision-making, and
+                  communicate insight effectively.</p>
+              </div>
+              <div class="focus-card">
+                <svg class="focus-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 11a9 9 0 0 1 9 9" />
+                  <path d="M4 4a16 16 0 0 1 16 16" />
+                  <circle cx="5" cy="19" r="1" />
+                </svg>
+                <h4 class="t-subheading" style="font-size: 16px;">Media Systems & Content Platforms</h4>
+                <p class="t-body" style="font-size: 13px;">Designing the systems, workflows, and digital environments
+                  that enable organizations to publish, manage, and evolve content as structured, scalable knowledge
+                  over time.</p>
+              </div>
+              <div class="focus-card">
+                <svg class="focus-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+                  <path d="M13 13l6 6" />
+                </svg>
+                <h4 class="t-subheading" style="font-size: 16px;">Creative Technology & Interactive Media</h4>
+                <p class="t-body" style="font-size: 13px;">Exploring and building experimental, emerging, and
+                  interactive digital experiences that extend how people engage with information, systems, and ideas
+                  beyond conventional interfaces.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Speaking -->
+          <div style="margin-top: var(--sp-10);">
+            <p class="t-label">Speaking, Workshops & Mentorship</p>
+            <div style="margin-top: var(--sp-4); max-width: 800px;">
+              <p class="t-body"
+                style="margin-bottom: 24px; font-size: 20px; font-weight: 500; color: var(--text); line-height: 1.4;">
+                Tomi designs and delivers talks, workshops, and mentorship programs at the intersection of design,
+                emerging technologies, systems thinking, and creative entrepreneurship, helping teams and individuals
+                apply these tools in practical, responsible, and strategically meaningful ways.
+              </p>
+              <p class="t-body" style="margin-bottom: 40px; line-height: 1.6;">
+                His audiences span early-stage founders, creative professionals, corporate teams, and global
+                organizations across Africa and beyond. He is known for translating complex technical concepts into
+                clear frameworks that support better decision-making, communication, and execution.
+              </p>
+            </div>
+
+            <p class="t-label" style="opacity: 0.6; margin-bottom: var(--sp-4);">Selected engagements include:</p>
+
+            <div class="bento-grid">
+              <!-- Mentorship (Featured) -->
+              <div class="bento-item large">
+                <div>
+                  <span class="bento-date">SINCE 2022 / MENTOR</span>
+                  <h4 class="t-subheading" style="font-size: 24px; margin-bottom: 16px;">MentorCruise</h4>
+                  <p class="bento-desc">Ongoing global design mentorship through MentorCruise, supporting designers in
+                    advancing toward senior and leadership roles. <a href="https://mentorcruise.com"
+                      style="color: inherit; text-decoration: underline;">Learn more</a></p>
+                </div>
+              </div>
+
+              <!-- Loblaw -->
+              <div class="bento-item">
+                <div>
+                  <span class="bento-date">2024 / TRAINER</span>
+                  <h4 class="t-subheading">Loblaw Digital</h4>
+                  <p class="bento-desc">Advanced prompting and generative workflow training for internal AI committee.
+                  </p>
+                </div>
+              </div>
+
+              <!-- African Climate Stories -->
+              <div class="bento-item">
+                <div>
+                  <span class="bento-date">2024 / FACILITATOR</span>
+                  <h4 class="t-subheading">African Climate Stories</h4>
+                  <p class="bento-desc">AI-driven infographic design workshop helping sustainability advocates translate
+                    complex research into visual narratives.</p>
+                </div>
+              </div>
+
+              <!-- FITC -->
+              <div class="bento-item">
+                <div>
+                  <span class="bento-date">2024 / PANELIST</span>
+                  <h4 class="t-subheading">FITC E3 Conference</h4>
+                  <p class="bento-desc">Ethical AI panel contributing to discussions on responsible automation and the
+                    future of work.</p>
+                </div>
+              </div>
+
+              <!-- Nairametrics -->
+              <div class="bento-item">
+                <div>
+                  <span class="bento-date">2020 / SPEAKER</span>
+                  <h4 class="t-subheading">Nairametrics</h4>
+                  <p class="bento-desc">Strategy session for creative entrepreneurs on navigating financial uncertainty.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact" style="border-bottom: none; text-align: center; padding: var(--sp-10) 0;">
+      <div class="container">
+        <p class="t-label" style="margin-bottom: var(--sp-6);">Let's Work</p>
+        <h2 class="t-display" style="margin-bottom: var(--sp-8);">Let’s create <br>something coherent.</h2>
+        <a href="mailto:studio@tomiabe.com" class="btn btn-primary btn-contact"
+          style="font-size: 24px; padding: 24px 64px; border-radius: 20px;">studio@tomiabe.com</a>
+        <p class="t-body" style="margin-top: 32px;">For project inquiries, collaborations, or speaking engagements.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Twitter">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
+              </path>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+              </path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <footer>
+        <p>© 2026 TOMI ABE STUDIO</p>
+        <p>OBJECTIVITY · CLARITY · PRECISION</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- MODE SWITCHER -->
+  <div class="mode-pill">
+    <div class="mode-dot active" data-mode="morning" onclick="setMode('morning', true)" title="Morning"
+      style="background: #E2E2DE;"></div>
+    <div class="mode-dot" data-mode="afternoon" onclick="setMode('afternoon', true)" title="Afternoon"
+      style="background: #DBCDBA;"></div>
+    <div class="mode-dot" data-mode="evening" onclick="setMode('evening', true)" title="Evening"
+      style="background: #5E463E;"></div>
+    <div class="mode-dot" data-mode="night" onclick="setMode('night', true)" title="Night" style="background: #222222;">
+    </div>
+    <div class="clock" id="clockLabel">--:-- --</div>
+  </div>
+
+  <button class="btn-scroll-top" id="scrollTopBtn" onclick="scrollToTop()" title="Scroll to Top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  </button>
+
+  <script>
+    // ── SHADER LOGIC ───────────────────────────────
+    const canvas = document.getElementById('shaderCanvas');
+    const gl = canvas.getContext('webgl');
+
+    const modeConfig = {
+      morning: { r: 0.16, g: 0.36, b: 0.27, o: 0.12, d: 0.0 },
+      afternoon: { r: 0.69, g: 0.35, b: 0.16, o: 0.12, d: 0.0 },
+      evening: { r: 0.91, g: 0.56, b: 0.29, o: 0.20, d: 1.0 },
+      night: { r: 0.7, g: 0.8, b: 1.0, o: 0.35, d: 1.0 }
+    };
+
+    let cur = { ...modeConfig.morning }, tgt = { ...modeConfig.morning };
+
+    const vert = `attribute vec2 a; void main(){gl_Position=vec4(a,0,1);}`;
+    const frag = `
+      precision mediump float;
+      uniform float u_t; uniform vec2 u_res; uniform vec3 u_col; uniform float u_op; uniform float u_dark;
+      float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+      void main(){
+        vec2 uv = gl_FragCoord.xy / u_res.xy;
+        vec2 p = (gl_FragCoord.xy * 2.0 - u_res.xy) / min(u_res.x, u_res.y);
+        vec3 finalCol = vec3(0.0);
+        if(u_dark > 0.5) {
+          float s = 0.0;
+          for(float i=0.0; i<3.0; i++) {
+            vec2 q = p * (2.0 + i); vec2 id = floor(q); vec2 f = fract(q) - 0.5;
+            float h = hash(id);
+            if(h > 0.98) {
+              float d = length(f);
+              float twinkle = sin(u_t * 2.0 + h * 10.0) * 0.5 + 0.5;
+              s += smoothstep(0.04, 0.0, d) * twinkle * (1.0 - i * 0.3);
+            }
+          }
+          finalCol = u_col * s;
+        } else {
+          float b = 0.0;
+          for(float i=0.0; i<3.0; i++) {
+            float t = u_t * (0.05 + i * 0.03);
+            vec2 pos = vec2(sin(t), cos(t * 0.8)) * 0.8;
+            float d = length(p - pos);
+            b += exp(-d * (1.5 + i)) * 0.15;
+          }
+          finalCol = u_col * b;
+        }
+        float vg = 1.0 - length(uv - 0.5) * 0.6;
+        gl_FragColor = vec4(finalCol, u_op * vg);
+      }`;
+
+    let prog, uT, uR, uC, uO, uD, t0;
+    if (gl) {
+      function sh(tp, src) { const s = gl.createShader(tp); gl.shaderSource(s, src); gl.compileShader(s); return s; }
+      prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vert)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, frag)); gl.linkProgram(prog); gl.useProgram(prog);
+      const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      const aPos = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+      uT = gl.getUniformLocation(prog, 'u_t'); uR = gl.getUniformLocation(prog, 'u_res'); uC = gl.getUniformLocation(prog, 'u_col'); uO = gl.getUniformLocation(prog, 'u_op'); uD = gl.getUniformLocation(prog, 'u_dark');
+      gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      t0 = performance.now();
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; gl.viewport(0, 0, canvas.width, canvas.height); }
+      window.addEventListener('resize', resize); resize();
+      function lerp(a, b, t) { return a + (b - a) * t; }
+      (function frame(now) {
+        const t = (now - t0) * .001, lf = 0.02;
+        cur.r = lerp(cur.r, tgt.r, lf); cur.g = lerp(cur.g, tgt.g, lf); cur.b = lerp(cur.b, tgt.b, lf); cur.o = lerp(cur.o, tgt.o, lf); cur.d = lerp(cur.d, tgt.d, lf);
+        gl.clear(gl.COLOR_BUFFER_BIT); gl.uniform1f(uT, t); gl.uniform2f(uR, canvas.width, canvas.height); gl.uniform3f(uC, cur.r, cur.g, cur.b); gl.uniform1f(uO, cur.o); gl.uniform1f(uD, cur.d);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(frame);
+      })(t0);
+    }
+
+    // ── MODE MANAGEMENT ──────────────────────────────────────────
+    const MODES = ['morning', 'afternoon', 'evening', 'night'];
+    let currentMode = null;
+    let manualOverride = false;
+    function setMode(mode, manual = false) {
+      if (manual) manualOverride = true;
+      if (mode === currentMode) return;
+      currentMode = mode;
+      MODES.forEach(m => document.body.classList.remove('mode-' + m));
+      document.body.classList.add('mode-' + mode);
+      document.querySelectorAll('.mode-dot').forEach(d => d.classList.toggle('active', d.dataset.mode === mode));
+      tgt = { ...modeConfig[mode] };
+    }
+    function updateClock() {
+      const now = new Date();
+      const rawH = now.getHours();
+      const h = rawH % 12 || 12;
+      const m = now.getMinutes().toString().padStart(2, '0');
+      const ampm = rawH >= 12 ? 'PM' : 'AM';
+      document.getElementById('clockLabel').textContent = h + ":" + m + " " + ampm;
+      if (!manualOverride) {
+        let a = 'night';
+        if (rawH >= 6 && rawH < 12) a = 'morning';
+        else if (rawH >= 12 && rawH < 17) a = 'afternoon';
+        else if (rawH >= 17 && rawH < 21) a = 'evening';
+        setMode(a);
+      }
+    }
+    updateClock(); setInterval(updateClock, 10000);
+
+    // Fade nav on scroll
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      const nav = document.querySelector('.nav');
+      if (currentScroll > 150) {
+        nav.style.background = 'color-mix(in srgb, var(--surface) 80%, transparent)';
+        nav.style.backdropFilter = 'var(--glass)';
+        nav.style.borderBottom = '1px solid var(--border)';
+      } else {
+        nav.style.background = 'transparent';
+        nav.style.backdropFilter = 'none';
+        nav.style.borderBottom = 'none';
+      }
+      lastScroll = currentScroll;
+
+      // Hero fade logic
+      const heroBg = document.getElementById('heroBg');
+      if (heroBg) {
+        const opacity = Math.max(0, 0.15 - (currentScroll / 800));
+        heroBg.style.opacity = opacity;
+      }
+
+      // Scroll to top button visibility
+      const scrollTopBtn = document.getElementById('scrollTopBtn');
+      if (currentScroll > 500) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      const menuToggle = document.querySelector('.menu-toggle');
+      if (window.innerWidth <= 768) {
+        navLinks.classList.toggle('active');
+        menuToggle.textContent = navLinks.classList.contains('active') ? 'Close' : 'Menu';
+      }
+    }
+  </script>
+</body>
+
+</html>
