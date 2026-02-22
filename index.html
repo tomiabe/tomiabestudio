@@ -285,6 +285,42 @@
       filter: grayscale(1);
     }
 
+    .hero-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s var(--ease-out), opacity 0.6s var(--ease-out);
+      opacity: 0;
+    }
+
+    .hero-details.active {
+      max-height: 500px;
+      opacity: 1;
+      margin-top: var(--sp-4);
+      margin-bottom: var(--sp-6);
+    }
+
+    .btn-toggle-hero {
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: var(--sp-6);
+      transition: color 0.3s;
+    }
+
+    .btn-toggle-hero:hover {
+      color: var(--text);
+    }
+
     /* Unified Project/Lab Styling */
     .project-panel,
     .lab-panel {
@@ -1010,11 +1046,24 @@
             Tomi Abe Studio is an independent, systems-driven creative and digital practice working with organizations
             navigating complexity across product, brand, and media.
           </p>
-          <p class="t-body" style="margin-bottom: var(--sp-6); font-size: 18px; line-height: 1.6;">
+          <p class="t-body" style="margin-bottom: var(--sp-4); font-size: 18px; line-height: 1.6;">
             I partner with early-stage ventures, growth-stage companies, and established institutions across Africa,
             Europe, and North America to translate strategy, information, and infrastructure into coherent digital
             products, brand systems, and media platforms that scale with clarity.
           </p>
+          <button class="btn-toggle-hero" onclick="toggleHeroReadMore()" id="heroToggle">Read More</button>
+          <div class="hero-details" id="heroDetails">
+            <p class="t-body" style="font-size: 18px; line-height: 1.6; margin-bottom: var(--sp-4);">
+              Strategic creative and digital leader working at the intersection of design, technology, media, and
+              research. Over the past decade, I have partnered with YC-backed startups, Fortune 500 ecosystems, and
+              impact-driven organizations, building systems that help teams communicate clearly, ship confidently, and
+              scale with coherence.
+            </p>
+            <p class="t-body" style="font-size: 18px; line-height: 1.6;">
+              With foundations in computer science, design, and creative technology, and experience spanning in-house,
+              agency, and consulting environments, I believe knowledge should empower, not overwhelm.
+            </p>
+          </div>
           <a href="#contact" class="btn btn-primary">Let's Work →</a>
         </div>
       </div>
@@ -1689,6 +1738,13 @@
         navLinks.classList.toggle('active');
         menuToggle.textContent = navLinks.classList.contains('active') ? 'Close' : 'Menu';
       }
+    }
+
+    function toggleHeroReadMore() {
+      const details = document.getElementById('heroDetails');
+      const btn = document.getElementById('heroToggle');
+      const isActive = details.classList.toggle('active');
+      btn.textContent = isActive ? 'Read Less' : 'Read More';
     }
   </script>
 </body>
