@@ -709,16 +709,26 @@
     }
 
     .tag {
-      padding: 4px 12px;
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
       font-family: var(--font-mono);
       font-size: 10px;
+      line-height: 1;
       text-transform: uppercase;
       border-radius: 100px;
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(4px);
       color: #fff;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      margin-right: 6px;
+      white-space: nowrap;
+    }
+
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
     }
 
     /* Mode Switcher Pill */
@@ -969,6 +979,12 @@
         background: var(--accent-muted);
         color: var(--accent);
         border: 1px solid var(--accent-muted);
+        padding: 6px 14px;
+      }
+
+      .tags-row {
+        gap: 6px;
+        margin-bottom: 12px;
       }
 
       .lab-grid {
@@ -1036,7 +1052,7 @@
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
-                <div style="margin-bottom: 12px;">
+                <div class="tags-row">
                   <span class="tag">Media</span><span class="tag">Research</span><span class="tag">Sustainability</span>
                 </div>
                 <h3>Susinsight</h3>
@@ -1061,7 +1077,7 @@
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
-                <div style="margin-bottom: 12px;">
+                <div class="tags-row">
                   <span class="tag">Infrastructure</span><span class="tag">B2B</span><span class="tag">Data</span>
                 </div>
                 <h3>WeCollect</h3>
@@ -1086,7 +1102,7 @@
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
-                <div style="margin-bottom: 12px;">
+                <div class="tags-row">
                   <span class="tag">Marketplace</span><span class="tag">Industrial</span><span
                     class="tag">Procurement</span>
                 </div>
@@ -1112,8 +1128,9 @@
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
-                <div style="margin-bottom: 12px;">
-                  <span class="tag">Translation</span><span class="tag">Legal</span><span class="tag">Cross-border</span>
+                <div class="tags-row">
+                  <span class="tag">Translation</span><span class="tag">Legal</span><span
+                    class="tag">Cross-border</span>
                 </div>
                 <h3>Translayte</h3>
                 <p class="t-label">Growth Design Consultant</p>
@@ -1137,7 +1154,7 @@
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
-                <div style="margin-bottom: 12px;">
+                <div class="tags-row">
                   <span class="tag">Social Impact</span><span class="tag">Travel</span><span
                     class="tag">Cooperative</span>
                 </div>
@@ -1163,7 +1180,7 @@
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
-                <div style="margin-bottom: 12px;">
+                <div class="tags-row">
                   <span class="tag">B2B</span><span class="tag">Electronics</span><span class="tag">Marketplace</span>
                 </div>
                 <h3>Eze</h3>
@@ -1199,7 +1216,7 @@
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
-                  <div style="margin-bottom:8px;"><span class="tag">Web App</span></div>
+                  <div class="tags-row"><span class="tag">Web App</span></div>
                   <h3>NairaWatch</h3>
                   <p class="t-body" style="font-size:13px; max-width:300px;">Aggregating
                     Nigerian parallel market exchange rates using a hybrid of official data and AI-interpreted signals.
@@ -1214,7 +1231,7 @@
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
-                  <div style="margin-bottom:8px;"><span class="tag">Curated Gallery</span></div>
+                  <div class="tags-row"><span class="tag">Curated Gallery</span></div>
                   <h3>WebHunt</h3>
                   <p class="t-body" style="font-size:13px; max-width:300px;">A digital gallery
                     showcasing innovative web designs pushing the boundaries of storytelling and interaction.</p>
@@ -1228,7 +1245,7 @@
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
-                  <div style="margin-bottom:8px;"><span class="tag">Typography</span></div>
+                  <div class="tags-row"><span class="tag">Typography</span></div>
                   <h3>Alphabetics</h3>
                   <p class="t-body" style="font-size:13px; max-width:300px;">Typographic
                     exploration transforming letterforms into minimalist marks that blend clarity with conceptual
@@ -1243,7 +1260,7 @@
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
-                  <div style="margin-bottom:8px;"><span class="tag">AI Animation</span></div>
+                  <div class="tags-row"><span class="tag">AI Animation</span></div>
                   <h3>Yoruba Trad Wedding</h3>
                   <p class="t-body" style="font-size:13px; max-width:300px;">An AI-animated
                     short celebrating the symbolism, color, and ceremony of traditional Yoruba weddings.</p>
@@ -1257,7 +1274,7 @@
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
-                  <div style="margin-bottom:8px;"><span class="tag">Interactive Site</span></div>
+                  <div class="tags-row"><span class="tag">Interactive Site</span></div>
                   <h3>JTF23</h3>
                   <p class="t-body" style="font-size:13px; max-width:300px;">A personalized
                     wedding website telling a couple’s story through an intimate, interactive digital experience.</p>
@@ -1271,7 +1288,7 @@
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
-                  <div style="margin-bottom:8px;"><span class="tag">Data Simulation</span></div>
+                  <div class="tags-row"><span class="tag">Data Simulation</span></div>
                   <h3>Acquario</h3>
                   <p class="t-body" style="font-size:13px; max-width:300px;">A virtual aquarium
                     visualizing aquatic migration patterns through multisensory, data-driven simulations.</p>
