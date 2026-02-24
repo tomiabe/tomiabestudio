@@ -299,6 +299,7 @@
       display: flex;
       flex-direction: column;
       border: 1px solid var(--border);
+      text-decoration: none;
     }
 
     .project-img {
@@ -307,6 +308,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top center;
       transition: transform 1.2s var(--ease-out);
       z-index: 1;
     }
@@ -316,16 +318,37 @@
       transform: scale(1.05);
     }
 
+    /* Cinematic Motion Patterns (Desktop Only) */
+    @media (min-width: 1025px) {
+
+      /* Pattern V: Vertical Narrative Scroll */
+      .project-scroll-v .project-img {
+        object-position: center top;
+        transition: transform 1.2s var(--ease-out), object-position 8s var(--ease-out) !important;
+      }
+
+      .project-scroll-v:hover .project-img {
+        transform: scale(1.1);
+        object-position: center bottom;
+      }
+    }
+
+
     .project-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.2) 100%);
       display: flex;
       align-items: flex-end;
       padding: var(--sp-6);
       color: #fff;
       z-index: 2;
-      transition: background 0.4s var(--ease-out);
+      transition: background 0.6s var(--ease-out);
+    }
+
+    .project-panel:hover .project-overlay,
+    .lab-panel:hover .project-overlay {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.3) 100%);
     }
 
     .project-overlay .t-label {
@@ -1047,8 +1070,9 @@
         <p class="t-label" style="margin-bottom: var(--sp-6);">Selected Work</p>
 
         <!-- Susinsight -->
-        <div class="project-panel">
-          <img src="https://picsum.photos/id/48/1600/900" class="project-img">
+        <a href="https://susinsight.com" target="_blank" rel="noopener noreferrer"
+          class="project-panel project-scroll-v">
+          <img src="assets/images/work/Susinsight.jpg" class="project-img">
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
@@ -1069,11 +1093,12 @@
               </div>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- WeCollect -->
-        <div class="project-panel">
-          <img src="https://picsum.photos/id/60/1600/900" class="project-img">
+        <a href="https://wecollect.tech" target="_blank" rel="noopener noreferrer"
+          class="project-panel project-scroll-v">
+          <img src="assets/images/work/WeCollect.jpg" class="project-img">
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
@@ -1094,11 +1119,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Zeproc -->
-        <div class="project-panel">
-          <img src="https://picsum.photos/id/107/1600/900" class="project-img">
+        <a href="https://zeproc.com" target="_blank" rel="noopener noreferrer" class="project-panel project-scroll-v">
+          <img src="assets/images/work/Zeproc.jpg" class="project-img">
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
@@ -1120,11 +1145,12 @@
               </div>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Translayte -->
-        <div class="project-panel">
-          <img src="https://picsum.photos/id/119/1600/900" class="project-img">
+        <a href="https://translayte.com" target="_blank" rel="noopener noreferrer"
+          class="project-panel project-scroll-v">
+          <img src="assets/images/work/Translayte.jpg" class="project-img">
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
@@ -1146,11 +1172,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Fairbnb -->
-        <div class="project-panel">
-          <img src="https://picsum.photos/id/122/1600/900" class="project-img">
+        <a href="https://fairbnb.coop" target="_blank" rel="noopener noreferrer" class="project-panel project-scroll-v">
+          <img src="assets/images/work/Fairbnb.jpg" class="project-img">
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
@@ -1172,11 +1198,12 @@
               </div>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- Eze -->
-        <div class="project-panel">
-          <img src="https://picsum.photos/id/160/1600/900" class="project-img">
+        <a href="https://ezewholesale.com" target="_blank" rel="noopener noreferrer"
+          class="project-panel project-scroll-v">
+          <img src="assets/images/work/Eze.jpg" class="project-img">
           <div class="project-overlay">
             <div class="project-content">
               <div class="project-meta">
@@ -1197,7 +1224,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     </section>
 
@@ -1211,91 +1238,94 @@
         </p>
         <div class="lab-grid">
           <!-- NairaWatch -->
-          <div class="lab-panel">
-            <img src="https://picsum.photos/id/180/1200/600" class="project-img">
+          <a href="https://nairawatch.vercel.app" target="_blank" rel="noopener noreferrer"
+            class="lab-panel project-scroll-v">
+            <img src="assets/images/lab/NairaWatch.jpg" class="project-img">
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
                   <div class="tags-row"><span class="tag">Web App</span></div>
                   <h3>NairaWatch</h3>
-                  <p class="t-body" style="font-size:13px; max-width:300px;">Aggregating
+                  <div class="project-desc" style="max-width:300px;">Aggregating
                     Nigerian parallel market exchange rates using a hybrid of official data and AI-interpreted signals.
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
           <!-- WebHunt -->
-          <div class="lab-panel">
-            <img src="https://picsum.photos/id/164/1200/600" class="project-img">
+          <a href="https://webhunt.tumblr.com" target="_blank" rel="noopener noreferrer"
+            class="lab-panel project-scroll-v">
+            <img src="assets/images/lab/WebHunt.jpg" class="project-img">
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
                   <div class="tags-row"><span class="tag">Curated Gallery</span></div>
                   <h3>WebHunt</h3>
-                  <p class="t-body" style="font-size:13px; max-width:300px;">A digital gallery
-                    showcasing innovative web designs pushing the boundaries of storytelling and interaction.</p>
+                  <div class="project-desc" style="max-width:300px;">A digital gallery
+                    showcasing innovative web designs pushing the boundaries of storytelling and interaction.</div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
           <!-- Alphabetics -->
-          <div class="lab-panel">
+          <a href="https://alphabet-ics.tumblr.com" target="_blank" rel="noopener noreferrer" class="lab-panel project-scroll-v">
             <img src="https://picsum.photos/id/175/1200/600" class="project-img">
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
                   <div class="tags-row"><span class="tag">Typography</span></div>
                   <h3>Alphabetics</h3>
-                  <p class="t-body" style="font-size:13px; max-width:300px;">Typographic
+                  <div class="project-desc" style="max-width:300px;">Typographic
                     exploration transforming letterforms into minimalist marks that blend clarity with conceptual
-                    storytelling.</p>
+                    storytelling.</div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
           <!-- Yoruba Trad Wedding -->
-          <div class="lab-panel">
+          <a href="https://yorubatradweddings.com" target="_blank" rel="noopener noreferrer"
+            class="lab-panel project-scroll-v">
             <img src="https://picsum.photos/id/102/1200/600" class="project-img">
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
                   <div class="tags-row"><span class="tag">AI Animation</span></div>
                   <h3>Yoruba Trad Wedding</h3>
-                  <p class="t-body" style="font-size:13px; max-width:300px;">An AI-animated
-                    short celebrating the symbolism, color, and ceremony of traditional Yoruba weddings.</p>
+                  <div class="project-desc" style="max-width:300px;">An AI-animated
+                    short celebrating the symbolism, color, and ceremony of traditional Yoruba weddings.</div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
           <!-- JTF23 -->
-          <div class="lab-panel">
-            <img src="https://picsum.photos/id/111/1200/600" class="project-img">
+          <a href="https://jtf.persona.co" target="_blank" rel="noopener noreferrer" class="lab-panel project-scroll-v">
+            <img src="assets/images/lab/JTF.jpg" class="project-img">
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
                   <div class="tags-row"><span class="tag">Interactive Site</span></div>
                   <h3>JTF23</h3>
-                  <p class="t-body" style="font-size:13px; max-width:300px;">A personalized
-                    wedding website telling a couple’s story through an intimate, interactive digital experience.</p>
+                  <div class="project-desc" style="max-width:300px;">A personalized
+                    wedding website telling a couple’s story through an intimate, interactive digital experience.</div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
           <!-- Acquario -->
-          <div class="lab-panel">
+          <a href="https://editor.p5js.org/tomiabe/full/BGR-M0ZbZ" target="_blank" rel="noopener noreferrer" class="lab-panel project-scroll-v">
             <img src="https://picsum.photos/id/158/1200/600" class="project-img">
             <div class="project-overlay">
               <div class="project-content">
                 <div class="project-meta">
                   <div class="tags-row"><span class="tag">Data Simulation</span></div>
                   <h3>Acquario</h3>
-                  <p class="t-body" style="font-size:13px; max-width:300px;">A virtual aquarium
-                    visualizing aquatic migration patterns through multisensory, data-driven simulations.</p>
+                  <div class="project-desc" style="max-width:300px;">A virtual aquarium
+                    visualizing aquatic migration patterns through multisensory, data-driven simulations.</div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -1448,8 +1478,8 @@
                   <span class="bento-date">SINCE 2022 / MENTOR</span>
                   <h4 class="t-subheading" style="font-size: 24px; margin-bottom: 16px;">MentorCruise</h4>
                   <p class="bento-desc">Ongoing global design mentorship through MentorCruise, supporting designers in
-                    advancing toward senior and leadership roles. <a href="https://mentorcruise.com"
-                      style="color: inherit; text-decoration: underline;">Learn more</a></p>
+                    advancing toward senior and leadership roles. <a href="https://mentorcruise.com" target="_blank"
+                      rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Learn more</a></p>
                 </div>
               </div>
 
@@ -1508,7 +1538,7 @@
           style="font-size: 24px; padding: 24px 64px; border-radius: 20px;">studio@tomiabe.com</a>
         <p class="t-body" style="margin-top: 32px;">For project inquiries, collaborations, or speaking engagements.</p>
         <div class="social-links">
-          <a href="#" class="social-icon" aria-label="LinkedIn">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
               <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
@@ -1516,7 +1546,7 @@
               <circle cx="4" cy="4" r="2"></circle>
             </svg>
           </a>
-          <a href="#" class="social-icon" aria-label="Twitter">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
               <path
@@ -1524,7 +1554,7 @@
               </path>
             </svg>
           </a>
-          <a href="#" class="social-icon" aria-label="Instagram">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -1532,7 +1562,7 @@
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
           </a>
-          <a href="#" class="social-icon" aria-label="GitHub">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
               <path
@@ -1572,8 +1602,7 @@
     </svg>
   </button>
 
-  <script>
-    // ── SHADER LOGIC ───────────────────────────────
+  <script> // SHADER LOGIC ───────────────────────────────
     const canvas = document.getElementById('shaderCanvas');
     const gl = canvas.getContext('webgl');
 
