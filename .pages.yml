@@ -127,6 +127,81 @@ content:
               - { name: text, label: Panel Body, type: text }
               - { name: image, label: Panel Image, type: image }
 
+      # ─── Settings ─────────────────────────────────────────────────────────────
+      - name: settings
+        label: "🎛 UI Settings"
+        type: object
+        fields:
+
+          - name: labels
+            label: "Text Labels & Section Headings"
+            type: object
+            fields:
+              - { name: workSectionHeading, label: "Work Section Heading", type: string, description: "e.g. Selected Work" }
+              - { name: updatesSectionHeading, label: "Updates Section Heading", type: string, description: "e.g. News & Updates" }
+              - { name: infoSectionHeading, label: "Info Section Heading", type: string, description: "e.g. Info" }
+              - { name: operatingModelHeading, label: "Operating Model Heading", type: string, description: "e.g. Operating Model" }
+              - { name: focusAreasHeading, label: "Focus Areas Heading", type: string, description: "e.g. Focus Areas" }
+              - { name: speakingHeading, label: "Speaking Section Heading", type: string, description: "e.g. Speaking, Workshops & Mentorship" }
+              - { name: heroCta, label: "Hero CTA Button Text", type: string, description: "Large button in hero section, e.g. Let's Work" }
+              - { name: loadMore, label: "Load More Button Text", type: string, description: "e.g. Load More" }
+              - { name: showLess, label: "Show Less Button Text", type: string, description: "e.g. Show Less" }
+              - { name: backToTop, label: "Back to Top Button Text", type: string, description: "e.g. Back to Top" }
+              - { name: visitProject, label: "Visit Project Button", type: string, description: "Shown in project drawer when a live link exists, e.g. Visit Live Project" }
+              - { name: discussProject, label: "Discuss Project Button", type: string, description: "Shown in project drawer when no live link, e.g. Discuss Similar Project" }
+              - { name: engagementCtaLabel, label: "Engagement CTA Label", type: string, description: "Text on speaking engagement CTA buttons, e.g. Book me on MentorCruise" }
+              - { name: filterLabel, label: "Filter Button Label", type: string, description: "e.g. Filters" }
+              - { name: filterByLabel, label: "Filter Panel Label", type: string, description: "e.g. Filter by discipline" }
+              - { name: sidebarEnvironment, label: "Sidebar: Environment Label", type: string, description: "e.g. Environment" }
+              - { name: sidebarVisuals, label: "Sidebar: Visuals Label", type: string, description: "e.g. Visuals" }
+              - { name: sidebarLayout, label: "Sidebar: Layout Label", type: string, description: "e.g. Layout" }
+              - { name: sidebarAcoustics, label: "Sidebar: Acoustics Label", type: string, description: "e.g. Acoustics" }
+              - { name: sidebarNetwork, label: "Sidebar: Network Label", type: string, description: "e.g. Network" }
+
+          - name: layout
+            label: "Layout"
+            type: object
+            fields:
+              - { name: workItemsPerPage, label: "Work Items Before 'Load More'", type: number, description: "How many projects to show before the Load More button appears" }
+              - { name: updatesItemsPerPage, label: "Updates Items Before 'Load More'", type: number, description: "How many updates to show before the Load More button appears" }
+
+          - name: clock
+            label: "Clock"
+            type: object
+            fields:
+              - { name: locale, label: "Locale", type: string, description: "Language/region code, e.g. en-US, en-GB, fr-FR" }
+              - { name: hour12, label: "12-Hour Format", type: boolean, description: "On = 12-hour clock (e.g. 3:00 PM), Off = 24-hour clock (e.g. 15:00)" }
+              - { name: timezone, label: "Timezone Display Style", type: string, description: "How to show timezone: 'short' = EST, 'long' = Eastern Standard Time, 'shortOffset' = GMT-5. Leave blank to hide timezone." }
+
+          - name: theme
+            label: "Theme Colors"
+            type: object
+            fields:
+              - name: morning
+                label: "Morning Theme"
+                type: object
+                fields:
+                  - { name: bg, label: "Background", type: string, description: "Hex color, e.g. #fdfaf6" }
+                  - { name: fg, label: "Foreground (text)", type: string, description: "Main text color, e.g. #1c1917" }
+                  - { name: muted, label: "Muted (secondary text)", type: string, description: "Secondary text and icons, e.g. #78716c" }
+                  - { name: border, label: "Border", type: string, description: "Lines and dividers, e.g. #e7e5e4" }
+              - name: noon
+                label: "Noon Theme"
+                type: object
+                fields:
+                  - { name: bg, label: "Background", type: string, description: "e.g. #ffffff" }
+                  - { name: fg, label: "Foreground (text)", type: string, description: "e.g. #09090b" }
+                  - { name: muted, label: "Muted (secondary text)", type: string, description: "e.g. #71717a" }
+                  - { name: border, label: "Border", type: string, description: "e.g. #e4e4e7" }
+              - name: evening
+                label: "Evening Theme"
+                type: object
+                fields:
+                  - { name: bg, label: "Background", type: string, description: "e.g. #09090b" }
+                  - { name: fg, label: "Foreground (text)", type: string, description: "e.g. #fafafa" }
+                  - { name: muted, label: "Muted (secondary text)", type: string, description: "e.g. #a1a1aa" }
+                  - { name: border, label: "Border", type: string, description: "e.g. #27272a" }
+
       # ─── Updates ──────────────────────────────────────────────────────────
       - name: updates
         label: "Updates & News"

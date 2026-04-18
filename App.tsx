@@ -53,6 +53,45 @@ interface Engagement {
   link?: string;
 }
 
+interface SiteSettings {
+  labels: {
+    workSectionHeading: string;
+    updatesSectionHeading: string;
+    infoSectionHeading: string;
+    operatingModelHeading: string;
+    focusAreasHeading: string;
+    speakingHeading: string;
+    heroCta: string;
+    loadMore: string;
+    showLess: string;
+    backToTop: string;
+    visitProject: string;
+    discussProject: string;
+    engagementCtaLabel: string;
+    filterLabel: string;
+    filterByLabel: string;
+    sidebarEnvironment: string;
+    sidebarVisuals: string;
+    sidebarLayout: string;
+    sidebarAcoustics: string;
+    sidebarNetwork: string;
+  };
+  layout: {
+    workItemsPerPage: number;
+    updatesItemsPerPage: number;
+  };
+  clock: {
+    locale: string;
+    hour12: boolean;
+    timezone: string;
+  };
+  theme: {
+    morning: { bg: string; fg: string; muted: string; border: string };
+    noon: { bg: string; fg: string; muted: string; border: string };
+    evening: { bg: string; fg: string; muted: string; border: string };
+  };
+}
+
 interface SiteData {
   metadata: {
     siteTitle: string;
@@ -93,6 +132,7 @@ interface SiteData {
   socialLinks: SocialLink[];
   projects: Project[];
   updates: Update[];
+  settings: SiteSettings;
 }
 
 // ─── Hooks ────────────────────────────────────────────────────────────────────
@@ -120,7 +160,7 @@ function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue] as const;
 }
 
-function LiveClock() {
+function LiveClock({ locale = 'en-US', hour12 = true, timezone = 'short' }: { locale?: string; hour12?: boolean; timezone?: string }) {
   const [time, setTime] = useState(new Date());
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -128,10 +168,43 @@ function LiveClock() {
   }, []);
   return (
     <div className="font-mono text-[12px] tracking-widest text-[var(--theme-muted)] uppercase whitespace-nowrap">
-      {time.toLocaleTimeString('en-US', { hour12: true, timeZoneName: 'short' })}
+      {time.toLocaleTimeString(locale, { hour12, timeZoneName: timezone as Intl.DateTimeFormatOptions['timeZoneName'] })}
     </div>
   );
 }
+
+// ─── Default settings ─────────────────────────────────────────────────────────
+const DEFAULT_SETTINGS: SiteSettings = {
+  labels: {
+    workSectionHeading: 'Selected Work',
+    updatesSectionHeading: 'News & Updates',
+    infoSectionHeading: 'Info',
+    operatingModelHeading: 'Operating Model',
+    focusAreasHeading: 'Focus Areas',
+    speakingHeading: 'Speaking, Workshops & Mentorship',
+    heroCta: "Let's Work",
+    loadMore: 'Load More',
+    showLess: 'Show Less',
+    backToTop: 'Back to Top',
+    visitProject: 'Visit Live Project',
+    discussProject: 'Discuss Similar Project',
+    engagementCtaLabel: 'Book me on MentorCruise',
+    filterLabel: 'Filters',
+    filterByLabel: 'Filter by discipline',
+    sidebarEnvironment: 'Environment',
+    sidebarVisuals: 'Visuals',
+    sidebarLayout: 'Layout',
+    sidebarAcoustics: 'Acoustics',
+    sidebarNetwork: 'Network',
+  },
+  layout: { workItemsPerPage: 6, updatesItemsPerPage: 6 },
+  clock: { locale: 'en-US', hour12: true, timezone: 'short' },
+  theme: {
+    morning: { bg: '#fdfaf6', fg: '#1c1917', muted: '#78716c', border: '#e7e5e4' },
+    noon: { bg: '#ffffff', fg: '#09090b', muted: '#71717a', border: '#e4e4e7' },
+    evening: { bg: '#09090b', fg: '#fafafa', muted: '#a1a1aa', border: '#27272a' },
+  },
+};
 
 // ─── Default data (used while JSON loads) ─────────────────────────────────────
 const DEFAULT_DATA: SiteData = {
@@ -143,6 +216,7 @@ const DEFAULT_DATA: SiteData = {
   socialLinks: [],
   projects: [],
   updates: [],
+  settings: DEFAULT_SETTINGS,
 };
 
 // ─── App ──────────────────────────────────────────────────────────────────────
@@ -181,6 +255,21 @@ export default function App() {
         document.title = data.metadata.siteTitle || 'Tomi Abe Studio';
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute('content', data.metadata.seoDescription || '');
+        // Inject CMS theme colors as CSS variables (overrides index.css defaults)
+        const themeData = data.settings?.theme;
+        if (themeData) {
+          const existing = document.getElementById('cms-theme-vars');
+          if (existing) existing.remove();
+          const style = document.createElement('style');
+          style.id = 'cms-theme-vars';
+          style.textContent = `
+            :root { --theme-bg: ${themeData.noon.bg}; --theme-fg: ${themeData.noon.fg}; --theme-muted: ${themeData.noon.muted}; --theme-border: ${themeData.noon.border}; }
+            .theme-morning { --theme-bg: ${themeData.morning.bg}; --theme-fg: ${themeData.morning.fg}; --theme-muted: ${themeData.morning.muted}; --theme-border: ${themeData.morning.border}; }
+            .theme-noon { --theme-bg: ${themeData.noon.bg}; --theme-fg: ${themeData.noon.fg}; --theme-muted: ${themeData.noon.muted}; --theme-border: ${themeData.noon.border}; }
+            .theme-evening { --theme-bg: ${themeData.evening.bg}; --theme-fg: ${themeData.evening.fg}; --theme-muted: ${themeData.evening.muted}; --theme-border: ${themeData.evening.border}; }
+          `;
+          document.head.appendChild(style);
+        }
       })
       .catch(err => {
         console.warn('Could not load content/data.json, using defaults.', err);
@@ -190,6 +279,12 @@ export default function App() {
 
   // ── Derived data ──
   const { metadata, navigation, hero, about, contact, socialLinks, projects, updates } = siteData;
+  const settings = siteData.settings ?? DEFAULT_SETTINGS;
+  const labels = settings.labels ?? DEFAULT_SETTINGS.labels;
+  const layout = settings.layout ?? DEFAULT_SETTINGS.layout;
+  const clockSettings = settings.clock ?? DEFAULT_SETTINGS.clock;
+  const workItemsPerPage = layout.workItemsPerPage ?? 6;
+  const updatesItemsPerPage = layout.updatesItemsPerPage ?? 6;
 
   // ── Scroll lock when drawer open ──
   useEffect(() => {
@@ -313,7 +408,7 @@ export default function App() {
               {/* Theme Settings */}
               <div className="flex flex-col gap-4">
                 <div className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">
-                  <span>Environment</span>
+                  <span>{labels.sidebarEnvironment}</span>
                 </div>
                 <div className="grid grid-cols-4 gap-2">
                   {(['morning', 'noon', 'evening', 'system'] as ThemeMode[]).map(mode => (
@@ -337,7 +432,7 @@ export default function App() {
               {/* Visuals Setting */}
               <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">
-                  <span>Visuals</span>
+                  <span>{labels.sidebarVisuals}</span>
                   <button onClick={() => { triggerSound(); setColorMode(colorMode === 'color' ? 'monochrome' : 'color'); }} className="flex items-center gap-1 hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
                     {colorMode === 'color' ? 'REAL' : 'B&W'}
                   </button>
@@ -347,7 +442,7 @@ export default function App() {
               {/* Sound Settings */}
               <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">
-                  <span>Acoustics</span>
+                  <span>{labels.sidebarAcoustics}</span>
                   <button onClick={() => { triggerSound(); setSoundEnabled(!soundEnabled); }} className="flex items-center gap-1 hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
                     {soundEnabled ? <Volume2 className="w-4 h-4"/> : <VolumeX className="w-4 h-4"/>}
                     {soundEnabled ? 'ON' : 'OFF'}
@@ -382,7 +477,7 @@ export default function App() {
 
               {/* Mobile Network */}
               <div className="flex flex-col gap-4">
-                <div className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">Network</div>
+                <div className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">{labels.sidebarNetwork}</div>
                 <div className="grid grid-cols-2 gap-4 text-sm font-mono mt-2">
                   {socialLinks.map((link, idx) => (
                     <a key={idx} href={link.url} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[var(--theme-muted)] transition-colors cursor-pointer w-fit text-[var(--theme-fg)]">
@@ -394,7 +489,7 @@ export default function App() {
 
               {/* Mobile Clock */}
               <div className="flex flex-col gap-2">
-                <LiveClock />
+                <LiveClock locale={clockSettings.locale} hour12={clockSettings.hour12} timezone={clockSettings.timezone} />
               </div>
             </div>
           </motion.div>
@@ -430,19 +525,19 @@ export default function App() {
               onClick={() => { triggerSound(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
               className="mt-4 flex items-center w-fit px-6 py-3 bg-[var(--theme-fg)] text-[var(--theme-bg)] rounded-full hover:scale-105 active:scale-95 transition-transform group font-medium cursor-pointer"
             >
-              Let's Work <ArrowDown className="ml-2 w-5 h-5"/>
+              {labels.heroCta} <ArrowDown className="ml-2 w-5 h-5"/>
             </motion.button>
           </section>
 
           {/* UNIFIED WORK FEED */}
           <section id="work" className="scroll-mt-32">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2 flex-grow mr-4">Selected Work</h2>
+              <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2 flex-grow mr-4">{labels.workSectionHeading}</h2>
               <button
                 onClick={() => { triggerSound(); setFilterPanelOpen(!filterPanelOpen); }}
                 className="flex items-center gap-2 px-3 py-1.5 border border-[var(--theme-border)] rounded text-xs uppercase cursor-pointer"
               >
-                <Filter className="w-3 h-3"/> Filters {selectedCategories.length > 0 && `(${selectedCategories.length})`}
+                <Filter className="w-3 h-3"/> {labels.filterLabel} {selectedCategories.length > 0 && `(${selectedCategories.length})`}
               </button>
             </div>
 
@@ -455,7 +550,7 @@ export default function App() {
                   exit={{ height: 0, opacity: 0 }}
                   className="overflow-hidden mb-8 border-b border-[var(--theme-border)] pb-6"
                 >
-                  <p className="text-xs uppercase tracking-widest text-[var(--theme-muted)] mb-4 font-mono">Filter by discipline</p>
+                  <p className="text-xs uppercase tracking-widest text-[var(--theme-muted)] mb-4 font-mono">{labels.filterByLabel}</p>
                   <div className="flex flex-wrap gap-2">
                     {allCategories.map(cat => {
                       const isActive = selectedCategories.includes(cat);
@@ -480,7 +575,7 @@ export default function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-12">
               <AnimatePresence mode="popLayout">
-                {(showAllWork ? filteredProjects : filteredProjects.slice(0, 6)).map((project) => (
+                {(showAllWork ? filteredProjects : filteredProjects.slice(0, workItemsPerPage)).map((project) => (
                   <motion.a
                     href={project.link || "#"}
                     onClick={e => { e.preventDefault(); triggerSound(); setSelectedProject(project); }}
@@ -531,13 +626,13 @@ export default function App() {
               )}
             </div>
 
-            {filteredProjects.length > 6 && (
+            {filteredProjects.length > workItemsPerPage && (
               <div className="flex justify-center -mt-6 pb-6">
                 <button
                   onClick={() => { triggerSound(); setShowAllWork(!showAllWork); }}
                   className="px-6 py-3 border border-[var(--theme-border)] rounded-full text-xs font-mono uppercase tracking-widest hover:border-[var(--theme-fg)] hover:text-[var(--theme-fg)] transition-colors cursor-pointer"
                 >
-                  {showAllWork ? "Show Less" : "Load More"}
+                  {showAllWork ? labels.showLess : labels.loadMore}
                 </button>
               </div>
             )}
@@ -545,9 +640,9 @@ export default function App() {
 
           {/* UPDATES SECTION */}
           <section id="updates" className="scroll-mt-32 border-t border-[var(--theme-border)] pt-12">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] mb-8">News & Updates</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] mb-8">{labels.updatesSectionHeading}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {(showAllUpdates ? updates : updates.slice(0, 6)).map((update, idx) => (
+              {(showAllUpdates ? updates : updates.slice(0, updatesItemsPerPage)).map((update) => (
                 <div
                   key={update.id}
                   onClick={() => { triggerSound(); setSelectedUpdate(update); }}
@@ -570,13 +665,13 @@ export default function App() {
               ))}
             </div>
 
-            {updates.length > 6 && (
+            {updates.length > updatesItemsPerPage && (
               <div className="flex justify-center mt-10">
                 <button
                   onClick={() => { triggerSound(); setShowAllUpdates(!showAllUpdates); }}
                   className="px-6 py-3 border border-[var(--theme-border)] rounded-full text-xs font-mono uppercase tracking-widest hover:border-[var(--theme-fg)] hover:text-[var(--theme-fg)] transition-colors cursor-pointer"
                 >
-                  {showAllUpdates ? "Show Less" : "Load More"}
+                  {showAllUpdates ? labels.showLess : labels.loadMore}
                 </button>
               </div>
             )}
@@ -584,7 +679,7 @@ export default function App() {
 
           {/* INFO SECTION */}
           <section id="info" className="scroll-mt-32 border-t border-[var(--theme-border)] pt-12 pb-12 flex flex-col gap-16">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)]">Info</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)]">{labels.infoSectionHeading}</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <img
@@ -605,7 +700,7 @@ export default function App() {
             </div>
 
             <div className="flex flex-col gap-8 mt-8">
-              <h3 className="text-xl font-medium tracking-tight border-b border-[var(--theme-border)] pb-4">Operating Model</h3>
+              <h3 className="text-xl font-medium tracking-tight border-b border-[var(--theme-border)] pb-4">{labels.operatingModelHeading}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {about.operatingModels.map((model, i) => (
                   <div key={i} className="p-6 border border-[var(--theme-border)] rounded-2xl bg-[var(--theme-bg)] flex flex-col gap-3 hover:border-[var(--theme-muted)] transition-colors cursor-pointer">
@@ -617,7 +712,7 @@ export default function App() {
             </div>
 
             <div className="flex flex-col gap-8 mt-8">
-              <h3 className="text-xl font-medium tracking-tight border-b border-[var(--theme-border)] pb-4">Focus Areas</h3>
+              <h3 className="text-xl font-medium tracking-tight border-b border-[var(--theme-border)] pb-4">{labels.focusAreasHeading}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {about.focusAreas.map((area, i) => {
                   const Icon = focusIcons[i % focusIcons.length];
@@ -635,7 +730,7 @@ export default function App() {
             </div>
 
             <div className="flex flex-col gap-8 mt-8">
-              <h3 className="text-xl font-medium tracking-tight border-b border-[var(--theme-border)] pb-4">Speaking, Workshops & Mentorship</h3>
+              <h3 className="text-xl font-medium tracking-tight border-b border-[var(--theme-border)] pb-4">{labels.speakingHeading}</h3>
               <div className="flex flex-col gap-6">
                 <p className="max-w-3xl text-sm md:text-base leading-relaxed text-[var(--theme-muted)]">{about.speaking.description}</p>
               </div>
@@ -657,7 +752,7 @@ export default function App() {
                         onClick={(e) => { e.stopPropagation(); triggerSound(); }}
                         className="mt-2 w-fit flex items-center px-4 py-2 border border-[var(--theme-fg)] rounded-full hover:bg-[var(--theme-fg)] hover:text-[var(--theme-bg)] transition-colors text-[10px] font-mono uppercase tracking-widest font-medium cursor-pointer"
                       >
-                        Book me on MentorCruise <ArrowUpRight className="ml-1 w-3 h-3"/>
+                        {labels.engagementCtaLabel} <ArrowUpRight className="ml-1 w-3 h-3"/>
                       </a>
                     )}
                   </div>
@@ -691,12 +786,12 @@ export default function App() {
           <div className="sticky top-32 flex flex-col gap-10">
 
             <div className="flex flex-col gap-2 pb-6 border-b border-[var(--theme-border)]">
-              <LiveClock />
+              <LiveClock locale={clockSettings.locale} hour12={clockSettings.hour12} timezone={clockSettings.timezone} />
             </div>
 
             {/* Theme Toggle */}
             <div className="flex flex-col gap-6">
-              <div className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">Environment</div>
+              <div className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">{labels.sidebarEnvironment}</div>
               <div className="grid grid-cols-2 gap-2">
                 {(['morning', 'noon', 'evening', 'system'] as ThemeMode[]).map(mode => (
                   <button
@@ -720,7 +815,7 @@ export default function App() {
             {/* Visuals Toggle */}
             <div className="flex flex-col gap-4 mt-4">
               <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">
-                <span>Visuals</span>
+                <span>{labels.sidebarVisuals}</span>
                 <button onClick={() => { triggerSound(); setColorMode(colorMode === 'color' ? 'monochrome' : 'color'); }} className="flex items-center gap-1 hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
                   {colorMode === 'color' ? 'REAL COLORS' : 'B&W'}
                 </button>
@@ -730,7 +825,7 @@ export default function App() {
             {/* Layout Toggle */}
             <div className="flex flex-col gap-4 mt-4">
               <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">
-                <span>Layout</span>
+                <span>{labels.sidebarLayout}</span>
                 <button onClick={() => { triggerSound(); setSidebarPosition(sidebarPosition === 'right' ? 'left' : 'right'); }} className="flex items-center gap-1 hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
                   {sidebarPosition === 'right' ? 'DOCK LEFT' : 'DOCK RIGHT'}
                 </button>
@@ -740,7 +835,7 @@ export default function App() {
             {/* Sound Toggle */}
             <div className="flex flex-col gap-4 mt-4">
               <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">
-                <span>Acoustics</span>
+                <span>{labels.sidebarAcoustics}</span>
                 <button onClick={() => { triggerSound(); setSoundEnabled(!soundEnabled); }} className="flex items-center gap-1 hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
                   {soundEnabled ? <Volume2 className="w-3 h-3"/> : <VolumeX className="w-3 h-3"/>}
                   {soundEnabled ? 'ON' : 'OFF'}
@@ -775,7 +870,7 @@ export default function App() {
 
             {/* Social Panel */}
             <div className="flex flex-col gap-4 mt-4">
-              <div className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">Network</div>
+              <div className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">{labels.sidebarNetwork}</div>
               <div className="grid grid-cols-2 gap-4 text-sm font-mono mt-2">
                 {socialLinks.map((link, idx) => (
                   <a key={idx} href={link.url} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[var(--theme-muted)] transition-colors cursor-pointer w-fit text-[var(--theme-fg)]">
@@ -790,7 +885,7 @@ export default function App() {
               <p>© {new Date().getFullYear()} {contact.footerCopyright || 'TOMI ABE STUDIO'}</p>
               <p className="border-b border-[var(--theme-border)] pb-8">{contact.footerTagline || 'Objectivity · Clarity · Precision'}</p>
               <button onClick={scrollToTop} className="mt-2 text-xs font-mono uppercase tracking-widest flex items-center gap-2 hover:text-[var(--theme-fg)] transition-colors cursor-pointer w-fit">
-                <ChevronUp className="w-4 h-4"/> Back to Top
+                <ChevronUp className="w-4 h-4"/> {labels.backToTop}
               </button>
             </div>
 
@@ -800,7 +895,7 @@ export default function App() {
 
       <div className="md:hidden flex justify-center py-6 border-t border-[var(--theme-border)]">
         <button onClick={scrollToTop} className="flex items-center gap-2 hover:text-[var(--theme-fg)] text-[var(--theme-muted)] text-xs font-mono uppercase tracking-widest transition-colors cursor-pointer">
-          <ChevronUp className="w-4 h-4"/> Back to Top
+          <ChevronUp className="w-4 h-4"/> {labels.backToTop}
         </button>
       </div>
 
@@ -958,7 +1053,7 @@ export default function App() {
                     onClick={() => { triggerSound(); if (selectedProject.link) window.open(selectedProject.link, '_blank'); else { setSelectedProject(null); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); } }}
                     className="w-fit px-8 py-4 bg-[var(--theme-fg)] text-[var(--theme-bg)] rounded-full text-xs font-mono uppercase tracking-widest hover:scale-105 active:scale-95 transition-transform flex items-center gap-3 cursor-pointer mt-10"
                   >
-                    {selectedProject.link ? <>Visit Live Project <ArrowUpRight className="w-4 h-4"/></> : <>Discuss Similar Project <ArrowUpRight className="w-4 h-4"/></>}
+                    {selectedProject.link ? <>{labels.visitProject} <ArrowUpRight className="w-4 h-4"/></> : <>{labels.discussProject} <ArrowUpRight className="w-4 h-4"/></>}
                   </button>
 
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-[var(--theme-border)] pb-8 mt-10">

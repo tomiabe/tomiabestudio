@@ -218,6 +218,59 @@
       ]
     }
   ],
+  "settings": {
+    "labels": {
+      "workSectionHeading": "Selected Work",
+      "updatesSectionHeading": "News & Updates",
+      "infoSectionHeading": "Info",
+      "operatingModelHeading": "Operating Model",
+      "focusAreasHeading": "Focus Areas",
+      "speakingHeading": "Speaking, Workshops & Mentorship",
+      "heroCta": "Let's Work",
+      "loadMore": "Load More",
+      "showLess": "Show Less",
+      "backToTop": "Back to Top",
+      "visitProject": "Visit Live Project",
+      "discussProject": "Discuss Similar Project",
+      "engagementCtaLabel": "Book me on MentorCruise",
+      "filterLabel": "Filters",
+      "filterByLabel": "Filter by discipline",
+      "sidebarEnvironment": "Environment",
+      "sidebarVisuals": "Visuals",
+      "sidebarLayout": "Layout",
+      "sidebarAcoustics": "Acoustics",
+      "sidebarNetwork": "Network"
+    },
+    "layout": {
+      "workItemsPerPage": 6,
+      "updatesItemsPerPage": 6
+    },
+    "clock": {
+      "locale": "en-US",
+      "hour12": true,
+      "timezone": "short"
+    },
+    "theme": {
+      "morning": {
+        "bg": "#fdfaf6",
+        "fg": "#1c1917",
+        "muted": "#78716c",
+        "border": "#e7e5e4"
+      },
+      "noon": {
+        "bg": "#ffffff",
+        "fg": "#09090b",
+        "muted": "#71717a",
+        "border": "#e4e4e7"
+      },
+      "evening": {
+        "bg": "#09090b",
+        "fg": "#fafafa",
+        "muted": "#a1a1aa",
+        "border": "#27272a"
+      }
+    }
+  },
   "updates": [
     {
       "id": "u1",
