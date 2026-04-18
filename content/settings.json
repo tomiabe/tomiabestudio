@@ -53,8 +53,8 @@
     "monoFontFamily": "Geist Mono"
   },
   "layout": {
-    "workItemsPerPage": 3,
-    "updatesItemsPerPage": 4
+    "workItemsPerPage": 6,
+    "updatesItemsPerPage": 6
   },
   "clock": {
     "locale": "en-US",
