@@ -894,7 +894,7 @@ export default function App() {
                   <p className="text-sm font-mono uppercase tracking-wider text-[var(--theme-muted)]" style={textSize(typography.infoRolePx, 14)}>{about.role}</p>
                 </div>
                 <div className="flex flex-col gap-6 text-[var(--theme-muted)] leading-relaxed">
-                  <p className="text-xl font-semibold text-[var(--theme-fg)]" style={textSize(typography.infoLeadPx, 20)}>
+                  <p className="text-xl font-medium text-[var(--theme-fg)]" style={textSize(typography.infoLeadPx, 20)}>
                     {about.lead}
                   </p>
                   <div className="whitespace-pre-wrap text-base" style={textSize(typography.infoBioPx, 16)}>
