@@ -187,6 +187,22 @@ function LiveClock({ locale = 'en-US', hour12 = true, timezone = 'short' }: { lo
   );
 }
 
+function RichPanelText({ content }: { content?: string }) {
+  if (!content) return null;
+  const looksLikeHtml = /<([a-z][\w-]*)(\s[^>]*)?>/i.test(content);
+
+  if (!looksLikeHtml) {
+    return <p className="text-[16px] text-[var(--theme-muted)] leading-relaxed">{content}</p>;
+  }
+
+  return (
+    <div
+      className="text-[16px] text-[var(--theme-muted)] leading-relaxed flex flex-col gap-3 [&_a]:underline [&_a]:underline-offset-2 [&_a]:text-[var(--theme-fg)] [&_a:hover]:opacity-80 [&_strong]:text-[var(--theme-fg)] [&_h1]:text-[28px] [&_h1]:text-[var(--theme-fg)] [&_h1]:font-medium [&_h2]:text-[24px] [&_h2]:text-[var(--theme-fg)] [&_h2]:font-medium [&_h3]:text-[20px] [&_h3]:text-[var(--theme-fg)] [&_h3]:font-medium [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:my-1"
+      dangerouslySetInnerHTML={{ __html: content }}
+    />
+  );
+}
+
 // ─── Default settings ─────────────────────────────────────────────────────────
 const DEFAULT_THEME_COLORS: ThemeColors = {
   morning: { bg: '#fdfaf6', fg: '#1c1917', muted: '#78716c', border: '#e7e5e4' },
@@ -1156,7 +1172,7 @@ export default function App() {
                     {selectedProject.details?.map((detail, idx) => (
                       <div key={idx} className="flex flex-col gap-6">
                         <h3 className="text-2xl md:text-3xl font-medium tracking-tight">{detail.heading}</h3>
-                        <p className="text-[16px] text-[var(--theme-muted)] leading-relaxed">{detail.text}</p>
+                        <RichPanelText content={detail.text} />
                         <img
                           src={detail.image}
                           alt={detail.heading}

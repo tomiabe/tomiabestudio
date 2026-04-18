@@ -61,7 +61,10 @@ content:
             type: string
           - name: text
             label: Panel Text
-            type: text
+            type: rich-text
+            options:
+              format: html
+              switcher: true
           - name: image
             label: Panel Image
             type: image
