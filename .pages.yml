@@ -46,6 +46,7 @@ content:
       - name: link
         label: Live Project URL
         type: string
+        description: "Optional link to the external site."
       - name: isFullBleed
         label: Full-width in grid
         type: boolean
@@ -55,13 +56,13 @@ content:
         label_field: heading
         fields:
           - name: heading
-            label: Heading
+            label: Section Heading
             type: string
           - name: text
-            label: Body Text
+            label: Section Body Text
             type: text
           - name: image
-            label: Image
+            label: Section Image
             type: image
 
   # ─────────────────────────────────────────────────────────────────────────────
@@ -87,7 +88,6 @@ content:
       - name: order
         label: Sort Order
         type: number
-        description: "Lower numbers appear first."
       - name: date
         label: Date Label
         type: string
@@ -105,7 +105,7 @@ content:
         fields: [{ name: value, label: Paragraph, type: text }]
 
   # ─────────────────────────────────────────────────────────────────────────────
-  # HOME PAGE
+  # HOME PAGE SETTINGS
   # ─────────────────────────────────────────────────────────────────────────────
   - name: home
     label: Home Page Settings
@@ -128,29 +128,29 @@ content:
         type: object
         fields:
           - name: heroCta
-            label: Hero CTA Button
+            label: Hero CTA Label
             type: string
           - name: workSectionHeading
-            label: Work Heading
+            label: Work Feed Title
             type: string
           - name: updatesSectionHeading
-            label: Updates Heading
+            label: Updates Feed Title
             type: string
           - name: infoSectionHeading
-            label: Info Heading
+            label: Info Section Title
             type: string
 
   # ─────────────────────────────────────────────────────────────────────────────
-  # INFO PAGE
+  # INFO PAGE PROFILE
   # ─────────────────────────────────────────────────────────────────────────────
   - name: info
-    label: Info Page Profile
+    label: Studio Info & Bio
     type: file
     path: content/info.json
     format: json
     fields:
       - name: about
-        label: Profile
+        label: Profile Information
         type: object
         fields:
           - name: name
@@ -160,97 +160,97 @@ content:
             label: Role / Title
             type: string
           - name: imageUrl
-            label: Image
+            label: Profile Picture
             type: image
           - name: about
             label: Bio Paragraphs
             type: list
             label_field: value
-            fields: [{ name: value, label: Paragraph, type: text }]
+            fields: [{ name: value, label: Text, type: text }]
       - name: operatingModels
-        label: Operating Model List
+        label: Operating Models
         type: list
         label_field: title
         fields:
           - name: title
-            label: Title
+            label: Model Title
             type: string
           - name: description
-            label: Description
+            label: Model Description
             type: text
       - name: focusAreas
-        label: Focus Areas List
+        label: Strategic Focus Areas
         type: list
         label_field: title
         fields:
           - name: title
-            label: Title
+            label: Area Title
             type: string
           - name: description
-            label: Description
+            label: Area Description
             type: text
       - name: speaking
         label: Speaking & Mentorship
         type: object
         fields:
           - name: description
-            label: Section Desc
+            label: Section Intro Text
             type: text
           - name: engagements
-            label: Engagements
+            label: Past Engagements
             type: list
             label_field: title
             fields:
               - name: title
-                label: Title
+                label: Event/Platform Title
                 type: string
               - name: year
                 label: Year
                 type: string
               - name: role
-                label: Role
+                label: Your Role
                 type: string
               - name: description
-                label: Details
+                label: Engagement Details
                 type: text
               - name: link
-                label: URL
+                label: External Link
                 type: string
       - name: contact
-        label: Contact Section
+        label: Contact Details
         type: object
         fields:
           - name: headline
-            label: Headline
+            label: Contact Headline
             type: text
           - name: description
-            label: Subheading
+            label: Contact Description
             type: text
           - name: email
-            label: Email
+            label: Public Email Address
             type: string
           - name: location
-            label: Location
+            label: Studio Location
             type: string
       - name: labels
-        label: Section Headings
+        label: Layout Labels
         type: object
         fields:
           - name: operatingModelHeading
-            label: Operating Model Title
+            label: Models Section Heading
             type: string
           - name: focusAreasHeading
-            label: Focus Areas Title
+            label: Focus Areas Section Heading
             type: string
           - name: speakingHeading
-            label: Speaking Title
+            label: Speaking Section Heading
             type: string
 
   # ─────────────────────────────────────────────────────────────────────────────
   # SITE SETTINGS
   # ─────────────────────────────────────────────────────────────────────────────
   - name: site_settings
-    label: Global Site Settings
+    label: Global Website Settings
     type: file
     path: content/settings.json
     format: json
@@ -288,7 +288,7 @@ content:
             label: Logo Text
             type: string
           - name: items
-            label: Menu Items
+            label: Menu Links
             type: list
             label_field: label
             fields:
@@ -314,88 +314,88 @@ content:
         type: object
         fields:
           - name: footerCopyright
-            label: Copyright Name
+            label: Copyright Owner
             type: string
           - name: footerTagline
             label: Brand Tagline
             type: string
       - name: themeColors
-        label: Visual Themes
+        label: Color Themes
         type: object
         fields:
           - name: morning
-            label: Morning Mode
+            label: Morning (Warm)
             type: object
             fields:
-              - { name: bg, label: Background Color, type: color }
-              - { name: fg, label: Text Color, type: color }
-              - { name: muted, label: Muted Text Color, type: color }
-              - { name: border, label: Border Color, type: color }
+              - { name: bg, label: Background, type: color }
+              - { name: fg, label: Text, type: color }
+              - { name: muted, label: Muted, type: color }
+              - { name: border, label: Border, type: color }
           - name: noon
-            label: Noon Mode
+            label: Noon (Clean)
             type: object
             fields:
-              - { name: bg, label: Background Color, type: color }
-              - { name: fg, label: Text Color, type: color }
-              - { name: muted, label: Muted Text Color, type: color }
-              - { name: border, label: Border Color, type: color }
+              - { name: bg, label: Background, type: color }
+              - { name: fg, label: Text, type: color }
+              - { name: muted, label: Muted, type: color }
+              - { name: border, label: Border, type: color }
           - name: evening
-            label: Evening Mode
+            label: Evening (Dark)
             type: object
             fields:
-              - { name: bg, label: Background Color, type: color }
-              - { name: fg, label: Text Color, type: color }
-              - { name: muted, label: Muted Text Color, type: color }
-              - { name: border, label: Border Color, type: color }
+              - { name: bg, label: Background, type: color }
+              - { name: fg, label: Text, type: color }
+              - { name: muted, label: Muted, type: color }
+              - { name: border, label: Border, type: color }
       - name: typography
-        label: Site Typography
+        label: Site-wide Typography
         type: object
         fields:
           - name: bodyFontUrl
             label: Google Font URL
             type: string
           - name: bodyFontFamily
-            label: Serif/Sans Font Name
+            label: Body Font Family
             type: string
           - name: monoFontFamily
-            label: Monospace Font Name
+            label: Mono Font Family
             type: string
       - name: layout
-        label: Display & Pagination
+        label: Feed Display Settings
         type: object
         fields:
           - name: workItemsPerPage
-            label: Max Work in Grid
+            label: Projects to show initially
             type: number
           - name: updatesItemsPerPage
-            label: Max Updates in Grid
+            label: Updates to show initially
             type: number
       - name: clock
-        label: World Clock Config
+        label: Clock & Time Settings
         type: object
         fields:
           - name: locale
-            label: Date Locale
+            label: Formatting Locale
             type: string
           - name: hour12
-            label: Use 12h Clock
+            label: 12-hour Display
             type: boolean
           - name: timezone
-            label: Theme TZ
+            label: Timezone Descriptor
             type: string
       - name: uiLabels
-        label: Global UI Translations
+        label: Interface Labels (Translation)
         type: object
         fields:
-          - { name: loadMore, label: Load More Label, type: string }
-          - { name: showLess, label: Show Less Label, type: string }
-          - { name: backToTop, label: Back to Top Label, type: string }
-          - { name: visitProject, label: Visit Project Label, type: string }
-          - { name: discussProject, label: Discuss Project Label, type: string }
-          - { name: filterLabel, label: Filter Menu Title, type: string }
-          - { name: filterByLabel, label: Filter Category Heading, type: string }
-          - { name: sidebarEnvironment, label: Mode Tab Label, type: string }
-          - { name: sidebarVisuals, label: Visuals Tab Label, type: string }
-          - { name: sidebarLayout, label: Layout Tab Label, type: string }
-          - { name: sidebarAcoustics, label: Sound Tab Label, type: string }
-          - { name: sidebarNetwork, label: Network (TBC) Label, type: string }
+          - { name: loadMore, label: Load More, type: string }
+          - { name: showLess, label: Show Less, type: string }
+          - { name: backToTop, label: Back to Top, type: string }
+          - { name: visitProject, label: Visit Project, type: string }
+          - { name: discussProject, label: Discuss Project, type: string }
+          - { name: filterLabel, label: Filter Menu, type: string }
+          - { name: filterByLabel, label: Filter By Heading, type: string }
+          - { name: sidebarEnvironment, label: Mode Tab, type: string }
+          - { name: sidebarVisuals, label: Visuals Tab, type: string }
+          - { name: sidebarLayout, label: Layout Tab, type: string }
+          - { name: sidebarAcoustics, label: Sound Tab, type: string }
+          - { name: sidebarNetwork, label: Network Tab, type: string }
