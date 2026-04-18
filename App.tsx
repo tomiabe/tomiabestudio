@@ -51,6 +51,7 @@ interface Engagement {
   title: string;
   description: string;
   link?: string;
+  ctaLabel?: string;
 }
 
 interface ThemeColors {
@@ -79,6 +80,7 @@ interface UILabels {
   sidebarLayout?: string;
   sidebarAcoustics?: string;
   sidebarNetwork?: string;
+  engagementCtaLabel?: string;
 }
 
 interface SiteSettings {
@@ -212,6 +214,7 @@ const DEFAULT_UI_LABELS: UILabels = {
   sidebarLayout: 'Layout',
   sidebarAcoustics: 'Acoustics',
   sidebarNetwork: 'Network',
+  engagementCtaLabel: 'View Engagement',
 };
 
 const DEFAULT_SETTINGS: SiteSettings = {
@@ -867,7 +870,7 @@ export default function App() {
                         onClick={(e) => { e.stopPropagation(); triggerSound(); }}
                         className="mt-2 w-fit flex items-center px-4 py-2 border border-[var(--theme-fg)] rounded-full hover:bg-[var(--theme-fg)] hover:text-[var(--theme-bg)] transition-colors text-[10px] font-mono uppercase tracking-widest font-medium cursor-pointer"
                       >
-                        {labels.engagementCtaLabel} <ArrowUpRight className="ml-1 w-3 h-3"/>
+                        {eng.ctaLabel || labels.engagementCtaLabel || 'View Engagement'} <ArrowUpRight className="ml-1 w-3 h-3"/>
                       </a>
                     )}
                   </div>

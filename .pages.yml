@@ -223,6 +223,9 @@ content:
               - name: link
                 label: Link
                 type: string
+              - name: ctaLabel
+                label: Button Label
+                type: string
       - name: contact
         label: Contact
         type: object
