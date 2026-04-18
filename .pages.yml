@@ -9,7 +9,7 @@ content:
   # ─────────────────────────────────────────────────────────────────────────────
   - name: work
     label: Work
-    type: folder
+    type: collection
     path: content/work
     format: json
     extension: json
@@ -28,7 +28,6 @@ content:
       - name: order
         label: Sort Order
         type: number
-        description: "Lower numbers appear first (0, 1, 2...)"
       - name: role
         label: Your Role
         type: string
@@ -46,7 +45,6 @@ content:
       - name: link
         label: Live Project URL
         type: string
-        description: "Optional link to the external site."
       - name: isFullBleed
         label: Full-width in grid
         type: boolean
@@ -56,13 +54,13 @@ content:
         label_field: heading
         fields:
           - name: heading
-            label: Section Heading
+            label: Panel Heading
             type: string
           - name: text
-            label: Section Body Text
+            label: Panel Text
             type: text
           - name: image
-            label: Section Image
+            label: Panel Image
             type: image
 
   # ─────────────────────────────────────────────────────────────────────────────
@@ -70,7 +68,7 @@ content:
   # ─────────────────────────────────────────────────────────────────────────────
   - name: updates_news
     label: Updates
-    type: folder
+    type: collection
     path: content/updates
     format: json
     extension: json
@@ -91,7 +89,6 @@ content:
       - name: date
         label: Date Label
         type: string
-        description: "e.g. April 2026"
       - name: description
         label: Excerpt
         type: text
@@ -105,10 +102,10 @@ content:
         fields: [{ name: value, label: Paragraph, type: text }]
 
   # ─────────────────────────────────────────────────────────────────────────────
-  # HOME PAGE SETTINGS
+  # HOME PAGE
   # ─────────────────────────────────────────────────────────────────────────────
   - name: home
-    label: Home Page Settings
+    label: Home
     type: file
     path: content/home.json
     format: json
@@ -124,85 +121,86 @@ content:
             label: Description
             type: text
       - name: labels
-        label: Section Headings
+        label: Content Labels
         type: object
         fields:
           - name: heroCta
-            label: Hero CTA Label
+            label: Hero CTA Button
             type: string
           - name: workSectionHeading
-            label: Work Feed Title
+            label: Work Heading
             type: string
           - name: updatesSectionHeading
-            label: Updates Feed Title
+            label: Updates Heading
             type: string
           - name: infoSectionHeading
-            label: Info Section Title
+            label: Info Heading
             type: string
 
   # ─────────────────────────────────────────────────────────────────────────────
-  # INFO PAGE PROFILE
+  # INFO PAGE
   # ─────────────────────────────────────────────────────────────────────────────
   - name: info
-    label: Studio Info & Bio
+    label: Info
     type: file
     path: content/info.json
     format: json
     fields:
       - name: about
-        label: Profile Information
+        label: Studio Profile
         type: object
         fields:
           - name: name
-            label: Full Name
+            label: Name
             type: string
           - name: role
-            label: Role / Title
+            label: Title
             type: string
           - name: imageUrl
-            label: Profile Picture
+            label: Profile Photo
             type: image
-          - name: about
-            label: Bio Paragraphs
-            type: list
-            label_field: value
-            fields: [{ name: value, label: Text, type: text }]
+          - name: lead
+            label: Core Statement (First line)
+            type: text
+          - name: bio
+            label: Main Bio (Supports Styles)
+            type: markdown
       - name: operatingModels
         label: Operating Models
         type: list
         label_field: title
         fields:
           - name: title
-            label: Model Title
+            label: Title
             type: string
           - name: description
-            label: Model Description
+            label: Description
             type: text
       - name: focusAreas
-        label: Strategic Focus Areas
+        label: Focus Areas
         type: list
         label_field: title
         fields:
           - name: title
-            label: Area Title
+            label: Title
             type: string
           - name: description
-            label: Area Description
+            label: Description
             type: text
       - name: speaking
         label: Speaking & Mentorship
         type: object
         fields:
           - name: description
-            label: Section Intro Text
+            label: Section Intro
             type: text
           - name: engagements
-            label: Past Engagements
+            label: Selected Engagements
             type: list
             label_field: title
             fields:
               - name: title
-                label: Event/Platform Title
+                label: Platform/Event
                 type: string
               - name: year
                 label: Year
@@ -211,56 +209,56 @@ content:
                 label: Your Role
                 type: string
               - name: description
-                label: Engagement Details
+                label: Details
                 type: text
               - name: link
-                label: External Link
+                label: Link
                 type: string
       - name: contact
-        label: Contact Details
+        label: Contact
         type: object
         fields:
           - name: headline
-            label: Contact Headline
+            label: Headline
             type: text
           - name: description
-            label: Contact Description
+            label: Text
             type: text
           - name: email
-            label: Public Email Address
+            label: Email
             type: string
           - name: location
-            label: Studio Location
+            label: Location
             type: string
       - name: labels
-        label: Layout Labels
+        label: Section Headings
         type: object
         fields:
           - name: operatingModelHeading
-            label: Models Section Heading
+            label: Operating Model Title
             type: string
           - name: focusAreasHeading
-            label: Focus Areas Section Heading
+            label: Focus Areas Title
             type: string
           - name: speakingHeading
-            label: Speaking Section Heading
+            label: Speaking Title
             type: string
 
   # ─────────────────────────────────────────────────────────────────────────────
-  # SITE SETTINGS
+  # SETTINGS
   # ─────────────────────────────────────────────────────────────────────────────
   - name: site_settings
-    label: Global Website Settings
+    label: Settings
     type: file
     path: content/settings.json
     format: json
     fields:
       - name: metadata
-        label: SEO and Site Data
+        label: Site SEO
         type: object
         fields:
           - name: siteTitle
-            label: Site Title
+            label: Browser Title
             type: string
           - name: faviconEmoji
             label: Favicon Emoji
@@ -269,7 +267,7 @@ content:
             label: Favicon Image
             type: image
           - name: seoDescription
-            label: SEO Description
+            label: SEO Meta Desc
             type: text
           - name: seoKeywords
             label: SEO Keywords
@@ -278,7 +276,7 @@ content:
             label: Share Image
             type: image
           - name: headScripts
-            label: Custom Scripts (gTag, etc.)
+            label: Scripts (GA, etc.)
             type: text
       - name: navigation
         label: Navigation Menu
@@ -288,103 +286,93 @@ content:
             label: Logo Text
             type: string
           - name: items
-            label: Menu Links
+            label: Link List
             type: list
             label_field: label
             fields:
               - name: label
-                label: Link Label
+                label: Label
                 type: string
               - name: url
-                label: Target URL
+                label: URL
                 type: string
       - name: socialLinks
-        label: Social Media Profiles
+        label: Social
         type: list
         label_field: name
         fields:
           - name: name
-            label: Platform Name
+            label: Network
             type: string
           - name: url
-            label: Full URL
-            type: string
-      - name: footer
-        label: Global Footer
-        type: object
-        fields:
-          - name: footerCopyright
-            label: Copyright Owner
-            type: string
-          - name: footerTagline
-            label: Brand Tagline
+            label: Link
             type: string
       - name: themeColors
-        label: Color Themes
+        label: Theme Presets
         type: object
         fields:
           - name: morning
-            label: Morning (Warm)
+            label: Morning
             type: object
             fields:
-              - { name: bg, label: Background, type: color }
-              - { name: fg, label: Text, type: color }
+              - { name: bg, label: BG, type: color }
+              - { name: fg, label: FG, type: color }
               - { name: muted, label: Muted, type: color }
               - { name: border, label: Border, type: color }
           - name: noon
-            label: Noon (Clean)
+            label: Noon
             type: object
             fields:
-              - { name: bg, label: Background, type: color }
-              - { name: fg, label: Text, type: color }
+              - { name: bg, label: BG, type: color }
+              - { name: fg, label: FG, type: color }
               - { name: muted, label: Muted, type: color }
               - { name: border, label: Border, type: color }
           - name: evening
-            label: Evening (Dark)
+            label: Evening
             type: object
             fields:
-              - { name: bg, label: Background, type: color }
-              - { name: fg, label: Text, type: color }
+              - { name: bg, label: BG, type: color }
+              - { name: fg, label: FG, type: color }
               - { name: muted, label: Muted, type: color }
               - { name: border, label: Border, type: color }
       - name: typography
-        label: Site-wide Typography
+        label: Fonts
         type: object
         fields:
           - name: bodyFontUrl
             label: Google Font URL
             type: string
           - name: bodyFontFamily
-            label: Body Font Family
+            label: Body Font Name
             type: string
           - name: monoFontFamily
-            label: Mono Font Family
+            label: Mono Font Name
             type: string
       - name: layout
-        label: Feed Display Settings
+        label: Pagination
         type: object
         fields:
           - name: workItemsPerPage
-            label: Projects to show initially
+            label: Work Threshold
             type: number
           - name: updatesItemsPerPage
-            label: Updates to show initially
+            label: Updates Threshold
             type: number
       - name: clock
-        label: Clock & Time Settings
+        label: Clock
         type: object
         fields:
           - name: locale
-            label: Formatting Locale
+            label: Locale
             type: string
           - name: hour12
-            label: 12-hour Display
+            label: 12-hour
             type: boolean
           - name: timezone
-            label: Timezone Descriptor
+            label: Timezone Name
             type: string
       - name: uiLabels
-        label: Interface Labels (Translation)
+        label: UI Translations
         type: object
         fields:
           - { name: loadMore, label: Load More, type: string }
@@ -393,7 +381,7 @@ content:
           - { name: visitProject, label: Visit Project, type: string }
           - { name: discussProject, label: Discuss Project, type: string }
           - { name: filterLabel, label: Filter Menu, type: string }
-          - { name: filterByLabel, label: Filter By Heading, type: string }
+          - { name: filterByLabel, label: Filter Category, type: string }
           - { name: sidebarEnvironment, label: Mode Tab, type: string }
           - { name: sidebarVisuals, label: Visuals Tab, type: string }
           - { name: sidebarLayout, label: Layout Tab, type: string }
