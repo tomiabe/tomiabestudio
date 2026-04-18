@@ -100,6 +100,7 @@ interface SiteData {
     ogImage?: string;
     headScripts?: string;
     faviconEmoji?: string;
+    faviconImage?: string;
   };
   navigation: {
     logoText: string;
@@ -263,6 +264,17 @@ export default function App() {
         document.title = merged.metadata.siteTitle || 'Tomi Abe Studio';
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute('content', merged.metadata.seoDescription || '');
+        // Update favicon — image takes priority, then emoji, then keep static default
+        const faviconEl = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+        if (faviconEl) {
+          if (merged.metadata.faviconImage) {
+            faviconEl.type = 'image/png';
+            faviconEl.href = merged.metadata.faviconImage;
+          } else if (merged.metadata.faviconEmoji) {
+            faviconEl.type = 'image/svg+xml';
+            faviconEl.href = `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${merged.metadata.faviconEmoji}</text></svg>`;
+          }
+        }
         // Inject CMS theme colors as CSS variables (overrides index.css defaults)
         const themeData = merged.uiSettings?.theme;
         if (themeData) {

@@ -70,7 +70,8 @@ content:
         type: object
         fields:
           - { name: siteTitle, label: Site Title, type: string, description: "Appears in browser tab and og:title" }
-          - { name: faviconEmoji, label: Favicon Emoji, type: string, description: "Single emoji used as favicon (e.g. ✦)" }
+          - { name: faviconImage, label: Favicon Image, type: image, description: "Upload a PNG/ICO file — this takes priority over the emoji below" }
+          - { name: faviconEmoji, label: Favicon Emoji (fallback), type: string, description: "Used if no image is uploaded above. Single emoji, e.g. ✦" }
           - { name: seoDescription, label: SEO Description, type: text, description: "Shown in Google search results (~160 chars)" }
           - { name: seoKeywords, label: SEO Keywords, type: string }
           - { name: ogImage, label: Social Share Image (OG), type: image, description: "Used when sharing on Twitter, LinkedIn, etc." }
