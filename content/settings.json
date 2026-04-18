@@ -82,7 +82,7 @@
     }
   },
   "typography": {
-    "bodyFontUrl": "https://fonts.google.com/specimen/Geist?query=geist",
+    "bodyFontUrl": "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap",
     "bodyFontFamily": "Geist",
     "monoFontFamily": "Geist Mono",
     "navLogoPx": 14,
