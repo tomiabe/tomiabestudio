@@ -50,8 +50,11 @@ content:
         type: boolean
       - name: details
         label: Case Study Panels
-        type: list
-        label_field: heading
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{heading}"
         fields:
           - name: heading
             label: Panel Heading
