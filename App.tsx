@@ -53,28 +53,40 @@ interface Engagement {
   link?: string;
 }
 
+interface ThemeColors {
+  morning: { bg: string; fg: string; muted: string; border: string };
+  noon: { bg: string; fg: string; muted: string; border: string };
+  evening: { bg: string; fg: string; muted: string; border: string };
+}
+
+interface UILabels {
+  workSectionHeading?: string;
+  updatesSectionHeading?: string;
+  infoSectionHeading?: string;
+  operatingModelHeading?: string;
+  focusAreasHeading?: string;
+  speakingHeading?: string;
+  heroCta?: string;
+  loadMore?: string;
+  showLess?: string;
+  backToTop?: string;
+  visitProject?: string;
+  discussProject?: string;
+  filterLabel?: string;
+  filterByLabel?: string;
+  sidebarEnvironment?: string;
+  sidebarVisuals?: string;
+  sidebarLayout?: string;
+  sidebarAcoustics?: string;
+  sidebarNetwork?: string;
+}
+
 interface SiteSettings {
-  labels: {
-    workSectionHeading: string;
-    updatesSectionHeading: string;
-    infoSectionHeading: string;
-    operatingModelHeading: string;
-    focusAreasHeading: string;
-    speakingHeading: string;
-    heroCta: string;
-    loadMore: string;
-    showLess: string;
-    backToTop: string;
-    visitProject: string;
-    discussProject: string;
-    engagementCtaLabel: string;
-    filterLabel: string;
-    filterByLabel: string;
-    sidebarEnvironment: string;
-    sidebarVisuals: string;
-    sidebarLayout: string;
-    sidebarAcoustics: string;
-    sidebarNetwork: string;
+  themeColors: ThemeColors;
+  typography: {
+    bodyFontUrl?: string;
+    bodyFontFamily?: string;
+    monoFontFamily?: string;
   };
   layout: {
     workItemsPerPage: number;
@@ -85,11 +97,10 @@ interface SiteSettings {
     hour12: boolean;
     timezone: string;
   };
-  theme: {
-    morning: { bg: string; fg: string; muted: string; border: string };
-    noon: { bg: string; fg: string; muted: string; border: string };
-    evening: { bg: string; fg: string; muted: string; border: string };
-  };
+  uiLabels: UILabels;
+  // label overrides from home.json and info.json
+  _homeLabels?: UILabels;
+  _infoLabels?: { operatingModelHeading?: string; focusAreasHeading?: string; speakingHeading?: string };
 }
 
 interface SiteData {
@@ -175,36 +186,40 @@ function LiveClock({ locale = 'en-US', hour12 = true, timezone = 'short' }: { lo
 }
 
 // ─── Default settings ─────────────────────────────────────────────────────────
+const DEFAULT_THEME_COLORS: ThemeColors = {
+  morning: { bg: '#fdfaf6', fg: '#1c1917', muted: '#78716c', border: '#e7e5e4' },
+  noon: { bg: '#ffffff', fg: '#09090b', muted: '#71717a', border: '#e4e4e7' },
+  evening: { bg: '#09090b', fg: '#fafafa', muted: '#a1a1aa', border: '#27272a' },
+};
+
+const DEFAULT_UI_LABELS: UILabels = {
+  workSectionHeading: 'Selected Work',
+  updatesSectionHeading: 'News & Updates',
+  infoSectionHeading: 'Info',
+  operatingModelHeading: 'Operating Model',
+  focusAreasHeading: 'Focus Areas',
+  speakingHeading: 'Speaking, Workshops & Mentorship',
+  heroCta: "Let's Work",
+  loadMore: 'Load More',
+  showLess: 'Show Less',
+  backToTop: 'Back to Top',
+  visitProject: 'Visit Live Project',
+  discussProject: 'Discuss Similar Project',
+  filterLabel: 'Filters',
+  filterByLabel: 'Filter by discipline',
+  sidebarEnvironment: 'Environment',
+  sidebarVisuals: 'Visuals',
+  sidebarLayout: 'Layout',
+  sidebarAcoustics: 'Acoustics',
+  sidebarNetwork: 'Network',
+};
+
 const DEFAULT_SETTINGS: SiteSettings = {
-  labels: {
-    workSectionHeading: 'Selected Work',
-    updatesSectionHeading: 'News & Updates',
-    infoSectionHeading: 'Info',
-    operatingModelHeading: 'Operating Model',
-    focusAreasHeading: 'Focus Areas',
-    speakingHeading: 'Speaking, Workshops & Mentorship',
-    heroCta: "Let's Work",
-    loadMore: 'Load More',
-    showLess: 'Show Less',
-    backToTop: 'Back to Top',
-    visitProject: 'Visit Live Project',
-    discussProject: 'Discuss Similar Project',
-    engagementCtaLabel: 'Book me on MentorCruise',
-    filterLabel: 'Filters',
-    filterByLabel: 'Filter by discipline',
-    sidebarEnvironment: 'Environment',
-    sidebarVisuals: 'Visuals',
-    sidebarLayout: 'Layout',
-    sidebarAcoustics: 'Acoustics',
-    sidebarNetwork: 'Network',
-  },
+  themeColors: DEFAULT_THEME_COLORS,
+  typography: { bodyFontUrl: '', bodyFontFamily: 'Inter', monoFontFamily: 'JetBrains Mono' },
   layout: { workItemsPerPage: 6, updatesItemsPerPage: 6 },
   clock: { locale: 'en-US', hour12: true, timezone: 'short' },
-  theme: {
-    morning: { bg: '#fdfaf6', fg: '#1c1917', muted: '#78716c', border: '#e7e5e4' },
-    noon: { bg: '#ffffff', fg: '#09090b', muted: '#71717a', border: '#e4e4e7' },
-    evening: { bg: '#09090b', fg: '#fafafa', muted: '#a1a1aa', border: '#27272a' },
-  },
+  uiLabels: DEFAULT_UI_LABELS,
 };
 
 // ─── Default data (used while JSON loads) ─────────────────────────────────────
@@ -244,63 +259,138 @@ export default function App() {
   const [copiedUpdate, setCopiedUpdate] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [copiedProject, setCopiedProject] = useState(false);
-
-  // ── Load JSON data (3 separate files, merged) ──
   useEffect(() => {
-    Promise.all([
-      fetch('/content/settings.json').then(r => r.json()),
-      fetch('/content/projects.json').then(r => r.json()),
-      fetch('/content/updates.json').then(r => r.json()),
-    ])
-      .then(([settingsData, projectsData, updatesData]) => {
-        const merged: SiteData = {
-          ...settingsData,
-          projects: projectsData.projects || [],
-          updates: updatesData.updates || [],
-        };
-        setSiteData(merged);
-        setDataLoaded(true);
-        // Update document metadata
-        document.title = merged.metadata.siteTitle || 'Tomi Abe Studio';
-        const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) metaDesc.setAttribute('content', merged.metadata.seoDescription || '');
-        // Update favicon — image takes priority, then emoji, then keep static default
-        const faviconEl = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
-        if (faviconEl) {
-          if (merged.metadata.faviconImage) {
-            faviconEl.type = 'image/png';
-            faviconEl.href = merged.metadata.faviconImage;
-          } else if (merged.metadata.faviconEmoji) {
-            faviconEl.type = 'image/svg+xml';
-            faviconEl.href = `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${merged.metadata.faviconEmoji}</text></svg>`;
-          }
-        }
-        // Inject CMS theme colors as CSS variables (overrides index.css defaults)
-        const themeData = merged.uiSettings?.theme;
-        if (themeData) {
-          const existing = document.getElementById('cms-theme-vars');
-          if (existing) existing.remove();
-          const style = document.createElement('style');
-          style.id = 'cms-theme-vars';
-          style.textContent = `
-            :root { --theme-bg: ${themeData.noon.bg}; --theme-fg: ${themeData.noon.fg}; --theme-muted: ${themeData.noon.muted}; --theme-border: ${themeData.noon.border}; }
-            .theme-morning { --theme-bg: ${themeData.morning.bg}; --theme-fg: ${themeData.morning.fg}; --theme-muted: ${themeData.morning.muted}; --theme-border: ${themeData.morning.border}; }
-            .theme-noon { --theme-bg: ${themeData.noon.bg}; --theme-fg: ${themeData.noon.fg}; --theme-muted: ${themeData.noon.muted}; --theme-border: ${themeData.noon.border}; }
-            .theme-evening { --theme-bg: ${themeData.evening.bg}; --theme-fg: ${themeData.evening.fg}; --theme-muted: ${themeData.evening.muted}; --theme-border: ${themeData.evening.border}; }
-          `;
-          document.head.appendChild(style);
-        }
-      })
-      .catch(err => {
-        console.warn('Could not load content files, using defaults.', err);
-        setDataLoaded(true);
+    try {
+      // 1. Load singleton files
+      const settingsMod = import.meta.glob('./content/settings.json', { eager: true });
+      const homeMod = import.meta.glob('./content/home.json', { eager: true });
+      const infoMod = import.meta.glob('./content/info.json', { eager: true });
+      
+      const sd = (Object.values(settingsMod)[0] as any)?.default || {};
+      const hd = (Object.values(homeMod)[0] as any)?.default || {};
+      const id = (Object.values(infoMod)[0] as any)?.default || {};
+
+      // 2. Load collections
+      const projectMods = import.meta.glob('./content/work/*.json', { eager: true });
+      const updatesMods = import.meta.glob('./content/updates/*.json', { eager: true });
+      
+      // Helper to unwrap CMS lists (string[] or {value: string}[])
+      const unwrap = (arr: any) => {
+        if (!Array.isArray(arr)) return [];
+        return arr.map(item => (typeof item === 'object' && item !== null ? (item.value || item.title || item.label || Object.values(item)[0]) : item));
+      };
+
+      const pd_list = Object.values(projectMods).map((m: any) => {
+        const p = m.default;
+        return { ...p, categories: unwrap(p.categories) };
       });
+      const ud_list = Object.values(updatesMods).map((m: any) => {
+        const u = m.default;
+        return { ...u, content: unwrap(u.content) };
+      });
+
+      // Merge labels from all sources: settings > home labels > info labels
+      const mergedLabels: UILabels = {
+        ...DEFAULT_UI_LABELS,
+        ...(sd.uiLabels || {}),
+        ...(hd.labels || {}),
+        ...(id.labels || {}),
+      };
+
+      const merged: SiteData = {
+        metadata: sd.metadata || {},
+        navigation: sd.navigation || { logoText: 'TAS', items: [] },
+        hero: hd.hero || { headline: '', description: '' },
+        about: {
+          ...(id.about || DEFAULT_DATA.about),
+          about: unwrap(id.about?.about),
+          operatingModels: id.operatingModels || id.about?.operatingModels || [],
+          focusAreas: id.focusAreas || id.about?.focusAreas || [],
+          speaking: id.speaking || id.about?.speaking || { description: '', engagements: [] },
+        },
+        contact: {
+          ...(id.contact || {}),
+          footerCopyright: sd.footer?.footerCopyright || '',
+          footerTagline: sd.footer?.footerTagline || '',
+        },
+        socialLinks: sd.socialLinks || [],
+        projects: pd_list,
+        updates: ud_list,
+        uiSettings: {
+          themeColors: sd.themeColors || DEFAULT_THEME_COLORS,
+          typography: sd.typography || DEFAULT_SETTINGS.typography,
+          layout: sd.layout || DEFAULT_SETTINGS.layout,
+          clock: sd.clock || DEFAULT_SETTINGS.clock,
+          uiLabels: mergedLabels,
+        },
+      };
+
+      setSiteData(merged);
+      setDataLoaded(true);
+
+      // Apply side effects
+      document.title = merged.metadata.siteTitle || 'Tomi Abe Studio';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', merged.metadata.seoDescription || '');
+
+      const faviconEl = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+      if (faviconEl) {
+        if (merged.metadata.faviconImage) {
+          faviconEl.type = 'image/png';
+          faviconEl.href = merged.metadata.faviconImage;
+        } else if (merged.metadata.faviconEmoji) {
+          faviconEl.type = 'image/svg+xml';
+          faviconEl.href = `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${merged.metadata.faviconEmoji}</text></svg>`;
+        }
+      }
+
+      // Themes & Fonts
+      const themeData = merged.uiSettings.themeColors;
+      if (themeData?.noon?.bg) {
+        const existing = document.getElementById('cms-theme-vars');
+        if (existing) existing.remove();
+        const style = document.createElement('style');
+        style.id = 'cms-theme-vars';
+        style.textContent = `
+          :root { --theme-bg: ${themeData.noon.bg}; --theme-fg: ${themeData.noon.fg}; --theme-muted: ${themeData.noon.muted}; --theme-border: ${themeData.noon.border}; }
+          .theme-morning { --theme-bg: ${themeData.morning.bg}; --theme-fg: ${themeData.morning.fg}; --theme-muted: ${themeData.morning.muted}; --theme-border: ${themeData.morning.border}; }
+          .theme-noon { --theme-bg: ${themeData.noon.bg}; --theme-fg: ${themeData.noon.fg}; --theme-muted: ${themeData.noon.muted}; --theme-border: ${themeData.noon.border}; }
+          .theme-evening { --theme-bg: ${themeData.evening.bg}; --theme-fg: ${themeData.evening.fg}; --theme-muted: ${themeData.evening.muted}; --theme-border: ${themeData.evening.border}; }
+        `;
+        document.head.appendChild(style);
+      }
+
+      const typo = merged.uiSettings.typography;
+      if (typo?.bodyFontUrl) {
+        const el = document.getElementById('cms-font-link');
+        if (el) el.remove();
+        const link = document.createElement('link');
+        link.id = 'cms-font-link';
+        link.rel = 'stylesheet';
+        link.href = typo.bodyFontUrl;
+        document.head.appendChild(link);
+      }
+      if (typo?.bodyFontFamily || typo?.monoFontFamily) {
+        const el2 = document.getElementById('cms-font-vars');
+        if (el2) el2.remove();
+        const style2 = document.createElement('style');
+        style2.id = 'cms-font-vars';
+        style2.textContent = `:root {
+          ${typo.bodyFontFamily ? `--font-sans: "${typo.bodyFontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;` : ''}
+          ${typo.monoFontFamily ? `--font-mono: "${typo.monoFontFamily}", ui-monospace, monospace;` : ''}
+        }`;
+        document.head.appendChild(style2);
+      }
+    } catch (err) {
+      console.warn('Error loading synchronous content, check content directory.', err);
+      setDataLoaded(true);
+    }
   }, []);
 
   // ── Derived data ──
   const { metadata, navigation, hero, about, contact, socialLinks, projects, updates } = siteData;
   const settings = siteData.uiSettings ?? DEFAULT_SETTINGS;
-  const labels = settings.labels ?? DEFAULT_SETTINGS.labels;
+  const labels: UILabels = { ...DEFAULT_UI_LABELS, ...(settings.uiLabels ?? {}) };
   const layout = settings.layout ?? DEFAULT_SETTINGS.layout;
   const clockSettings = settings.clock ?? DEFAULT_SETTINGS.clock;
   const workItemsPerPage = layout.workItemsPerPage ?? 6;

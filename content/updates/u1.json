@@ -1,0 +1,12 @@
+{
+  "id": "u1",
+  "date": "April 2026",
+  "title": "New Studio Website Launched",
+  "description": "Transitioned the digital practice portfolio from a category-based structure to a unified systems-based feed.",
+  "image": "https://picsum.photos/seed/u1/400/300",
+  "content": [
+    "After several months of iterative design and systems engineering, we have officially launched the new studio digital presence. This shift represents a transition away from traditional portfolio structures towards a more modular, fluid feed of ongoing work and insight.",
+    "By stripping away static categorizations and embracing a timeline-based architectural approach, the site mirrors how digital products actually evolve—incrementally, systematically, and continuously.",
+    "The underlying stack relies primarily on React via Vite, using extremely tight Tailwind configuration for a custom 'environment' theme system that adjusts based on the local time of day."
+  ]
+}

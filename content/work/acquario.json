@@ -1,0 +1,35 @@
+{
+  "id": "acquario",
+  "title": "Acquario",
+  "role": "Creative Director",
+  "description": "Visual branding and art direction for an independent music label. Translating sound aesthetics into tangible brand language across physical and digital formats.",
+  "categories": [
+    "Brand",
+    "Art"
+  ],
+  "link": "",
+  "isFullBleed": false,
+  "image": "https://picsum.photos/seed/acquario/800/800",
+  "details": [
+    {
+      "heading": "The Challenge",
+      "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system. We had to break down existing silos and establish a foundational logic that could scale without breaking.",
+      "image": "https://picsum.photos/seed/acquario_d1/800/500"
+    },
+    {
+      "heading": "Strategic Approach",
+      "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics to construct a resilient architecture. We conducted extensive mapping of the user ecosystem, ensuring that every touchpoint served both immediate utility and long-term business objectives.",
+      "image": "https://picsum.photos/seed/acquario_d2/800/500"
+    },
+    {
+      "heading": "Design & Execution",
+      "text": "Execution required meticulous attention to typographic hierarchy, spatial rhythm, and interaction patterns. I implemented a modular component system that allowed for rapid iteration while maintaining strict visual consistency.",
+      "image": "https://picsum.photos/seed/acquario_d3/800/500"
+    },
+    {
+      "heading": "Results & Impact",
+      "text": "The final outcome significantly streamlined operational workflows and accelerated user engagement metrics. By eliminating friction and delivering a highly intuitive interface, we saw an immediate positive shift in retention.",
+      "image": "https://picsum.photos/seed/acquario_d4/800/500"
+    }
+  ]
+}

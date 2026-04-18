@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QQNXSYX8TP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+
+    gtag("config", "G-QQNXSYX8TP");
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomi Abe Studio — Master Design System [Elevated]</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ================================================================
+       TOMI ABE STUDIO — MASTER DESIGN SYSTEM [REFINED]
+       A balance of precision, atmosphere, and clarity.
+       ================================================================ */
+
+    :root {
+      /* Typefaces */
+      --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Geist Mono', SFMono-Regular, monospace;
+
+      /* Type scale - Elevated for better legibility */
+      --sz-xs: 12px;
+      --sz-sm: 14px;
+      --sz-base: 16px;
+      --sz-md: 20px;
+      --sz-lg: 32px;
+      --sz-xl: 48px;
+      --sz-2xl: 64px;
+      --sz-3xl: 80px;
+      --sz-4xl: 112px;
+
+      /* Spacing Scale - 8px Grid */
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 16px;
+      --sp-4: 24px;
+      --sp-5: 32px;
+      --sp-6: 48px;
+      --sp-7: 64px;
+      --sp-8: 80px;
+      --sp-9: 120px;
+      --sp-10: 160px;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-fast: 150ms;
+      --dur-base: 300ms;
+      --dur-slow: 500ms;
+      --dur-mode: 1200ms;
+
+      /* Layout */
+      --max-w: 1440px;
+      --page-pad: clamp(32px, 6vw, 96px);
+
+      /* Shadows */
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.04);
+      --glass: blur(12px) saturate(1.1);
+
+      /* Active mode tokens — default: morning */
+      --bg: #F9F9F7;
+      --surface: #FFFFFF;
+      --border: rgba(0, 0, 0, 0.08);
+      --text: #111110;
+      --muted: #666662;
+      --accent: #2A5C45;
+      --accent-muted: rgba(42, 92, 69, 0.08);
+      --is-dark: 0;
+    }
+
+    /* ── 01  TIME MODES (Refined Palettes) ────────────────────────── */
+    .mode-morning {
+      --bg: #F9F9F7;
+      --surface: #FFFFFF;
+      --border: rgba(0, 0, 0, 0.06);
+      --text: #111110;
+      --muted: #666662;
+      --accent: #2A5C45;
+      --accent-muted: rgba(42, 92, 69, 0.08);
+      --is-dark: 0;
+    }
+
+    .mode-afternoon {
+      --bg: #F7F3EF;
+      --surface: #FFFFFF;
+      --border: rgba(0, 0, 0, 0.06);
+      --text: #1C1814;
+      --muted: #7A6E62;
+      --accent: #B05A2A;
+      --accent-muted: rgba(176, 90, 42, 0.08);
+      --is-dark: 0;
+    }
+
+    .mode-evening {
+      --bg: #1A1412;
+      --surface: #261E1B;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #F2EBE4;
+      --muted: #9E8B82;
+      --accent: #E8904A;
+      --accent-muted: rgba(232, 144, 74, 0.12);
+      --is-dark: 1;
+    }
+
+    .mode-night {
+      --bg: #0A0A0A;
+      --surface: #141414;
+      --border: rgba(255, 255, 255, 0.06);
+      --text: #E8E8E8;
+      --muted: #777777;
+      --accent: #8FA7FF;
+      --accent-muted: rgba(143, 167, 255, 0.12);
+      --is-dark: 1;
+    }
+
+    /* ── 02  BASE RESET ─────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      transition: background var(--dur-mode) var(--ease-out), color var(--dur-mode) var(--ease-out);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Refined Grain */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+
+    #shaderCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── DS SHELL ────────────────────────────────────────────────── */
+    .ds-shell {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Elevated Sidebar */
+    .ds-sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      background: color-mix(in srgb, var(--surface) 70%, transparent);
+      border-right: 1px solid var(--border);
+      backdrop-filter: var(--glass);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--dur-mode) var(--ease-out);
+    }
+
+    .ds-sidebar-top {
+      padding: var(--sp-6) var(--sp-4) var(--sp-4);
+    }
+
+    .ds-wordmark {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .ds-wordmark span {
+      font-weight: 300;
+      opacity: 0.6;
+    }
+
+    .ds-version {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .ds-nav {
+      flex: 1;
+      padding: var(--sp-4) var(--sp-3);
+    }
+
+    .ds-nav-head {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: var(--sp-2);
+      padding-left: var(--sp-2);
+    }
+
+    .ds-nav-group {
+      margin-bottom: var(--sp-5);
+    }
+
+    .ds-nav a {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      font-size: var(--sz-sm);
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all var(--dur-base);
+      margin-bottom: 2px;
+    }
+
+    .ds-nav a:hover {
+      color: var(--text);
+      background: var(--border);
+    }
+
+    .ds-nav a.active {
+      color: var(--accent);
+      background: var(--accent-muted);
+      font-weight: 500;
+    }
+
+    .ds-sidebar-bottom {
+      padding: var(--sp-4);
+      border-top: 1px solid var(--border);
+    }
+
+    .mode-dots {
+      display: flex;
+      gap: var(--sp-2);
+      margin-top: var(--sp-2);
+    }
+
+    .mode-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s var(--ease-out);
+    }
+
+    .mode-dot:hover {
+      transform: scale(1.2);
+    }
+
+    .mode-dot.active {
+      border-color: var(--text);
+      transform: scale(1.1);
+    }
+
+    .mode-dot[data-mode="morning"] {
+      background: #E2E2DE;
+    }
+
+    .mode-dot[data-mode="afternoon"] {
+      background: #DBCDBA;
+    }
+
+    .mode-dot[data-mode="evening"] {
+      background: #5E463E;
+    }
+
+    .mode-dot[data-mode="night"] {
+      background: #222222;
+    }
+
+    /* ── MAIN CONTENT ───────────────────────────────────────────── */
+    .ds-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ds-section {
+      padding: var(--sp-8) var(--page-pad);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ds-section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: var(--sp-6);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ds-section-label .num {
+      color: var(--accent);
+      font-weight: 600;
+      width: 24px;
+    }
+
+    /* ── TYPOGRAPHY ────────────────────────────────────────────── */
+    .t-display {
+      font-size: var(--sz-3xl);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .t-heading {
+      font-size: var(--sz-xl);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .t-body-lg {
+      font-size: var(--sz-md);
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .t-body {
+      font-size: var(--sz-base);
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .t-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── BUTTONS ──────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: var(--sz-sm);
+      font-weight: 500;
+      text-decoration: none;
+      transition: all var(--dur-base) var(--ease-out);
+      cursor: pointer;
+      border: none;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      background: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: color-mix(in srgb, var(--text) 8%, var(--border));
+    }
+
+    .btn-text {
+      background: transparent;
+      color: var(--muted);
+      padding: 10px 0;
+    }
+
+    .btn-text:hover {
+      color: var(--text);
+    }
+
+    .btn-text span {
+      transition: transform 0.3s;
+    }
+
+    .btn-text:hover span {
+      transform: translateX(4px);
+    }
+
+    /* ── COMPONENTS ────────────────────────────────────────────── */
+    .focus-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: var(--sp-5);
+      border-radius: 20px;
+      transition: all 0.4s var(--ease-out);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .focus-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+
+    .tag {
+      padding: 6px 14px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 100px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      background: var(--border);
+    }
+
+    .tag-accent {
+      background: var(--accent-muted);
+      color: var(--accent);
+    }
+
+    /* ── LAYOUTS ──────────────────────────────────────────────── */
+    .project-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      margin-bottom: var(--sp-4);
+      cursor: pointer;
+    }
+
+    .project-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s var(--ease-out);
+    }
+
+    .project-card:hover .project-img {
+      transform: scale(1.04);
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: var(--sp-5);
+      color: #fff;
+    }
+
+    .project-info h3 {
+      font-size: var(--sz-lg);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    /* ── SHADER CONFIG (Hidden helper) ────────────────────────── */
+    [data-shader-r] {
+      transition: all var(--dur-mode);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--muted);
+    }
+  </style>
+</head>
+
+<body class="mode-morning" id="body">
+
+  <canvas id="shaderCanvas"></canvas>
+
+  <div class="ds-shell">
+    <!-- SIDEBAR -->
+    <aside class="ds-sidebar">
+      <div class="ds-sidebar-top">
+        <a href="#" class="ds-wordmark">Tomi Abe <span>Studio</span></a>
+        <span class="ds-version">v2.0 Refined</span>
+      </div>
+
+      <nav class="ds-nav">
+        <div class="ds-nav-group">
+          <p class="ds-nav-head">System</p>
+          <a href="#s-tokens" class="active">Design Tokens</a>
+          <a href="#s-typography">Typography</a>
+          <a href="#s-color">Color & Mode</a>
+        </div>
+        <div class="ds-nav-group">
+          <p class="ds-nav-head">Components</p>
+          <a href="#s-buttons">Buttons</a>
+          <a href="#s-cards">Focus Cards</a>
+          <a href="#s-tags">Tags & Pills</a>
+        </div>
+        <div class="ds-nav-group">
+          <p class="ds-nav-head">Explorations</p>
+          <a href="#s-layouts">Project Layouts</a>
+          <a href="#s-hero">Hero Specimen</a>
+        </div>
+      </nav>
+
+      <div class="ds-sidebar-bottom">
+        <p class="t-label" style="opacity: 0.5;">Switch Time</p>
+        <div class="mode-dots">
+          <div class="mode-dot active" data-mode="morning" onclick="setMode('morning', true)" title="Morning"></div>
+          <div class="mode-dot" data-mode="afternoon" onclick="setMode('afternoon', true)" title="Afternoon"></div>
+          <div class="mode-dot" data-mode="evening" onclick="setMode('evening', true)" title="Evening"></div>
+          <div class="mode-dot" data-mode="night" onclick="setMode('night', true)" title="Night"></div>
+        </div>
+        <div style="margin-top: 16px; font-family: var(--font-mono); font-size: 10px; opacity: 0.6;">
+          <span id="clockLabel">--:--</span> · <span id="modeLabel">morning</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="ds-main">
+
+      <!-- HERO -->
+      <section class="ds-section" id="s-hero" style="border-bottom: none; padding-top: var(--sp-10);">
+        <div class="ds-section-label"><span class="num">00</span> Hero Specimen</div>
+        <h1 class="t-display" style="max-width: 800px; margin-bottom: var(--sp-4);">
+          Turning complex systems into clear digital products.
+        </h1>
+        <p class="t-body-lg" style="max-width: 600px; margin-bottom: var(--sp-6);">
+          An independent practice working at the intersection of brand, product, and data strategy for ventures across
+          the globe.
+        </p>
+        <div style="display: flex; gap: 16px;">
+          <a href="#" class="btn btn-primary">Start a Project</a>
+          <a href="#" class="btn btn-secondary">Selected Work</a>
+        </div>
+      </section>
+
+      <!-- TOKENS -->
+      <section class="ds-section" id="s-tokens">
+        <div class="ds-section-label"><span class="num">01</span> Design Tokens</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--sp-4);">
+          <div>
+            <p class="t-label" style="margin-bottom: 8px;">Spacing Unit</p>
+            <p class="t-body" style="font-family: var(--font-mono); font-size: 13px;">8px Base Grid</p>
+          </div>
+          <div>
+            <p class="t-label" style="margin-bottom: 8px;">Primary Sans</p>
+            <p class="t-body">Geist (Modern Neo-Grotesk)</p>
+          </div>
+          <div>
+            <p class="t-label" style="margin-bottom: 8px;">Active Accent</p>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent);"></div>
+              <p class="t-body" style="font-family: var(--font-mono); font-size: 13px;" id="accentHex">#2A5C45</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TYPOGRAPHY -->
+      <section class="ds-section" id="s-typography">
+        <div class="ds-section-label"><span class="num">02</span> Typography Scale</div>
+        <div style="display: flex; flex-direction: column; gap: var(--sp-5);">
+          <div>
+            <p class="t-label" style="margin-bottom: 12px;">Display 3XL · 112px</p>
+            <h2 class="t-display" style="font-size: var(--sz-4xl);">Vision.</h2>
+          </div>
+          <div style="padding: 24px 0; border-top: 1px solid var(--border);">
+            <p class="t-label" style="margin-bottom: 12px;">Display XL · 48px</p>
+            <h3 class="t-heading">Clarity over Complexity.</h3>
+          </div>
+          <div style="padding: 24px 0; border-top: 1px solid var(--border);">
+            <p class="t-label" style="margin-bottom: 12px;">Body Large · 20px</p>
+            <p class="t-body-lg">Helping leaders and teams translate high-ambiguity ideas into tangible systems.</p>
+          </div>
+          <div style="padding: 24px 0; border-top: 1px solid var(--border);">
+            <p class="t-label" style="margin-bottom: 12px;">Body Base · 16px</p>
+            <p class="t-body">Precision is not just about aesthetics; it is about reducing the cognitive load for the
+              end user.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- BUTTONS -->
+      <section class="ds-section" id="s-buttons">
+        <div class="ds-section-label"><span class="num">03</span> Interactive Elements</div>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center;">
+          <button class="btn btn-primary">Primary Action</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-text">Learn More <span>→</span></button>
+        </div>
+      </section>
+
+      <!-- CARDS -->
+      <section class="ds-section" id="s-cards">
+        <div class="ds-section-label"><span class="num">04</span> Intelligent Surfaces</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--sp-4);">
+          <div class="focus-card">
+            <span class="t-label" style="opacity: 0.5; margin-bottom: 16px; display: block;">01</span>
+            <h4 class="t-body-lg" style="font-weight: 500; margin-bottom: 12px;">Data Visualization</h4>
+            <p class="t-body">We transform messy datasets into clear, interactive narratives that drive decision making.
+            </p>
+          </div>
+          <div class="focus-card">
+            <span class="t-label" style="opacity: 0.5; margin-bottom: 16px; display: block;">02</span>
+            <h4 class="t-body-lg" style="font-weight: 500; margin-bottom: 12px;">Product Strategy</h4>
+            <p class="t-body">Defining the architecture and roadmap for products that need to scale with coherence.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECT LAYOUTS -->
+      <section class="ds-section" id="s-layouts">
+        <div class="ds-section-label"><span class="num">05</span> Project Layout Explorations</div>
+
+        <!-- Layout A -->
+        <div style="margin-bottom: var(--sp-8);">
+          <p class="t-label" style="margin-bottom: 24px; opacity: 0.6;">A — Immersive Panel</p>
+          <div class="project-card">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000"
+              class="project-img">
+            <div class="project-overlay">
+              <div class="project-info">
+                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                  <span class="tag tag-accent">Fintech</span>
+                  <span class="tag">Strategy</span>
+                </div>
+                <h3>Zeproc industrial</h3>
+                <p class="t-body" style="color: rgba(255,255,255,0.8);">Streamlining B2B procurement workflows.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layout B -->
+        <div>
+          <p class="t-label" style="margin-bottom: 24px; opacity: 0.6;">B — Refined Split</p>
+          <div
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border-radius: 24px; overflow: hidden; border: 1px solid var(--border);">
+            <div style="background: var(--surface); padding: var(--sp-6);">
+              <span class="t-label" style="color: var(--accent); margin-bottom: 16px; display: block;">Featured
+                Experiment</span>
+              <h3 class="t-heading" style="margin-bottom: 16px;">The Modular Web</h3>
+              <p class="t-body" style="margin-bottom: 32px;">An exploration into how atomic design systems can be
+                applied to high-traffic media platforms.</p>
+              <a href="#" class="btn btn-secondary">Read Article</a>
+            </div>
+            <div style="overflow: hidden;">
+              <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1200"
+                style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="ds-section"
+        style="border-top: 1px solid var(--border); text-align: center; padding: var(--sp-10) 0;">
+        <p class="t-display" style="font-size: var(--sz-base); opacity: 0.3; margin-bottom: 16px;">TOMI ABE STUDIO</p>
+        <p class="t-label" style="opacity: 0.5;">Objectivity · Clarity · Precision</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    // ── SHADER LOGIC (Simplex 2D) ───────────────────────────────
+    const canvas = document.getElementById('shaderCanvas');
+    const gl = canvas.getContext('webgl');
+
+    const modeConfig = {
+      morning: { r: 0.16, g: 0.36, b: 0.27, o: 0.15, d: 0.0 },
+      afternoon: { r: 0.69, g: 0.35, b: 0.16, o: 0.15, d: 0.0 },
+      evening: { r: 0.91, g: 0.56, b: 0.29, o: 0.25, d: 1.0 },
+      night: { r: 0.7, g: 0.8, b: 1.0, o: 0.40, d: 1.0 }
+    };
+
+    let cur = { ...modeConfig.morning }, tgt = { ...modeConfig.morning };
+
+    const vert = `attribute vec2 a; void main(){gl_Position=vec4(a,0,1);}`;
+    const frag = `
+      precision mediump float;
+      uniform float u_t; uniform vec2 u_res; uniform vec3 u_col; uniform float u_op; uniform float u_dark;
+      
+      float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+      
+      void main(){
+        vec2 uv = gl_FragCoord.xy / u_res.xy;
+        vec2 p = (gl_FragCoord.xy * 2.0 - u_res.xy) / min(u_res.x, u_res.y);
+        vec3 finalCol = vec3(0.0);
+        
+        if(u_dark > 0.5) {
+          // STARS MODE
+          float s = 0.0;
+          for(float i=0.0; i<3.0; i++) {
+            vec2 q = p * (2.0 + i);
+            vec2 id = floor(q);
+            vec2 f = fract(q) - 0.5;
+            float h = hash(id);
+            if(h > 0.98) {
+              float d = length(f);
+              float twinkle = sin(u_t * 2.0 + h * 10.0) * 0.5 + 0.5;
+              s += smoothstep(0.04, 0.0, d) * twinkle * (1.0 - i * 0.3);
+            }
+          }
+          finalCol = u_col * s;
+        } else {
+          // BEAMS MODE
+          float b = 0.0;
+          for(float i=0.0; i<3.0; i++) {
+            float t = u_t * (0.1 + i * 0.05);
+            vec2 pos = vec2(sin(t), cos(t * 0.8)) * 0.5;
+            float d = length(p - pos);
+            b += exp(-d * (2.0 + i)) * 0.2;
+          }
+          finalCol = u_col * b;
+        }
+        
+        float vg = 1.0 - length(uv - 0.5) * 0.5;
+        gl_FragColor = vec4(finalCol, u_op * vg);
+      }`;
+
+    let prog, uT, uR, uC, uO, uS, t0;
+    if (gl) {
+      function sh(tp, src) { const s = gl.createShader(tp); gl.shaderSource(s, src); gl.compileShader(s); return s; }
+      prog = gl.createProgram();
+      gl.attachShader(prog, sh(gl.VERTEX_SHADER, vert));
+      gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, frag));
+      gl.linkProgram(prog); gl.useProgram(prog);
+      const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      const aPos = gl.getAttribLocation(prog, 'a');
+      gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+      uT = gl.getUniformLocation(prog, 'u_t'); uR = gl.getUniformLocation(prog, 'u_res');
+      uC = gl.getUniformLocation(prog, 'u_col'); uO = gl.getUniformLocation(prog, 'u_op'); uD = gl.getUniformLocation(prog, 'u_dark');
+      gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      t0 = performance.now();
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; gl.viewport(0, 0, canvas.width, canvas.height); }
+      window.addEventListener('resize', resize); resize();
+      function lerp(a, b, t) { return a + (b - a) * t; }
+      (function frame(now) {
+        const t = (now - t0) * .001, lf = 0.02;
+        cur.r = lerp(cur.r, tgt.r, lf); cur.g = lerp(cur.g, tgt.g, lf); cur.b = lerp(cur.b, tgt.b, lf);
+        cur.o = lerp(cur.o, tgt.o, lf); cur.d = lerp(cur.d, tgt.d, lf);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.uniform1f(uT, t); gl.uniform2f(uR, canvas.width, canvas.height);
+        gl.uniform3f(uC, cur.r, cur.g, cur.b); gl.uniform1f(uO, cur.o); gl.uniform1f(uD, cur.d);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        requestAnimationFrame(frame);
+      })(t0);
+    }
+
+    // ── MODE MANAGEMENT ──────────────────────────────────────────
+    const MODES = ['morning', 'afternoon', 'evening', 'night'];
+    let currentMode = null;
+    let manualOverride = false;
+
+    function getAutoMode(h) {
+      if (h >= 6 && h < 12) return 'morning';
+      if (h >= 12 && h < 17) return 'afternoon';
+      if (h >= 17 && h < 20) return 'evening';
+      return 'night';
+    }
+
+    function setMode(mode, manual = false) {
+      if (manual) manualOverride = true;
+      if (mode === currentMode) return;
+      currentMode = mode;
+      const body = document.getElementById('body');
+      MODES.forEach(m => body.classList.remove('mode-' + m));
+      body.classList.add('mode-' + mode);
+      document.querySelectorAll('.mode-dot').forEach(d => d.classList.toggle('active', d.dataset.mode === mode));
+      tgt = { ...modeConfig[mode] };
+
+      const ml = document.getElementById('modeLabel');
+      if (ml) ml.textContent = mode;
+
+      const accentHex = document.getElementById('accentHex');
+      if (accentHex) {
+        // Simple visual update for show
+        const colors = { morning: '#2A5C45', afternoon: '#B05A2A', evening: '#E8904A', night: '#8FA7FF' };
+        accentHex.textContent = colors[mode];
+      }
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const h = now.getHours();
+      const m = now.getMinutes().toString().padStart(2, '0');
+      const time = `${h}:${m}`;
+      const cl = document.getElementById('clockLabel');
+      if (cl) cl.textContent = time;
+      if (!manualOverride) { const a = getAutoMode(h); if (a !== currentMode) setMode(a); }
+    }
+
+    updateClock();
+    setInterval(updateClock, 10000);
+
+    // ── SCROLL SPY ───────────────────────────────────────────────
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.ds-nav a');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const link = document.querySelector(`.ds-nav a[href="#${entry.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+
+</html>

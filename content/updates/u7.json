@@ -1,0 +1,10 @@
+{
+  "id": "u7",
+  "date": "October 2025",
+  "title": "Data Viz Library Release",
+  "description": "Open-sourced a collection of D3-based React components for advanced data storytelling.",
+  "image": "https://picsum.photos/seed/u7/400/300",
+  "content": [
+    "Open-sourced our internal collection of composable D3-based React components specifically optimized for advanced narrative storytelling."
+  ]
+}

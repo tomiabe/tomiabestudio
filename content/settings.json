@@ -1,0 +1,78 @@
+{
+  "metadata": {
+    "siteTitle": "Tomi Abe Studio",
+    "faviconEmoji": "✦",
+    "faviconImage": "",
+    "seoDescription": "Tomi Abe Studio is an independent, systems-driven creative and digital practice turning complex systems into clear products, brands, and stories.",
+    "seoKeywords": "design strategy, brand identity, product design, digital studio, Africa, systems thinking",
+    "ogImage": "",
+    "headScripts": ""
+  },
+  "navigation": {
+    "logoText": "TAS",
+    "items": [
+      { "label": "Work", "url": "#work" },
+      { "label": "Updates", "url": "#updates" },
+      { "label": "Info", "url": "#info" },
+      { "label": "Contact", "url": "#contact" }
+    ]
+  },
+  "footer": {
+    "footerCopyright": "TOMI ABE STUDIO",
+    "footerTagline": "Objectivity · Clarity · Precision"
+  },
+  "socialLinks": [
+    { "name": "LinkedIn", "url": "https://linkedin.com/in/tomiabe" },
+    { "name": "Twitter", "url": "https://twitter.com/tomiabe" },
+    { "name": "Instagram", "url": "https://instagram.com/tomiabe" },
+    { "name": "Github", "url": "https://github.com/tomiabe" }
+  ],
+  "themeColors": {
+    "morning": {
+      "bg": "#fdfaf6",
+      "fg": "#1c1917",
+      "muted": "#78716c",
+      "border": "#e7e5e4"
+    },
+    "noon": {
+      "bg": "#ffffff",
+      "fg": "#09090b",
+      "muted": "#71717a",
+      "border": "#e4e4e7"
+    },
+    "evening": {
+      "bg": "#09090b",
+      "fg": "#fafafa",
+      "muted": "#a1a1aa",
+      "border": "#27272a"
+    }
+  },
+  "typography": {
+    "bodyFontUrl": "",
+    "bodyFontFamily": "Inter",
+    "monoFontFamily": "JetBrains Mono"
+  },
+  "layout": {
+    "workItemsPerPage": 6,
+    "updatesItemsPerPage": 6
+  },
+  "clock": {
+    "locale": "en-US",
+    "hour12": true,
+    "timezone": "short"
+  },
+  "uiLabels": {
+    "loadMore": "Load More",
+    "showLess": "Show Less",
+    "backToTop": "Back to Top",
+    "visitProject": "Visit Live Project",
+    "discussProject": "Discuss Similar Project",
+    "filterLabel": "Filters",
+    "filterByLabel": "Filter by discipline",
+    "sidebarEnvironment": "Environment",
+    "sidebarVisuals": "Visuals",
+    "sidebarLayout": "Layout",
+    "sidebarAcoustics": "Acoustics",
+    "sidebarNetwork": "Network"
+  }
+}

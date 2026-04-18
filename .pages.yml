@@ -4,230 +4,387 @@ media:
 
 content:
 
-  # ─── Work / Projects ──────────────────────────────────────────────────────────
+  # ─────────────────────────────────────────────────────────────────────────────
+  # WORK — Individual case studies and client projects
+  # ─────────────────────────────────────────────────────────────────────────────
   - name: work
-    label: "💼 Work"
-    type: file
-    path: public/content/projects.json
+    label: Work
+    type: folder
+    path: content/work
     format: json
+    extension: json
+    create: true
+    delete: true
+    identifier_field: id
+    label_field: title
     fields:
-      - name: projects
-        label: Projects
+      - name: title
+        label: Project Title
+        type: string
+      - name: id
+        label: Slug / ID
+        type: string
+        description: "Unique identifier, e.g. my-project. Used for internal routing."
+      - name: role
+        label: Your Role
+        type: string
+      - name: description
+        label: Short Excerpt
+        type: text
+      - name: categories
+        label: Disciplines / Tags
         type: list
+        fields: [{ name: value, label: Tag, type: string }]
+      - name: image
+        label: Main Image
+        type: image
+      - name: link
+        label: Live Project URL
+        type: string
+      - name: isFullBleed
+        label: Full-width in grid
+        type: boolean
+      - name: details
+        label: Case Study Panels
+        type: list
+        label_field: heading
         fields:
-          - { name: id, label: "Slug / ID (unique)", type: string, description: "Used as the URL anchor. Lowercase, no spaces. e.g. my-project" }
-          - { name: title, label: Title, type: string }
-          - { name: role, label: Role, type: string }
-          - { name: description, label: Short Description / Excerpt, type: text, description: "Shown on card and top of drawer — aim for 1–2 sentences" }
-          - name: categories
-            label: Categories
-            type: list
-            description: "e.g. Brand, Product, Data, Content, Art — used for filtering"
-          - { name: image, label: Cover Image, type: image }
-          - { name: link, label: Live Link URL, type: string, description: "Leave blank to show 'Discuss Similar Project' instead" }
-          - { name: isFullBleed, label: Full-width card, type: boolean, description: "Makes this card span both columns on desktop" }
-          - name: details
-            label: Case Study Panels
-            type: list
-            description: "Each panel has a heading, body, and image"
-            fields:
-              - { name: heading, label: Panel Heading, type: string }
-              - { name: text, label: Panel Body, type: text }
-              - { name: image, label: Panel Image, type: image }
+          - name: heading
+            label: Heading
+            type: string
+          - name: text
+            label: Body Text
+            type: text
+          - name: image
+            label: Image
+            type: image
 
-  # ─── Updates & News ───────────────────────────────────────────────────────────
+  # ─────────────────────────────────────────────────────────────────────────────
+  # UPDATES — News, talks, launches
+  # ─────────────────────────────────────────────────────────────────────────────
   - name: updates_news
-    label: "📰 Updates"
-    type: file
-    path: public/content/updates.json
+    label: Updates
+    type: folder
+    path: content/updates
     format: json
+    extension: json
+    create: true
+    delete: true
+    identifier_field: id
+    label_field: title
     fields:
-      - name: updates
-        label: Updates & News
+      - name: title
+        label: Update Title
+        type: string
+      - name: id
+        label: Slug / ID
+        type: string
+      - name: date
+        label: Date Label
+        type: string
+        description: "e.g. April 2026"
+      - name: description
+        label: Excerpt
+        type: text
+      - name: image
+        label: Cover Image
+        type: image
+      - name: content
+        label: Body Paragraphs
         type: list
-        fields:
-          - { name: id, label: "Slug / ID (unique)", type: string }
-          - { name: date, label: Date Label, type: string, description: "e.g. April 2026" }
-          - { name: title, label: Title, type: string }
-          - { name: description, label: Excerpt, type: text, description: "Shown on the card and below the title in the drawer" }
-          - { name: image, label: Cover Image, type: image }
-          - name: content
-            label: Body Paragraphs
-            type: list
-            description: "Each item is a separate paragraph shown inside the drawer"
+        fields: [{ name: value, label: Paragraph, type: text }]
 
-  # ─── Site Settings ────────────────────────────────────────────────────────────
-  - name: site_settings
-    label: "⚙ Site Settings"
+  # ─────────────────────────────────────────────────────────────────────────────
+  # HOME PAGE
+  # ─────────────────────────────────────────────────────────────────────────────
+  - name: home
+    label: Home Page
     type: file
-    path: public/content/settings.json
+    path: content/home.json
     format: json
     fields:
-
-      # ─── Metadata ───────────────────────────────────────────────────────────
-      - name: metadata
-        label: "Metadata & SEO"
-        type: object
-        fields:
-          - { name: siteTitle, label: Site Title, type: string, description: "Appears in browser tab and og:title" }
-          - { name: faviconImage, label: Favicon Image, type: image, description: "Upload a PNG/ICO file — this takes priority over the emoji below" }
-          - { name: faviconEmoji, label: Favicon Emoji (fallback), type: string, description: "Used if no image is uploaded above. Single emoji, e.g. ✦" }
-          - { name: seoDescription, label: SEO Description, type: text, description: "Shown in Google search results (~160 chars)" }
-          - { name: seoKeywords, label: SEO Keywords, type: string }
-          - { name: ogImage, label: Social Share Image (OG), type: image, description: "Used when sharing on Twitter, LinkedIn, etc." }
-          - { name: headScripts, label: Custom Head Scripts, type: text, description: "Paste analytics scripts, fonts, etc." }
-
-      # ─── Navigation ─────────────────────────────────────────────────────────
-      - name: navigation
-        label: "Navigation"
-        type: object
-        fields:
-          - { name: logoText, label: Logo Text, type: string, description: "Short text shown top-left (e.g. TAS)" }
-          - name: items
-            label: Menu Links
-            type: list
-            fields:
-              - { name: label, label: Label, type: string }
-              - { name: url, label: URL / Anchor, type: string, description: "Use #section-id for on-page jumps" }
-
-      # ─── Hero ───────────────────────────────────────────────────────────────
       - name: hero
-        label: "Hero Section"
+        label: Hero Section
         type: object
         fields:
-          - { name: headline, label: Headline, type: text, description: "Large title displayed prominently" }
-          - { name: description, label: Description, type: text, description: "Paragraph beneath the headline" }
+          - name: headline
+            label: Headline
+            type: text
+          - name: description
+            label: Description
+            type: text
+      - name: labels
+        label: Section Headings
+        type: object
+        fields:
+          - name: heroCta
+            label: Hero CTA Button
+            type: string
+          - name: workSectionHeading
+            label: Work Heading
+            type: string
+          - name: updatesSectionHeading
+            label: Updates Heading
+            type: string
+          - name: infoSectionHeading
+            label: Info Heading
+            type: string
 
-      # ─── About ──────────────────────────────────────────────────────────────
+  # ─────────────────────────────────────────────────────────────────────────────
+  # INFO PAGE
+  # ─────────────────────────────────────────────────────────────────────────────
+  - name: info
+    label: Info Page
+    type: file
+    path: content/info.json
+    format: json
+    fields:
       - name: about
-        label: "About / Info Section"
+        label: Profile
         type: object
         fields:
-          - { name: name, label: Full Name, type: string }
-          - { name: role, label: Role / Title, type: string }
-          - { name: imageUrl, label: Profile Image, type: image }
+          - name: name
+            label: Full Name
+            type: string
+          - name: role
+            label: Role / Title
+            type: string
+          - name: imageUrl
+            label: Image
+            type: image
           - name: about
             label: Bio Paragraphs
             type: list
-            description: "Each item is a separate paragraph. The first paragraph is displayed larger."
-          - name: operatingModels
-            label: Operating Models
-            type: list
-            fields:
-              - { name: title, label: Title, type: string }
-              - { name: description, label: Description, type: text }
-          - name: focusAreas
-            label: Focus Areas
-            type: list
-            fields:
-              - { name: title, label: Title, type: string }
-              - { name: description, label: Description, type: text }
-          - name: speaking
-            label: Speaking & Mentorship
-            type: object
-            fields:
-              - { name: description, label: Section Description, type: text }
-              - name: engagements
-                label: Engagements
-                type: list
-                fields:
-                  - { name: year, label: Year / Period, type: string, description: "e.g. 2024 or SINCE 2022" }
-                  - { name: role, label: Role, type: string, description: "e.g. MENTOR, SPEAKER, TRAINER" }
-                  - { name: title, label: Organisation / Event, type: string }
-                  - { name: description, label: Description, type: text }
-                  - { name: link, label: CTA Link URL, type: string, description: "If set, a button will appear on this card" }
-
-      # ─── Contact ────────────────────────────────────────────────────────────
-      - name: contact
-        label: "Contact & Footer"
-        type: object
-        fields:
-          - { name: headline, label: Section Headline, type: text }
-          - { name: description, label: Subheading / Description, type: text }
-          - { name: email, label: Contact Email, type: string }
-          - { name: location, label: Location, type: string }
-          - { name: footerCopyright, label: Footer Copyright Name, type: string, description: "e.g. TOMI ABE STUDIO" }
-          - { name: footerTagline, label: Footer Tagline, type: string, description: "e.g. Objectivity · Clarity · Precision" }
-
-      # ─── Social Links ────────────────────────────────────────────────────────
-      - name: socialLinks
-        label: "Social / Network Links"
+            fields: [{ name: value, label: Paragraph, type: text }]
+      - name: operatingModels
+        label: Operating Model List
         type: list
+        label_field: title
         fields:
-          - { name: name, label: Platform Name, type: string }
-          - { name: url, label: URL, type: string }
-
-      # ─── UI Settings ────────────────────────────────────────────────────────
-      - name: uiSettings
-        label: "🎛 UI Settings"
+          - name: title
+            label: Title
+            type: string
+          - name: description
+            label: Description
+            type: text
+      - name: focusAreas
+        label: Focus Areas List
+        type: list
+        label_field: title
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: description
+            label: Description
+            type: text
+      - name: speaking
+        label: Speaking & Mentorship
         type: object
         fields:
+          - name: description
+            label: Section Desc
+            type: text
+          - name: engagements
+            label: Engagements
+            type: list
+            label_field: title
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: year
+                label: Year
+                type: string
+              - name: role
+                label: Role
+                type: string
+              - name: description
+                label: Details
+                type: text
+              - name: link
+                label: URL
+                type: string
+      - name: contact
+        label: Contact Section
+        type: object
+        fields:
+          - name: headline
+            label: Headline
+            type: text
+          - name: description
+            label: Subheading
+            type: text
+          - name: email
+            label: Email
+            type: string
+          - name: location
+            label: Location
+            type: string
+      - name: labels
+        label: Section Headings
+        type: object
+        fields:
+          - name: operatingModelHeading
+            label: Operating Model Title
+            type: string
+          - name: focusAreasHeading
+            label: Focus Areas Title
+            type: string
+          - name: speakingHeading
+            label: Speaking Title
+            type: string
 
-          - name: labels
-            label: "Text Labels & Section Headings"
+  # ─────────────────────────────────────────────────────────────────────────────
+  # SITE SETTINGS
+  # ─────────────────────────────────────────────────────────────────────────────
+  - name: site_settings
+    label: Site Settings
+    type: file
+    path: content/settings.json
+    format: json
+    fields:
+      - name: metadata
+        label: SEO
+        type: object
+        fields:
+          - name: siteTitle
+            label: Title
+            type: string
+          - name: faviconEmoji
+            label: Favicon Emoji
+            type: string
+          - name: faviconImage
+            label: Favicon Image
+            type: image
+          - name: seoDescription
+            label: Desc
+            type: text
+          - name: seoKeywords
+            label: Keywords
+            type: string
+          - name: ogImage
+            label: Share Image
+            type: image
+          - name: headScripts
+            label: Custom Scripts
+            type: text
+      - name: navigation
+        label: Navigation
+        type: object
+        fields:
+          - name: logoText
+            label: Logo Text
+            type: string
+          - name: items
+            label: Menu
+            type: list
+            label_field: label
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: url
+                label: URL
+                type: string
+      - name: footer
+        label: Footer
+        type: object
+        fields:
+          - name: footerCopyright
+            label: Copyright
+            type: string
+          - name: footerTagline
+            label: Tagline
+            type: string
+      - name: socialLinks
+        label: Social
+        type: list
+        label_field: name
+        fields:
+          - name: name
+            label: Name
+            type: string
+          - name: url
+            label: URL
+            type: string
+      - name: themeColors
+        label: Themes
+        type: object
+        fields:
+          - name: morning
+            label: Morning
             type: object
             fields:
-              - { name: workSectionHeading, label: "Work Section Heading", type: string, description: "e.g. Selected Work" }
-              - { name: updatesSectionHeading, label: "Updates Section Heading", type: string, description: "e.g. News & Updates" }
-              - { name: infoSectionHeading, label: "Info Section Heading", type: string, description: "e.g. Info" }
-              - { name: operatingModelHeading, label: "Operating Model Heading", type: string }
-              - { name: focusAreasHeading, label: "Focus Areas Heading", type: string }
-              - { name: speakingHeading, label: "Speaking Section Heading", type: string }
-              - { name: heroCta, label: "Hero CTA Button Text", type: string, description: "Large button in hero section, e.g. Let's Work" }
-              - { name: loadMore, label: "Load More Button Text", type: string }
-              - { name: showLess, label: "Show Less Button Text", type: string }
-              - { name: backToTop, label: "Back to Top Button Text", type: string }
-              - { name: visitProject, label: "Visit Project Button", type: string, description: "Shown in project drawer when a live link exists" }
-              - { name: discussProject, label: "Discuss Project Button", type: string, description: "Shown in project drawer when no live link" }
-              - { name: engagementCtaLabel, label: "Engagement CTA Label", type: string, description: "Text on speaking engagement CTA buttons" }
-              - { name: filterLabel, label: "Filter Button Label", type: string, description: "e.g. Filters" }
-              - { name: filterByLabel, label: "Filter Panel Label", type: string, description: "e.g. Filter by discipline" }
-              - { name: sidebarEnvironment, label: "Sidebar: Environment Label", type: string }
-              - { name: sidebarVisuals, label: "Sidebar: Visuals Label", type: string }
-              - { name: sidebarLayout, label: "Sidebar: Layout Label", type: string }
-              - { name: sidebarAcoustics, label: "Sidebar: Acoustics Label", type: string }
-              - { name: sidebarNetwork, label: "Sidebar: Network Label", type: string }
-
-          - name: layout
-            label: "Layout"
+              - { name: bg, label: BG, type: color }
+              - { name: fg, label: FG, type: color }
+              - { name: muted, label: Muted, type: color }
+              - { name: border, label: Border, type: color }
+          - name: noon
+            label: Noon
             type: object
             fields:
-              - { name: workItemsPerPage, label: "Work Items Before 'Load More'", type: number, description: "How many projects to show before the Load More button appears" }
-              - { name: updatesItemsPerPage, label: "Updates Items Before 'Load More'", type: number, description: "How many updates to show before the Load More button appears" }
-
-          - name: clock
-            label: "Clock"
+              - { name: bg, label: BG, type: color }
+              - { name: fg, label: FG, type: color }
+              - { name: muted, label: Muted, type: color }
+              - { name: border, label: Border, type: color }
+          - name: evening
+            label: Evening
             type: object
             fields:
-              - { name: locale, label: "Locale", type: string, description: "Language/region code, e.g. en-US, en-GB, fr-FR" }
-              - { name: hour12, label: "12-Hour Format", type: boolean, description: "On = 12-hour (3:00 PM), Off = 24-hour (15:00)" }
-              - { name: timezone, label: "Timezone Display Style", type: string, description: "'short' = EST, 'long' = Eastern Standard Time, 'shortOffset' = GMT-5. Leave blank to hide." }
-
-          - name: theme
-            label: "Theme Colors"
-            type: object
-            fields:
-              - name: morning
-                label: "Morning Theme"
-                type: object
-                fields:
-                  - { name: bg, label: "Background", type: string, description: "Hex color, e.g. #fdfaf6" }
-                  - { name: fg, label: "Foreground (text)", type: string, description: "e.g. #1c1917" }
-                  - { name: muted, label: "Muted (secondary text)", type: string, description: "e.g. #78716c" }
-                  - { name: border, label: "Border", type: string, description: "e.g. #e7e5e4" }
-              - name: noon
-                label: "Noon Theme"
-                type: object
-                fields:
-                  - { name: bg, label: "Background", type: string, description: "e.g. #ffffff" }
-                  - { name: fg, label: "Foreground (text)", type: string, description: "e.g. #09090b" }
-                  - { name: muted, label: "Muted (secondary text)", type: string, description: "e.g. #71717a" }
-                  - { name: border, label: "Border", type: string, description: "e.g. #e4e4e7" }
-              - name: evening
-                label: "Evening Theme"
-                type: object
-                fields:
-                  - { name: bg, label: "Background", type: string, description: "e.g. #09090b" }
-                  - { name: fg, label: "Foreground (text)", type: string, description: "e.g. #fafafa" }
-                  - { name: muted, label: "Muted (secondary text)", type: string, description: "e.g. #a1a1aa" }
-                  - { name: border, label: "Border", type: string, description: "e.g. #27272a" }
+              - { name: bg, label: BG, type: color }
+              - { name: fg, label: FG, type: color }
+              - { name: muted, label: Muted, type: color }
+              - { name: border, label: Border, type: color }
+      - name: typography
+        label: Typography
+        type: object
+        fields:
+          - name: bodyFontUrl
+            label: Google Font URL
+            type: string
+          - name: bodyFontFamily
+            label: Body Font Name
+            type: string
+          - name: monoFontFamily
+            label: Mono Font Name
+            type: string
+      - name: layout
+        label: Layout
+        type: object
+        fields:
+          - name: workItemsPerPage
+            label: Work Per Page
+            type: number
+          - name: updatesItemsPerPage
+            label: Updates Per Page
+            type: number
+      - name: clock
+        label: Clock
+        type: object
+        fields:
+          - name: locale
+            label: Locale
+            type: string
+          - name: hour12
+            label: 12h Format
+            type: boolean
+          - name: timezone
+            label: TZ Style
+            type: string
+      - name: uiLabels
+        label: UI Labels
+        type: object
+        fields:
+          - { name: loadMore, label: Load More, type: string }
+          - { name: showLess, label: Show Less, type: string }
+          - { name: backToTop, label: Back to Top, type: string }
+          - { name: visitProject, label: Visit Project, type: string }
+          - { name: discussProject, label: Discuss Project, type: string }
+          - { name: filterLabel, label: Filter Label, type: string }
+          - { name: filterByLabel, label: Filter By Heading, type: string }
+          - { name: sidebarEnvironment, label: Env Tab, type: string }
+          - { name: sidebarVisuals, label: Visuals Tab, type: string }
+          - { name: sidebarLayout, label: Layout Tab, type: string }
+          - { name: sidebarAcoustics, label: Acoustics Tab, type: string }
+          - { name: sidebarNetwork, label: Network Tab, type: string }
