@@ -333,6 +333,17 @@ content:
           - name: url
             label: Link
             type: string
+      - name: workFilters
+        label: Work Filters
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - name: name
+            label: Filter Name
+            type: string
       - name: themeColors
         label: Theme Presets
         type: object

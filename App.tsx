@@ -85,6 +85,7 @@ interface UILabels {
 
 interface SiteSettings {
   themeColors: ThemeColors;
+  workFilters?: { name: string }[] | string[];
   typography: {
     bodyFontUrl?: string;
     bodyFontFamily?: string;
@@ -237,6 +238,7 @@ const DEFAULT_UI_LABELS: UILabels = {
 
 const DEFAULT_SETTINGS: SiteSettings = {
   themeColors: DEFAULT_THEME_COLORS,
+  workFilters: [{ name: 'Art' }, { name: 'Brand' }, { name: 'Content' }, { name: 'Data' }, { name: 'Product' }],
   typography: { bodyFontUrl: '', bodyFontFamily: 'Inter', monoFontFamily: 'JetBrains Mono', baseFontSizePx: 16, updatesMetaFontSizePx: 14 },
   layout: { workItemsPerPage: 6, updatesItemsPerPage: 6 },
   clock: { locale: 'en-US', hour12: true, timezone: 'short' },
@@ -347,6 +349,7 @@ export default function App() {
         updates: ud_list,
         uiSettings: {
           themeColors: sd.themeColors || DEFAULT_THEME_COLORS,
+          workFilters: sd.workFilters || DEFAULT_SETTINGS.workFilters,
           typography: sd.typography || DEFAULT_SETTINGS.typography,
           layout: sd.layout || DEFAULT_SETTINGS.layout,
           clock: sd.clock || DEFAULT_SETTINGS.clock,
@@ -493,7 +496,12 @@ export default function App() {
   const nextUpdate = selectedUpdateIndex !== -1 && selectedUpdateIndex < updates.length - 1 ? updates[selectedUpdateIndex + 1] : null;
 
   // Derive unique categories from data
-  const allCategories = Array.from(new Set(projects.flatMap(p => p.categories)));
+  const configuredFilters = (settings.workFilters || [])
+    .map((item: any) => (typeof item === 'string' ? item : item?.name))
+    .map((name: any) => String(name || '').trim())
+    .filter(Boolean);
+  const categoriesFromProjects = Array.from(new Set(projects.flatMap(p => p.categories)));
+  const allCategories = Array.from(new Set([...configuredFilters, ...categoriesFromProjects]));
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
     e.preventDefault();

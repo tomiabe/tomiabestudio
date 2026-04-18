@@ -45,6 +45,23 @@
       "url": "https://github.com/tomiabe"
     }
   ],
+  "workFilters": [
+    {
+      "name": "Art"
+    },
+    {
+      "name": "Brand"
+    },
+    {
+      "name": "Content"
+    },
+    {
+      "name": "Data"
+    },
+    {
+      "name": "Product"
+    }
+  ],
   "themeColors": {
     "morning": {
       "bg": "#fdfaf6",
