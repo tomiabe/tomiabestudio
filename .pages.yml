@@ -167,8 +167,11 @@ content:
             type: markdown
       - name: operatingModels
         label: Operating Models
-        type: list
-        label_field: title
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
         fields:
           - name: title
             label: Title
@@ -178,8 +181,11 @@ content:
             type: text
       - name: focusAreas
         label: Focus Areas
-        type: list
-        label_field: title
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
         fields:
           - name: title
             label: Title
@@ -196,8 +202,11 @@ content:
             type: text
           - name: engagements
             label: Selected Engagements
-            type: list
-            label_field: title
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title} ({year})"
             fields:
               - name: title
                 label: Platform/Event
