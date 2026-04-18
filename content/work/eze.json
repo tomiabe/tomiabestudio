@@ -1,34 +1,35 @@
 {
-  "id": "wecollect",
-  "title": "WeCollect",
-  "role": "Brand & Digital Consultant",
-  "description": "Developing tools for offline data capture and real-time analytics across African markets. Redefining WeCollect’s story to communicate complex technical capabilities.",
+  "id": "eze",
+  "title": "Eze",
+  "role": "Brand & Product Design Lead",
+  "description": "YC-backed B2B electronics marketplace connecting global buyers and sellers through a trusted platform. Redesigning core interfaces and streamlining journeys.",
   "categories": [
     "Brand",
     "Product"
   ],
-  "image": "https://picsum.photos/seed/wecollect/800/800",
+  "isFullBleed": true,
+  "image": "https://picsum.photos/seed/eze/1200/800",
   "details": [
     {
       "heading": "The Challenge",
       "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...",
-      "image": "https://picsum.photos/seed/wecollect_d1/800/500"
+      "image": "https://picsum.photos/seed/eze_d1/800/500"
     },
     {
       "heading": "Strategic Approach",
       "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics...",
-      "image": "https://picsum.photos/seed/wecollect_d2/800/500"
+      "image": "https://picsum.photos/seed/eze_d2/800/500"
     },
     {
       "heading": "Design & Execution",
       "text": "Execution required meticulous attention to typographic hierarchy...",
-      "image": "https://picsum.photos/seed/wecollect_d3/800/500"
+      "image": "https://picsum.photos/seed/eze_d3/800/500"
     },
     {
       "heading": "Results & Impact",
       "text": "The final outcome significantly streamlined operational workflows...",
-      "image": "https://picsum.photos/seed/wecollect_d4/800/500"
+      "image": "https://picsum.photos/seed/eze_d4/800/500"
     }
   ],
-  "order": 1
+  "order": 5
 }

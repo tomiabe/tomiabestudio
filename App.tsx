@@ -714,7 +714,6 @@ export default function App() {
                       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
                         <h3 className="text-2xl font-medium tracking-tight text-left">
                           {project.title}
-                          {project.link && <ArrowUpRight className="inline-block ml-1 w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity"/>}
                         </h3>
                       </div>
                       <p className="text-gray-200 leading-snug text-sm sm:text-base max-w-2xl line-clamp-none sm:line-clamp-2 md:line-clamp-3 text-left">

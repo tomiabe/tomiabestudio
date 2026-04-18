@@ -2,33 +2,31 @@
   "id": "fairbnb",
   "title": "Fairbnb",
   "role": "Brand & Product Consultant",
-  "description": "Sustainable travel marketplace aligning tourism with local community impact. Redefined Fairbnb's verbal identity to project trust and transparency.",
+  "description": "Sustainable travel marketplace aligning tourism with local community impact. Redefined Fairbnb’s verbal identity to project trust and transparency.",
   "categories": [
     "Brand",
     "Product"
   ],
-  "link": "https://fairbnb.coop",
-  "isFullBleed": false,
   "image": "https://picsum.photos/seed/fairbnb/800/600",
   "details": [
     {
       "heading": "The Challenge",
-      "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system. We had to break down existing silos and establish a foundational logic that could scale without breaking.",
+      "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...",
       "image": "https://picsum.photos/seed/fairbnb_d1/800/500"
     },
     {
       "heading": "Strategic Approach",
-      "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics to construct a resilient architecture. We conducted extensive mapping of the user ecosystem, ensuring that every touchpoint served both immediate utility and long-term business objectives.",
+      "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics...",
       "image": "https://picsum.photos/seed/fairbnb_d2/800/500"
     },
     {
       "heading": "Design & Execution",
-      "text": "Execution required meticulous attention to typographic hierarchy, spatial rhythm, and interaction patterns. I implemented a modular component system that allowed for rapid iteration while maintaining strict visual consistency.",
+      "text": "Execution required meticulous attention to typographic hierarchy...",
       "image": "https://picsum.photos/seed/fairbnb_d3/800/500"
     },
     {
       "heading": "Results & Impact",
-      "text": "The final outcome significantly streamlined operational workflows and accelerated user engagement metrics. By eliminating friction and delivering a highly intuitive interface, we saw an immediate positive shift in retention.",
+      "text": "The final outcome significantly streamlined operational workflows...",
       "image": "https://picsum.photos/seed/fairbnb_d4/800/500"
     }
   ],
