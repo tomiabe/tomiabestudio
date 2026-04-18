@@ -132,7 +132,7 @@ interface SiteData {
   socialLinks: SocialLink[];
   projects: Project[];
   updates: Update[];
-  settings: SiteSettings;
+  uiSettings: SiteSettings;
 }
 
 // ─── Hooks ────────────────────────────────────────────────────────────────────
@@ -216,7 +216,7 @@ const DEFAULT_DATA: SiteData = {
   socialLinks: [],
   projects: [],
   updates: [],
-  settings: DEFAULT_SETTINGS,
+  uiSettings: DEFAULT_SETTINGS,
 };
 
 // ─── App ──────────────────────────────────────────────────────────────────────
@@ -244,19 +244,27 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [copiedProject, setCopiedProject] = useState(false);
 
-  // ── Load JSON data ──
+  // ── Load JSON data (3 separate files, merged) ──
   useEffect(() => {
-    fetch('/content/data.json')
-      .then(r => r.json())
-      .then((data: SiteData) => {
-        setSiteData(data);
+    Promise.all([
+      fetch('/content/settings.json').then(r => r.json()),
+      fetch('/content/projects.json').then(r => r.json()),
+      fetch('/content/updates.json').then(r => r.json()),
+    ])
+      .then(([settingsData, projectsData, updatesData]) => {
+        const merged: SiteData = {
+          ...settingsData,
+          projects: projectsData.projects || [],
+          updates: updatesData.updates || [],
+        };
+        setSiteData(merged);
         setDataLoaded(true);
         // Update document metadata
-        document.title = data.metadata.siteTitle || 'Tomi Abe Studio';
+        document.title = merged.metadata.siteTitle || 'Tomi Abe Studio';
         const metaDesc = document.querySelector('meta[name="description"]');
-        if (metaDesc) metaDesc.setAttribute('content', data.metadata.seoDescription || '');
+        if (metaDesc) metaDesc.setAttribute('content', merged.metadata.seoDescription || '');
         // Inject CMS theme colors as CSS variables (overrides index.css defaults)
-        const themeData = data.settings?.theme;
+        const themeData = merged.uiSettings?.theme;
         if (themeData) {
           const existing = document.getElementById('cms-theme-vars');
           if (existing) existing.remove();
@@ -272,14 +280,14 @@ export default function App() {
         }
       })
       .catch(err => {
-        console.warn('Could not load content/data.json, using defaults.', err);
+        console.warn('Could not load content files, using defaults.', err);
         setDataLoaded(true);
       });
   }, []);
 
   // ── Derived data ──
   const { metadata, navigation, hero, about, contact, socialLinks, projects, updates } = siteData;
-  const settings = siteData.settings ?? DEFAULT_SETTINGS;
+  const settings = siteData.uiSettings ?? DEFAULT_SETTINGS;
   const labels = settings.labels ?? DEFAULT_SETTINGS.labels;
   const layout = settings.layout ?? DEFAULT_SETTINGS.layout;
   const clockSettings = settings.clock ?? DEFAULT_SETTINGS.clock;
