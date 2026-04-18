@@ -1,0 +1,208 @@
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: site_data
+    label: Site Content
+    type: file
+    path: content/data.json
+    format: json
+    fields:
+      - name: metadata
+        label: Metadata & SEO
+        type: object
+        fields:
+          - { name: siteTitle, label: Site Title, type: string }
+          - { name: favicon, label: Favicon, type: image }
+          - { name: seoDescription, label: SEO Description, type: text }
+          - { name: seoKeywords, label: SEO Keywords, type: string }
+          - { name: ogImage, label: OG Image (Social), type: image }
+          - { name: headScripts, label: Header Scripts, type: text }
+
+      - name: navigation
+        label: Navigation
+        type: object
+        fields:
+          - { name: logoText, label: Logo Text, type: string }
+          - { name: logoImage, label: Logo Image, type: image }
+          - name: items
+            label: Menu Links
+            type: list
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: url, label: URL, type: string }
+
+      - name: hero
+        label: Hero Section
+        type: object
+        fields:
+          - { name: title, label: Headline, type: string }
+          - { name: subtitle, label: Subtitle, type: text }
+          - { name: cta_primary, label: Primary Button Text, type: string }
+          - { name: cta_primary_link, label: Primary Button Link, type: string }
+          - { name: cta_secondary, label: Secondary Button Text, type: string }
+          - { name: cta_secondary_link, label: Secondary Button Link, type: string }
+          - { name: footer_text, label: Hero Footer Text, type: text }
+
+      - name: updates
+        label: Updates & News
+        type: list
+        fields:
+          - { name: id, label: ID (unique slug), type: string }
+          - { name: date, label: Date, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: description, label: Short Description, type: text }
+          - { name: image, label: Cover Image URL, type: string }
+          - name: content
+            label: Body Paragraphs
+            type: list
+
+      - name: selectedWork
+        label: Selected Work
+        type: object
+        fields:
+          - { name: section_title, label: Section Title, type: string }
+          - { name: main_heading, label: Main Heading, type: string }
+          - { name: footer_text, label: Footer Text, type: string }
+          - name: tags
+            label: Filter Tags (must match project categories exactly)
+            type: list
+          - name: projects
+            label: Projects
+            type: list
+            fields:
+              - { name: id, label: ID (unique slug), type: string }
+              - { name: title, label: Title, type: string }
+              - { name: role, label: Role, type: string }
+              - { name: description, label: Description, type: text }
+              - name: categories
+                label: Categories (must match filter tags)
+                type: list
+              - { name: image, label: Image URL, type: string }
+              - { name: link, label: Link URL, type: string }
+              - { name: isFullBleed, label: Full-width card, type: boolean }
+              - name: details
+                label: Case Study Panels
+                type: list
+                fields:
+                  - { name: heading, label: Heading, type: string }
+                  - { name: text, label: Text, type: text }
+                  - { name: image, label: Image URL, type: string }
+
+      - name: about
+        label: About
+        type: object
+        fields:
+          - { name: name, label: Full Name, type: string }
+          - { name: role, label: Role/Subtitle, type: string }
+          - { name: image_url, label: Profile Image URL, type: string }
+          - name: intro_paragraphs
+            label: Intro Paragraphs
+            type: list
+          - name: operatingModels
+            label: Operating Models
+            type: list
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: description, label: Description, type: text }
+          - name: focusAreas
+            label: Focus Areas
+            type: list
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: description, label: Description, type: text }
+          - name: speaking_items
+            label: Speaking & Mentorship
+            type: object
+            fields:
+              - { name: description, label: Section Description, type: text }
+              - name: engagements
+                label: Engagements
+                type: list
+                fields:
+                  - { name: year, label: Year, type: string }
+                  - { name: role, label: Role, type: string }
+                  - { name: title, label: Organisation / Event, type: string }
+                  - { name: description, label: Description, type: text }
+
+      - name: contact
+        label: Contact & Footer
+        type: object
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: description, label: Description, type: text }
+          - { name: button_text, label: Button Text, type: string }
+          - { name: booking_link, label: Booking Link, type: string }
+          - { name: email, label: Email, type: string }
+          - { name: location, label: Location, type: string }
+          - { name: footer_copyright, label: Copyright Text, type: string }
+          - { name: footer_tagline, label: Footer Tagline, type: string }
+          - name: socials
+            label: Social Links
+            type: list
+            fields:
+              - { name: platform, label: Platform, type: select, options: [Linkedin, Twitter, Instagram] }
+              - { name: url, label: URL, type: string }
+
+      - name: problem
+        label: Problem Section
+        type: object
+        fields:
+          - { name: section_title, label: Section Title, type: string }
+          - { name: main_heading, label: Main Heading, type: string }
+          - { name: description, label: Description, type: text }
+          - name: items
+            label: Problem Items
+            type: list
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: description, label: Description, type: text }
+              - { name: icon, label: Icon, type: select, options: [Layers, Box, Maximize2, Minimize2] }
+
+      - name: approach
+        label: Approach Section
+        type: object
+        fields:
+          - { name: section_title, label: Section Title, type: string }
+          - { name: main_heading, label: Main Heading, type: string }
+          - { name: intro_text, label: Intro Text, type: text }
+          - { name: footer_text, label: Footer Text, type: string }
+          - name: cards
+            label: Cards
+            type: list
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: description, label: Description, type: text }
+              - { name: icon, label: Icon, type: select, options: [Share2, Database, Search] }
+              - { name: color, label: Colour, type: string }
+
+      - name: services
+        label: Services
+        type: object
+        fields:
+          - { name: section_title, label: Section Title, type: string }
+          - { name: description, label: Description, type: text }
+          - name: items
+            label: Service Items
+            type: list
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: description, label: Description, type: text }
+              - name: list
+                label: Bullet Points
+                type: list
+
+      - name: workModels
+        label: Work Models
+        type: object
+        fields:
+          - { name: section_title, label: Section Title, type: string }
+          - { name: footer_text, label: Footer Text, type: string }
+          - name: models
+            label: Models
+            type: list
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: role, label: Role Tag, type: string }
+              - { name: description, label: Description, type: text }

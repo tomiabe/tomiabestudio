@@ -1,0 +1,435 @@
+{
+  "metadata": {
+    "siteTitle": "Tomi Abe Studio | Strategic Creative & Digital Practice",
+    "favicon": "/favicon.png",
+    "seoDescription": "Independent, systems-driven creative and digital practice partnering with organizations to translate strategy into coherent products, brands, and media platforms.",
+    "seoKeywords": "Strategic Design, Product Design, Digital Transformation, Brand Systems, Tomi Abe Studio",
+    "ogImage": "/og-image.jpg",
+    "headScripts": "<!-- Google tag (gtag.js) -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-QQNXSYX8TP\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag() { dataLayer.push(arguments); }\n  gtag(\"js\", new Date());\n  gtag(\"config\", \"G-QQNXSYX8TP\");\n</script>"
+  },
+  "navigation": {
+    "logoText": "Tomi Abe Studio",
+    "logoImage": "",
+    "items": [
+      { "label": "Work", "url": "#work" },
+      { "label": "Updates", "url": "#updates" },
+      { "label": "Info", "url": "#about" },
+      { "label": "Contact", "url": "#contact" }
+    ]
+  },
+  "hero": {
+    "title": "Turning complex systems into clear products, brands, and stories.",
+    "subtitle": "Tomi Abe Studio is an independent, systems-driven creative and digital practice partnering with organizations to translate strategy, information, and infrastructure into coherent digital products, brand systems, and media platforms that scale with clarity.",
+    "cta_primary": "Start a Conversation",
+    "cta_primary_link": "#contact",
+    "cta_secondary": "View Selected Work",
+    "cta_secondary_link": "#work",
+    "footer_text": "I work with organizations navigating complex challenges—across data, digital products, and cultural systems—translating strategy, information, and infrastructure into clear, human-centered experiences that inform, engage, and endure."
+  },
+  "problem": {
+    "section_title": "The Problem",
+    "main_heading": "Complex systems are hard to communicate clearly.",
+    "description": "Across my work, I see the same patterns repeatedly. The result is often more content, more tools, or more vendors—without resolving the underlying system.",
+    "items": [
+      {
+        "title": "Fragmented Narratives",
+        "description": "Strategy, data, and brand exist in silos, leading to inconsistent messaging and confused audiences.",
+        "icon": "Layers"
+      },
+      {
+        "title": "Dense Information",
+        "description": "Research, policy, or data holds value but remains inaccessible or unusable to the people it's meant to serve.",
+        "icon": "Box"
+      },
+      {
+        "title": "Digital Products Without Context",
+        "description": "Platforms function technically but fail to reflect cultural nuance, user reality, or long-term adaptability.",
+        "icon": "Maximize2"
+      },
+      {
+        "title": "Scaling Without Clarity",
+        "description": "As organizations grow, meaning erodes across teams, tools, and touchpoints.",
+        "icon": "Minimize2"
+      }
+    ]
+  },
+  "approach": {
+    "section_title": "The Approach",
+    "main_heading": "I design clarity at the system level.",
+    "intro_text": "Rather than isolated deliverables, I work across strategy, design, media, and technology to align meaning, structure, and experience.\n\nEach engagement begins with a question—about people, systems, and context—and results in frameworks, platforms, or narratives that can scale beyond the initial output.",
+    "footer_text": "These systems guide how I think and work, regardless of project size or format.",
+    "cards": [
+      {
+        "title": "Clarity Framework",
+        "description": "Aligns strategy, narrative, and structure so organizations communicate with coherence across platforms.",
+        "icon": "Share2",
+        "color": "blue"
+      },
+      {
+        "title": "Information-to-Experience Model",
+        "description": "Transforms research, data, and insight into visual, interactive, and editorial experiences.",
+        "icon": "Database",
+        "color": "purple"
+      },
+      {
+        "title": "Narrative Infrastructure",
+        "description": "Treats brands, products, and media as living systems—not static artifacts.",
+        "icon": "Search",
+        "color": "orange"
+      }
+    ]
+  },
+  "updates": [
+    {
+      "id": "u1",
+      "date": "April 2026",
+      "title": "New Studio Website Launched",
+      "description": "Transitioned the digital practice portfolio from a category-based structure to a unified systems-based feed.",
+      "image": "https://picsum.photos/seed/u1/400/300",
+      "content": [
+        "After several months of iterative design and systems engineering, we have officially launched the new studio digital presence. This shift represents a transition away from traditional portfolio structures towards a more modular, fluid feed of ongoing work and insight.",
+        "By stripping away static categorizations and embracing a timeline-based architectural approach, the site mirrors how digital products actually evolve—incrementally, systematically, and continuously.",
+        "The underlying stack relies primarily on React via Vite, using extremely tight Tailwind configuration for a custom 'environment' theme system that adjusts based on the local time of day."
+      ]
+    },
+    {
+      "id": "u2",
+      "date": "March 2026",
+      "title": "African Climate Stories",
+      "description": "Facilitated an AI-driven infographic design workshop helping sustainability advocates translate complex research.",
+      "image": "https://picsum.photos/seed/u2/400/300",
+      "content": [
+        "Facilitated an AI-driven infographic design workshop helping sustainability advocates translate complex research into accessible visual narratives.",
+        "The program covered the integration of large language models for initial data synthesis, transitioning into vector-based design tools for final execution. We worked with over forty participants across the continent."
+      ]
+    },
+    {
+      "id": "u3",
+      "date": "February 2026",
+      "title": "Loblaw Digital Training",
+      "description": "Delivered advanced prompting and generative workflow training for their internal AI committee.",
+      "image": "https://picsum.photos/seed/u3/400/300",
+      "content": [
+        "Delivered an intensive internal workshop for the design engineering teams on integrating generative AI directly into their internal rapid-prototyping workflows.",
+        "The hands-on session explored structuring complex system prompts, component generation, and rigorous AI safety rails when deploying internal tools."
+      ]
+    },
+    {
+      "id": "u4",
+      "date": "January 2026",
+      "title": "Systems Design Keynote",
+      "description": "Presented approaches to modular design systems for large-scale e-commerce platforms.",
+      "image": "https://picsum.photos/seed/u4/400/300",
+      "content": [
+        "Keynote presentation focusing on the maintenance and scaling of component libraries when shared across distinct platforms and product squads."
+      ]
+    },
+    {
+      "id": "u5",
+      "date": "December 2025",
+      "title": "Tech Startup Branding",
+      "description": "Launched a new brand identity for an emerging fintech startup focusing on GenZ.",
+      "image": "https://picsum.photos/seed/u5/400/300",
+      "content": [
+        "Launched a new brand identity that bridges traditional financial trust markers with bright, highly energetic digital-first visual cues."
+      ]
+    },
+    {
+      "id": "u6",
+      "date": "November 2025",
+      "title": "Ethical AI Symposium",
+      "description": "Joined a panel discussing the implications of AI integration in everyday consumer products.",
+      "image": "https://picsum.photos/seed/u6/400/300",
+      "content": [
+        "Joined a multi-disciplinary panel to discuss the friction points between frictionless AI utility and necessary, deliberate user consent."
+      ]
+    },
+    {
+      "id": "u7",
+      "date": "October 2025",
+      "title": "Data Viz Library Release",
+      "description": "Open-sourced a collection of D3-based React components for advanced data storytelling.",
+      "image": "https://picsum.photos/seed/u7/400/300",
+      "content": [
+        "Open-sourced our internal collection of composable D3-based React components specifically optimized for advanced narrative storytelling."
+      ]
+    }
+  ],
+  "services": {
+    "section_title": "What I Help Design",
+    "description": "Engagements are tailored based on need and context.",
+    "items": [
+      {
+        "title": "Strategic Clarity",
+        "description": "For organizations defining direction, positioning, or change.",
+        "list": [
+          "Brand & product strategy",
+          "Research synthesis",
+          "Narrative and messaging systems"
+        ]
+      },
+      {
+        "title": "Digital Products & Experiences",
+        "description": "For platforms where people interact with information.",
+        "list": [
+          "Product & experience design",
+          "Data visualization & storytelling",
+          "Dashboard and interface systems"
+        ]
+      },
+      {
+        "title": "Media & Knowledge Ecosystems",
+        "description": "For organizations communicating insight over time.",
+        "list": [
+          "Editorial & media development",
+          "Content systems and publishing frameworks",
+          "Creative technology & experimental formats"
+        ]
+      }
+    ]
+  },
+  "workModels": {
+    "section_title": "How I Work",
+    "footer_text": "Each model is scoped intentionally—no unnecessary layers, no inflated teams.",
+    "models": [
+      {
+        "title": "Consulting Partner",
+        "role": "Strategic Guidance",
+        "description": "Strategic guidance, frameworks, and leadership for teams navigating complexity or change."
+      },
+      {
+        "title": "Creative Collaborator",
+        "role": "Hands-on Design",
+        "description": "Hands-on design and thinking alongside internal teams, agencies, or research groups."
+      },
+      {
+        "title": "Independent Contributor",
+        "role": "Embedded Execution",
+        "description": "Embedded execution on product, data, or media initiatives where depth and speed matter."
+      }
+    ]
+  },
+  "selectedWork": {
+    "section_title": "Selected Work",
+    "main_heading": "Each project reflects a different context, but the same underlying approach.",
+    "footer_text": "More work available upon request",
+    "tags": ["Brand", "Product", "Data", "Content", "Art"],
+    "projects": [
+      {
+        "id": "susinsight",
+        "title": "Susinsight",
+        "role": "Co-Publisher",
+        "description": "Advancing sustainability journalism across Africa through data-driven storytelling. I shape editorial strategy and creative direction, optimizing our digital platform and content systems.",
+        "categories": ["Content", "Data"],
+        "isFullBleed": true,
+        "image": "https://picsum.photos/seed/susinsight/1200/800",
+        "link": "#",
+        "details": [
+          { "heading": "The Challenge", "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system. We had to break down existing silos and establish a foundational logic that could scale without breaking.", "image": "https://picsum.photos/seed/susinsight_d1/800/500" },
+          { "heading": "Strategic Approach", "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics to construct a resilient architecture. We conducted extensive mapping of the user ecosystem, ensuring that every touchpoint served both immediate utility and long-term business objectives.", "image": "https://picsum.photos/seed/susinsight_d2/800/500" },
+          { "heading": "Design & Execution", "text": "Execution required meticulous attention to typographic hierarchy, spatial rhythm, and interaction patterns. I implemented a modular component system that allowed for rapid iteration while maintaining strict visual consistency.", "image": "https://picsum.photos/seed/susinsight_d3/800/500" },
+          { "heading": "Results & Impact", "text": "The final outcome significantly streamlined operational workflows and accelerated user engagement metrics. By eliminating friction and delivering a highly intuitive interface, we saw an immediate positive shift in retention.", "image": "https://picsum.photos/seed/susinsight_d4/800/500" }
+        ]
+      },
+      {
+        "id": "wecollect",
+        "title": "WeCollect",
+        "role": "Brand & Digital Consultant",
+        "description": "Developing tools for offline data capture and real-time analytics across African markets. Redefining WeCollect's story to communicate complex technical capabilities.",
+        "categories": ["Brand", "Product"],
+        "image": "https://picsum.photos/seed/wecollect/800/800",
+        "link": "#",
+        "details": [
+          { "heading": "The Challenge", "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system.", "image": "https://picsum.photos/seed/wecollect_d1/800/500" },
+          { "heading": "Strategic Approach", "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics to construct a resilient architecture.", "image": "https://picsum.photos/seed/wecollect_d2/800/500" },
+          { "heading": "Design & Execution", "text": "Execution required meticulous attention to typographic hierarchy, spatial rhythm, and interaction patterns.", "image": "https://picsum.photos/seed/wecollect_d3/800/500" },
+          { "heading": "Results & Impact", "text": "The final outcome significantly streamlined operational workflows and accelerated user engagement metrics.", "image": "https://picsum.photos/seed/wecollect_d4/800/500" }
+        ]
+      },
+      {
+        "id": "zeproc",
+        "title": "Zeproc",
+        "role": "Product Design Consultant",
+        "description": "Simplifying industrial procurement in a complex ecosystem. Translating user research into focused refinements that reduced friction in buying workflows.",
+        "categories": ["Product"],
+        "image": "https://picsum.photos/seed/zeproc/800/800",
+        "link": "#",
+        "details": [
+          { "heading": "The Challenge", "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system.", "image": "https://picsum.photos/seed/zeproc_d1/800/500" },
+          { "heading": "Strategic Approach", "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics to construct a resilient architecture.", "image": "https://picsum.photos/seed/zeproc_d2/800/500" },
+          { "heading": "Design & Execution", "text": "Execution required meticulous attention to typographic hierarchy, spatial rhythm, and interaction patterns.", "image": "https://picsum.photos/seed/zeproc_d3/800/500" },
+          { "heading": "Results & Impact", "text": "The final outcome significantly streamlined operational workflows and accelerated user engagement metrics.", "image": "https://picsum.photos/seed/zeproc_d4/800/500" }
+        ]
+      },
+      {
+        "id": "translayte",
+        "title": "Translayte",
+        "role": "Growth Design Consultant",
+        "description": "Certified translation services across borders. I focused on the intersection of UX and conversion, identifying growth opportunities that scale sustainably.",
+        "categories": ["Product", "Brand"],
+        "image": "https://picsum.photos/seed/translayte/800/800",
+        "link": "#",
+        "details": [
+          { "heading": "The Challenge", "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system.", "image": "https://picsum.photos/seed/translayte_d1/800/500" },
+          { "heading": "Strategic Approach", "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics to construct a resilient architecture.", "image": "https://picsum.photos/seed/translayte_d2/800/500" },
+          { "heading": "Design & Execution", "text": "Execution required meticulous attention to typographic hierarchy, spatial rhythm, and interaction patterns.", "image": "https://picsum.photos/seed/translayte_d3/800/500" },
+          { "heading": "Results & Impact", "text": "The final outcome significantly streamlined operational workflows and accelerated user engagement metrics.", "image": "https://picsum.photos/seed/translayte_d4/800/500" }
+        ]
+      },
+      {
+        "id": "fairbnb",
+        "title": "Fairbnb",
+        "role": "Brand & Product Consultant",
+        "description": "Sustainable travel marketplace aligning tourism with local community impact. Redefined Fairbnb's verbal identity to project trust and transparency.",
+        "categories": ["Brand", "Product"],
+        "image": "https://picsum.photos/seed/fairbnb/800/600",
+        "link": "#",
+        "details": [
+          { "heading": "The Challenge", "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system.", "image": "https://picsum.photos/seed/fairbnb_d1/800/500" },
+          { "heading": "Strategic Approach", "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics to construct a resilient architecture.", "image": "https://picsum.photos/seed/fairbnb_d2/800/500" },
+          { "heading": "Design & Execution", "text": "Execution required meticulous attention to typographic hierarchy, spatial rhythm, and interaction patterns.", "image": "https://picsum.photos/seed/fairbnb_d3/800/500" },
+          { "heading": "Results & Impact", "text": "The final outcome significantly streamlined operational workflows and accelerated user engagement metrics.", "image": "https://picsum.photos/seed/fairbnb_d4/800/500" }
+        ]
+      },
+      {
+        "id": "eze",
+        "title": "Eze",
+        "role": "Brand & Product Design Lead",
+        "description": "YC-backed B2B electronics marketplace connecting global buyers and sellers through a trusted platform. Redesigning core interfaces and streamlining journeys.",
+        "categories": ["Brand", "Product"],
+        "isFullBleed": true,
+        "image": "https://picsum.photos/seed/eze/1200/800",
+        "link": "#",
+        "details": [
+          { "heading": "The Challenge", "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system.", "image": "https://picsum.photos/seed/eze_d1/800/500" },
+          { "heading": "Strategic Approach", "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics to construct a resilient architecture.", "image": "https://picsum.photos/seed/eze_d2/800/500" },
+          { "heading": "Design & Execution", "text": "Execution required meticulous attention to typographic hierarchy, spatial rhythm, and interaction patterns.", "image": "https://picsum.photos/seed/eze_d3/800/500" },
+          { "heading": "Results & Impact", "text": "The final outcome significantly streamlined operational workflows and accelerated user engagement metrics.", "image": "https://picsum.photos/seed/eze_d4/800/500" }
+        ]
+      },
+      {
+        "id": "nairawatch",
+        "title": "NairaWatch",
+        "description": "Aggregating Nigerian parallel market exchange rates using a hybrid of official data and AI-interpreted signals.",
+        "categories": ["Product", "Data"],
+        "image": "https://picsum.photos/seed/nairawatch/800/600",
+        "link": "#",
+        "details": [
+          { "heading": "The Challenge", "text": "Aggregating reliable FX data across informal markets required building novel data pipelines and signal interpretation logic.", "image": "https://picsum.photos/seed/nairawatch_d1/800/500" },
+          { "heading": "Design & Execution", "text": "Built a clean, readable dashboard that surfaces rate trends and discrepancies across multiple market sources.", "image": "https://picsum.photos/seed/nairawatch_d2/800/500" }
+        ]
+      },
+      {
+        "id": "yoruba-trad",
+        "title": "Yoruba Trad Wedding",
+        "description": "An AI-animated short celebrating the symbolism, color, and ceremony of traditional Yoruba weddings.",
+        "categories": ["Art", "Content"],
+        "isFullBleed": true,
+        "image": "https://picsum.photos/seed/yoruba/1200/800",
+        "link": "#",
+        "details": [
+          { "heading": "Concept", "text": "Using generative AI tools to document and celebrate cultural ceremonies through an animated visual essay.", "image": "https://picsum.photos/seed/yoruba_d1/800/500" },
+          { "heading": "Execution", "text": "A short-form animated film exploring fabric patterns, jewelry, and ceremony through AI-generated imagery stitched into narrative.", "image": "https://picsum.photos/seed/yoruba_d2/800/500" }
+        ]
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Tomi",
+    "main_heading": "Jesutomilayo (Tomi) Abe is a strategic creative and digital lead with over a decade of experience.",
+    "name": "Tomi Abe",
+    "role": "Principal Consultant",
+    "image_url": "https://picsum.photos/seed/tomiabe/800/1000?grayscale",
+    "intro_paragraphs": [
+      "Using strategy, creativity, and technology to turn complex systems into clear products, brands, and stories.",
+      "Tomi Abe is a strategic creative and digital leader working at the intersection of design, technology, media, and research. Over the past decade, he has partnered with early-stage ventures, growth-stage companies, and established institutions, including YC-backed startups, Fortune 500 ecosystems, and impact-driven organizations across emerging and established markets, building systems that help teams communicate clearly, ship confidently, and scale with coherence.",
+      "Beyond client work, he speaks, trains, and mentors on emerging technologies, systems thinking, and responsible innovation. With foundations in computer science, design, and creative technology, and experience spanning in-house, agency, and consulting environments, he believes knowledge should empower, not overwhelm."
+    ],
+    "operatingModels": [
+      {
+        "title": "Strategic Advisory",
+        "description": "Providing direction, systems thinking, and decision frameworks for organizations navigating complexity, growth, or transformation."
+      },
+      {
+        "title": "Independent Execution",
+        "description": "Leading the design and development of product, brand, or digital systems from concept through implementation and launch."
+      },
+      {
+        "title": "Embedded Collaboration",
+        "description": "Working closely with internal teams as an integrated partner to accelerate clarity, alignment, and execution."
+      }
+    ],
+    "focusAreas": [
+      {
+        "title": "Brand & Digital Strategy",
+        "description": "Defining the narrative, structure, and digital foundation that helps organizations communicate clearly, differentiate meaningfully, and scale with coherence across platforms and touchpoints."
+      },
+      {
+        "title": "Product & Experience Design",
+        "description": "Designing and building intuitive, scalable digital products and interfaces that align user needs, business goals, and technical systems into usable, effective, and enduring experiences."
+      },
+      {
+        "title": "Data Visualization & Storytelling",
+        "description": "Transforming complex data, research, and information into clear visual and interactive narratives that improve understanding, support decision-making, and communicate insight effectively."
+      },
+      {
+        "title": "Media Systems & Content Platforms",
+        "description": "Designing the systems, workflows, and digital environments that enable organizations to publish, manage, and evolve content as structured, scalable knowledge over time."
+      },
+      {
+        "title": "Creative Technology & Interactive Media",
+        "description": "Exploring and building experimental, emerging, and interactive digital experiences that extend how people engage with information, systems, and ideas beyond conventional interfaces."
+      }
+    ],
+    "speaking_items": {
+      "description": "Tomi designs and delivers talks, workshops, and mentorship programs at the intersection of design, emerging technologies, systems thinking, and creative entrepreneurship, helping teams and individuals apply these tools in practical, responsible, and strategically meaningful ways. His audiences span early-stage founders, creative professionals, corporate teams, and global organizations across Africa and beyond.",
+      "engagements": [
+        {
+          "year": "SINCE 2022",
+          "role": "MENTOR",
+          "title": "MentorCruise",
+          "description": "Ongoing global design mentorship through MentorCruise, supporting designers in advancing toward senior and leadership roles."
+        },
+        {
+          "year": "2024",
+          "role": "TRAINER",
+          "title": "Loblaw Digital",
+          "description": "Advanced prompting and generative workflow training for internal AI committee."
+        },
+        {
+          "year": "2024",
+          "role": "FACILITATOR",
+          "title": "African Climate Stories",
+          "description": "AI-driven infographic design workshop helping sustainability advocates translate complex research into visual narratives."
+        },
+        {
+          "year": "2024",
+          "role": "PANELIST",
+          "title": "FITC E3 Conference",
+          "description": "Ethical AI panel contributing to discussions on responsible automation and the future of work."
+        },
+        {
+          "year": "2020",
+          "role": "SPEAKER",
+          "title": "Nairametrics",
+          "description": "Strategy session for creative entrepreneurs on navigating financial uncertainty."
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "Let's create something coherent.",
+    "description": "For project inquiries, collaborations, or engagements.",
+    "button_text": "studio@tomiabe.com",
+    "booking_link": "mailto:studio@tomiabe.com",
+    "email": "studio@tomiabe.com",
+    "location": "Lagos, Nigeria",
+    "footer_copyright": "\u00a9 2025 Tomi Abe Studio. All rights reserved.",
+    "footer_tagline": "Built for Clarity.",
+    "socials": [
+      { "platform": "Linkedin", "url": "#" },
+      { "platform": "Twitter", "url": "#" },
+      { "platform": "Instagram", "url": "#" }
+    ]
+  }
+}
