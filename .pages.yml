@@ -433,20 +433,72 @@ content:
           - name: monoFontFamily
             label: Mono Font Name
             type: string
-          - name: baseFontSizePx
-            label: Base Font Size (px)
+          - name: navLogoPx
+            label: Nav Logo Size (px)
             type: number
-            options:
-              min: 12
-              max: 22
-              step: 1
-          - name: updatesMetaFontSizePx
-            label: Updates Meta Font Size (px)
+          - name: navLinkPx
+            label: Nav Link Size (px)
             type: number
-            options:
-              min: 10
-              max: 22
-              step: 1
+          - name: heroTitlePx
+            label: Hero Title Size (px)
+            type: number
+          - name: heroDescriptionPx
+            label: Hero Description Size (px)
+            type: number
+          - name: heroCtaPx
+            label: Hero Button Text Size (px)
+            type: number
+          - name: sectionHeadingPx
+            label: Section Heading Size (px)
+            type: number
+          - name: workCardTitlePx
+            label: Work Card Title Size (px)
+            type: number
+          - name: workCardExcerptPx
+            label: Work Card Excerpt Size (px)
+            type: number
+          - name: updatesCardDatePx
+            label: Updates Card Date Size (px)
+            type: number
+          - name: updatesCardTitlePx
+            label: Updates Card Title Size (px)
+            type: number
+          - name: updatesCardExcerptPx
+            label: Updates Card Excerpt Size (px)
+            type: number
+          - name: updatesDrawerDatePx
+            label: Updates Drawer Date Size (px)
+            type: number
+          - name: updatesDrawerTitlePx
+            label: Updates Drawer Title Size (px)
+            type: number
+          - name: updatesDrawerExcerptPx
+            label: Updates Drawer Excerpt Size (px)
+            type: number
+          - name: updatesDrawerBodyPx
+            label: Updates Drawer Body Size (px)
+            type: number
+          - name: infoNamePx
+            label: Info Name Size (px)
+            type: number
+          - name: infoRolePx
+            label: Info Role Size (px)
+            type: number
+          - name: infoLeadPx
+            label: Info Lead Size (px)
+            type: number
+          - name: infoBioPx
+            label: Info Bio Size (px)
+            type: number
+          - name: contactTitlePx
+            label: Contact Title Size (px)
+            type: number
+          - name: contactDescriptionPx
+            label: Contact Description Size (px)
+            type: number
+          - name: contactButtonPx
+            label: Contact Button Text Size (px)
+            type: number
       - name: layout
         label: Pagination
         type: object

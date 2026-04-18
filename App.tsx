@@ -90,8 +90,28 @@ interface SiteSettings {
     bodyFontUrl?: string;
     bodyFontFamily?: string;
     monoFontFamily?: string;
-    baseFontSizePx?: number;
-    updatesMetaFontSizePx?: number;
+    navLogoPx?: number;
+    navLinkPx?: number;
+    heroTitlePx?: number;
+    heroDescriptionPx?: number;
+    heroCtaPx?: number;
+    sectionHeadingPx?: number;
+    workCardTitlePx?: number;
+    workCardExcerptPx?: number;
+    updatesCardDatePx?: number;
+    updatesCardTitlePx?: number;
+    updatesCardExcerptPx?: number;
+    updatesDrawerDatePx?: number;
+    updatesDrawerTitlePx?: number;
+    updatesDrawerExcerptPx?: number;
+    updatesDrawerBodyPx?: number;
+    infoNamePx?: number;
+    infoRolePx?: number;
+    infoLeadPx?: number;
+    infoBioPx?: number;
+    contactTitlePx?: number;
+    contactDescriptionPx?: number;
+    contactButtonPx?: number;
   };
   layout: {
     workItemsPerPage: number;
@@ -239,7 +259,33 @@ const DEFAULT_UI_LABELS: UILabels = {
 const DEFAULT_SETTINGS: SiteSettings = {
   themeColors: DEFAULT_THEME_COLORS,
   workFilters: [{ name: 'Art' }, { name: 'Brand' }, { name: 'Content' }, { name: 'Data' }, { name: 'Product' }],
-  typography: { bodyFontUrl: '', bodyFontFamily: 'Inter', monoFontFamily: 'JetBrains Mono', baseFontSizePx: 16, updatesMetaFontSizePx: 14 },
+  typography: {
+    bodyFontUrl: '',
+    bodyFontFamily: 'Inter',
+    monoFontFamily: 'JetBrains Mono',
+    navLogoPx: 14,
+    navLinkPx: 14,
+    heroTitlePx: 72,
+    heroDescriptionPx: 20,
+    heroCtaPx: 16,
+    sectionHeadingPx: 14,
+    workCardTitlePx: 24,
+    workCardExcerptPx: 16,
+    updatesCardDatePx: 12,
+    updatesCardTitlePx: 18,
+    updatesCardExcerptPx: 14,
+    updatesDrawerDatePx: 12,
+    updatesDrawerTitlePx: 36,
+    updatesDrawerExcerptPx: 18,
+    updatesDrawerBodyPx: 16,
+    infoNamePx: 30,
+    infoRolePx: 14,
+    infoLeadPx: 20,
+    infoBioPx: 16,
+    contactTitlePx: 64,
+    contactDescriptionPx: 18,
+    contactButtonPx: 18,
+  },
   layout: { workItemsPerPage: 6, updatesItemsPerPage: 6 },
   clock: { locale: 'en-US', hour12: true, timezone: 'short' },
   uiLabels: DEFAULT_UI_LABELS,
@@ -410,11 +456,6 @@ export default function App() {
         style2.textContent = `:root {
           ${typo.bodyFontFamily ? `--font-sans: "${typo.bodyFontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;` : ''}
           ${typo.monoFontFamily ? `--font-mono: "${typo.monoFontFamily}", ui-monospace, monospace;` : ''}
-          --base-font-size: ${typo.baseFontSizePx ?? 16}px;
-          --updates-meta-size: ${typo.updatesMetaFontSizePx ?? 14}px;
-        }
-        html {
-          font-size: var(--base-font-size);
         }
         .italic, i, em {
           font-style: normal !important;
@@ -430,11 +471,13 @@ export default function App() {
   // ── Derived data ──
   const { metadata, navigation, hero, about, contact, socialLinks, projects, updates } = siteData;
   const settings = siteData.uiSettings ?? DEFAULT_SETTINGS;
+  const typography = settings.typography ?? DEFAULT_SETTINGS.typography;
   const labels: UILabels = { ...DEFAULT_UI_LABELS, ...(settings.uiLabels ?? {}) };
   const layout = settings.layout ?? DEFAULT_SETTINGS.layout;
   const clockSettings = settings.clock ?? DEFAULT_SETTINGS.clock;
   const workItemsPerPage = layout.workItemsPerPage ?? 6;
   const updatesItemsPerPage = layout.updatesItemsPerPage ?? 6;
+  const textSize = (value: number | undefined, fallback: number) => ({ fontSize: `${value ?? fallback}px` });
 
   // ── Scroll lock when drawer open ──
   useEffect(() => {
@@ -515,14 +558,14 @@ export default function App() {
   const TopNav = () => (
     <nav className="fixed top-0 left-0 w-full z-50 border-b border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md">
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="font-mono text-sm tracking-tight font-medium uppercase" onClick={(e) => handleNavClick(e as any, 'hero')}>
+        <a href="#" className="font-mono text-sm tracking-tight font-medium uppercase" style={textSize(typography.navLogoPx, 14)} onClick={(e) => handleNavClick(e as any, 'hero')}>
           {navigation.logoText || metadata.siteTitle || 'TAS'}
         </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8 text-sm uppercase tracking-wide font-medium">
           {navigation.items.map((item, i) => (
-            <a key={i} href={item.url} onClick={(e) => handleNavClick(e, item.url.replace('#', ''))} className="hover:text-[var(--theme-muted)] transition-colors cursor-pointer">
+            <a key={i} href={item.url} style={textSize(typography.navLinkPx, 14)} onClick={(e) => handleNavClick(e, item.url.replace('#', ''))} className="hover:text-[var(--theme-muted)] transition-colors cursor-pointer">
               {item.label}
             </a>
           ))}
@@ -661,6 +704,7 @@ export default function App() {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              style={textSize(typography.heroTitlePx, 72)}
               className="text-4xl sm:text-5xl md:text-7xl font-sans tracking-tight leading-[1.05] font-medium max-w-4xl"
             >
               {hero.headline}
@@ -669,6 +713,7 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
+              style={textSize(typography.heroDescriptionPx, 20)}
               className="text-lg md:text-xl text-[var(--theme-muted)] max-w-2xl leading-relaxed mt-4"
             >
               {hero.description}
@@ -677,6 +722,7 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
+              style={textSize(typography.heroCtaPx, 16)}
               onClick={() => { triggerSound(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
               className="mt-4 flex items-center w-fit px-6 py-3 bg-[var(--theme-fg)] text-[var(--theme-bg)] rounded-full hover:scale-105 active:scale-95 transition-transform group font-medium cursor-pointer"
             >
@@ -687,7 +733,7 @@ export default function App() {
           {/* UNIFIED WORK FEED */}
           <section id="work" className="scroll-mt-32">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2 flex-grow mr-4">{labels.workSectionHeading}</h2>
+              <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2 flex-grow mr-4" style={textSize(typography.sectionHeadingPx, 14)}>{labels.workSectionHeading}</h2>
               <button
                 onClick={() => { triggerSound(); setFilterPanelOpen(!filterPanelOpen); }}
                 className="flex items-center gap-2 px-3 py-1.5 border border-[var(--theme-border)] rounded text-xs uppercase cursor-pointer"
@@ -754,11 +800,11 @@ export default function App() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 group-hover:from-black/90 group-hover:via-black/50" />
                     <div className="relative z-10 p-6 sm:p-8 flex flex-col gap-2 text-white mt-auto">
                       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-                        <h3 className="text-2xl font-medium tracking-tight text-left">
+                        <h3 className="text-2xl font-medium tracking-tight text-left" style={textSize(typography.workCardTitlePx, 24)}>
                           {project.title}
                         </h3>
                       </div>
-                      <p className="text-gray-200 leading-snug text-sm sm:text-base max-w-2xl line-clamp-none sm:line-clamp-2 md:line-clamp-3 text-left">
+                      <p className="text-gray-200 leading-snug text-sm sm:text-base max-w-2xl line-clamp-none sm:line-clamp-2 md:line-clamp-3 text-left" style={textSize(typography.workCardExcerptPx, 16)}>
                         {project.description}
                       </p>
                       <div className="mt-4 pt-4 border-t border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left">
@@ -794,7 +840,7 @@ export default function App() {
 
           {/* UPDATES SECTION */}
           <section id="updates" className="scroll-mt-32 border-t border-[var(--theme-border)] pt-12">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] mb-8">{labels.updatesSectionHeading}</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] mb-8" style={textSize(typography.sectionHeadingPx, 14)}>{labels.updatesSectionHeading}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {(showAllUpdates ? updates : updates.slice(0, updatesItemsPerPage)).map((update) => (
                 <div
@@ -811,9 +857,9 @@ export default function App() {
                     />
                   </div>
                   <div className="flex flex-col gap-3">
-                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[12px]">{update.date}</span>
-                    <h4 className="font-medium text-lg">{update.title}</h4>
-                    <p className="text-[14px] text-[var(--theme-muted)] leading-relaxed">{update.description}</p>
+                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[12px]" style={textSize(typography.updatesCardDatePx, 12)}>{update.date}</span>
+                    <h4 className="font-medium text-lg" style={textSize(typography.updatesCardTitlePx, 18)}>{update.title}</h4>
+                    <p className="text-[14px] text-[var(--theme-muted)] leading-relaxed" style={textSize(typography.updatesCardExcerptPx, 14)}>{update.description}</p>
                   </div>
                 </div>
               ))}
@@ -833,7 +879,7 @@ export default function App() {
 
           {/* INFO SECTION */}
           <section id="info" className="scroll-mt-32 border-t border-[var(--theme-border)] pt-12 pb-12 flex flex-col gap-16">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)]">{labels.infoSectionHeading}</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)]" style={textSize(typography.sectionHeadingPx, 14)}>{labels.infoSectionHeading}</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <img
@@ -844,14 +890,14 @@ export default function App() {
               />
               <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-2">
-                  <h3 className="text-3xl font-medium tracking-tight">{about.name}</h3>
-                  <p className="text-sm font-mono uppercase tracking-wider text-[var(--theme-muted)]">{about.role}</p>
+                  <h3 className="text-3xl font-medium tracking-tight" style={textSize(typography.infoNamePx, 30)}>{about.name}</h3>
+                  <p className="text-sm font-mono uppercase tracking-wider text-[var(--theme-muted)]" style={textSize(typography.infoRolePx, 14)}>{about.role}</p>
                 </div>
                 <div className="flex flex-col gap-6 text-[var(--theme-muted)] leading-relaxed">
-                  <p className="text-xl font-semibold text-[var(--theme-fg)]">
+                  <p className="text-xl font-semibold text-[var(--theme-fg)]" style={textSize(typography.infoLeadPx, 20)}>
                     {about.lead}
                   </p>
-                  <div className="whitespace-pre-wrap text-base">
+                  <div className="whitespace-pre-wrap text-base" style={textSize(typography.infoBioPx, 16)}>
                     {about.bio}
                   </div>
                 </div>
@@ -922,11 +968,12 @@ export default function App() {
 
           {/* CONTACT SECTION */}
           <section id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-left items-start justify-start">
-            <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]">{contact.headline || "Let's create something coherent."}</h2>
-            <p className="text-[var(--theme-muted)] max-w-md md:text-lg">{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
+            <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]" style={textSize(typography.contactTitlePx, 64)}>{contact.headline || "Let's create something coherent."}</h2>
+            <p className="text-[var(--theme-muted)] max-w-md md:text-lg" style={textSize(typography.contactDescriptionPx, 18)}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 
             <button
               onClick={handleCopyEmail}
+              style={textSize(typography.contactButtonPx, 18)}
               className="mt-2 flex items-center justify-center gap-3 px-8 py-4 bg-[var(--theme-fg)] text-[var(--theme-bg)] rounded-full hover:scale-105 active:scale-95 transition-transform group font-medium text-lg cursor-pointer"
             >
               {contact.email}
@@ -1096,11 +1143,11 @@ export default function App() {
                     alt={selectedUpdate.title}
                   />
                   <div>
-                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[12px]">{selectedUpdate.date}</span>
-                    <h2 className="text-[36px] font-medium tracking-tight mt-3">{selectedUpdate.title}</h2>
-                    <p className="text-[18px] text-[var(--theme-muted)] leading-relaxed mt-4">{selectedUpdate.description}</p>
+                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[12px]" style={textSize(typography.updatesDrawerDatePx, 12)}>{selectedUpdate.date}</span>
+                    <h2 className="text-[36px] font-medium tracking-tight mt-3" style={textSize(typography.updatesDrawerTitlePx, 36)}>{selectedUpdate.title}</h2>
+                    <p className="text-[18px] text-[var(--theme-muted)] leading-relaxed mt-4" style={textSize(typography.updatesDrawerExcerptPx, 18)}>{selectedUpdate.description}</p>
                   </div>
-                  <div className="text-[16px] text-[var(--theme-muted)] leading-relaxed flex flex-col gap-4 border-t border-[var(--theme-border)] pt-6 mt-2">
+                  <div className="text-[16px] text-[var(--theme-muted)] leading-relaxed flex flex-col gap-4 border-t border-[var(--theme-border)] pt-6 mt-2" style={textSize(typography.updatesDrawerBodyPx, 16)}>
                     {selectedUpdate.content?.map((p, i) => <p key={i}>{p}</p>)}
                   </div>
                   <div className="mt-16 pt-8 border-t border-[var(--theme-border)] flex items-center justify-between gap-6 pb-4">
