@@ -969,7 +969,7 @@ export default function App() {
           {/* CONTACT SECTION */}
           <section id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-left items-start justify-start">
             <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]" style={textSize(typography.contactTitlePx, 64)}>{contact.headline || "Let's create something coherent."}</h2>
-            <p className="text-[var(--theme-muted)] max-w-md md:text-lg" style={textSize(typography.contactDescriptionPx, 18)}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
+            <p className="text-[var(--theme-muted)] max-w-xl md:text-lg" style={textSize(typography.contactDescriptionPx, 18)}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 
             <button
               onClick={handleCopyEmail}
