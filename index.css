@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --color-morning-bg: #fdfaf6;
+  --color-morning-fg: #1c1917;
+  --color-morning-muted: #78716c;
+  --color-morning-border: #e7e5e4;
+
+  --color-noon-bg: #ffffff;
+  --color-noon-fg: #09090b;
+  --color-noon-muted: #71717a;
+  --color-noon-border: #e4e4e7;
+  
+  --color-evening-bg: #09090b;
+  --color-evening-fg: #fafafa;
+  --color-evening-muted: #a1a1aa;
+  --color-evening-border: #27272a;
+}
+
+:root {
+  --theme-bg: var(--color-noon-bg);
+  --theme-fg: var(--color-noon-fg);
+  --theme-muted: var(--color-noon-muted);
+  --theme-border: var(--color-noon-border);
+}
+
+.theme-morning {
+  --theme-bg: var(--color-morning-bg);
+  --theme-fg: var(--color-morning-fg);
+  --theme-muted: var(--color-morning-muted);
+  --theme-border: var(--color-morning-border);
+}
+
+.theme-noon {
+  --theme-bg: var(--color-noon-bg);
+  --theme-fg: var(--color-noon-fg);
+  --theme-muted: var(--color-noon-muted);
+  --theme-border: var(--color-noon-border);
+}
+
+.theme-evening {
+  --theme-bg: var(--color-evening-bg);
+  --theme-fg: var(--color-evening-fg);
+  --theme-muted: var(--color-evening-muted);
+  --theme-border: var(--color-evening-border);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--theme-bg);
+  color: var(--theme-fg);
+}
+
+body {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
