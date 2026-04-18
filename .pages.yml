@@ -24,7 +24,11 @@ content:
       - name: id
         label: Slug / ID
         type: string
-        description: "Unique identifier, e.g. my-project. Used for internal routing."
+        description: "Unique identifier, e.g. my-project."
+      - name: order
+        label: Sort Order
+        type: number
+        description: "Lower numbers appear first (0, 1, 2...)"
       - name: role
         label: Your Role
         type: string
@@ -79,6 +83,10 @@ content:
       - name: id
         label: Slug / ID
         type: string
+      - name: order
+        label: Sort Order
+        type: number
+        description: "Lower numbers appear first."
       - name: date
         label: Date Label
         type: string
@@ -177,7 +185,7 @@ content:
             type: string
           - name: description
             label: Description
-            type: text
+            text: ""
       - name: speaking
         label: Speaking & Mentorship
         type: object

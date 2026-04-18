@@ -7,5 +7,6 @@
   "content": [
     "Delivered an intensive internal workshop for the design engineering teams on integrating generative AI directly into their internal rapid-prototyping workflows.",
     "The hands-on session explored structuring complex system prompts, component generation, and rigorous AI safety rails when deploying internal tools."
-  ]
+  ],
+  "order": 4
 }

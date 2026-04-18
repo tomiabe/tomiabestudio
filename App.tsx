@@ -284,10 +284,13 @@ export default function App() {
         const p = m.default;
         return { ...p, categories: unwrap(p.categories) };
       });
+      pd_list.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+
       const ud_list = Object.values(updatesMods).map((m: any) => {
         const u = m.default;
         return { ...u, content: unwrap(u.content) };
       });
+      ud_list.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 
       // Merge labels from all sources: settings > home labels > info labels
       const mergedLabels: UILabels = {
@@ -769,7 +772,7 @@ export default function App() {
                   <div className="flex flex-col gap-3">
                     <span className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)]">{update.date}</span>
                     <h4 className="font-medium text-lg">{update.title}</h4>
-                    <p className="text-[18px] text-[var(--theme-muted)] leading-relaxed">{update.description}</p>
+                    <p className="text-base text-[var(--theme-muted)] leading-relaxed">{update.description}</p>
                   </div>
                 </div>
               ))}

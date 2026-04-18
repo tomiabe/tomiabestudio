@@ -49,12 +49,12 @@
   },
   "typography": {
     "bodyFontUrl": "",
-    "bodyFontFamily": "Inter",
-    "monoFontFamily": "JetBrains Mono"
+    "bodyFontFamily": "Geist",
+    "monoFontFamily": "Geist Mono"
   },
   "layout": {
-    "workItemsPerPage": 6,
-    "updatesItemsPerPage": 6
+    "workItemsPerPage": 3,
+    "updatesItemsPerPage": 4
   },
   "clock": {
     "locale": "en-US",

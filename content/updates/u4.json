@@ -6,5 +6,6 @@
   "image": "https://picsum.photos/seed/u4/400/300",
   "content": [
     "Keynote presentation focusing on the maintenance and scaling of component libraries when shared across distinct platforms and product squads."
-  ]
+  ],
+  "order": 3
 }
