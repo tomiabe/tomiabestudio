@@ -299,8 +299,11 @@ content:
             type: string
           - name: items
             label: Link List
-            type: list
-            label_field: label
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{label}"
             fields:
               - name: label
                 label: Label
@@ -310,8 +313,11 @@ content:
                 type: string
       - name: socialLinks
         label: Social
-        type: list
-        label_field: name
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}"
         fields:
           - name: name
             label: Network
@@ -327,26 +333,74 @@ content:
             label: Morning
             type: object
             fields:
-              - { name: bg, label: BG, type: color }
-              - { name: fg, label: FG, type: color }
-              - { name: muted, label: Muted, type: color }
-              - { name: border, label: Border, type: color }
+              - name: bg
+                label: BG
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color (e.g. #fdfaf6)"
+              - name: fg
+                label: FG
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color (e.g. #1c1917)"
+              - name: muted
+                label: Muted
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color"
+              - name: border
+                label: Border
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color"
           - name: noon
             label: Noon
             type: object
             fields:
-              - { name: bg, label: BG, type: color }
-              - { name: fg, label: FG, type: color }
-              - { name: muted, label: Muted, type: color }
-              - { name: border, label: Border, type: color }
+              - name: bg
+                label: BG
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color (e.g. #ffffff)"
+              - name: fg
+                label: FG
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color (e.g. #09090b)"
+              - name: muted
+                label: Muted
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color"
+              - name: border
+                label: Border
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color"
           - name: evening
             label: Evening
             type: object
             fields:
-              - { name: bg, label: BG, type: color }
-              - { name: fg, label: FG, type: color }
-              - { name: muted, label: Muted, type: color }
-              - { name: border, label: Border, type: color }
+              - name: bg
+                label: BG
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color (e.g. #09090b)"
+              - name: fg
+                label: FG
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color (e.g. #fafafa)"
+              - name: muted
+                label: Muted
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color"
+              - name: border
+                label: Border
+                type: string
+                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                description: "Hex color"
       - name: typography
         label: Fonts
         type: object
