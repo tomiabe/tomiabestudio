@@ -36,9 +36,11 @@ content:
         type: text
       - name: categories
         label: Disciplines / Tags
-        type: list
-        label_field: value
-        fields: [{ name: value, label: Tag, type: string }]
+        type: select
+        options:
+          multiple: true
+          creatable: true
+          values: [Art, Brand, Content, Data, Product]
       - name: image
         label: Main Image
         type: image
@@ -420,6 +422,20 @@ content:
           - name: monoFontFamily
             label: Mono Font Name
             type: string
+          - name: baseFontSizePx
+            label: Base Font Size (px)
+            type: number
+            options:
+              min: 12
+              max: 22
+              step: 1
+          - name: updatesMetaFontSizePx
+            label: Updates Meta Font Size (px)
+            type: number
+            options:
+              min: 10
+              max: 22
+              step: 1
       - name: layout
         label: Pagination
         type: object

@@ -89,6 +89,8 @@ interface SiteSettings {
     bodyFontUrl?: string;
     bodyFontFamily?: string;
     monoFontFamily?: string;
+    baseFontSizePx?: number;
+    updatesMetaFontSizePx?: number;
   };
   layout: {
     workItemsPerPage: number;
@@ -235,7 +237,7 @@ const DEFAULT_UI_LABELS: UILabels = {
 
 const DEFAULT_SETTINGS: SiteSettings = {
   themeColors: DEFAULT_THEME_COLORS,
-  typography: { bodyFontUrl: '', bodyFontFamily: 'Inter', monoFontFamily: 'JetBrains Mono' },
+  typography: { bodyFontUrl: '', bodyFontFamily: 'Inter', monoFontFamily: 'JetBrains Mono', baseFontSizePx: 16, updatesMetaFontSizePx: 14 },
   layout: { workItemsPerPage: 6, updatesItemsPerPage: 6 },
   clock: { locale: 'en-US', hour12: true, timezone: 'short' },
   uiLabels: DEFAULT_UI_LABELS,
@@ -301,7 +303,12 @@ export default function App() {
 
       const pd_list = Object.values(projectMods).map((m: any) => {
         const p = m.default;
-        return { ...p, categories: unwrap(p.categories) };
+        const rawCategories = unwrap(p.categories);
+        const normalizedCategories = rawCategories
+          .flatMap((cat: any) => (typeof cat === 'string' ? cat.split(',') : [cat]))
+          .map((cat: any) => String(cat).trim())
+          .filter(Boolean);
+        return { ...p, categories: Array.from(new Set(normalizedCategories)) };
       });
       pd_list.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 
@@ -392,7 +399,7 @@ export default function App() {
         link.href = typo.bodyFontUrl;
         document.head.appendChild(link);
       }
-      if (typo?.bodyFontFamily || typo?.monoFontFamily) {
+      if (typo) {
         const el2 = document.getElementById('cms-font-vars');
         if (el2) el2.remove();
         const style2 = document.createElement('style');
@@ -400,6 +407,14 @@ export default function App() {
         style2.textContent = `:root {
           ${typo.bodyFontFamily ? `--font-sans: "${typo.bodyFontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;` : ''}
           ${typo.monoFontFamily ? `--font-mono: "${typo.monoFontFamily}", ui-monospace, monospace;` : ''}
+          --base-font-size: ${typo.baseFontSizePx ?? 16}px;
+          --updates-meta-size: ${typo.updatesMetaFontSizePx ?? 14}px;
+        }
+        html {
+          font-size: var(--base-font-size);
+        }
+        .italic, i, em {
+          font-style: normal !important;
         }`;
         document.head.appendChild(style2);
       }
@@ -788,7 +803,7 @@ export default function App() {
                     />
                   </div>
                   <div className="flex flex-col gap-3">
-                    <span className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)]">{update.date}</span>
+                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[length:var(--updates-meta-size)]">{update.date}</span>
                     <h4 className="font-medium text-lg">{update.title}</h4>
                     <p className="text-base text-[var(--theme-muted)] leading-relaxed">{update.description}</p>
                   </div>
@@ -823,7 +838,7 @@ export default function App() {
                 <h3 className="text-3xl font-medium tracking-tight">{about.name}</h3>
                 <p className="text-sm font-mono uppercase tracking-wider text-[var(--theme-muted)]">{about.role}</p>
                 <div className="flex flex-col gap-6 text-[var(--theme-muted)] leading-relaxed">
-                  <p className="text-xl font-semibold text-[var(--theme-fg)] italic">
+                  <p className="text-xl font-semibold text-[var(--theme-fg)]">
                     &quot;{about.lead}&quot;
                   </p>
                   <div className="whitespace-pre-wrap text-base">
@@ -1071,7 +1086,7 @@ export default function App() {
                     alt={selectedUpdate.title}
                   />
                   <div>
-                    <span className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)]">{selectedUpdate.date}</span>
+                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[length:var(--updates-meta-size)]">{selectedUpdate.date}</span>
                     <h2 className="text-3xl md:text-4xl font-medium tracking-tight mt-3">{selectedUpdate.title}</h2>
                     <p className="text-[18px] text-[var(--theme-muted)] leading-relaxed mt-4">{selectedUpdate.description}</p>
                   </div>
