@@ -90,8 +90,10 @@ interface SiteSettings {
     bodyFontUrl?: string;
     bodyFontFamily?: string;
     monoFontFamily?: string;
+    // Desktop sizes
     navLogoPx?: number;
     navLinkPx?: number;
+    mobileMenuItemPx?: number;
     heroTitlePx?: number;
     heroDescriptionPx?: number;
     heroCtaPx?: number;
@@ -112,6 +114,38 @@ interface SiteSettings {
     contactTitlePx?: number;
     contactDescriptionPx?: number;
     contactButtonPx?: number;
+    footerPx?: number;
+    // Mobile overrides (≤767px)
+    navLogoMobilePx?: number;
+    mobileMenuItemMobilePx?: number;
+    heroTitleMobilePx?: number;
+    heroDescriptionMobilePx?: number;
+    heroCtaMobilePx?: number;
+    sectionHeadingMobilePx?: number;
+    workCardTitleMobilePx?: number;
+    workCardExcerptMobilePx?: number;
+    updatesCardDateMobilePx?: number;
+    updatesCardTitleMobilePx?: number;
+    updatesCardExcerptMobilePx?: number;
+    updatesDrawerDateMobilePx?: number;
+    updatesDrawerTitleMobilePx?: number;
+    updatesDrawerExcerptMobilePx?: number;
+    updatesDrawerBodyMobilePx?: number;
+    infoNameMobilePx?: number;
+    infoRoleMobilePx?: number;
+    infoLeadMobilePx?: number;
+    infoBioMobilePx?: number;
+    contactTitleMobilePx?: number;
+    contactDescriptionMobilePx?: number;
+    contactButtonMobilePx?: number;
+    footerMobilePx?: number;
+    // Tablet overrides (768px–1023px)
+    heroTitleTabletPx?: number;
+    heroDescriptionTabletPx?: number;
+    contactTitleTabletPx?: number;
+    contactDescriptionTabletPx?: number;
+    updatesDrawerTitleTabletPx?: number;
+    workCardTitleTabletPx?: number;
   };
   layout: {
     workItemsPerPage: number;
@@ -261,11 +295,13 @@ const DEFAULT_SETTINGS: SiteSettings = {
   workFilters: [{ name: 'Art' }, { name: 'Brand' }, { name: 'Content' }, { name: 'Data' }, { name: 'Product' }],
   typography: {
     bodyFontUrl: '',
-    bodyFontFamily: 'Inter',
-    monoFontFamily: 'JetBrains Mono',
+    bodyFontFamily: 'Geist',
+    monoFontFamily: 'Geist Mono',
+    // Desktop
     navLogoPx: 14,
     navLinkPx: 14,
-    heroTitlePx: 72,
+    mobileMenuItemPx: 20,
+    heroTitlePx: 64,
     heroDescriptionPx: 20,
     heroCtaPx: 16,
     sectionHeadingPx: 14,
@@ -285,6 +321,38 @@ const DEFAULT_SETTINGS: SiteSettings = {
     contactTitlePx: 64,
     contactDescriptionPx: 18,
     contactButtonPx: 18,
+    footerPx: 12,
+    // Mobile defaults (from reference design)
+    navLogoMobilePx: 14,
+    mobileMenuItemMobilePx: 20,
+    heroTitleMobilePx: 36,
+    heroDescriptionMobilePx: 18,
+    heroCtaMobilePx: 16,
+    sectionHeadingMobilePx: 14,
+    workCardTitleMobilePx: 24,
+    workCardExcerptMobilePx: 14,
+    updatesCardDateMobilePx: 12,
+    updatesCardTitleMobilePx: 18,
+    updatesCardExcerptMobilePx: 14,
+    updatesDrawerDateMobilePx: 12,
+    updatesDrawerTitleMobilePx: 30,
+    updatesDrawerExcerptMobilePx: 18,
+    updatesDrawerBodyMobilePx: 16,
+    infoNameMobilePx: 30,
+    infoRoleMobilePx: 14,
+    infoLeadMobilePx: 20,
+    infoBioMobilePx: 16,
+    contactTitleMobilePx: 48,
+    contactDescriptionMobilePx: 16,
+    contactButtonMobilePx: 16,
+    footerMobilePx: 12,
+    // Tablet defaults (768px–1023px)
+    heroTitleTabletPx: 48,
+    heroDescriptionTabletPx: 20,
+    contactTitleTabletPx: 64,
+    contactDescriptionTabletPx: 18,
+    updatesDrawerTitleTabletPx: 36,
+    workCardTitleTabletPx: 24,
   },
   layout: { workItemsPerPage: 6, updatesItemsPerPage: 6 },
   clock: { locale: 'en-US', hour12: true, timezone: 'short' },
@@ -453,13 +521,76 @@ export default function App() {
         if (el2) el2.remove();
         const style2 = document.createElement('style');
         style2.id = 'cms-font-vars';
-        style2.textContent = `:root {
-          ${typo.bodyFontFamily ? `--font-sans: "${typo.bodyFontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;` : ''}
-          ${typo.monoFontFamily ? `--font-mono: "${typo.monoFontFamily}", ui-monospace, monospace;` : ''}
-        }
-        .italic, i, em {
-          font-style: normal !important;
-        }`;
+        // Helper: resolve a value with a fallback, formatted as px
+        const px = (v: number | undefined, fallback: number) => `${v ?? fallback}px`;
+        style2.textContent = `
+          :root {
+            ${typo.bodyFontFamily ? `--font-sans: "${typo.bodyFontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;` : ''}
+            ${typo.monoFontFamily ? `--font-mono: "${typo.monoFontFamily}", ui-monospace, monospace;` : ''}
+            --typo-nav-logo: ${px(typo.navLogoPx, 14)};
+            --typo-nav-link: ${px(typo.navLinkPx, 14)};
+            --typo-mobile-menu: ${px(typo.mobileMenuItemPx, 20)};
+            --typo-hero-title: ${px(typo.heroTitlePx, 64)};
+            --typo-hero-desc: ${px(typo.heroDescriptionPx, 20)};
+            --typo-hero-cta: ${px(typo.heroCtaPx, 16)};
+            --typo-section-heading: ${px(typo.sectionHeadingPx, 14)};
+            --typo-work-card-title: ${px(typo.workCardTitlePx, 24)};
+            --typo-work-card-excerpt: ${px(typo.workCardExcerptPx, 16)};
+            --typo-updates-card-date: ${px(typo.updatesCardDatePx, 12)};
+            --typo-updates-card-title: ${px(typo.updatesCardTitlePx, 18)};
+            --typo-updates-card-excerpt: ${px(typo.updatesCardExcerptPx, 14)};
+            --typo-updates-drawer-date: ${px(typo.updatesDrawerDatePx, 12)};
+            --typo-updates-drawer-title: ${px(typo.updatesDrawerTitlePx, 36)};
+            --typo-updates-drawer-excerpt: ${px(typo.updatesDrawerExcerptPx, 18)};
+            --typo-updates-drawer-body: ${px(typo.updatesDrawerBodyPx, 16)};
+            --typo-info-name: ${px(typo.infoNamePx, 30)};
+            --typo-info-role: ${px(typo.infoRolePx, 14)};
+            --typo-info-lead: ${px(typo.infoLeadPx, 20)};
+            --typo-info-bio: ${px(typo.infoBioPx, 16)};
+            --typo-contact-title: ${px(typo.contactTitlePx, 64)};
+            --typo-contact-desc: ${px(typo.contactDescriptionPx, 18)};
+            --typo-contact-btn: ${px(typo.contactButtonPx, 18)};
+            --typo-footer: ${px(typo.footerPx, 12)};
+          }
+          @media (max-width: 767px) {
+            :root {
+              --typo-nav-logo: ${px(typo.navLogoMobilePx ?? typo.navLogoPx, 14)};
+              --typo-mobile-menu: ${px(typo.mobileMenuItemMobilePx ?? typo.mobileMenuItemPx, 20)};
+              --typo-hero-title: ${px(typo.heroTitleMobilePx, 36)};
+              --typo-hero-desc: ${px(typo.heroDescriptionMobilePx, 18)};
+              --typo-hero-cta: ${px(typo.heroCtaMobilePx ?? typo.heroCtaPx, 16)};
+              --typo-section-heading: ${px(typo.sectionHeadingMobilePx ?? typo.sectionHeadingPx, 14)};
+              --typo-work-card-title: ${px(typo.workCardTitleMobilePx ?? typo.workCardTitlePx, 24)};
+              --typo-work-card-excerpt: ${px(typo.workCardExcerptMobilePx, 14)};
+              --typo-updates-card-date: ${px(typo.updatesCardDateMobilePx ?? typo.updatesCardDatePx, 12)};
+              --typo-updates-card-title: ${px(typo.updatesCardTitleMobilePx ?? typo.updatesCardTitlePx, 18)};
+              --typo-updates-card-excerpt: ${px(typo.updatesCardExcerptMobilePx ?? typo.updatesCardExcerptPx, 14)};
+              --typo-updates-drawer-date: ${px(typo.updatesDrawerDateMobilePx ?? typo.updatesDrawerDatePx, 12)};
+              --typo-updates-drawer-title: ${px(typo.updatesDrawerTitleMobilePx, 30)};
+              --typo-updates-drawer-excerpt: ${px(typo.updatesDrawerExcerptMobilePx ?? typo.updatesDrawerExcerptPx, 18)};
+              --typo-updates-drawer-body: ${px(typo.updatesDrawerBodyMobilePx ?? typo.updatesDrawerBodyPx, 16)};
+              --typo-info-name: ${px(typo.infoNameMobilePx ?? typo.infoNamePx, 30)};
+              --typo-info-role: ${px(typo.infoRoleMobilePx ?? typo.infoRolePx, 14)};
+              --typo-info-lead: ${px(typo.infoLeadMobilePx ?? typo.infoLeadPx, 20)};
+              --typo-info-bio: ${px(typo.infoBioMobilePx ?? typo.infoBioPx, 16)};
+              --typo-contact-title: ${px(typo.contactTitleMobilePx, 48)};
+              --typo-contact-desc: ${px(typo.contactDescriptionMobilePx, 16)};
+              --typo-contact-btn: ${px(typo.contactButtonMobilePx ?? typo.contactButtonPx, 16)};
+              --typo-footer: ${px(typo.footerMobilePx ?? typo.footerPx, 12)};
+            }
+          }
+          @media (min-width: 768px) and (max-width: 1023px) {
+            :root {
+              --typo-hero-title: ${px(typo.heroTitleTabletPx, 48)};
+              --typo-hero-desc: ${px(typo.heroDescriptionTabletPx ?? typo.heroDescriptionPx, 20)};
+              --typo-work-card-title: ${px(typo.workCardTitleTabletPx ?? typo.workCardTitlePx, 24)};
+              --typo-updates-drawer-title: ${px(typo.updatesDrawerTitleTabletPx ?? typo.updatesDrawerTitlePx, 36)};
+              --typo-contact-title: ${px(typo.contactTitleTabletPx, 64)};
+              --typo-contact-desc: ${px(typo.contactDescriptionTabletPx ?? typo.contactDescriptionPx, 18)};
+            }
+          }
+          .italic, i, em { font-style: normal !important; }
+        `;
         document.head.appendChild(style2);
       }
     } catch (err) {
@@ -477,8 +608,6 @@ export default function App() {
   const clockSettings = settings.clock ?? DEFAULT_SETTINGS.clock;
   const workItemsPerPage = layout.workItemsPerPage ?? 6;
   const updatesItemsPerPage = layout.updatesItemsPerPage ?? 6;
-  const textSize = (value: number | undefined, fallback: number) => ({ fontSize: `${value ?? fallback}px` });
-
   // ── Scroll lock when drawer open ──
   useEffect(() => {
     document.body.style.overflow = selectedUpdate || selectedProject ? 'hidden' : 'auto';
@@ -558,14 +687,14 @@ export default function App() {
   const TopNav = () => (
     <nav className="fixed top-0 left-0 w-full z-50 border-b border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md">
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="font-mono text-sm tracking-tight font-medium uppercase" style={textSize(typography.navLogoPx, 14)} onClick={(e) => handleNavClick(e as any, 'hero')}>
+        <a href="#" className="font-mono tracking-tight font-medium uppercase" style={{ fontSize: 'var(--typo-nav-logo)' }} onClick={(e) => handleNavClick(e as any, 'hero')}>
           {navigation.logoText || metadata.siteTitle || 'TAS'}
         </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8 text-sm uppercase tracking-wide font-medium">
           {navigation.items.map((item, i) => (
-            <a key={i} href={item.url} style={textSize(typography.navLinkPx, 14)} onClick={(e) => handleNavClick(e, item.url.replace('#', ''))} className="hover:text-[var(--theme-muted)] transition-colors cursor-pointer">
+            <a key={i} href={item.url} style={{ fontSize: 'var(--typo-nav-link)' }} onClick={(e) => handleNavClick(e, item.url.replace('#', ''))} className="hover:text-[var(--theme-muted)] transition-colors cursor-pointer">
               {item.label}
             </a>
           ))}
@@ -592,11 +721,11 @@ export default function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-[var(--theme-bg)] pt-24 px-6 flex flex-col gap-6 text-xl uppercase tracking-wide md:hidden overflow-y-auto pb-12"
+            className="fixed inset-0 z-40 bg-[var(--theme-bg)] pt-24 px-6 flex flex-col gap-6 uppercase tracking-wide md:hidden overflow-y-auto pb-12"
           >
             <div className="flex flex-col gap-6 font-medium">
               {navigation.items.map((item, i) => (
-                <a key={i} href={item.url} onClick={(e) => handleNavClick(e as any, item.url.replace('#', ''))} className="cursor-pointer">
+                <a key={i} href={item.url} style={{ fontSize: 'var(--typo-mobile-menu)' }} onClick={(e) => handleNavClick(e as any, item.url.replace('#', ''))} className="cursor-pointer">
                   {item.label}
                 </a>
               ))}
@@ -704,7 +833,7 @@ export default function App() {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              style={textSize(typography.heroTitlePx, 72)}
+              style={{ fontSize: 'var(--typo-hero-title)' }}
               className="text-4xl sm:text-5xl md:text-7xl font-sans tracking-tight leading-[1.05] font-medium max-w-4xl"
             >
               {hero.headline}
@@ -713,7 +842,7 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
-              style={textSize(typography.heroDescriptionPx, 20)}
+              style={{ fontSize: 'var(--typo-hero-desc)' }}
               className="text-lg md:text-xl text-[var(--theme-muted)] max-w-2xl leading-relaxed mt-4"
             >
               {hero.description}
@@ -722,7 +851,7 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              style={textSize(typography.heroCtaPx, 16)}
+              style={{ fontSize: 'var(--typo-hero-cta)' }}
               onClick={() => { triggerSound(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
               className="mt-4 flex items-center w-fit px-6 py-3 bg-[var(--theme-fg)] text-[var(--theme-bg)] rounded-full hover:scale-105 active:scale-95 transition-transform group font-medium cursor-pointer"
             >
@@ -733,7 +862,7 @@ export default function App() {
           {/* UNIFIED WORK FEED */}
           <section id="work" className="scroll-mt-32">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2 flex-grow mr-4" style={textSize(typography.sectionHeadingPx, 14)}>{labels.workSectionHeading}</h2>
+              <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2 flex-grow mr-4" style={{ fontSize: 'var(--typo-section-heading)' }}>{labels.workSectionHeading}</h2>
               <button
                 onClick={() => { triggerSound(); setFilterPanelOpen(!filterPanelOpen); }}
                 className="flex items-center gap-2 px-3 py-1.5 border border-[var(--theme-border)] rounded text-xs uppercase cursor-pointer"
@@ -800,11 +929,11 @@ export default function App() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 group-hover:from-black/90 group-hover:via-black/50" />
                     <div className="relative z-10 p-6 sm:p-8 flex flex-col gap-2 text-white mt-auto">
                       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-                        <h3 className="text-2xl font-medium tracking-tight text-left" style={textSize(typography.workCardTitlePx, 24)}>
+                        <h3 className="text-2xl font-medium tracking-tight text-left" style={{ fontSize: 'var(--typo-work-card-title)' }}>
                           {project.title}
                         </h3>
                       </div>
-                      <p className="text-gray-200 leading-snug text-sm sm:text-base max-w-2xl line-clamp-none sm:line-clamp-2 md:line-clamp-3 text-left" style={textSize(typography.workCardExcerptPx, 16)}>
+                      <p className="text-gray-200 leading-snug text-sm sm:text-base max-w-2xl line-clamp-none sm:line-clamp-2 md:line-clamp-3 text-left" style={{ fontSize: 'var(--typo-work-card-excerpt)' }}>
                         {project.description}
                       </p>
                       <div className="mt-4 pt-4 border-t border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left">
@@ -840,7 +969,7 @@ export default function App() {
 
           {/* UPDATES SECTION */}
           <section id="updates" className="scroll-mt-32 border-t border-[var(--theme-border)] pt-12">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] mb-8" style={textSize(typography.sectionHeadingPx, 14)}>{labels.updatesSectionHeading}</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] mb-8" style={{ fontSize: 'var(--typo-section-heading)' }}>{labels.updatesSectionHeading}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {(showAllUpdates ? updates : updates.slice(0, updatesItemsPerPage)).map((update) => (
                 <div
@@ -857,9 +986,9 @@ export default function App() {
                     />
                   </div>
                   <div className="flex flex-col gap-3">
-                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[12px]" style={textSize(typography.updatesCardDatePx, 12)}>{update.date}</span>
-                    <h4 className="font-medium text-lg" style={textSize(typography.updatesCardTitlePx, 18)}>{update.title}</h4>
-                    <p className="text-[14px] text-[var(--theme-muted)] leading-relaxed" style={textSize(typography.updatesCardExcerptPx, 14)}>{update.description}</p>
+                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[12px]" style={{ fontSize: 'var(--typo-updates-card-date)' }}>{update.date}</span>
+                    <h4 className="font-medium text-lg" style={{ fontSize: 'var(--typo-updates-card-title)' }}>{update.title}</h4>
+                    <p className="text-[14px] text-[var(--theme-muted)] leading-relaxed" style={{ fontSize: 'var(--typo-updates-card-excerpt)' }}>{update.description}</p>
                   </div>
                 </div>
               ))}
@@ -879,7 +1008,7 @@ export default function App() {
 
           {/* INFO SECTION */}
           <section id="info" className="scroll-mt-32 border-t border-[var(--theme-border)] pt-12 pb-12 flex flex-col gap-16">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)]" style={textSize(typography.sectionHeadingPx, 14)}>{labels.infoSectionHeading}</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)]" style={{ fontSize: 'var(--typo-section-heading)' }}>{labels.infoSectionHeading}</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <img
@@ -890,14 +1019,14 @@ export default function App() {
               />
               <div className="flex flex-col gap-8">
                 <div className="flex flex-col gap-2">
-                  <h3 className="text-3xl font-medium tracking-tight" style={textSize(typography.infoNamePx, 30)}>{about.name}</h3>
-                  <p className="text-sm font-mono uppercase tracking-wider text-[var(--theme-muted)]" style={textSize(typography.infoRolePx, 14)}>{about.role}</p>
+                  <h3 className="text-3xl font-medium tracking-tight" style={{ fontSize: 'var(--typo-info-name)' }}>{about.name}</h3>
+                  <p className="text-sm font-mono uppercase tracking-wider text-[var(--theme-muted)]" style={{ fontSize: 'var(--typo-info-role)' }}>{about.role}</p>
                 </div>
                 <div className="flex flex-col gap-6 text-[var(--theme-muted)] leading-relaxed">
-                  <p className="text-xl font-medium text-[var(--theme-fg)]" style={textSize(typography.infoLeadPx, 20)}>
+                  <p className="text-xl font-medium text-[var(--theme-fg)]" style={{ fontSize: 'var(--typo-info-lead)' }}>
                     {about.lead}
                   </p>
-                  <div className="whitespace-pre-wrap text-base" style={textSize(typography.infoBioPx, 16)}>
+                  <div className="whitespace-pre-wrap text-base" style={{ fontSize: 'var(--typo-info-bio)' }}>
                     {about.bio}
                   </div>
                 </div>
@@ -968,12 +1097,12 @@ export default function App() {
 
           {/* CONTACT SECTION */}
           <section id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-left items-start justify-start">
-            <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]" style={textSize(typography.contactTitlePx, 64)}>{contact.headline || "Let's create something coherent."}</h2>
-            <p className="text-[var(--theme-muted)] max-w-xl md:text-lg" style={textSize(typography.contactDescriptionPx, 18)}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
+            <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
+            <p className="text-[var(--theme-muted)] max-w-xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 
             <button
               onClick={handleCopyEmail}
-              style={textSize(typography.contactButtonPx, 18)}
+              style={{ fontSize: 'var(--typo-contact-btn)' }}
               className="mt-2 flex items-center justify-center gap-3 px-8 py-4 bg-[var(--theme-fg)] text-[var(--theme-bg)] rounded-full hover:scale-105 active:scale-95 transition-transform group font-medium text-lg cursor-pointer"
             >
               {contact.email}
@@ -1087,7 +1216,7 @@ export default function App() {
             </div>
 
             {/* Footer */}
-            <div className="mt-8 pt-6 border-t border-[var(--theme-border)] flex flex-col gap-3 text-xs font-mono text-[var(--theme-muted)] uppercase tracking-widest">
+            <div className="mt-8 pt-6 border-t border-[var(--theme-border)] flex flex-col gap-3 font-mono text-[var(--theme-muted)] uppercase tracking-widest" style={{ fontSize: 'var(--typo-footer)' }}>
               <p>© {new Date().getFullYear()} {contact.footerCopyright || 'TOMI ABE STUDIO'}</p>
               <p className="border-b border-[var(--theme-border)] pb-8">{contact.footerTagline || 'Objectivity · Clarity · Precision'}</p>
               <button onClick={scrollToTop} className="mt-2 text-xs font-mono uppercase tracking-widest flex items-center gap-2 hover:text-[var(--theme-fg)] transition-colors cursor-pointer w-fit">
@@ -1106,7 +1235,7 @@ export default function App() {
       </div>
 
       {/* Mobile Footer */}
-      <footer className="md:hidden border-t border-[var(--theme-border)] py-8 px-6 text-center text-xs font-mono text-[var(--theme-muted)] uppercase tracking-widest flex flex-col gap-2">
+      <footer className="md:hidden border-t border-[var(--theme-border)] py-8 px-6 text-center font-mono text-[var(--theme-muted)] uppercase tracking-widest flex flex-col gap-2" style={{ fontSize: 'var(--typo-footer)' }}>
         <p>© {new Date().getFullYear()} {contact.footerCopyright || 'TOMI ABE STUDIO'}</p>
         <p>{contact.footerTagline || 'Objectivity · Clarity · Precision'}</p>
       </footer>
@@ -1143,11 +1272,11 @@ export default function App() {
                     alt={selectedUpdate.title}
                   />
                   <div>
-                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[12px]" style={textSize(typography.updatesDrawerDatePx, 12)}>{selectedUpdate.date}</span>
-                    <h2 className="text-[36px] font-medium tracking-tight mt-3" style={textSize(typography.updatesDrawerTitlePx, 36)}>{selectedUpdate.title}</h2>
-                    <p className="text-[18px] text-[var(--theme-muted)] leading-relaxed mt-4" style={textSize(typography.updatesDrawerExcerptPx, 18)}>{selectedUpdate.description}</p>
+                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[12px]" style={{ fontSize: 'var(--typo-updates-drawer-date)' }}>{selectedUpdate.date}</span>
+                    <h2 className="text-[36px] font-medium tracking-tight mt-3" style={{ fontSize: 'var(--typo-updates-drawer-title)' }}>{selectedUpdate.title}</h2>
+                    <p className="text-[18px] text-[var(--theme-muted)] leading-relaxed mt-4" style={{ fontSize: 'var(--typo-updates-drawer-excerpt)' }}>{selectedUpdate.description}</p>
                   </div>
-                  <div className="text-[16px] text-[var(--theme-muted)] leading-relaxed flex flex-col gap-4 border-t border-[var(--theme-border)] pt-6 mt-2" style={textSize(typography.updatesDrawerBodyPx, 16)}>
+                  <div className="text-[16px] text-[var(--theme-muted)] leading-relaxed flex flex-col gap-4 border-t border-[var(--theme-border)] pt-6 mt-2" style={{ fontSize: 'var(--typo-updates-drawer-body)' }}>
                     {selectedUpdate.content?.map((p, i) => <p key={i}>{p}</p>)}
                   </div>
                   <div className="mt-16 pt-8 border-t border-[var(--theme-border)] flex items-center justify-between gap-6 pb-4">

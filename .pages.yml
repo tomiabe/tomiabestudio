@@ -433,71 +433,179 @@ content:
           - name: monoFontFamily
             label: Mono Font Name
             type: string
+
+          # ── Navigation ────────────────────────────────────
           - name: navLogoPx
-            label: Nav Logo Size (px)
+            label: "Nav: Logo — Desktop (px)"
+            type: number
+          - name: navLogoMobilePx
+            label: "Nav: Logo — Mobile (px)"
             type: number
           - name: navLinkPx
-            label: Nav Link Size (px)
+            label: "Nav: Links — Desktop (px)"
             type: number
+          - name: mobileMenuItemPx
+            label: "Nav: Mobile Menu Items (px)"
+            type: number
+
+          # ── Hero ──────────────────────────────────────────
           - name: heroTitlePx
-            label: Hero Title Size (px)
+            label: "Hero: Title — Desktop (px)"
+            type: number
+          - name: heroTitleTabletPx
+            label: "Hero: Title — Tablet (px)"
+            type: number
+          - name: heroTitleMobilePx
+            label: "Hero: Title — Mobile (px)"
             type: number
           - name: heroDescriptionPx
-            label: Hero Description Size (px)
+            label: "Hero: Description — Desktop (px)"
+            type: number
+          - name: heroDescriptionTabletPx
+            label: "Hero: Description — Tablet (px)"
+            type: number
+          - name: heroDescriptionMobilePx
+            label: "Hero: Description — Mobile (px)"
             type: number
           - name: heroCtaPx
-            label: Hero Button Text Size (px)
+            label: "Hero: Button — Desktop (px)"
             type: number
+          - name: heroCtaMobilePx
+            label: "Hero: Button — Mobile (px)"
+            type: number
+
+          # ── Section Headings ──────────────────────────────
           - name: sectionHeadingPx
-            label: Section Heading Size (px)
+            label: "Section Heading — Desktop (px)"
             type: number
+          - name: sectionHeadingMobilePx
+            label: "Section Heading — Mobile (px)"
+            type: number
+
+          # ── Work Cards ────────────────────────────────────
           - name: workCardTitlePx
-            label: Work Card Title Size (px)
+            label: "Work Card: Title — Desktop (px)"
+            type: number
+          - name: workCardTitleTabletPx
+            label: "Work Card: Title — Tablet (px)"
+            type: number
+          - name: workCardTitleMobilePx
+            label: "Work Card: Title — Mobile (px)"
             type: number
           - name: workCardExcerptPx
-            label: Work Card Excerpt Size (px)
+            label: "Work Card: Excerpt — Desktop (px)"
             type: number
+          - name: workCardExcerptMobilePx
+            label: "Work Card: Excerpt — Mobile (px)"
+            type: number
+
+          # ── Updates Cards ─────────────────────────────────
           - name: updatesCardDatePx
-            label: Updates Card Date Size (px)
+            label: "Updates Card: Date — Desktop (px)"
+            type: number
+          - name: updatesCardDateMobilePx
+            label: "Updates Card: Date — Mobile (px)"
             type: number
           - name: updatesCardTitlePx
-            label: Updates Card Title Size (px)
+            label: "Updates Card: Title — Desktop (px)"
+            type: number
+          - name: updatesCardTitleMobilePx
+            label: "Updates Card: Title — Mobile (px)"
             type: number
           - name: updatesCardExcerptPx
-            label: Updates Card Excerpt Size (px)
+            label: "Updates Card: Excerpt — Desktop (px)"
             type: number
+          - name: updatesCardExcerptMobilePx
+            label: "Updates Card: Excerpt — Mobile (px)"
+            type: number
+
+          # ── Updates Drawer ────────────────────────────────
           - name: updatesDrawerDatePx
-            label: Updates Drawer Date Size (px)
+            label: "Updates Drawer: Date — Desktop (px)"
+            type: number
+          - name: updatesDrawerDateMobilePx
+            label: "Updates Drawer: Date — Mobile (px)"
             type: number
           - name: updatesDrawerTitlePx
-            label: Updates Drawer Title Size (px)
+            label: "Updates Drawer: Title — Desktop (px)"
+            type: number
+          - name: updatesDrawerTitleTabletPx
+            label: "Updates Drawer: Title — Tablet (px)"
+            type: number
+          - name: updatesDrawerTitleMobilePx
+            label: "Updates Drawer: Title — Mobile (px)"
             type: number
           - name: updatesDrawerExcerptPx
-            label: Updates Drawer Excerpt Size (px)
+            label: "Updates Drawer: Excerpt — Desktop (px)"
+            type: number
+          - name: updatesDrawerExcerptMobilePx
+            label: "Updates Drawer: Excerpt — Mobile (px)"
             type: number
           - name: updatesDrawerBodyPx
-            label: Updates Drawer Body Size (px)
+            label: "Updates Drawer: Body — Desktop (px)"
             type: number
+          - name: updatesDrawerBodyMobilePx
+            label: "Updates Drawer: Body — Mobile (px)"
+            type: number
+
+          # ── Info Section ──────────────────────────────────
           - name: infoNamePx
-            label: Info Name Size (px)
+            label: "Info: Name — Desktop (px)"
+            type: number
+          - name: infoNameMobilePx
+            label: "Info: Name — Mobile (px)"
             type: number
           - name: infoRolePx
-            label: Info Role Size (px)
+            label: "Info: Role — Desktop (px)"
+            type: number
+          - name: infoRoleMobilePx
+            label: "Info: Role — Mobile (px)"
             type: number
           - name: infoLeadPx
-            label: Info Lead Size (px)
+            label: "Info: Lead Line — Desktop (px)"
+            type: number
+          - name: infoLeadMobilePx
+            label: "Info: Lead Line — Mobile (px)"
             type: number
           - name: infoBioPx
-            label: Info Bio Size (px)
+            label: "Info: Bio — Desktop (px)"
             type: number
+          - name: infoBioMobilePx
+            label: "Info: Bio — Mobile (px)"
+            type: number
+
+          # ── Contact Section ───────────────────────────────
           - name: contactTitlePx
-            label: Contact Title Size (px)
+            label: "Contact: Title — Desktop (px)"
+            type: number
+          - name: contactTitleTabletPx
+            label: "Contact: Title — Tablet (px)"
+            type: number
+          - name: contactTitleMobilePx
+            label: "Contact: Title — Mobile (px)"
             type: number
           - name: contactDescriptionPx
-            label: Contact Description Size (px)
+            label: "Contact: Description — Desktop (px)"
+            type: number
+          - name: contactDescriptionTabletPx
+            label: "Contact: Description — Tablet (px)"
+            type: number
+          - name: contactDescriptionMobilePx
+            label: "Contact: Description — Mobile (px)"
             type: number
           - name: contactButtonPx
-            label: Contact Button Text Size (px)
+            label: "Contact: Button — Desktop (px)"
+            type: number
+          - name: contactButtonMobilePx
+            label: "Contact: Button — Mobile (px)"
+            type: number
+
+          # ── Footer ────────────────────────────────────────
+          - name: footerPx
+            label: "Footer — Desktop (px)"
+            type: number
+          - name: footerMobilePx
+            label: "Footer — Mobile (px)"
             type: number
       - name: layout
         label: Pagination
