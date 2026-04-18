@@ -835,11 +835,13 @@ export default function App() {
                 referrerPolicy="no-referrer"
               />
               <div className="flex flex-col gap-8">
-                <h3 className="text-3xl font-medium tracking-tight">{about.name}</h3>
-                <p className="text-sm font-mono uppercase tracking-wider text-[var(--theme-muted)]">{about.role}</p>
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-3xl font-medium tracking-tight">{about.name}</h3>
+                  <p className="text-sm font-mono uppercase tracking-wider text-[var(--theme-muted)]">{about.role}</p>
+                </div>
                 <div className="flex flex-col gap-6 text-[var(--theme-muted)] leading-relaxed">
                   <p className="text-xl font-semibold text-[var(--theme-fg)]">
-                    &quot;{about.lead}&quot;
+                    {about.lead}
                   </p>
                   <div className="whitespace-pre-wrap text-base">
                     {about.bio}
