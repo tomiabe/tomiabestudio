@@ -2,30 +2,47 @@
   "metadata": {
     "siteTitle": "Tomi Abe Studio",
     "faviconEmoji": "✦",
-    "faviconImage": "",
     "seoDescription": "Tomi Abe Studio is an independent, systems-driven creative and digital practice turning complex systems into clear products, brands, and stories.",
-    "seoKeywords": "design strategy, brand identity, product design, digital studio, Africa, systems thinking",
-    "ogImage": "",
-    "headScripts": ""
+    "seoKeywords": "design strategy, brand identity, product design, digital studio, Africa, systems thinking"
   },
   "navigation": {
-    "logoText": "TAS",
+    "logoText": "TOMI ABE STUDIO",
     "items": [
-      { "label": "Work", "url": "#work" },
-      { "label": "Updates", "url": "#updates" },
-      { "label": "Info", "url": "#info" },
-      { "label": "Contact", "url": "#contact" }
+      {
+        "label": "Work",
+        "url": "#work"
+      },
+      {
+        "label": "Updates",
+        "url": "#updates"
+      },
+      {
+        "label": "Info",
+        "url": "#info"
+      },
+      {
+        "label": "Contact",
+        "url": "#contact"
+      }
     ]
   },
-  "footer": {
-    "footerCopyright": "TOMI ABE STUDIO",
-    "footerTagline": "Objectivity · Clarity · Precision"
-  },
   "socialLinks": [
-    { "name": "LinkedIn", "url": "https://linkedin.com/in/tomiabe" },
-    { "name": "Twitter", "url": "https://twitter.com/tomiabe" },
-    { "name": "Instagram", "url": "https://instagram.com/tomiabe" },
-    { "name": "Github", "url": "https://github.com/tomiabe" }
+    {
+      "name": "LinkedIn",
+      "url": "https://linkedin.com/in/tomiabe"
+    },
+    {
+      "name": "Twitter",
+      "url": "https://twitter.com/tomiabe"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://instagram.com/tomiabe"
+    },
+    {
+      "name": "Github",
+      "url": "https://github.com/tomiabe"
+    }
   ],
   "themeColors": {
     "morning": {
@@ -48,7 +65,6 @@
     }
   },
   "typography": {
-    "bodyFontUrl": "",
     "bodyFontFamily": "Geist",
     "monoFontFamily": "Geist Mono"
   },
