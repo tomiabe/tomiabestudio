@@ -2,7 +2,7 @@
   "about": {
     "name": "Tomi Abe",
     "role": "Principal Consultant",
-    "imageUrl": "https://picsum.photos/seed/tomiabe/800/1000?grayscale",
+    "imageUrl": "/images/tomi-profile-1.jpg",
     "lead": "Using strategy, creativity, and technology to turn complex systems into clear products, brands, and stories.",
     "bio": "Tomi Abe is a strategic creative and digital leader working at the intersection of design, technology, media, and research. Over the past decade, he has partnered with early-stage ventures, growth-stage companies, and established institutions, including YC-backed startups, Fortune 500 ecosystems, and impact-driven organizations across emerging and established markets, building systems that help teams communicate clearly, ship confidently, and scale with coherence.\n\nBeyond client work, he speaks, trains, and mentors on emerging technologies, systems thinking, and responsible innovation. With foundations in computer science, design, and creative technology, and experience spanning in-house, agency, and consulting environments, he believes knowledge should empower, not overwhelm."
   },
@@ -57,29 +57,25 @@
         "title": "Loblaw Digital",
         "year": "2024",
         "role": "TRAINER",
-        "description": "Advanced prompting and generative workflow training for internal AI committee.",
-        "link": ""
+        "description": "Advanced prompting and generative workflow training for internal AI committee."
       },
       {
         "title": "African Climate Stories",
         "year": "2024",
         "role": "FACILITATOR",
-        "description": "AI-driven infographic design workshop helping sustainability advocates translate complex research into visual narratives.",
-        "link": ""
+        "description": "AI-driven infographic design workshop helping sustainability advocates translate complex research into visual narratives."
       },
       {
         "title": "FITC E3 Conference",
         "year": "2024",
         "role": "PANELIST",
-        "description": "Ethical AI panel contributing to discussions on responsible automation and the future of work.",
-        "link": ""
+        "description": "Ethical AI panel contributing to discussions on responsible automation and the future of work."
       },
       {
         "title": "Nairametrics",
         "year": "2020",
         "role": "SPEAKER",
-        "description": "Strategy session for creative entrepreneurs on navigating financial uncertainty.",
-        "link": ""
+        "description": "Strategy session for creative entrepreneurs on navigating financial uncertainty."
       }
     ]
   },
