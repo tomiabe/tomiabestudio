@@ -38,6 +38,7 @@ content:
       - name: categories
         label: Disciplines / Tags
         type: list
+        label_field: value
         fields: [{ name: value, label: Tag, type: string }]
       - name: image
         label: Main Image
@@ -100,13 +101,14 @@ content:
       - name: content
         label: Body Paragraphs
         type: list
+        label_field: value
         fields: [{ name: value, label: Paragraph, type: text }]
 
   # ─────────────────────────────────────────────────────────────────────────────
   # HOME PAGE
   # ─────────────────────────────────────────────────────────────────────────────
   - name: home
-    label: Home Page
+    label: Home Page Settings
     type: file
     path: content/home.json
     format: json
@@ -142,7 +144,7 @@ content:
   # INFO PAGE
   # ─────────────────────────────────────────────────────────────────────────────
   - name: info
-    label: Info Page
+    label: Info Page Profile
     type: file
     path: content/info.json
     format: json
@@ -163,6 +165,7 @@ content:
           - name: about
             label: Bio Paragraphs
             type: list
+            label_field: value
             fields: [{ name: value, label: Paragraph, type: text }]
       - name: operatingModels
         label: Operating Model List
@@ -185,7 +188,7 @@ content:
             type: string
           - name: description
             label: Description
-            text: ""
+            type: text
       - name: speaking
         label: Speaking & Mentorship
         type: object
@@ -247,17 +250,17 @@ content:
   # SITE SETTINGS
   # ─────────────────────────────────────────────────────────────────────────────
   - name: site_settings
-    label: Site Settings
+    label: Global Site Settings
     type: file
     path: content/settings.json
     format: json
     fields:
       - name: metadata
-        label: SEO
+        label: SEO and Site Data
         type: object
         fields:
           - name: siteTitle
-            label: Title
+            label: Site Title
             type: string
           - name: faviconEmoji
             label: Favicon Emoji
@@ -266,133 +269,133 @@ content:
             label: Favicon Image
             type: image
           - name: seoDescription
-            label: Desc
+            label: SEO Description
             type: text
           - name: seoKeywords
-            label: Keywords
+            label: SEO Keywords
             type: string
           - name: ogImage
             label: Share Image
             type: image
           - name: headScripts
-            label: Custom Scripts
+            label: Custom Scripts (gTag, etc.)
             type: text
       - name: navigation
-        label: Navigation
+        label: Navigation Menu
         type: object
         fields:
           - name: logoText
             label: Logo Text
             type: string
           - name: items
-            label: Menu
+            label: Menu Items
             type: list
             label_field: label
             fields:
               - name: label
-                label: Label
+                label: Link Label
                 type: string
               - name: url
-                label: URL
+                label: Target URL
                 type: string
-      - name: footer
-        label: Footer
-        type: object
-        fields:
-          - name: footerCopyright
-            label: Copyright
-            type: string
-          - name: footerTagline
-            label: Tagline
-            type: string
       - name: socialLinks
-        label: Social
+        label: Social Media Profiles
         type: list
         label_field: name
         fields:
           - name: name
-            label: Name
+            label: Platform Name
             type: string
           - name: url
-            label: URL
+            label: Full URL
+            type: string
+      - name: footer
+        label: Global Footer
+        type: object
+        fields:
+          - name: footerCopyright
+            label: Copyright Name
+            type: string
+          - name: footerTagline
+            label: Brand Tagline
             type: string
       - name: themeColors
-        label: Themes
+        label: Visual Themes
         type: object
         fields:
           - name: morning
-            label: Morning
+            label: Morning Mode
             type: object
             fields:
-              - { name: bg, label: BG, type: color }
-              - { name: fg, label: FG, type: color }
-              - { name: muted, label: Muted, type: color }
-              - { name: border, label: Border, type: color }
+              - { name: bg, label: Background Color, type: color }
+              - { name: fg, label: Text Color, type: color }
+              - { name: muted, label: Muted Text Color, type: color }
+              - { name: border, label: Border Color, type: color }
           - name: noon
-            label: Noon
+            label: Noon Mode
             type: object
             fields:
-              - { name: bg, label: BG, type: color }
-              - { name: fg, label: FG, type: color }
-              - { name: muted, label: Muted, type: color }
-              - { name: border, label: Border, type: color }
+              - { name: bg, label: Background Color, type: color }
+              - { name: fg, label: Text Color, type: color }
+              - { name: muted, label: Muted Text Color, type: color }
+              - { name: border, label: Border Color, type: color }
           - name: evening
-            label: Evening
+            label: Evening Mode
             type: object
             fields:
-              - { name: bg, label: BG, type: color }
-              - { name: fg, label: FG, type: color }
-              - { name: muted, label: Muted, type: color }
-              - { name: border, label: Border, type: color }
+              - { name: bg, label: Background Color, type: color }
+              - { name: fg, label: Text Color, type: color }
+              - { name: muted, label: Muted Text Color, type: color }
+              - { name: border, label: Border Color, type: color }
       - name: typography
-        label: Typography
+        label: Site Typography
         type: object
         fields:
           - name: bodyFontUrl
             label: Google Font URL
             type: string
           - name: bodyFontFamily
-            label: Body Font Name
+            label: Serif/Sans Font Name
             type: string
           - name: monoFontFamily
-            label: Mono Font Name
+            label: Monospace Font Name
             type: string
       - name: layout
-        label: Layout
+        label: Display & Pagination
         type: object
         fields:
           - name: workItemsPerPage
-            label: Work Per Page
+            label: Max Work in Grid
             type: number
           - name: updatesItemsPerPage
-            label: Updates Per Page
+            label: Max Updates in Grid
             type: number
       - name: clock
-        label: Clock
+        label: World Clock Config
         type: object
         fields:
           - name: locale
-            label: Locale
+            label: Date Locale
             type: string
           - name: hour12
-            label: 12h Format
+            label: Use 12h Clock
             type: boolean
           - name: timezone
-            label: TZ Style
+            label: Theme TZ
             type: string
       - name: uiLabels
-        label: UI Labels
+        label: Global UI Translations
         type: object
         fields:
-          - { name: loadMore, label: Load More, type: string }
-          - { name: showLess, label: Show Less, type: string }
-          - { name: backToTop, label: Back to Top, type: string }
-          - { name: visitProject, label: Visit Project, type: string }
-          - { name: discussProject, label: Discuss Project, type: string }
-          - { name: filterLabel, label: Filter Label, type: string }
-          - { name: filterByLabel, label: Filter By Heading, type: string }
-          - { name: sidebarEnvironment, label: Env Tab, type: string }
-          - { name: sidebarVisuals, label: Visuals Tab, type: string }
-          - { name: sidebarLayout, label: Layout Tab, type: string }
-          - { name: sidebarAcoustics, label: Acoustics Tab, type: string }
-          - { name: sidebarNetwork, label: Network Tab, type: string }
+          - { name: loadMore, label: Load More Label, type: string }
+          - { name: showLess, label: Show Less Label, type: string }
+          - { name: backToTop, label: Back to Top Label, type: string }
+          - { name: visitProject, label: Visit Project Label, type: string }
+          - { name: discussProject, label: Discuss Project Label, type: string }
+          - { name: filterLabel, label: Filter Menu Title, type: string }
+          - { name: filterByLabel, label: Filter Category Heading, type: string }
+          - { name: sidebarEnvironment, label: Mode Tab Label, type: string }
+          - { name: sidebarVisuals, label: Visuals Tab Label, type: string }
+          - { name: sidebarLayout, label: Layout Tab Label, type: string }
+          - { name: sidebarAcoustics, label: Sound Tab Label, type: string }
+          - { name: sidebarNetwork, label: Network (TBC) Label, type: string }
