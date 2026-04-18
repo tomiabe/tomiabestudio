@@ -803,9 +803,9 @@ export default function App() {
                     />
                   </div>
                   <div className="flex flex-col gap-3">
-                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[length:var(--updates-meta-size)]">{update.date}</span>
+                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[12px]">{update.date}</span>
                     <h4 className="font-medium text-lg">{update.title}</h4>
-                    <p className="text-base text-[var(--theme-muted)] leading-relaxed">{update.description}</p>
+                    <p className="text-[14px] text-[var(--theme-muted)] leading-relaxed">{update.description}</p>
                   </div>
                 </div>
               ))}
@@ -1086,8 +1086,8 @@ export default function App() {
                     alt={selectedUpdate.title}
                   />
                   <div>
-                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[length:var(--updates-meta-size)]">{selectedUpdate.date}</span>
-                    <h2 className="text-3xl md:text-4xl font-medium tracking-tight mt-3">{selectedUpdate.title}</h2>
+                    <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[12px]">{selectedUpdate.date}</span>
+                    <h2 className="text-[36px] font-medium tracking-tight mt-3">{selectedUpdate.title}</h2>
                     <p className="text-[18px] text-[var(--theme-muted)] leading-relaxed mt-4">{selectedUpdate.description}</p>
                   </div>
                   <div className="text-[16px] text-[var(--theme-muted)] leading-relaxed flex flex-col gap-4 border-t border-[var(--theme-border)] pt-6 mt-2">
