@@ -975,9 +975,9 @@ export default function App() {
                 <div
                   key={update.id}
                   onClick={() => { triggerSound(); setSelectedUpdate(update); }}
-                  className="p-4 md:p-6 border border-[var(--theme-border)] rounded-2xl bg-[var(--theme-bg)] flex flex-col sm:flex-row gap-6 transition-colors items-start sm:items-center group hover:border-[var(--theme-muted)] cursor-pointer"
+                  className="p-4 md:p-6 border border-[var(--theme-border)] rounded-2xl bg-[var(--theme-bg)] flex flex-col xl:flex-row gap-4 xl:gap-6 transition-colors items-start xl:items-center group hover:border-[var(--theme-muted)] cursor-pointer"
                 >
-                  <div className="aspect-video w-full sm:w-48 sm:aspect-[4/3] rounded-xl overflow-hidden shrink-0 border border-[var(--theme-border)]">
+                  <div className="aspect-video w-full xl:w-44 xl:aspect-[4/3] rounded-xl overflow-hidden shrink-0 border border-[var(--theme-border)]">
                     <img
                       src={update.image || ''}
                       className={cn("w-full h-full object-cover group-hover:scale-105 transition-transform duration-500", colorMode === 'monochrome' ? "grayscale" : "")}
@@ -985,7 +985,7 @@ export default function App() {
                       referrerPolicy="no-referrer"
                     />
                   </div>
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-3 min-w-0">
                     <span className="font-mono uppercase tracking-widest text-[var(--theme-muted)] text-[12px]" style={{ fontSize: 'var(--typo-updates-card-date)' }}>{update.date}</span>
                     <h4 className="font-medium text-lg" style={{ fontSize: 'var(--typo-updates-card-title)' }}>{update.title}</h4>
                     <p className="text-[14px] text-[var(--theme-muted)] leading-relaxed" style={{ fontSize: 'var(--typo-updates-card-excerpt)' }}>{update.description}</p>
