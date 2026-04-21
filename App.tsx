@@ -26,6 +26,7 @@ interface Project {
   description: string;
   categories: string[];
   link?: string;
+  useDrawer?: boolean;
   isFullBleed?: boolean;
   image: string;
   details?: ProjectDetail[];
@@ -908,7 +909,14 @@ export default function App() {
                 {(showAllWork ? filteredProjects : filteredProjects.slice(0, workItemsPerPage)).map((project) => (
                   <motion.a
                     href={project.link || "#"}
-                    onClick={e => { e.preventDefault(); triggerSound(); setSelectedProject(project); }}
+                    onClick={e => {
+                      triggerSound();
+                      const shouldUseDrawer = project.useDrawer !== false || !project.link;
+                      if (shouldUseDrawer) {
+                        e.preventDefault();
+                        setSelectedProject(project);
+                      }
+                    }}
                     layout
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}

@@ -47,6 +47,10 @@ content:
       - name: link
         label: Live Project URL
         type: string
+      - name: useDrawer
+        label: Open in Drawer
+        type: boolean
+        description: "Turn off to open the live link directly from the card."
       - name: isFullBleed
         label: Full-width in grid
         type: boolean
