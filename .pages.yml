@@ -107,6 +107,13 @@ content:
       - name: image
         label: Cover Image
         type: image
+      - name: link
+        label: External Link URL
+        type: string
+      - name: directLink
+        label: Open Direct Link
+        type: boolean
+        description: "When enabled, this update card opens the link in a new tab instead of the drawer."
       - name: content
         label: Body Paragraphs
         type: list

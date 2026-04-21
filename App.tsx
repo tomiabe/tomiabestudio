@@ -38,6 +38,8 @@ interface Update {
   title: string;
   description: string;
   image: string;
+  link?: string;
+  directLink?: boolean;
   content?: string[];
 }
 
@@ -982,7 +984,14 @@ export default function App() {
               {(showAllUpdates ? updates : updates.slice(0, updatesItemsPerPage)).map((update) => (
                 <div
                   key={update.id}
-                  onClick={() => { triggerSound(); setSelectedUpdate(update); }}
+                  onClick={() => {
+                    triggerSound();
+                    if (update.directLink && update.link) {
+                      window.open(update.link, '_blank', 'noopener,noreferrer');
+                      return;
+                    }
+                    setSelectedUpdate(update);
+                  }}
                   className="p-4 md:p-6 border border-[var(--theme-border)] rounded-2xl bg-[var(--theme-bg)] flex flex-col xl:flex-row gap-4 xl:gap-6 transition-colors items-start xl:items-center group hover:border-[var(--theme-muted)] cursor-pointer"
                 >
                   <div className="aspect-video w-full xl:w-44 xl:aspect-[4/3] rounded-xl overflow-hidden shrink-0 border border-[var(--theme-border)]">
