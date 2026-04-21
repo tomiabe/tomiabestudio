@@ -1,35 +1,22 @@
 {
-  "id": "susinsight",
   "title": "Susinsight",
+  "id": "susinsight",
+  "order": 0,
   "role": "Co-Publisher",
   "description": "Advancing sustainability journalism across Africa through data-driven storytelling. I shape editorial strategy and creative direction, optimizing our digital platform and content systems.",
   "categories": [
     "Content",
     "Data"
   ],
+  "image": "/images/Screenshot 2026-04-21 at 2.34.56 PM.png",
+  "link": "https://susinsight.com",
+  "useDrawer": false,
   "isFullBleed": true,
-  "image": "https://picsum.photos/seed/susinsight/1200/800",
   "details": [
     {
       "heading": "The Challenge",
-      "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...",
-      "image": "https://picsum.photos/seed/susinsight_d1/800/500"
-    },
-    {
-      "heading": "Strategic Approach",
-      "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics...",
-      "image": "https://picsum.photos/seed/susinsight_d2/800/500"
-    },
-    {
-      "heading": "Design & Execution",
-      "text": "Execution required meticulous attention to typographic hierarchy...",
-      "image": "https://picsum.photos/seed/susinsight_d3/800/500"
-    },
-    {
-      "heading": "Results & Impact",
-      "text": "The final outcome significantly streamlined operational workflows...",
-      "image": "https://picsum.photos/seed/susinsight_d4/800/500"
+      "text": "<p>When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...</p>",
+      "image": "/images/Screenshot 2026-04-21 at 2.34.56 PM.png"
     }
-  ],
-  "order": 0
+  ]
 }
