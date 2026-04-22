@@ -1,12 +1,13 @@
 {
   "id": "smart-expense",
   "title": "Smart Expense Agent",
-  "description": "An AI-powered expense detective that reads bank statements, flags hidden fees, and reveals patterns in everyday spending.",
+  "description": "Using AI to read messy bank statements, surface hidden fees, and visualize everyday spending patterns as clear, actionable financial insight.",
   "categories": [
     "Product",
     "Data"
   ],
   "image": "/images/lab/SmartExpense.jpg",
+  "link": "https://smart-expense-agent.vercel.app/",
   "details": [
     {
       "heading": "The Challenge",

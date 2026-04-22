@@ -1,12 +1,13 @@
 {
   "id": "nairawatch",
   "title": "NairaWatch",
-  "description": "Aggregating Nigerian parallel market exchange rates using a hybrid of official data and AI-interpreted signals.",
+  "description": "Tracking Nigeria's parallel market in real time by blending official rates with AI-interpreted signals into a clear, decision-ready FX dashboard.",
   "categories": [
     "Product",
     "Data"
   ],
   "image": "/images/lab/NairaWatch.jpg",
+  "link": "https://nairawatch.vercel.app",
   "details": [
     {
       "heading": "The Challenge",

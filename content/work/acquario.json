@@ -1,12 +1,13 @@
 {
   "id": "acquario",
   "title": "Acquario",
-  "description": "A virtual aquarium visualizing aquatic migration patterns through multisensory simulations.",
+  "description": "Visualizing aquatic migration through a multisensory, data-driven virtual aquarium that turns abstract movement patterns into tangible, exploratory simulations.",
   "categories": [
     "Art",
     "Data"
   ],
   "image": "/images/lab/Acquario.jpg",
+  "link": "https://editor.p5js.org/tomiabe/full/0iDmkljF2",
   "details": [
     {
       "heading": "The Challenge",

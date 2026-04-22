@@ -1,12 +1,12 @@
 {
   "id": "jtf23",
   "title": "JTF23",
-  "description": "A personalized wedding website telling a couple’s story through an interactive digital experience.",
+  "description": "Designing an intimate wedding website where interactive storytelling, photography, and micro-interactions trace a couple's journey as a living, personal archive.",
   "categories": [
-    "Art",
     "Content"
   ],
   "image": "/images/lab/JTF.jpg",
+  "link": "https://jtf.persona.co",
   "details": [
     {
       "heading": "The Challenge",

@@ -1,12 +1,12 @@
 {
   "id": "sound-atlas",
   "title": "Sound Atlas",
-  "description": "A global music scenes explorer that maps cities around the world through dynamic, location-aware playlists and listening patterns.",
+  "description": "Mapping global music cultures through dynamic, city-aware playlists that reveal how location, movement, and listening habits shape evolving soundscapes.",
   "categories": [
-    "Product",
-    "Art"
+    "Product"
   ],
   "image": "/images/lab/SoundAtlas.png",
+  "link": "https://thesoundatlas.vercel.app",
   "details": [
     {
       "heading": "The Challenge",

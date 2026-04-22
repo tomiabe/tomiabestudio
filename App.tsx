@@ -958,7 +958,7 @@ export default function App() {
                           {project.title}
                         </h3>
                       </div>
-                      <p className="text-gray-200 leading-snug text-sm sm:text-base max-w-2xl line-clamp-none sm:line-clamp-2 md:line-clamp-3 text-left" style={{ fontSize: 'var(--typo-work-card-excerpt)' }}>
+                      <p className="text-gray-200 leading-snug text-sm sm:text-base max-w-2xl text-left" style={{ fontSize: 'var(--typo-work-card-excerpt)' }}>
                         {project.description}
                       </p>
                       <div className="mt-4 pt-4 border-t border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left">

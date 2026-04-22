@@ -1,12 +1,13 @@
 {
   "id": "nigeria-embassy",
   "title": "Nigeria Embassy Finder",
-  "description": "A searchable directory that helps people quickly find Nigerian embassies, high commissions, and consulates abroad.",
+  "description": "Turning scattered consular information into a single, searchable directory for Nigerian embassies, missions, and visa centers at home and abroad.",
   "categories": [
     "Product",
     "Data"
   ],
   "image": "/images/lab/NigeriaEmbassy.png",
+  "link": "https://nigeriaembassy.vercel.app/",
   "details": [
     {
       "heading": "The Challenge",

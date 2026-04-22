@@ -1,12 +1,12 @@
 {
   "id": "webhunt",
   "title": "WebHunt",
-  "description": "A digital gallery showcasing innovative web designs pushing the boundaries of storytelling and interaction.",
+  "description": "Curating and systematizing standout web experiences into a digital gallery that showcases experimental interfaces, interaction patterns, and narrative-driven design.",
   "categories": [
-    "Art",
     "Content"
   ],
   "image": "/images/lab/WebHunt.jpg",
+  "link": "https://webhunt.tumblr.com",
   "details": [
     {
       "heading": "The Challenge",
