@@ -12,12 +12,5 @@
   "image": "/images/work/Susinsight.jpg",
   "link": "https://susinsight.com",
   "useDrawer": false,
-  "isFullBleed": true,
-  "details": [
-    {
-      "heading": "The Challenge",
-      "text": "<p>When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...</p>",
-      "image": "/images/Screenshot 2026-04-21 at 2.34.56 PM.png"
-    }
-  ]
+  "isFullBleed": true
 }
