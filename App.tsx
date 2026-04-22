@@ -936,7 +936,7 @@ export default function App() {
                       className={cn("absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105", colorMode === 'monochrome' ? "grayscale" : "")}
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 group-hover:from-black/90 group-hover:via-black/50" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-transparent transition-opacity duration-500 group-hover:from-black/95 group-hover:via-black/65" />
                     <div className="relative z-10 p-6 sm:p-8 flex flex-col gap-2 text-white mt-auto">
                       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
                         <h3 className="text-2xl font-medium tracking-tight text-left" style={{ fontSize: 'var(--typo-work-card-title)' }}>
