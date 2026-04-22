@@ -1,34 +1,14 @@
 {
-  "id": "translayte",
   "title": "Translayte",
+  "id": "translayte",
+  "order": 30,
   "role": "Growth Design Consultant",
-  "description": "Certified translation services across borders. I focused on the intersection of UX and conversion, identifying growth opportunities that scale sustainably.",
+  "description": "Scaling a certified translation platform across borders by aligning UX, conversion, and trust signals in documentation‑heavy, regulation‑sensitive customer journeys.",
   "categories": [
-    "Product",
-    "Brand"
+    "Product"
   ],
   "image": "/images/work/Translayte.jpg",
-  "details": [
-    {
-      "heading": "The Challenge",
-      "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...",
-      "image": "https://picsum.photos/seed/translayte_d1/800/500"
-    },
-    {
-      "heading": "Strategic Approach",
-      "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics...",
-      "image": "https://picsum.photos/seed/translayte_d2/800/500"
-    },
-    {
-      "heading": "Design & Execution",
-      "text": "Execution required meticulous attention to typographic hierarchy...",
-      "image": "https://picsum.photos/seed/translayte_d3/800/500"
-    },
-    {
-      "heading": "Results & Impact",
-      "text": "The final outcome significantly streamlined operational workflows...",
-      "image": "https://picsum.photos/seed/translayte_d4/800/500"
-    }
-  ],
-  "order": 3
+  "link": "https://translayte.com",
+  "useDrawer": false,
+  "isFullBleed": false
 }
