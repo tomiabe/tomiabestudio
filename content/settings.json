@@ -61,6 +61,10 @@
       "name": "Product"
     }
   ],
+  "workCardOverlay": {
+    "baseOpacity": 0.7,
+    "hoverOpacity": 0.8
+  },
   "themeColors": {
     "morning": {
       "bg": "#fdfaf6",

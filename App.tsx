@@ -89,6 +89,10 @@ interface UILabels {
 interface SiteSettings {
   themeColors: ThemeColors;
   workFilters?: { name: string }[] | string[];
+  workCardOverlay?: {
+    baseOpacity?: number;
+    hoverOpacity?: number;
+  };
   typography: {
     bodyFontUrl?: string;
     bodyFontFamily?: string;
@@ -296,6 +300,7 @@ const DEFAULT_UI_LABELS: UILabels = {
 const DEFAULT_SETTINGS: SiteSettings = {
   themeColors: DEFAULT_THEME_COLORS,
   workFilters: [{ name: 'Art' }, { name: 'Brand' }, { name: 'Content' }, { name: 'Data' }, { name: 'Product' }],
+  workCardOverlay: { baseOpacity: 0.7, hoverOpacity: 0.8 },
   typography: {
     bodyFontUrl: '',
     bodyFontFamily: 'Geist',
@@ -467,6 +472,7 @@ export default function App() {
         uiSettings: {
           themeColors: sd.themeColors || DEFAULT_THEME_COLORS,
           workFilters: sd.workFilters || DEFAULT_SETTINGS.workFilters,
+          workCardOverlay: sd.workCardOverlay || DEFAULT_SETTINGS.workCardOverlay,
           typography: sd.typography || DEFAULT_SETTINGS.typography,
           layout: sd.layout || DEFAULT_SETTINGS.layout,
           clock: sd.clock || DEFAULT_SETTINGS.clock,
@@ -526,10 +532,19 @@ export default function App() {
         style2.id = 'cms-font-vars';
         // Helper: resolve a value with a fallback, formatted as px
         const px = (v: number | undefined, fallback: number) => `${v ?? fallback}px`;
+        const clamp01 = (n: any, fallback: number) => {
+          const x = typeof n === 'number' ? n : parseFloat(String(n));
+          if (!Number.isFinite(x)) return fallback;
+          return Math.min(1, Math.max(0, x));
+        };
+        const overlayBase = clamp01(merged.uiSettings.workCardOverlay?.baseOpacity, 0.7);
+        const overlayHover = clamp01(merged.uiSettings.workCardOverlay?.hoverOpacity, 0.8);
         style2.textContent = `
           :root {
             ${typo.bodyFontFamily ? `--font-sans: "${typo.bodyFontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;` : ''}
             ${typo.monoFontFamily ? `--font-mono: "${typo.monoFontFamily}", ui-monospace, monospace;` : ''}
+            --work-card-overlay: ${overlayBase};
+            --work-card-overlay-hover: ${overlayHover};
             --typo-nav-logo: ${px(typo.navLogoPx, 14)};
             --typo-nav-link: ${px(typo.navLinkPx, 14)};
             --typo-mobile-menu: ${px(typo.mobileMenuItemPx, 20)};
@@ -936,7 +951,7 @@ export default function App() {
                       className={cn("absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105", colorMode === 'monochrome' ? "grayscale" : "")}
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-black/70 transition-colors duration-500 group-hover:bg-black/80" />
+                    <div className="absolute inset-0 bg-[rgba(0,0,0,var(--work-card-overlay))] transition-colors duration-500 group-hover:bg-[rgba(0,0,0,var(--work-card-overlay-hover))]" />
                     <div className="relative z-10 p-6 sm:p-8 flex flex-col gap-2 text-white mt-auto">
                       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
                         <h3 className="text-2xl font-medium tracking-tight text-left" style={{ fontSize: 'var(--typo-work-card-title)' }}>

@@ -355,6 +355,24 @@ content:
           - name: name
             label: Filter Name
             type: string
+      - name: workCardOverlay
+        label: Work Card Overlay
+        type: object
+        fields:
+          - name: baseOpacity
+            label: Base Opacity (0–1)
+            type: number
+            options:
+              min: 0
+              max: 1
+              step: 0.05
+          - name: hoverOpacity
+            label: Hover Opacity (0–1)
+            type: number
+            options:
+              min: 0
+              max: 1
+              step: 0.05
       - name: themeColors
         label: Theme Presets
         type: object
