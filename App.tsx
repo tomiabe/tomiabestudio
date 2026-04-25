@@ -455,12 +455,14 @@ export default function App() {
         return { ...p, categories: Array.from(new Set(normalizedCategories)) };
       });
       pd_list.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+      const visibleProjects = pd_list.filter((p: any) => p.visible !== false);
 
       const ud_list = Object.values(updatesMods).map((m: any) => {
         const u = m.default;
         return { ...u, content: unwrap(u.content) };
       });
       ud_list.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+      const visibleUpdates = ud_list.filter((u: any) => u.visible !== false);
 
       // Merge labels from all sources: settings > home labels > info labels
       const mergedLabels: UILabels = {
@@ -487,8 +489,8 @@ export default function App() {
           footerTagline: sd.footer?.footerTagline || '',
         },
         socialLinks: sd.socialLinks || [],
-        projects: pd_list,
-        updates: ud_list,
+        projects: visibleProjects,
+        updates: visibleUpdates,
         uiSettings: {
           themeColors: sd.themeColors || DEFAULT_THEME_COLORS,
           workFilters: sd.workFilters || DEFAULT_SETTINGS.workFilters,
@@ -948,6 +950,8 @@ export default function App() {
                 {(showAllWork ? filteredProjects : filteredProjects.slice(0, workItemsPerPage)).map((project) => (
                   <motion.a
                     href={project.link || "#"}
+                    target={project.link && project.useDrawer === false ? "_blank" : undefined}
+                    rel={project.link && project.useDrawer === false ? "noreferrer" : undefined}
                     onClick={e => {
                       triggerSound();
                       const shouldUseDrawer = project.useDrawer !== false || !project.link;

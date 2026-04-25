@@ -12,5 +12,6 @@
   "image": "/images/work/Susinsight.jpg",
   "link": "https://susinsight.com",
   "useDrawer": false,
-  "isFullBleed": true
+  "isFullBleed": true,
+  "visible": true
 }

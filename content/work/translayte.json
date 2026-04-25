@@ -10,5 +10,6 @@
   "image": "/images/work/Translayte.jpg",
   "link": "https://translayte.com",
   "useDrawer": false,
-  "isFullBleed": false
+  "isFullBleed": false,
+  "visible": true
 }

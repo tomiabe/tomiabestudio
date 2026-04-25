@@ -7,5 +7,6 @@
   "content": [
     "Joined a multi-disciplinary panel to discuss the friction points between frictionless AI utility and necessary, deliberate user consent."
   ],
-  "order": 1
+  "order": 1,
+  "visible": false
 }

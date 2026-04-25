@@ -32,5 +32,6 @@
       "image": "https://picsum.photos/seed/eze_d4/800/500"
     }
   ],
-  "order": 5
+  "order": 5,
+  "visible": true
 }

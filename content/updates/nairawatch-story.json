@@ -5,6 +5,7 @@
   "description": "How a recurring frustration with fragmented FX data became a small, focused tool — and a practical case study in shipping with AI without losing the human judgment that matters.",
   "image": "/images/lab/NairaWatch.jpg",
   "order": 2,
+  "visible": true,
   "content": [
     "NairaWatch didn't start as a grand product idea, but as something much simpler: discomfort. Working with international clients and moving between currencies, proposals, and invoices, I kept running into the same fragmentation — parallel market estimates here, official reference rates there, rumours in group chats, half-updated dashboards that didn't feel grounded in reality. Nothing felt coherent.",
     "So I built <a href=\"https://nairawatch.vercel.app\" target=\"_blank\" rel=\"noreferrer\">NairaWatch</a> — a small web app that tracks daily Naira estimates by combining parallel market signals with official reference rates across multiple currencies. It doesn't predict the future. It simply offers a clearer snapshot of where things are, so people working across borders can make slightly better decisions today.",

@@ -29,5 +29,6 @@
       "image": "https://picsum.photos/seed/soundatlas_d4/800/500"
     }
   ],
-  "order": 10
+  "order": 10,
+  "visible": true
 }

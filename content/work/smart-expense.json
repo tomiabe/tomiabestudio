@@ -30,5 +30,6 @@
       "image": "https://picsum.photos/seed/smartexpense_d4/800/500"
     }
   ],
-  "order": 9
+  "order": 9,
+  "visible": true
 }

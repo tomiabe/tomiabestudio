@@ -11,5 +11,6 @@
   "image": "/images/work/WeCollect.jpg",
   "link": "https://wecollect.tech",
   "useDrawer": false,
-  "isFullBleed": false
+  "isFullBleed": false,
+  "visible": true
 }

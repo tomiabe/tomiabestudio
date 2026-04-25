@@ -29,5 +29,6 @@
       "image": "https://picsum.photos/seed/jtf_d4/800/500"
     }
   ],
-  "order": 12
+  "order": 12,
+  "visible": true
 }

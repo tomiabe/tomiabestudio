@@ -28,6 +28,9 @@ content:
       - name: order
         label: Sort Order
         type: number
+      - name: visible
+        label: Show on Site
+        type: boolean
       - name: role
         label: Your Role
         type: string
@@ -98,6 +101,9 @@ content:
       - name: order
         label: Sort Order
         type: number
+      - name: visible
+        label: Show on Site
+        type: boolean
       - name: date
         label: Date Label
         type: string

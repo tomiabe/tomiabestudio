@@ -7,5 +7,6 @@
   "content": [
     "Keynote presentation focusing on the maintenance and scaling of component libraries when shared across distinct platforms and product squads."
   ],
-  "order": 3
+  "order": 3,
+  "visible": false
 }

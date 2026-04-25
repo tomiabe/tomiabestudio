@@ -5,6 +5,7 @@
   "description": "Three months of experiments in moving faster with AI — five tools shipped, a rebuilt client platform, and a new MentorCruise session on building with emerging tech.",
   "image": "/images/updates/q1-2026.jpg",
   "order": 1,
+  "visible": true,
   "content": [
     "Q1 was one long experiment in moving faster from idea to implementation with AI. In three months, I shipped a few things I'm proud of.",
     "<a href=\"https://nairawatch.vercel.app\" target=\"_blank\" rel=\"noreferrer\">NairaWatch</a> aggregates Nigerian parallel market FX rates with AI-interpreted signals. <a href=\"https://nigeriaembassy.vercel.app\" target=\"_blank\" rel=\"noreferrer\">Nigeria Embassy & Consular Finder</a> lets you locate Nigerian missions abroad and foreign missions in Nigeria, fast. <a href=\"https://lnkd.in/dm5H6HGd\" target=\"_blank\" rel=\"noreferrer\">Smart Expense Agent</a> reads your bank statements, flags hidden fees, and reveals spending patterns. <a href=\"https://thesoundatlas.vercel.app\" target=\"_blank\" rel=\"noreferrer\">Sound Atlas</a> is a global music scenes explorer built around an interactive, location-aware map. <a href=\"https://urbanclimate.vercel.app\" target=\"_blank\" rel=\"noreferrer\">Urban Climate Signals</a> is a live climate dashboard on why cities feel hotter and what leaders can actually do.",

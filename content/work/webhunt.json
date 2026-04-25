@@ -29,5 +29,6 @@
       "image": "https://picsum.photos/seed/webhunt_d4/800/500"
     }
   ],
-  "order": 8
+  "order": 8,
+  "visible": true
 }

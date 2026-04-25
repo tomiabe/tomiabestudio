@@ -30,5 +30,6 @@
       "image": "https://picsum.photos/seed/yoruba_d4/800/500"
     }
   ],
-  "order": 11
+  "order": 11,
+  "visible": true
 }

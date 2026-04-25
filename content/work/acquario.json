@@ -30,5 +30,6 @@
       "image": "https://picsum.photos/seed/acquario_d4/800/500"
     }
   ],
-  "order": 13
+  "order": 13,
+  "visible": true
 }
