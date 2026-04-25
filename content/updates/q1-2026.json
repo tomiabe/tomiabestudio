@@ -1,0 +1,14 @@
+{
+  "id": "q1-2026",
+  "title": "Q1 2026: Shipping Faster from Idea to Implementation",
+  "date": "April 2026",
+  "description": "Three months of experiments in moving faster with AI — five tools shipped, a rebuilt client platform, and a new MentorCruise session on building with emerging tech.",
+  "image": "/images/updates/q1-2026.jpg",
+  "order": 1,
+  "content": [
+    "Q1 was one long experiment in moving faster from idea to implementation with AI. In three months, I shipped a few things I'm proud of.",
+    "NairaWatch aggregates Nigerian parallel market FX rates with AI-interpreted signals (nairawatch.vercel.app). Nigeria Embassy & Consular Finder lets you locate Nigerian missions abroad and foreign missions in Nigeria, fast (nigeriaembassy.vercel.app). Smart Expense Agent reads your bank statements, flags hidden fees, and reveals spending patterns. Sound Atlas is a global music scenes explorer built around an interactive, location-aware map (thesoundatlas.vercel.app). Urban Climate Signals is a live climate dashboard on why cities feel hotter and what leaders can actually do (urbanclimate.vercel.app).",
+    "I also rebuilt Susbridge (susbridge.xyz), have a new CMS for Susinsight in the works, and made a few small utility tools I now use in my own workflow.",
+    "Behind all of this is a practical AI workflow I've been refining — now applied across UX, engineering, product, and content work. If you're a designer, product manager, or builder who wants to make AI a real part of how you work, that's exactly what I cover in my 'Building with Emerging Tech & AI' session on MentorCruise."
+  ]
+}
