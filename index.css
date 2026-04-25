@@ -57,3 +57,15 @@ html {
 body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
+
+/* Links inside update drawer body */
+.update-body a {
+  color: var(--theme-fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--theme-border);
+  transition: text-decoration-color 0.2s ease;
+}
+.update-body a:hover {
+  text-decoration-color: var(--theme-fg);
+}

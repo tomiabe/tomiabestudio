@@ -1330,8 +1330,12 @@ export default function App() {
                     <h2 className="text-[36px] font-medium tracking-tight mt-3" style={{ fontSize: 'var(--typo-updates-drawer-title)' }}>{selectedUpdate.title}</h2>
                     <p className="text-[18px] text-[var(--theme-muted)] leading-relaxed mt-4" style={{ fontSize: 'var(--typo-updates-drawer-excerpt)' }}>{selectedUpdate.description}</p>
                   </div>
-                  <div className="text-[16px] text-[var(--theme-muted)] leading-relaxed flex flex-col gap-4 border-t border-[var(--theme-border)] pt-6 mt-2" style={{ fontSize: 'var(--typo-updates-drawer-body)' }}>
-                    {selectedUpdate.content?.map((p, i) => <p key={i}>{p}</p>)}
+                  <div className="update-body text-[16px] text-[var(--theme-muted)] leading-relaxed flex flex-col gap-4 border-t border-[var(--theme-border)] pt-6 mt-2" style={{ fontSize: 'var(--typo-updates-drawer-body)' }}>
+                    {selectedUpdate.content?.map((p, i) =>
+                      /<[a-z][\w-]*(\s[^>]*)?>/.test(p)
+                        ? <p key={i} dangerouslySetInnerHTML={{ __html: p }} />
+                        : <p key={i}>{p}</p>
+                    )}
                   </div>
                   <div className="mt-16 pt-8 border-t border-[var(--theme-border)] flex items-center justify-between gap-6 pb-4">
                     <button onClick={() => { triggerSound(); setSelectedUpdate(null); }} className="flex items-center gap-2 hover:text-[var(--theme-fg)] text-[var(--theme-muted)] text-xs font-mono uppercase tracking-widest transition-colors cursor-pointer">
