@@ -636,6 +636,35 @@ content:
           - name: footerMobilePx
             label: "Footer — Mobile (px)"
             type: number
+      - name: visibility
+        label: Section Visibility
+        type: object
+        fields:
+          - name: hero
+            label: Show Hero Section
+            type: boolean
+          - name: work
+            label: Show Work Section
+            type: boolean
+          - name: updates
+            label: Show News & Updates Section
+            type: boolean
+          - name: info
+            label: Show Info Section
+            type: boolean
+          - name: operatingModel
+            label: "Info: Show Operating Model"
+            type: boolean
+          - name: focusAreas
+            label: "Info: Show Focus Areas"
+            type: boolean
+          - name: speaking
+            label: "Info: Show Speaking & Mentorship"
+            type: boolean
+          - name: contact
+            label: Show Contact Section
+            type: boolean
+
       - name: layout
         label: Pagination
         type: object

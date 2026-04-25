@@ -142,6 +142,16 @@
     "footerPx": 12,
     "footerMobilePx": 12
   },
+  "visibility": {
+    "hero": true,
+    "work": true,
+    "updates": true,
+    "info": true,
+    "operatingModel": true,
+    "focusAreas": true,
+    "speaking": true,
+    "contact": true
+  },
   "layout": {
     "workItemsPerPage": 6,
     "updatesItemsPerPage": 6

@@ -164,6 +164,16 @@ interface SiteSettings {
     timezone: string;
   };
   uiLabels: UILabels;
+  visibility?: {
+    hero?: boolean;
+    work?: boolean;
+    updates?: boolean;
+    info?: boolean;
+    operatingModel?: boolean;
+    focusAreas?: boolean;
+    speaking?: boolean;
+    contact?: boolean;
+  };
   // label overrides from home.json and info.json
   _homeLabels?: UILabels;
   _infoLabels?: { operatingModelHeading?: string; focusAreasHeading?: string; speakingHeading?: string };
@@ -365,6 +375,16 @@ const DEFAULT_SETTINGS: SiteSettings = {
   layout: { workItemsPerPage: 6, updatesItemsPerPage: 6 },
   clock: { locale: 'en-US', hour12: true, timezone: 'short' },
   uiLabels: DEFAULT_UI_LABELS,
+  visibility: {
+    hero: true,
+    work: true,
+    updates: true,
+    info: true,
+    operatingModel: true,
+    focusAreas: true,
+    speaking: true,
+    contact: true,
+  },
 };
 
 // ─── Default data (used while JSON loads) ─────────────────────────────────────
@@ -477,6 +497,7 @@ export default function App() {
           layout: sd.layout || DEFAULT_SETTINGS.layout,
           clock: sd.clock || DEFAULT_SETTINGS.clock,
           uiLabels: mergedLabels,
+          visibility: { ...DEFAULT_SETTINGS.visibility, ...(sd.visibility || {}) },
         },
       };
 
@@ -625,6 +646,7 @@ export default function App() {
   const layout = settings.layout ?? DEFAULT_SETTINGS.layout;
   const clockSettings = settings.clock ?? DEFAULT_SETTINGS.clock;
   const workItemsPerPage = layout.workItemsPerPage ?? 6;
+  const vis = { ...DEFAULT_SETTINGS.visibility, ...(settings.visibility ?? {}) };
   const updatesItemsPerPage = layout.updatesItemsPerPage ?? 6;
   // ── Scroll lock when drawer open ──
   useEffect(() => {
@@ -847,7 +869,7 @@ export default function App() {
         <div className={cn("md:col-span-9 flex flex-col gap-32", sidebarPosition === 'right' ? "order-1" : "order-2")}>
 
           {/* HERO */}
-          <section id="hero" className="flex flex-col gap-6 pt-4">
+          {vis.hero && <section id="hero" className="flex flex-col gap-6 pt-4">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -875,10 +897,10 @@ export default function App() {
             >
               {labels.heroCta} <ArrowDown className="ml-2 w-5 h-5"/>
             </motion.button>
-          </section>
+          </section>}
 
           {/* UNIFIED WORK FEED */}
-          <section id="work" className="scroll-mt-32">
+          {vis.work && <section id="work" className="scroll-mt-32">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2 flex-grow mr-4" style={{ fontSize: 'var(--typo-section-heading)' }}>{labels.workSectionHeading}</h2>
               <button
@@ -990,10 +1012,10 @@ export default function App() {
                 </button>
               </div>
             )}
-          </section>
+          </section>}
 
           {/* UPDATES SECTION */}
-          <section id="updates" className="scroll-mt-32 border-t border-[var(--theme-border)] pt-12">
+          {vis.updates && <section id="updates" className="scroll-mt-32 border-t border-[var(--theme-border)] pt-12">
             <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)] mb-8" style={{ fontSize: 'var(--typo-section-heading)' }}>{labels.updatesSectionHeading}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {(showAllUpdates ? updates : updates.slice(0, updatesItemsPerPage)).map((update) => (
@@ -1036,10 +1058,10 @@ export default function App() {
                 </button>
               </div>
             )}
-          </section>
+          </section>}
 
           {/* INFO SECTION */}
-          <section id="info" className="scroll-mt-32 border-t border-[var(--theme-border)] pt-12 pb-12 flex flex-col gap-16">
+          {vis.info && <section id="info" className="scroll-mt-32 border-t border-[var(--theme-border)] pt-12 pb-12 flex flex-col gap-16">
             <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)]" style={{ fontSize: 'var(--typo-section-heading)' }}>{labels.infoSectionHeading}</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -1065,7 +1087,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-8 mt-8">
+            {vis.operatingModel && <div className="flex flex-col gap-8 mt-8">
               <h3 className="text-xl font-medium tracking-tight border-b border-[var(--theme-border)] pb-4">{labels.operatingModelHeading}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {about.operatingModels.map((model, i) => (
@@ -1075,9 +1097,9 @@ export default function App() {
                   </div>
                 ))}
               </div>
-            </div>
+            </div>}
 
-            <div className="flex flex-col gap-8 mt-8">
+            {vis.focusAreas && <div className="flex flex-col gap-8 mt-8">
               <h3 className="text-xl font-medium tracking-tight border-b border-[var(--theme-border)] pb-4">{labels.focusAreasHeading}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {about.focusAreas.map((area, i) => {
@@ -1093,9 +1115,9 @@ export default function App() {
                   );
                 })}
               </div>
-            </div>
+            </div>}
 
-            <div className="flex flex-col gap-8 mt-8">
+            {vis.speaking && <div className="flex flex-col gap-8 mt-8">
               <h3 className="text-xl font-medium tracking-tight border-b border-[var(--theme-border)] pb-4">{labels.speakingHeading}</h3>
               <div className="flex flex-col gap-6">
                 <p className="max-w-3xl text-sm md:text-base leading-relaxed text-[var(--theme-muted)]">{about.speaking.description}</p>
@@ -1124,11 +1146,11 @@ export default function App() {
                   </div>
                 ))}
               </div>
-            </div>
-          </section>
+            </div>}
+          </section>}
 
           {/* CONTACT SECTION */}
-          <section id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-left items-start justify-start">
+          {vis.contact && <section id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-left items-start justify-start">
             <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
             <p className="text-[var(--theme-muted)] max-w-xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 
@@ -1140,7 +1162,7 @@ export default function App() {
               {contact.email}
               {copied ? <Check className="w-5 h-5"/> : <Copy className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity"/>}
             </button>
-          </section>
+          </section>}
 
         </div>
 
