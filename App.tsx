@@ -885,7 +885,7 @@ export default function App() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
               style={{ fontSize: 'var(--typo-hero-desc)' }}
-              className="text-lg md:text-xl text-[var(--theme-muted)] max-w-2xl leading-relaxed mt-4"
+              className="text-lg md:text-xl text-[var(--theme-muted)] max-w-2xl md:max-w-3xl leading-relaxed mt-4"
             >
               {hero.description}
             </motion.p>
