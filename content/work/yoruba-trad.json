@@ -1,35 +1,13 @@
 {
-  "id": "yoruba-trad",
   "title": "Yoruba Trad Wedding",
+  "id": "yoruba-trad",
+  "order": 11,
+  "visible": false,
   "description": "Exploring Yoruba ceremony, symbolism, and color through AI-animated storytelling that translates cultural detail into a vivid, modern visual narrative.",
   "categories": [
     "Art",
     "Content"
   ],
-  "isFullBleed": true,
   "image": "/images/lab/TradWedding.png",
-  "details": [
-    {
-      "heading": "The Challenge",
-      "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...",
-      "image": "https://picsum.photos/seed/yoruba_d1/800/500"
-    },
-    {
-      "heading": "Strategic Approach",
-      "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics...",
-      "image": "https://picsum.photos/seed/yoruba_d2/800/500"
-    },
-    {
-      "heading": "Design & Execution",
-      "text": "Execution required meticulous attention to typographic hierarchy...",
-      "image": "https://picsum.photos/seed/yoruba_d3/800/500"
-    },
-    {
-      "heading": "Results & Impact",
-      "text": "The final outcome significantly streamlined operational workflows...",
-      "image": "https://picsum.photos/seed/yoruba_d4/800/500"
-    }
-  ],
-  "order": 11,
-  "visible": true
+  "isFullBleed": true
 }
