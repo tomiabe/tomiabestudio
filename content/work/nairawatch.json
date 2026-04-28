@@ -31,5 +31,6 @@
     }
   ],
   "order": 6,
-  "visible": true
+  "visible": true,
+  "useDrawer": false
 }

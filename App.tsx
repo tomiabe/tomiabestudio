@@ -950,11 +950,13 @@ export default function App() {
                 {(showAllWork ? filteredProjects : filteredProjects.slice(0, workItemsPerPage)).map((project) => (
                   <motion.a
                     href={project.link || "#"}
-                    target={project.link && project.useDrawer === false ? "_blank" : undefined}
-                    rel={project.link && project.useDrawer === false ? "noreferrer" : undefined}
+                    target={project.link && project.useDrawer !== true ? "_blank" : undefined}
+                    rel={project.link && project.useDrawer !== true ? "noreferrer" : undefined}
                     onClick={e => {
                       triggerSound();
-                      const shouldUseDrawer = project.useDrawer !== false || !project.link;
+                      // Default behavior: go to the live link when present.
+                      // Only open the drawer when explicitly enabled, or when there's no link.
+                      const shouldUseDrawer = project.useDrawer === true || !project.link;
                       if (shouldUseDrawer) {
                         e.preventDefault();
                         setSelectedProject(project);
