@@ -2,7 +2,8 @@
   "title": "Susinsight",
   "id": "susinsight",
   "order": 0,
-  "role": "Co-Publisher & Platform Lead",
+  "visible": true,
+  "role": "Creative & Platform Lead",
   "description": "Advancing sustainability journalism across Africa through data‑driven reporting, editorial strategy, and a rigorously optimized, continent‑wide digital insight platform.",
   "categories": [
     "Content",
@@ -11,7 +12,5 @@
   ],
   "image": "/images/work/Susinsight.jpg",
   "link": "https://susinsight.com",
-  "useDrawer": false,
-  "isFullBleed": true,
-  "visible": true
+  "isFullBleed": true
 }
