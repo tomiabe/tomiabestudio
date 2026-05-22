@@ -1,36 +1,14 @@
 {
-  "id": "nairawatch",
   "title": "NairaWatch",
+  "id": "nairawatch",
+  "order": 6,
+  "visible": true,
   "description": "Tracking Nigeria's parallel market in real time by blending official rates with AI-interpreted signals into a clear, decision-ready FX dashboard.",
   "categories": [
     "Product",
     "Data"
   ],
   "image": "/images/lab/NairaWatch.jpg",
-  "link": "https://nairawatch.vercel.app",
-  "details": [
-    {
-      "heading": "The Challenge",
-      "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...",
-      "image": "https://picsum.photos/seed/nairawatch_d1/800/500"
-    },
-    {
-      "heading": "Strategic Approach",
-      "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics...",
-      "image": "https://picsum.photos/seed/nairawatch_d2/800/500"
-    },
-    {
-      "heading": "Design & Execution",
-      "text": "Execution required meticulous attention to typographic hierarchy...",
-      "image": "https://picsum.photos/seed/nairawatch_d3/800/500"
-    },
-    {
-      "heading": "Results & Impact",
-      "text": "The final outcome significantly streamlined operational workflows...",
-      "image": "https://picsum.photos/seed/nairawatch_d4/800/500"
-    }
-  ],
-  "order": 6,
-  "visible": true,
-  "useDrawer": false
+  "link": "https://tomiabe.github.io/nairawatch/",
+  "isFullBleed": false
 }
