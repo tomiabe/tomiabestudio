@@ -1,35 +1,13 @@
 {
-  "id": "sound-atlas",
   "title": "Sound Atlas",
+  "id": "sound-atlas",
+  "order": 10,
+  "visible": true,
   "description": "Mapping global music cultures through dynamic, city-aware playlists that reveal how location, movement, and listening habits shape evolving soundscapes.",
   "categories": [
     "Product"
   ],
   "image": "/images/lab/SoundAtlas.png",
-  "link": "https://thesoundatlas.vercel.app",
-  "details": [
-    {
-      "heading": "The Challenge",
-      "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...",
-      "image": "https://picsum.photos/seed/soundatlas_d1/800/500"
-    },
-    {
-      "heading": "Strategic Approach",
-      "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics...",
-      "image": "https://picsum.photos/seed/soundatlas_d2/800/500"
-    },
-    {
-      "heading": "Design & Execution",
-      "text": "Execution required meticulous attention to typographic hierarchy...",
-      "image": "https://picsum.photos/seed/soundatlas_d3/800/500"
-    },
-    {
-      "heading": "Results & Impact",
-      "text": "The final outcome significantly streamlined operational workflows...",
-      "image": "https://picsum.photos/seed/soundatlas_d4/800/500"
-    }
-  ],
-  "order": 10,
-  "visible": true,
-  "useDrawer": false
+  "link": "https://tomiabe.github.io/soundatlas/",
+  "isFullBleed": false
 }
