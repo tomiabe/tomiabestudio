@@ -60,8 +60,12 @@ body {
 
 @keyframes grid-drift {
   0% { background-position: 0px 0px; }
-  50% { background-position: 6px 4px; }
+  50% { background-position: 12px 8px; }
   100% { background-position: 0px 0px; }
+}
+
+.animate-grid-drift {
+  animation: grid-drift 5s ease-in-out infinite;
 }
 
 /* Links inside update drawer body */

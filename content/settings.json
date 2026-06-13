@@ -180,5 +180,9 @@
     "sidebarLayout": "Layout",
     "sidebarAcoustics": "Acoustics",
     "sidebarNetwork": "Network"
+  },
+  "gridSettings": {
+    "variant": "a",
+    "enabled": false
   }
 }

@@ -10,9 +10,9 @@ function cn(...inputs: (string | undefined | null | false)[]) {
 }
 
 type ThemeMode = 'morning' | 'noon' | 'evening' | 'system';
-type GridVariant = 'a' | 'b' | 'c' | 'd';
+type GridVariant = 'a' | 'b' | 'c' | 'd' | 'e' | 'off';
 
-const GRID_LABELS: Record<GridVariant, string> = { a: 'Parallax', b: 'Spotlight', c: 'Drift', d: 'Crosshair' };
+const GRID_LABELS: Record<GridVariant, string> = { a: 'Parallax', b: 'Spotlight', c: 'Drift', d: 'Crosshair', e: 'Dots', off: 'Off' };
 
 // ─── Data Types ────────────────────────────────────────────────────────────────
 
@@ -179,6 +179,10 @@ interface SiteSettings {
     focusAreas?: boolean;
     speaking?: boolean;
     contact?: boolean;
+  };
+  gridSettings?: {
+    variant: GridVariant;
+    enabled: boolean;
   };
   // label overrides from home.json and info.json
   _homeLabels?: UILabels;
@@ -393,6 +397,10 @@ const DEFAULT_SETTINGS: SiteSettings = {
     speaking: true,
     contact: true,
   },
+  gridSettings: {
+    variant: 'a',
+    enabled: false,
+  },
 };
 
 // ─── Default data (used while JSON loads) ─────────────────────────────────────
@@ -422,7 +430,7 @@ function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mo
               'linear-gradient(90deg, rgba(128,128,128,0.07) 1px, transparent 1px)',
             ].join(','),
             backgroundSize: '40px 40px',
-            backgroundPosition: `${(x - 0.5) * 8}px ${(y - 0.5) * 8}px`,
+            backgroundPosition: `${(x - 0.5) * 20}px ${(y - 0.5) * 20}px`,
             transition: 'background-position 0.15s ease-out',
           }}
         />
@@ -476,6 +484,31 @@ function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mo
         </div>
       );
     }
+    case 'e': {
+      const dotSize = Math.max(2, 6 - Math.sqrt((x - 0.5) ** 2 + (y - 0.5) ** 2) * 8);
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(128,128,128,0.15) 1px, transparent 1px)',
+            backgroundSize: '32px 32px',
+          }}
+        >
+          <div
+            className="absolute w-2 h-2 rounded-full bg-[var(--theme-fg)] opacity-20 -translate-x-1/2 -translate-y-1/2"
+            style={{
+              left: `${x * 100}%`,
+              top: `${y * 100}%`,
+              width: `${dotSize * 3}px`,
+              height: `${dotSize * 3}px`,
+              transition: 'left 0.15s ease-out, top 0.15s ease-out, width 0.2s, height 0.2s',
+            }}
+          />
+        </div>
+      );
+    }
+    default:
+      return null;
   }
 }
 
@@ -492,7 +525,7 @@ function GridSection({ variant, children, className, id }: { variant: GridVarian
       style={{ position: 'relative', overflow: 'hidden' }}
     >
       <GridOverlay variant={variant} mousePos={mousePos} />
-      <div className="flex flex-col items-center" style={{ position: 'relative', zIndex: 1 }}>{children}</div>
+      {children}
     </section>
   );
 }
@@ -513,7 +546,8 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useLocalStorage<boolean>('tomi_soundEnabled', false);
   const [soundProfile, setSoundProfile] = useLocalStorage<'modern' | 'mechanical' | 'soft'>('tomi_soundProfile', 'modern');
   const [soundVolume, setSoundVolume] = useLocalStorage<number>('tomi_soundVolume', 1.0);
-  const [gridVariant, setGridVariant] = useState<GridVariant>('a');
+  const [gridVariant, setGridVariant] = useState<GridVariant>(DEFAULT_SETTINGS.gridSettings!.variant);
+  const effectiveVariant = settings.gridSettings?.enabled ? gridVariant : 'off';
   const [showAllWork, setShowAllWork] = useState(false);
   const [showAllUpdates, setShowAllUpdates] = useState(false);
   const [colorMode, setColorMode] = useLocalStorage<'color' | 'monochrome'>('tomi_colorMode', 'color');
@@ -611,10 +645,12 @@ export default function App() {
           clock: sd.clock || DEFAULT_SETTINGS.clock,
           uiLabels: mergedLabels,
           visibility: { ...DEFAULT_SETTINGS.visibility, ...(sd.visibility || {}) },
+          gridSettings: { ...DEFAULT_SETTINGS.gridSettings, ...(sd.gridSettings || {}) },
         },
       };
 
       setSiteData(merged);
+      setGridVariant(merged.uiSettings.gridSettings?.variant || 'a');
       setDataLoaded(true);
 
       // Apply side effects
@@ -983,7 +1019,7 @@ export default function App() {
         <div className="flex flex-col gap-32">
 
           {/* HERO */}
-          {vis.hero && <GridSection variant={gridVariant} id="hero" className="flex flex-col gap-6 pt-4 text-center items-center">
+          {vis.hero && <GridSection variant={effectiveVariant} id="hero" className="flex flex-col gap-8 pt-4 text-center items-center">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1284,7 +1320,7 @@ export default function App() {
           </section>}
 
           {/* CONTACT SECTION */}
-          {vis.contact && <GridSection variant={gridVariant} id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-center items-center justify-center">
+          {vis.contact && <GridSection variant={effectiveVariant} id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-8 text-center items-center justify-center">
             <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05] max-w-4xl" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
             <p className="text-[var(--theme-muted)] max-w-2xl md:max-w-3xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 
@@ -1628,7 +1664,7 @@ export default function App() {
         <button
           onClick={() => {
             triggerSound();
-            const order: GridVariant[] = ['a', 'b', 'c', 'd'];
+            const order: GridVariant[] = ['a', 'b', 'c', 'd', 'e', 'off'];
             setGridVariant(order[(order.indexOf(gridVariant) + 1) % order.length]);
           }}
           className="px-4 py-2 border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md rounded-full text-[11px] font-mono uppercase tracking-widest text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm flex items-center gap-2"
