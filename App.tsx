@@ -10,6 +10,9 @@ function cn(...inputs: (string | undefined | null | false)[]) {
 }
 
 type ThemeMode = 'morning' | 'noon' | 'evening' | 'system';
+type GridVariant = 'a' | 'b' | 'c' | 'd';
+
+const GRID_LABELS: Record<GridVariant, string> = { a: 'Parallax', b: 'Spotlight', c: 'Drift', d: 'Crosshair' };
 
 // ─── Data Types ────────────────────────────────────────────────────────────────
 
@@ -324,7 +327,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
     navLogoPx: 14,
     navLinkPx: 14,
     mobileMenuItemPx: 20,
-    heroTitlePx: 64,
+    heroTitlePx: 50,
     heroDescriptionPx: 20,
     heroCtaPx: 16,
     sectionHeadingPx: 14,
@@ -341,7 +344,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
     infoRolePx: 14,
     infoLeadPx: 20,
     infoBioPx: 16,
-    contactTitlePx: 64,
+    contactTitlePx: 50,
     contactDescriptionPx: 18,
     contactButtonPx: 18,
     footerPx: 12,
@@ -405,6 +408,95 @@ const DEFAULT_DATA: SiteData = {
   uiSettings: DEFAULT_SETTINGS,
 };
 
+// ─── Grid Overlay ─────────────────────────────────────────────────────────────
+
+function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mousePos: { x: number; y: number } }) {
+  switch (variant) {
+    case 'a':
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: [
+              'linear-gradient(rgba(128,128,128,0.04) 1px, transparent 1px)',
+              'linear-gradient(90deg, rgba(128,128,128,0.04) 1px, transparent 1px)',
+            ].join(','),
+            backgroundSize: '40px 40px',
+            backgroundPosition: `${(x - 0.5) * 8}px ${(y - 0.5) * 8}px`,
+            transition: 'background-position 0.15s ease-out',
+          }}
+        />
+      );
+    case 'b':
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: [
+              'linear-gradient(rgba(128,128,128,0.04) 1px, transparent 1px)',
+              'linear-gradient(90deg, rgba(128,128,128,0.04) 1px, transparent 1px)',
+              `radial-gradient(circle 100px at ${x * 100}% ${y * 100}%, rgba(128,128,128,0.1) 0%, transparent 70%)`,
+            ].join(','),
+            backgroundSize: '40px 40px, 40px 40px, 100% 100%',
+          }}
+        />
+      );
+    case 'c':
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none animate-grid-drift"
+          style={{
+            backgroundImage: [
+              'linear-gradient(rgba(128,128,128,0.03) 1px, transparent 1px)',
+              'linear-gradient(90deg, rgba(128,128,128,0.03) 1px, transparent 1px)',
+            ].join(','),
+            backgroundSize: '40px 40px',
+          }}
+        />
+      );
+    case 'd': {
+      return (
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute top-0 w-px h-full"
+            style={{
+              left: `${x * 100}%`,
+              background: 'rgba(128,128,128,0.06)',
+              transition: 'left 0.15s ease-out',
+            }}
+          />
+          <div
+            className="absolute left-0 h-px w-full"
+            style={{
+              top: `${y * 100}%`,
+              background: 'rgba(128,128,128,0.06)',
+              transition: 'top 0.15s ease-out',
+            }}
+          />
+        </div>
+      );
+    }
+  }
+}
+
+function GridSection({ variant, children, className, id }: { variant: GridVariant; children: React.ReactNode; className?: string; id?: string }) {
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  return (
+    <section
+      id={id}
+      onMouseMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        setMousePos({ x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height });
+      }}
+      className={className}
+      style={{ position: 'relative', overflow: 'hidden' }}
+    >
+      <GridOverlay variant={variant} mousePos={mousePos} />
+      <div style={{ position: 'relative', zIndex: 1 }}>{children}</div>
+    </section>
+  );
+}
+
 // ─── App ──────────────────────────────────────────────────────────────────────
 
 export default function App() {
@@ -421,6 +513,7 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useLocalStorage<boolean>('tomi_soundEnabled', false);
   const [soundProfile, setSoundProfile] = useLocalStorage<'modern' | 'mechanical' | 'soft'>('tomi_soundProfile', 'modern');
   const [soundVolume, setSoundVolume] = useLocalStorage<number>('tomi_soundVolume', 1.0);
+  const [gridVariant, setGridVariant] = useState<GridVariant>('a');
   const [showAllWork, setShowAllWork] = useState(false);
   const [showAllUpdates, setShowAllUpdates] = useState(false);
   const [colorMode, setColorMode] = useLocalStorage<'color' | 'monochrome'>('tomi_colorMode', 'color');
@@ -890,7 +983,7 @@ export default function App() {
         <div className="flex flex-col gap-32">
 
           {/* HERO */}
-          {vis.hero && <section id="hero" className="flex flex-col gap-6 pt-4 text-center items-center">
+          {vis.hero && <GridSection variant={gridVariant} id="hero" className="flex flex-col gap-6 pt-4 text-center items-center">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -934,7 +1027,7 @@ export default function App() {
                 </a>
               )}
             </motion.div>
-          </section>}
+          </GridSection>}
 
           {/* UNIFIED WORK FEED */}
           {vis.work && <section id="work" className="scroll-mt-32">
@@ -1191,9 +1284,9 @@ export default function App() {
           </section>}
 
           {/* CONTACT SECTION */}
-          {vis.contact && <section id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-center items-center justify-center">
-            <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
-            <p className="text-[var(--theme-muted)] max-w-xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
+          {vis.contact && <GridSection variant={gridVariant} id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-center items-center justify-center">
+            <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05] max-w-4xl" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
+            <p className="text-[var(--theme-muted)] max-w-2xl md:max-w-3xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 
             <button
               onClick={handleCopyEmail}
@@ -1203,7 +1296,7 @@ export default function App() {
               {contact.email}
               {copied ? <Check className="w-5 h-5"/> : <Copy className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity"/>}
             </button>
-          </section>}
+          </GridSection>}
 
         </div>
 
@@ -1529,6 +1622,21 @@ export default function App() {
           </>
         )}
       </AnimatePresence>
+
+      {/* Grid Variant Toggle */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <button
+          onClick={() => {
+            triggerSound();
+            const order: GridVariant[] = ['a', 'b', 'c', 'd'];
+            setGridVariant(order[(order.indexOf(gridVariant) + 1) % order.length]);
+          }}
+          className="px-4 py-2 border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md rounded-full text-[11px] font-mono uppercase tracking-widest text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm flex items-center gap-2"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--theme-fg)]" />
+          Grid: {GRID_LABELS[gridVariant]}
+        </button>
+      </div>
     </div>
   );
 }
