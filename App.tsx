@@ -399,7 +399,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
   },
   gridSettings: {
     variant: 'a',
-    enabled: false,
+    enabled: true,
   },
 };
 
@@ -649,7 +649,8 @@ export default function App() {
       };
 
       setSiteData(merged);
-      setGridVariant(merged.uiSettings.gridSettings?.variant || 'a');
+      const cmsVariant = merged.uiSettings.gridSettings?.variant || 'a';
+      setGridVariant(merged.uiSettings.gridSettings?.enabled ? cmsVariant : 'off');
       setDataLoaded(true);
 
       // Apply side effects
@@ -790,7 +791,7 @@ export default function App() {
   // ── Derived data ──
   const { metadata, navigation, hero, about, contact, socialLinks, projects, updates } = siteData;
   const settings = siteData.uiSettings ?? DEFAULT_SETTINGS;
-  const effectiveVariant = settings.gridSettings?.enabled ? gridVariant : 'off';
+  const effectiveVariant = gridVariant;
   const typography = settings.typography ?? DEFAULT_SETTINGS.typography;
   const labels: UILabels = { ...DEFAULT_UI_LABELS, ...(settings.uiLabels ?? {}) };
   const layout = settings.layout ?? DEFAULT_SETTINGS.layout;

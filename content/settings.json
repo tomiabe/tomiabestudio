@@ -183,6 +183,6 @@
   },
   "gridSettings": {
     "variant": "a",
-    "enabled": false
+    "enabled": true
   }
 }
