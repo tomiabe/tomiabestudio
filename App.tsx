@@ -418,8 +418,8 @@ function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mo
           className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage: [
-              'linear-gradient(rgba(128,128,128,0.04) 1px, transparent 1px)',
-              'linear-gradient(90deg, rgba(128,128,128,0.04) 1px, transparent 1px)',
+              'linear-gradient(rgba(128,128,128,0.07) 1px, transparent 1px)',
+              'linear-gradient(90deg, rgba(128,128,128,0.07) 1px, transparent 1px)',
             ].join(','),
             backgroundSize: '40px 40px',
             backgroundPosition: `${(x - 0.5) * 8}px ${(y - 0.5) * 8}px`,
@@ -433,9 +433,9 @@ function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mo
           className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage: [
-              'linear-gradient(rgba(128,128,128,0.04) 1px, transparent 1px)',
-              'linear-gradient(90deg, rgba(128,128,128,0.04) 1px, transparent 1px)',
-              `radial-gradient(circle 100px at ${x * 100}% ${y * 100}%, rgba(128,128,128,0.1) 0%, transparent 70%)`,
+              'linear-gradient(rgba(128,128,128,0.07) 1px, transparent 1px)',
+              'linear-gradient(90deg, rgba(128,128,128,0.07) 1px, transparent 1px)',
+              `radial-gradient(circle 100px at ${x * 100}% ${y * 100}%, rgba(128,128,128,0.14) 0%, transparent 70%)`,
             ].join(','),
             backgroundSize: '40px 40px, 40px 40px, 100% 100%',
           }}
@@ -447,8 +447,8 @@ function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mo
           className="absolute inset-0 pointer-events-none animate-grid-drift"
           style={{
             backgroundImage: [
-              'linear-gradient(rgba(128,128,128,0.03) 1px, transparent 1px)',
-              'linear-gradient(90deg, rgba(128,128,128,0.03) 1px, transparent 1px)',
+              'linear-gradient(rgba(128,128,128,0.07) 1px, transparent 1px)',
+              'linear-gradient(90deg, rgba(128,128,128,0.07) 1px, transparent 1px)',
             ].join(','),
             backgroundSize: '40px 40px',
           }}
@@ -461,7 +461,7 @@ function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mo
             className="absolute top-0 w-px h-full"
             style={{
               left: `${x * 100}%`,
-              background: 'rgba(128,128,128,0.06)',
+              background: 'rgba(128,128,128,0.15)',
               transition: 'left 0.15s ease-out',
             }}
           />
@@ -469,7 +469,7 @@ function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mo
             className="absolute left-0 h-px w-full"
             style={{
               top: `${y * 100}%`,
-              background: 'rgba(128,128,128,0.06)',
+              background: 'rgba(128,128,128,0.15)',
               transition: 'top 0.15s ease-out',
             }}
           />
@@ -492,7 +492,7 @@ function GridSection({ variant, children, className, id }: { variant: GridVarian
       style={{ position: 'relative', overflow: 'hidden' }}
     >
       <GridOverlay variant={variant} mousePos={mousePos} />
-      <div style={{ position: 'relative', zIndex: 1 }}>{children}</div>
+      <div className="flex flex-col items-center" style={{ position: 'relative', zIndex: 1 }}>{children}</div>
     </section>
   );
 }
