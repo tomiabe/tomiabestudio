@@ -885,10 +885,12 @@ export default function App() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
               style={{ fontSize: 'var(--typo-hero-desc)' }}
-              className="text-lg md:text-xl text-[var(--theme-muted)] max-w-2xl md:max-w-3xl leading-relaxed mt-4"
-            >
-              {hero.description}
-            </motion.p>
+              className="text-lg md:text-xl text-[var(--theme-muted)] max-w-2xl md:max-w-3xl leading-relaxed mt-4 [&_span]:text-[var(--theme-fg)] [&_strong]:text-[var(--theme-fg)] [&_em]:italic [&_a]:underline [&_a]:underline-offset-2 [&_a]:text-[var(--theme-fg)] [&_a:hover]:opacity-80"
+              {...(/<[a-z][\w-]*(\s[^>]*)?>/.test(hero.description)
+                ? { dangerouslySetInnerHTML: { __html: hero.description } }
+                : { children: hero.description }
+              )}
+            />
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
