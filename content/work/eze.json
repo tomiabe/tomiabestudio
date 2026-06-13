@@ -1,38 +1,15 @@
 {
-  "id": "eze",
   "title": "Eze",
+  "id": "eze",
+  "order": 5,
+  "visible": true,
   "role": "Brand & Product Design Lead",
   "description": "Building and leading an in-house design function for a YC-backed B2B marketplace, unifying interfaces, journeys, and brand for global electronics trade.",
   "categories": [
     "Brand",
     "Product"
   ],
-  "isFullBleed": true,
   "image": "/images/work/Eze.jpg",
   "link": "https://ezewholesale.com",
-  "details": [
-    {
-      "heading": "The Challenge",
-      "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...",
-      "image": "https://picsum.photos/seed/eze_d1/800/500"
-    },
-    {
-      "heading": "Strategic Approach",
-      "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics...",
-      "image": "https://picsum.photos/seed/eze_d2/800/500"
-    },
-    {
-      "heading": "Design & Execution",
-      "text": "Execution required meticulous attention to typographic hierarchy...",
-      "image": "https://picsum.photos/seed/eze_d3/800/500"
-    },
-    {
-      "heading": "Results & Impact",
-      "text": "The final outcome significantly streamlined operational workflows...",
-      "image": "https://picsum.photos/seed/eze_d4/800/500"
-    }
-  ],
-  "order": 5,
-  "visible": true,
-  "useDrawer": false
+  "isFullBleed": false
 }
