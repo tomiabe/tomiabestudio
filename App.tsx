@@ -884,7 +884,7 @@ export default function App() {
         <div className="flex flex-col gap-32">
 
           {/* HERO */}
-          {vis.hero && <section id="hero" className="flex flex-col gap-6 pt-4">
+          {vis.hero && <section id="hero" className="flex flex-col gap-6 pt-4 text-center items-center">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1169,7 +1169,7 @@ export default function App() {
           </section>}
 
           {/* CONTACT SECTION */}
-          {vis.contact && <section id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-left items-start justify-start">
+          {vis.contact && <section id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-center items-center justify-center">
             <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
             <p className="text-[var(--theme-muted)] max-w-xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 
@@ -1214,7 +1214,7 @@ export default function App() {
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
             onClick={scrollToTop}
             aria-label="Back to top"
-            className="fixed bottom-6 left-6 z-40 w-10 h-10 flex items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm"
+            className="fixed bottom-6 right-6 z-40 w-10 h-10 flex items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm"
           >
             <ChevronUp className="w-4 h-4" />
           </motion.button>
@@ -1225,7 +1225,7 @@ export default function App() {
       <button
         onClick={() => { triggerSound(); setSettingsPanelOpen(true); }}
         aria-label="Open settings"
-        className="fixed bottom-6 right-6 z-40 w-10 h-10 flex items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm"
+        className="fixed bottom-[4.5rem] right-6 z-40 w-10 h-10 flex items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
           <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
