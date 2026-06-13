@@ -68,6 +68,15 @@ body {
   animation: grid-drift 5s ease-in-out infinite;
 }
 
+@keyframes grid-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.animate-grid-pulse {
+  animation: grid-pulse 5s ease-in-out infinite;
+}
+
 /* Links inside update drawer body */
 .update-body a {
   color: var(--theme-fg);
