@@ -158,6 +158,7 @@
     "footerTagline": "Objectivity · Clarity · Precision"
   },
   "layout": {
+    "siteMaxWidth": 1100,
     "workItemsPerPage": 6,
     "updatesItemsPerPage": 6
   },

@@ -691,9 +691,13 @@ content:
             type: string
             description: "e.g. Objectivity · Clarity · Precision"
       - name: layout
-        label: Pagination
+        label: Layout
         type: object
         fields:
+          - name: siteMaxWidth
+            label: Max Site Width (px)
+            type: number
+            description: "Controls the maximum width of the site on desktop. e.g. 1100, 1280, 1400"
           - name: workItemsPerPage
             label: Work Threshold
             type: number

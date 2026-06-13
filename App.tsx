@@ -159,6 +159,7 @@ interface SiteSettings {
   layout: {
     workItemsPerPage: number;
     updatesItemsPerPage: number;
+    siteMaxWidth?: number;
   };
   clock: {
     locale: string;
@@ -376,7 +377,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
     updatesDrawerTitleTabletPx: 36,
     workCardTitleTabletPx: 24,
   },
-  layout: { workItemsPerPage: 6, updatesItemsPerPage: 6 },
+  layout: { workItemsPerPage: 6, updatesItemsPerPage: 6, siteMaxWidth: 1100 },
   clock: { locale: 'en-US', hour12: true, timezone: 'short' },
   uiLabels: DEFAULT_UI_LABELS,
   visibility: {
@@ -609,6 +610,7 @@ export default function App() {
             --typo-contact-desc: ${px(typo.contactDescriptionPx, 18)};
             --typo-contact-btn: ${px(typo.contactButtonPx, 18)};
             --typo-footer: ${px(typo.footerPx, 12)};
+            --site-max-width: ${merged.uiSettings.layout?.siteMaxWidth ?? 1100}px;
           }
           @media (max-width: 767px) {
             :root {
@@ -745,7 +747,7 @@ export default function App() {
 
   const TopNav = () => (
     <nav className="fixed top-0 left-0 w-full z-50 border-b border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md">
-      <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="mx-auto w-full px-6 h-16 flex items-center justify-between" style={{ maxWidth: 'var(--site-max-width)' }}>
         <a href="#" className="font-mono tracking-tight font-medium uppercase" style={{ fontSize: 'var(--typo-nav-logo)' }} onClick={(e) => handleNavClick(e as any, 'hero')}>
           {navigation.logoText || metadata.siteTitle || 'TAS'}
         </a>
@@ -882,7 +884,7 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <main className="flex-1 w-full max-w-[1400px] mx-auto px-6 py-12 md:py-24">
+      <main className="flex-1 w-full mx-auto px-6 py-12 md:py-24" style={{ maxWidth: 'var(--site-max-width)' }}>
 
         {/* Main Content */}
         <div className="flex flex-col gap-32">
@@ -1211,7 +1213,7 @@ export default function App() {
       {/* Site Footer */}
       <footer className="w-full border-t border-[var(--theme-border)] mt-0">
         {/* Network */}
-        <div className="max-w-[1400px] mx-auto px-6 pt-16 pb-6 flex flex-wrap justify-center gap-x-8 gap-y-3">
+        <div className="mx-auto w-full px-6 pt-16 pb-6 flex flex-wrap justify-center gap-x-8 gap-y-3" style={{ maxWidth: 'var(--site-max-width)' }}>
           {socialLinks.map((link, idx) => (
             <a key={idx} href={link.url} target="_blank" rel="noreferrer"
               onClick={() => triggerSound()}
@@ -1221,7 +1223,7 @@ export default function App() {
           ))}
         </div>
         {/* Tagline + Copyright */}
-        <div className="max-w-[1400px] mx-auto px-6 pb-16 flex flex-col items-center gap-2 text-center font-mono uppercase tracking-widest text-[var(--theme-muted)]" style={{ fontSize: 'var(--typo-footer)' }}>
+        <div className="mx-auto w-full px-6 pb-16 flex flex-col items-center gap-2 text-center font-mono uppercase tracking-widest text-[var(--theme-muted)]" style={{ maxWidth: 'var(--site-max-width)', fontSize: 'var(--typo-footer)' }}>
           <p>{contact.footerTagline || 'Objectivity · Clarity · Precision'}</p>
           <p>© {new Date().getFullYear()} {contact.footerCopyright || 'TOMI ABE STUDIO'}</p>
         </div>
