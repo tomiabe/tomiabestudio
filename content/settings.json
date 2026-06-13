@@ -153,6 +153,10 @@
     "speaking": true,
     "contact": true
   },
+  "footer": {
+    "footerCopyright": "TOMI ABE STUDIO",
+    "footerTagline": "Objectivity · Clarity · Precision"
+  },
   "layout": {
     "workItemsPerPage": 6,
     "updatesItemsPerPage": 6

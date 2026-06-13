@@ -140,7 +140,10 @@ content:
             type: text
           - name: description
             label: Description
-            type: text
+            type: rich-text
+            options:
+              format: html
+              switcher: true
       - name: labels
         label: Content Labels
         type: object
@@ -148,6 +151,14 @@ content:
           - name: heroCta
             label: Hero CTA Button
             type: string
+          - name: heroCta2
+            label: Hero Secondary Button Label
+            type: string
+            description: "Leave blank to hide the second button"
+          - name: heroCta2Url
+            label: Hero Secondary Button URL
+            type: string
+            description: "Link for the second button (e.g. https://read.cv/tomiabe)"
           - name: workSectionHeading
             label: Work Heading
             type: string
@@ -376,81 +387,81 @@ content:
               max: 1
               step: 0.05
       - name: themeColors
-        label: Theme Presets
+        label: Theme Colors
         type: object
         fields:
           - name: morning
-            label: Morning
+            label: "☀️ Morning"
             type: object
             fields:
               - name: bg
-                label: BG
+                label: Background
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color (e.g. #fdfaf6)"
+                options:
+                  input: color
               - name: fg
-                label: FG
+                label: Foreground (Text)
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color (e.g. #1c1917)"
+                options:
+                  input: color
               - name: muted
-                label: Muted
+                label: Muted Text
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color"
+                options:
+                  input: color
               - name: border
-                label: Border
+                label: Borders
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color"
+                options:
+                  input: color
           - name: noon
-            label: Noon
+            label: "🌤 Noon"
             type: object
             fields:
               - name: bg
-                label: BG
+                label: Background
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color (e.g. #ffffff)"
+                options:
+                  input: color
               - name: fg
-                label: FG
+                label: Foreground (Text)
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color (e.g. #09090b)"
+                options:
+                  input: color
               - name: muted
-                label: Muted
+                label: Muted Text
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color"
+                options:
+                  input: color
               - name: border
-                label: Border
+                label: Borders
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color"
+                options:
+                  input: color
           - name: evening
-            label: Evening
+            label: "🌙 Evening"
             type: object
             fields:
               - name: bg
-                label: BG
+                label: Background
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color (e.g. #09090b)"
+                options:
+                  input: color
               - name: fg
-                label: FG
+                label: Foreground (Text)
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color (e.g. #fafafa)"
+                options:
+                  input: color
               - name: muted
-                label: Muted
+                label: Muted Text
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color"
+                options:
+                  input: color
               - name: border
-                label: Border
+                label: Borders
                 type: string
-                pattern: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-                description: "Hex color"
+                options:
+                  input: color
       - name: typography
         label: Fonts
         type: object
@@ -667,6 +678,18 @@ content:
             label: Show Contact Section
             type: boolean
 
+      - name: footer
+        label: Footer
+        type: object
+        fields:
+          - name: footerCopyright
+            label: Copyright Name
+            type: string
+            description: "e.g. TOMI ABE STUDIO"
+          - name: footerTagline
+            label: Tagline
+            type: string
+            description: "e.g. Objectivity · Clarity · Precision"
       - name: layout
         label: Pagination
         type: object

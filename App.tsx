@@ -71,6 +71,8 @@ interface UILabels {
   focusAreasHeading?: string;
   speakingHeading?: string;
   heroCta?: string;
+  heroCta2?: string;
+  heroCta2Url?: string;
   loadMore?: string;
   showLess?: string;
   backToTop?: string;
@@ -261,6 +263,105 @@ function LiveClock({ locale = 'en-US', hour12 = true, timezone = 'short' }: { lo
   );
 }
 
+// ─── Animated background lines ───────────────────────────────────────────────
+
+function AnimatedLines({ opacity = 0.045 }: { opacity?: number }) {
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animId: number;
+    const lines: { x: number; y: number; angle: number; speed: number; length: number; width: number }[] = [];
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Seed lines — mix of near-horizontal and near-vertical
+    const seed = () => {
+      lines.length = 0;
+      const count = 18;
+      for (let i = 0; i < count; i++) {
+        const isH = i < count / 2;
+        lines.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          angle: isH
+            ? (Math.random() * 0.12 - 0.06)          // nearly horizontal
+            : (Math.PI / 2 + Math.random() * 0.12 - 0.06), // nearly vertical
+          speed: 0.18 + Math.random() * 0.22,
+          length: 80 + Math.random() * 160,
+          width: 0.4 + Math.random() * 0.5,
+        });
+      }
+    };
+    seed();
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const color = getComputedStyle(document.documentElement)
+        .getPropertyValue('--theme-fg').trim() || '#000000';
+
+      for (const l of lines) {
+        const dx = Math.cos(l.angle) * l.speed;
+        const dy = Math.sin(l.angle) * l.speed;
+        l.x += dx;
+        l.y += dy;
+
+        // Wrap: when fully out of bounds, re-enter from a randomised offset edge
+        const margin = l.length + 20;
+        if (l.x > canvas.width + margin) {
+          l.x = -margin;
+          l.y = Math.random() * canvas.height;
+        } else if (l.x < -margin) {
+          l.x = canvas.width + margin;
+          l.y = Math.random() * canvas.height;
+        }
+        if (l.y > canvas.height + margin) {
+          l.y = -margin;
+          l.x = Math.random() * canvas.width;
+        } else if (l.y < -margin) {
+          l.y = canvas.height + margin;
+          l.x = Math.random() * canvas.width;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = opacity;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = l.width;
+        ctx.beginPath();
+        ctx.moveTo(l.x - Math.cos(l.angle) * l.length / 2, l.y - Math.sin(l.angle) * l.length / 2);
+        ctx.lineTo(l.x + Math.cos(l.angle) * l.length / 2, l.y + Math.sin(l.angle) * l.length / 2);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      animId = requestAnimationFrame(draw);
+    };
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', resize);
+    };
+  }, [opacity]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      className="absolute inset-0 w-full h-full pointer-events-none"
+    />
+  );
+}
+
 function RichPanelText({ content }: { content?: string }) {
   if (!content) return null;
   const looksLikeHtml = /<([a-z][\w-]*)(\s[^>]*)?>/i.test(content);
@@ -292,6 +393,8 @@ const DEFAULT_UI_LABELS: UILabels = {
   focusAreasHeading: 'Focus Areas',
   speakingHeading: 'Speaking, Workshops & Mentorship',
   heroCta: "Let's Work",
+  heroCta2: '',
+  heroCta2Url: '',
   loadMore: 'Load More',
   showLess: 'Show Less',
   backToTop: 'Back to Top',
@@ -884,12 +987,13 @@ export default function App() {
         <div className="flex flex-col gap-32">
 
           {/* HERO */}
-          {vis.hero && <section id="hero" className="flex flex-col gap-6 pt-4 text-center items-center">
+          {vis.hero && <section id="hero" className="relative overflow-hidden flex flex-col gap-6 pt-4 text-center items-center">
+            <AnimatedLines />
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               style={{ fontSize: 'var(--typo-hero-title)' }}
-              className="text-4xl sm:text-5xl md:text-7xl font-sans tracking-tight leading-[1.05] font-medium max-w-4xl"
+              className="relative text-4xl sm:text-5xl md:text-7xl font-sans tracking-tight leading-[1.05] font-medium max-w-4xl"
             >
               {hero.headline}
             </motion.h1>
@@ -898,20 +1002,36 @@ export default function App() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
               style={{ fontSize: 'var(--typo-hero-desc)' }}
-              className="text-lg md:text-xl text-[var(--theme-muted)] max-w-2xl md:max-w-3xl leading-relaxed mt-4"
+              className="relative text-lg md:text-xl text-[var(--theme-muted)] max-w-2xl md:max-w-3xl leading-relaxed mt-4"
             >
               {hero.description}
             </motion.p>
-            <motion.button
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              style={{ fontSize: 'var(--typo-hero-cta)' }}
-              onClick={() => { triggerSound(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-              className="mt-4 flex items-center w-fit px-6 py-3 bg-[var(--theme-fg)] text-[var(--theme-bg)] rounded-full hover:scale-105 active:scale-95 transition-transform group font-medium cursor-pointer"
+              className="relative mt-4 flex flex-wrap items-center justify-center gap-3"
             >
-              {labels.heroCta} <ArrowDown className="ml-2 w-5 h-5"/>
-            </motion.button>
+              <button
+                style={{ fontSize: 'var(--typo-hero-cta)' }}
+                onClick={() => { triggerSound(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+                className="flex items-center w-fit px-6 py-3 bg-[var(--theme-fg)] text-[var(--theme-bg)] rounded-full hover:scale-105 active:scale-95 transition-transform group font-medium cursor-pointer"
+              >
+                {labels.heroCta} <ArrowDown className="ml-2 w-5 h-5"/>
+              </button>
+              {labels.heroCta2 && labels.heroCta2Url && (
+                <a
+                  href={labels.heroCta2Url}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => triggerSound()}
+                  style={{ fontSize: 'var(--typo-hero-cta)' }}
+                  className="flex items-center w-fit px-6 py-3 border border-[var(--theme-fg)] text-[var(--theme-fg)] rounded-full hover:scale-105 active:scale-95 transition-transform font-medium cursor-pointer"
+                >
+                  {labels.heroCta2} <ArrowUpRight className="ml-2 w-5 h-5"/>
+                </a>
+              )}
+            </motion.div>
           </section>}
 
           {/* UNIFIED WORK FEED */}
@@ -1169,14 +1289,15 @@ export default function App() {
           </section>}
 
           {/* CONTACT SECTION */}
-          {vis.contact && <section id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-center items-center justify-center">
-            <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
-            <p className="text-[var(--theme-muted)] max-w-xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
+          {vis.contact && <section id="contact" className="relative overflow-hidden scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-center items-center justify-center">
+            <AnimatedLines opacity={0.035} />
+            <h2 className="relative text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
+            <p className="relative text-[var(--theme-muted)] max-w-xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 
             <button
               onClick={handleCopyEmail}
               style={{ fontSize: 'var(--typo-contact-btn)' }}
-              className="mt-2 flex items-center justify-center gap-3 px-8 py-4 bg-[var(--theme-fg)] text-[var(--theme-bg)] rounded-full hover:scale-105 active:scale-95 transition-transform group font-medium text-lg cursor-pointer"
+              className="relative mt-2 flex items-center justify-center gap-3 px-8 py-4 bg-[var(--theme-fg)] text-[var(--theme-bg)] rounded-full hover:scale-105 active:scale-95 transition-transform group font-medium text-lg cursor-pointer"
             >
               {contact.email}
               {copied ? <Check className="w-5 h-5"/> : <Copy className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity"/>}
