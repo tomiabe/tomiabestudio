@@ -58,6 +58,25 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
+@keyframes grid-drift {
+  0% { background-position: 0px 0px; }
+  50% { background-position: 12px 8px; }
+  100% { background-position: 0px 0px; }
+}
+
+.animate-grid-drift {
+  animation: grid-drift 5s ease-in-out infinite;
+}
+
+@keyframes grid-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.animate-grid-pulse {
+  animation: grid-pulse 5s ease-in-out infinite;
+}
+
 /* Links inside update drawer body */
 .update-body a {
   color: var(--theme-fg);

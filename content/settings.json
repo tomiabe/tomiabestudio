@@ -94,7 +94,7 @@
     "navLogoMobilePx": 14,
     "navLinkPx": 14,
     "mobileMenuItemPx": 18,
-    "heroTitlePx": 64,
+    "heroTitlePx": 50,
     "heroTitleTabletPx": 48,
     "heroTitleMobilePx": 36,
     "heroDescriptionPx": 20,
@@ -132,7 +132,7 @@
     "infoLeadMobilePx": 20,
     "infoBioPx": 16,
     "infoBioMobilePx": 16,
-    "contactTitlePx": 64,
+    "contactTitlePx": 50,
     "contactTitleTabletPx": 64,
     "contactTitleMobilePx": 48,
     "contactDescriptionPx": 18,
@@ -180,5 +180,9 @@
     "sidebarLayout": "Layout",
     "sidebarAcoustics": "Acoustics",
     "sidebarNetwork": "Network"
+  },
+  "gridSettings": {
+    "variant": "a",
+    "enabled": true
   }
 }

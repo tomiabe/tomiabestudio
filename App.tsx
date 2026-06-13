@@ -10,6 +10,10 @@ function cn(...inputs: (string | undefined | null | false)[]) {
 }
 
 type ThemeMode = 'morning' | 'noon' | 'evening' | 'system';
+type GridVariant = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'off';
+type GridScope = 'hero' | 'contact' | 'general';
+
+const GRID_LABELS: Record<GridVariant, string> = { a: 'Parallax', b: 'Spotlight', c: 'Drift', d: 'Crosshair', e: 'Radiant', f: 'Isometric', g: 'Pulse', h: 'Diamond', i: 'Scanline', off: 'Off' };
 
 // ─── Data Types ────────────────────────────────────────────────────────────────
 
@@ -160,6 +164,8 @@ interface SiteSettings {
     workItemsPerPage: number;
     updatesItemsPerPage: number;
     siteMaxWidth?: number;
+    infoImageRatio?: number;
+    infoDetailsRatio?: number;
   };
   clock: {
     locale: string;
@@ -176,6 +182,11 @@ interface SiteSettings {
     focusAreas?: boolean;
     speaking?: boolean;
     contact?: boolean;
+  };
+  gridSettings?: {
+    variant: GridVariant;
+    enabled: boolean;
+    scope: GridScope;
   };
   // label overrides from home.json and info.json
   _homeLabels?: UILabels;
@@ -324,7 +335,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
     navLogoPx: 14,
     navLinkPx: 14,
     mobileMenuItemPx: 20,
-    heroTitlePx: 64,
+    heroTitlePx: 50,
     heroDescriptionPx: 20,
     heroCtaPx: 16,
     sectionHeadingPx: 14,
@@ -341,7 +352,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
     infoRolePx: 14,
     infoLeadPx: 20,
     infoBioPx: 16,
-    contactTitlePx: 64,
+    contactTitlePx: 50,
     contactDescriptionPx: 18,
     contactButtonPx: 18,
     footerPx: 12,
@@ -377,7 +388,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
     updatesDrawerTitleTabletPx: 36,
     workCardTitleTabletPx: 24,
   },
-  layout: { workItemsPerPage: 6, updatesItemsPerPage: 6, siteMaxWidth: 1100 },
+  layout: { workItemsPerPage: 6, updatesItemsPerPage: 6, siteMaxWidth: 1100, infoImageRatio: 5, infoDetailsRatio: 5 },
   clock: { locale: 'en-US', hour12: true, timezone: 'short' },
   uiLabels: DEFAULT_UI_LABELS,
   visibility: {
@@ -389,6 +400,11 @@ const DEFAULT_SETTINGS: SiteSettings = {
     focusAreas: true,
     speaking: true,
     contact: true,
+  },
+  gridSettings: {
+    variant: 'b',
+    enabled: true,
+    scope: 'general',
   },
 };
 
@@ -404,6 +420,193 @@ const DEFAULT_DATA: SiteData = {
   updates: [],
   uiSettings: DEFAULT_SETTINGS,
 };
+
+// ─── Grid Overlay ─────────────────────────────────────────────────────────────
+
+function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mousePos: { x: number; y: number } }) {
+  switch (variant) {
+    case 'a':
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: [
+              'linear-gradient(rgba(128,128,128,0.07) 1px, transparent 1px)',
+              'linear-gradient(90deg, rgba(128,128,128,0.07) 1px, transparent 1px)',
+            ].join(','),
+            backgroundSize: '40px 40px',
+            backgroundPosition: `${(x - 0.5) * 20}px ${(y - 0.5) * 20}px`,
+            transition: 'background-position 0.15s ease-out',
+          }}
+        />
+      );
+    case 'b':
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: [
+              'linear-gradient(rgba(128,128,128,0.07) 1px, transparent 1px)',
+              'linear-gradient(90deg, rgba(128,128,128,0.07) 1px, transparent 1px)',
+              `radial-gradient(circle 100px at ${x * 100}% ${y * 100}%, rgba(128,128,128,0.14) 0%, transparent 70%)`,
+            ].join(','),
+            backgroundSize: '40px 40px, 40px 40px, 100% 100%',
+          }}
+        />
+      );
+    case 'c':
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none animate-grid-drift"
+          style={{
+            backgroundImage: [
+              'linear-gradient(rgba(128,128,128,0.07) 1px, transparent 1px)',
+              'linear-gradient(90deg, rgba(128,128,128,0.07) 1px, transparent 1px)',
+            ].join(','),
+            backgroundSize: '40px 40px',
+          }}
+        />
+      );
+    case 'd': {
+      return (
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute top-0 w-px h-full"
+            style={{
+              left: `${x * 100}%`,
+              background: 'rgba(128,128,128,0.15)',
+              transition: 'left 0.15s ease-out',
+            }}
+          />
+          <div
+            className="absolute left-0 h-px w-full"
+            style={{
+              top: `${y * 100}%`,
+              background: 'rgba(128,128,128,0.15)',
+              transition: 'top 0.15s ease-out',
+            }}
+          />
+        </div>
+      );
+    }
+    case 'e': {
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: [
+              'repeating-radial-gradient(circle at 50% 50%, rgba(128,128,128,0.05) 0px, rgba(128,128,128,0.05) 1px, transparent 1px, transparent 35px)',
+              `repeating-conic-gradient(from ${Math.atan2(y - 0.5, x - 0.5)}rad, rgba(128,128,128,0.04) 0deg, rgba(128,128,128,0.04) 1deg, transparent 1deg, transparent 30deg)`,
+            ].join(','),
+            backgroundPosition: `${x * 100}% ${y * 100}%, 50% 50%`,
+            backgroundSize: '70px 70px, auto',
+            transition: 'background-position 0.15s ease-out',
+          }}
+        />
+      );
+    }
+    case 'f': {
+      const offsetX = (x - 0.5) * 20;
+      const offsetY = (y - 0.5) * 20;
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: [
+              'repeating-linear-gradient(30deg, rgba(128,128,128,0.05) 0px, rgba(128,128,128,0.05) 1px, transparent 1px, transparent 35px)',
+              'repeating-linear-gradient(150deg, rgba(128,128,128,0.05) 0px, rgba(128,128,128,0.05) 1px, transparent 1px, transparent 35px)',
+            ].join(','),
+            backgroundPosition: `${offsetX}px ${offsetY}px`,
+            backgroundSize: '70px 40px',
+            transition: 'background-position 0.15s ease-out',
+          }}
+        />
+      );
+    }
+    case 'g': {
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none animate-grid-pulse"
+          style={{
+            backgroundImage: [
+              'linear-gradient(rgba(128,128,128,0.07) 1px, transparent 1px)',
+              'linear-gradient(90deg, rgba(128,128,128,0.07) 1px, transparent 1px)',
+              `radial-gradient(circle 140px at ${x * 100}% ${y * 100}%, rgba(128,128,128,0.12) 0%, transparent 60%)`,
+            ].join(','),
+            backgroundSize: '40px 40px, 40px 40px, 100% 100%',
+          }}
+        />
+      );
+    }
+    case 'h': {
+      const ox = (x - 0.5) * 16;
+      const oy = (y - 0.5) * 16;
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: [
+              'repeating-linear-gradient(45deg, rgba(128,128,128,0.05) 0px, rgba(128,128,128,0.05) 1px, transparent 1px, transparent 28px)',
+              'repeating-linear-gradient(-45deg, rgba(128,128,128,0.05) 0px, rgba(128,128,128,0.05) 1px, transparent 1px, transparent 28px)',
+            ].join(','),
+            backgroundPosition: `${ox}px ${oy}px`,
+            transition: 'background-position 0.15s ease-out',
+          }}
+        />
+      );
+    }
+    case 'i': {
+      const tilt = (x - 0.5) * 0.5;
+      return (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `repeating-linear-gradient(${tilt}deg, rgba(128,128,128,0.06) 0px, rgba(128,128,128,0.06) 1px, transparent 1px, transparent 4px)`,
+            backgroundSize: '100% 100%',
+            transition: 'background-image 0.15s ease-out',
+          }}
+        />
+      );
+    }
+    default:
+      return null;
+  }
+}
+
+function GridOverlayFull({ variant }: { variant: GridVariant }) {
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  useEffect(() => {
+    const onMouse = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
+    };
+    window.addEventListener('mousemove', onMouse);
+    return () => window.removeEventListener('mousemove', onMouse);
+  }, []);
+  if (variant === 'off') return null;
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0">
+      <GridOverlay variant={variant} mousePos={mousePos} />
+    </div>
+  );
+}
+
+function GridSection({ variant, children, className, id }: { variant: GridVariant; children: React.ReactNode; className?: string; id?: string }) {
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  return (
+    <section
+      id={id}
+      onMouseMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        setMousePos({ x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height });
+      }}
+      className={className}
+      style={{ position: 'relative', overflow: 'hidden' }}
+    >
+      <GridOverlay variant={variant} mousePos={mousePos} />
+      {children}
+    </section>
+  );
+}
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 
@@ -421,6 +624,7 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useLocalStorage<boolean>('tomi_soundEnabled', false);
   const [soundProfile, setSoundProfile] = useLocalStorage<'modern' | 'mechanical' | 'soft'>('tomi_soundProfile', 'modern');
   const [soundVolume, setSoundVolume] = useLocalStorage<number>('tomi_soundVolume', 1.0);
+  const [gridVariant, setGridVariant] = useState<GridVariant>(DEFAULT_SETTINGS.gridSettings!.variant);
   const [showAllWork, setShowAllWork] = useState(false);
   const [showAllUpdates, setShowAllUpdates] = useState(false);
   const [colorMode, setColorMode] = useLocalStorage<'color' | 'monochrome'>('tomi_colorMode', 'color');
@@ -518,10 +722,13 @@ export default function App() {
           clock: sd.clock || DEFAULT_SETTINGS.clock,
           uiLabels: mergedLabels,
           visibility: { ...DEFAULT_SETTINGS.visibility, ...(sd.visibility || {}) },
+          gridSettings: { ...DEFAULT_SETTINGS.gridSettings, ...(sd.gridSettings || {}) },
         },
       };
 
       setSiteData(merged);
+      const cmsVariant = merged.uiSettings.gridSettings?.variant || 'a';
+      setGridVariant(merged.uiSettings.gridSettings?.enabled ? cmsVariant : 'off');
       setDataLoaded(true);
 
       // Apply side effects
@@ -662,9 +869,13 @@ export default function App() {
   // ── Derived data ──
   const { metadata, navigation, hero, about, contact, socialLinks, projects, updates } = siteData;
   const settings = siteData.uiSettings ?? DEFAULT_SETTINGS;
+  const effectiveVariant = gridVariant;
+  const gridScope: GridScope = (settings.gridSettings?.scope as GridScope) || 'hero';
   const typography = settings.typography ?? DEFAULT_SETTINGS.typography;
   const labels: UILabels = { ...DEFAULT_UI_LABELS, ...(settings.uiLabels ?? {}) };
   const layout = settings.layout ?? DEFAULT_SETTINGS.layout;
+  const infoImageRatio = layout.infoImageRatio ?? 5;
+  const infoDetailsRatio = layout.infoDetailsRatio ?? 5;
   const clockSettings = settings.clock ?? DEFAULT_SETTINGS.clock;
   const workItemsPerPage = layout.workItemsPerPage ?? 6;
   const vis = { ...DEFAULT_SETTINGS.visibility, ...(settings.visibility ?? {}) };
@@ -884,13 +1095,15 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      {gridScope === 'general' && <GridOverlayFull variant={effectiveVariant} />}
+
       <main className="flex-1 w-full mx-auto px-6 py-12 md:py-24" style={{ maxWidth: 'var(--site-max-width)' }}>
 
         {/* Main Content */}
         <div className="flex flex-col gap-32">
 
           {/* HERO */}
-          {vis.hero && <section id="hero" className="flex flex-col gap-6 pt-4 text-center items-center">
+          {vis.hero && <GridSection variant={gridScope === 'hero' ? effectiveVariant : 'off'} id="hero" className="flex flex-col gap-8 pt-4 text-center items-center">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -934,7 +1147,7 @@ export default function App() {
                 </a>
               )}
             </motion.div>
-          </section>}
+          </GridSection>}
 
           {/* UNIFIED WORK FEED */}
           {vis.work && <section id="work" className="scroll-mt-32">
@@ -1191,9 +1404,9 @@ export default function App() {
           </section>}
 
           {/* CONTACT SECTION */}
-          {vis.contact && <section id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-center items-center justify-center">
-            <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
-            <p className="text-[var(--theme-muted)] max-w-xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
+          {vis.contact && <GridSection variant={gridScope === 'contact' ? effectiveVariant : 'off'} id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-8 text-center items-center justify-center">
+            <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05] max-w-4xl" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
+            <p className="text-[var(--theme-muted)] max-w-2xl md:max-w-3xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 
             <button
               onClick={handleCopyEmail}
@@ -1203,7 +1416,7 @@ export default function App() {
               {contact.email}
               {copied ? <Check className="w-5 h-5"/> : <Copy className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity"/>}
             </button>
-          </section>}
+          </GridSection>}
 
         </div>
 
@@ -1529,6 +1742,21 @@ export default function App() {
           </>
         )}
       </AnimatePresence>
+
+      {/* Grid Variant Toggle */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <button
+          onClick={() => {
+            triggerSound();
+            const order: GridVariant[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'off'];
+            setGridVariant(order[(order.indexOf(gridVariant) + 1) % order.length]);
+          }}
+          className="px-4 py-2 border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md rounded-full text-[11px] font-mono uppercase tracking-widest text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm flex items-center gap-2"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--theme-fg)]" />
+          Grid: {GRID_LABELS[gridVariant]}
+        </button>
+      </div>
     </div>
   );
 }

@@ -733,3 +733,15 @@ content:
           - { name: sidebarLayout, label: Layout Tab, type: string }
           - { name: sidebarAcoustics, label: Sound Tab, type: string }
           - { name: sidebarNetwork, label: Network Tab, type: string }
+      - name: gridSettings
+        label: Grid Overlay
+        type: object
+        fields:
+          - name: variant
+            label: Grid Style
+            type: select
+            options:
+              values: [a, b, c, d, e, off]
+          - name: enabled
+            label: Show Grid
+            type: boolean
