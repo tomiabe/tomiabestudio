@@ -424,6 +424,19 @@ export default function App() {
   const [copiedUpdate, setCopiedUpdate] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [copiedProject, setCopiedProject] = useState(false);
+  const [settingsPanelOpen, setSettingsPanelOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  useEffect(() => {
+    if (!settingsPanelOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSettingsPanelOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [settingsPanelOpen]);
   useEffect(() => {
     try {
       // 1. Load singleton files
@@ -865,10 +878,10 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <main className="flex-1 w-full max-w-[1400px] mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 py-12 md:py-24">
+      <main className="flex-1 w-full max-w-[1400px] mx-auto px-6 py-12 md:py-24">
 
-        {/* Left Column / Main Content */}
-        <div className={cn("md:col-span-9 flex flex-col gap-32", sidebarPosition === 'right' ? "order-1" : "order-2")}>
+        {/* Main Content */}
+        <div className="flex flex-col gap-32">
 
           {/* HERO */}
           {vis.hero && <section id="hero" className="flex flex-col gap-6 pt-4">
@@ -1172,133 +1185,148 @@ export default function App() {
 
         </div>
 
-        {/* Right Column / Sticky Sidebar */}
-        <aside className={cn(
-          "hidden md:flex flex-col col-span-3",
-          sidebarPosition === 'right' ? "order-2 pl-8 lg:pl-10 border-l" : "order-1 pr-8 lg:pr-10 border-r",
-          "border-[var(--theme-border)]"
-        )}>
-          <div className="sticky top-32 flex flex-col gap-10">
+        {/* Right Column / Sticky Sidebar — removed, replaced by floating settings panel */}
+      </main>
 
-            <div className="flex flex-col gap-2 pb-6 border-b border-[var(--theme-border)]">
-              <LiveClock locale={clockSettings.locale} hour12={clockSettings.hour12} timezone={clockSettings.timezone} />
-            </div>
+      {/* Site Footer */}
+      <footer className="w-full border-t border-[var(--theme-border)] mt-0">
+        {/* Network */}
+        <div className="max-w-[1400px] mx-auto px-6 pt-16 pb-6 flex flex-wrap justify-center gap-x-8 gap-y-3">
+          {socialLinks.map((link, idx) => (
+            <a key={idx} href={link.url} target="_blank" rel="noreferrer"
+              onClick={() => triggerSound()}
+              className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
+              {link.name} <ArrowUpRight className="w-3 h-3 opacity-50" />
+            </a>
+          ))}
+        </div>
+        {/* Tagline + Copyright */}
+        <div className="max-w-[1400px] mx-auto px-6 pb-16 flex flex-col items-center gap-2 text-center font-mono uppercase tracking-widest text-[var(--theme-muted)]" style={{ fontSize: 'var(--typo-footer)' }}>
+          <p>{contact.footerTagline || 'Objectivity · Clarity · Precision'}</p>
+          <p>© {new Date().getFullYear()} {contact.footerCopyright || 'TOMI ABE STUDIO'}</p>
+        </div>
+      </footer>
 
-            {/* Theme Toggle */}
-            <div className="flex flex-col gap-6">
-              <div className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">{labels.sidebarEnvironment}</div>
-              <div className="grid grid-cols-2 gap-2">
-                {(['morning', 'noon', 'evening', 'system'] as ThemeMode[]).map(mode => (
-                  <button
-                    key={mode}
-                    onClick={() => { triggerSound(); setTheme(mode); }}
-                    className={cn(
-                      "flex items-center justify-center gap-2 px-3 py-3 border rounded-xl text-[10px] uppercase tracking-widest transition-colors cursor-pointer",
-                      theme === mode ? "border-[var(--theme-fg)] text-[var(--theme-fg)]" : "border-[var(--theme-border)] text-[var(--theme-muted)] hover:border-[var(--theme-muted)]"
-                    )}
-                  >
-                    {mode === 'morning' && <Sunrise className="w-4 h-4"/>}
-                    {mode === 'noon' && <Sun className="w-4 h-4"/>}
-                    {mode === 'evening' && <Moon className="w-4 h-4"/>}
-                    {mode === 'system' && <span className="font-mono text-lg leading-none">⚙</span>}
-                    <span className="hidden xl:inline">{mode}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
+      {/* Floating: Back to Top */}
+      <AnimatePresence>
+        {scrolled && (
+          <motion.button
+            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
+            onClick={scrollToTop}
+            aria-label="Back to top"
+            className="fixed bottom-6 left-6 z-40 w-10 h-10 flex items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm"
+          >
+            <ChevronUp className="w-4 h-4" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
-            {/* Visuals Toggle */}
-            <div className="flex flex-col gap-4 mt-4">
-              <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">
-                <span>{labels.sidebarVisuals}</span>
-                <button onClick={() => { triggerSound(); setColorMode(colorMode === 'color' ? 'monochrome' : 'color'); }} className="flex items-center gap-1 hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
-                  {colorMode === 'color' ? 'REAL COLORS' : 'B&W'}
+      {/* Floating: Settings button */}
+      <button
+        onClick={() => { triggerSound(); setSettingsPanelOpen(true); }}
+        aria-label="Open settings"
+        className="fixed bottom-6 right-6 z-40 w-10 h-10 flex items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+          <circle cx="8" cy="6" r="2" fill="var(--theme-bg)"/><circle cx="16" cy="12" r="2" fill="var(--theme-bg)"/><circle cx="10" cy="18" r="2" fill="var(--theme-bg)"/>
+        </svg>
+      </button>
+
+      {/* Settings Panel */}
+      <AnimatePresence>
+        {settingsPanelOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setSettingsPanelOpen(false)}
+              className="fixed inset-0 z-[55] bg-black/30 backdrop-blur-sm cursor-pointer"
+            />
+            <motion.div
+              initial={{ x: '100%' }} animate={{ x: '0%' }} exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 220 }}
+              className="fixed top-0 right-0 w-80 h-full z-[60] bg-[var(--theme-bg)] border-l border-[var(--theme-border)] overflow-y-auto flex flex-col shadow-2xl"
+            >
+              {/* Panel header */}
+              <div className="p-5 border-b border-[var(--theme-border)] flex items-center justify-between shrink-0">
+                <LiveClock locale={clockSettings.locale} hour12={clockSettings.hour12} timezone={clockSettings.timezone} />
+                <button onClick={() => setSettingsPanelOpen(false)} aria-label="Close settings"
+                  className="p-1.5 border border-[var(--theme-border)] hover:bg-[var(--theme-fg)] hover:text-[var(--theme-bg)] rounded-full transition-colors cursor-pointer">
+                  <X className="w-4 h-4" />
                 </button>
               </div>
-            </div>
 
-            {/* Layout Toggle */}
-            <div className="flex flex-col gap-4 mt-4">
-              <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">
-                <span>{labels.sidebarLayout}</span>
-                <button onClick={() => { triggerSound(); setSidebarPosition(sidebarPosition === 'right' ? 'left' : 'right'); }} className="flex items-center gap-1 hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
-                  {sidebarPosition === 'right' ? 'DOCK LEFT' : 'DOCK RIGHT'}
-                </button>
-              </div>
-            </div>
-
-            {/* Sound Toggle */}
-            <div className="flex flex-col gap-4 mt-4">
-              <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">
-                <span>{labels.sidebarAcoustics}</span>
-                <button onClick={() => { triggerSound(); setSoundEnabled(!soundEnabled); }} className="flex items-center gap-1 hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
-                  {soundEnabled ? <Volume2 className="w-3 h-3"/> : <VolumeX className="w-3 h-3"/>}
-                  {soundEnabled ? 'ON' : 'OFF'}
-                </button>
-              </div>
-              {soundEnabled && (
-                <div className="flex flex-col gap-3">
-                  <div className="grid grid-cols-3 gap-2">
-                    {(['modern', 'mechanical', 'soft'] as const).map(profile => (
-                      <button
-                        key={profile}
-                        onClick={() => { setSoundProfile(profile); setTimeout(() => playClickSound(profile, soundVolume), 10); }}
+              <div className="p-6 flex flex-col gap-8">
+                {/* Environment */}
+                <div className="flex flex-col gap-4">
+                  <div className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">{labels.sidebarEnvironment}</div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {(['morning', 'noon', 'evening', 'system'] as ThemeMode[]).map(mode => (
+                      <button key={mode} onClick={() => { triggerSound(); setTheme(mode); }}
                         className={cn(
-                          "py-2 px-1 border rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer",
-                          soundProfile === profile ? "border-[var(--theme-fg)] text-[var(--theme-fg)]" : "border-[var(--theme-border)] text-[var(--theme-muted)] hover:border-[var(--theme-muted)]"
-                        )}
-                      >
-                        {profile}
+                          "flex items-center justify-center gap-2 px-3 py-3 border rounded-xl text-[10px] uppercase tracking-widest transition-colors cursor-pointer",
+                          theme === mode ? "border-[var(--theme-fg)] text-[var(--theme-fg)]" : "border-[var(--theme-border)] text-[var(--theme-muted)] hover:border-[var(--theme-muted)]"
+                        )}>
+                        {mode === 'morning' && <Sunrise className="w-4 h-4"/>}
+                        {mode === 'noon' && <Sun className="w-4 h-4"/>}
+                        {mode === 'evening' && <Moon className="w-4 h-4"/>}
+                        {mode === 'system' && <span className="font-mono text-lg leading-none">⚙</span>}
+                        <span>{mode}</span>
                       </button>
                     ))}
                   </div>
-                  <div className="flex items-center gap-3 mt-1">
-                    <span className="text-[10px] font-mono text-[var(--theme-muted)] uppercase tracking-widest select-none">Vol</span>
-                    <input type="range" min="0" max="1" step="0.1" value={soundVolume}
-                      onChange={(e) => { const val = parseFloat(e.target.value); setSoundVolume(val); setTimeout(() => playClickSound(soundProfile, val), 10); }}
-                      className="w-full h-1 bg-[var(--theme-border)] rounded-full appearance-none cursor-pointer focus:outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[var(--theme-fg)]"
-                    />
+                </div>
+
+                {/* Visuals */}
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">
+                    <span>{labels.sidebarVisuals}</span>
+                    <button onClick={() => { triggerSound(); setColorMode(colorMode === 'color' ? 'monochrome' : 'color'); }}
+                      className="flex items-center gap-1 hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
+                      {colorMode === 'color' ? 'REAL COLORS' : 'B&W'}
+                    </button>
                   </div>
                 </div>
-              )}
-            </div>
 
-            {/* Social Panel */}
-            <div className="flex flex-col gap-4 mt-4">
-              <div className="text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">{labels.sidebarNetwork}</div>
-              <div className="grid grid-cols-2 gap-4 text-sm font-mono mt-2">
-                {socialLinks.map((link, idx) => (
-                  <a key={idx} href={link.url} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[var(--theme-muted)] transition-colors cursor-pointer w-fit text-[var(--theme-fg)]">
-                    {link.name} <ArrowUpRight className="w-3 h-3 opacity-50" />
-                  </a>
-                ))}
+                {/* Acoustics */}
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[var(--theme-muted)] border-b border-[var(--theme-border)] pb-2">
+                    <span>{labels.sidebarAcoustics}</span>
+                    <button onClick={() => { triggerSound(); setSoundEnabled(!soundEnabled); }}
+                      className="flex items-center gap-1 hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
+                      {soundEnabled ? <Volume2 className="w-3 h-3"/> : <VolumeX className="w-3 h-3"/>}
+                      {soundEnabled ? 'ON' : 'OFF'}
+                    </button>
+                  </div>
+                  {soundEnabled && (
+                    <div className="flex flex-col gap-3">
+                      <div className="grid grid-cols-3 gap-2">
+                        {(['modern', 'mechanical', 'soft'] as const).map(profile => (
+                          <button key={profile}
+                            onClick={() => { setSoundProfile(profile); setTimeout(() => playClickSound(profile, soundVolume), 10); }}
+                            className={cn(
+                              "py-2 px-1 border rounded-lg text-[10px] uppercase tracking-wider transition-colors cursor-pointer",
+                              soundProfile === profile ? "border-[var(--theme-fg)] text-[var(--theme-fg)]" : "border-[var(--theme-border)] text-[var(--theme-muted)] hover:border-[var(--theme-muted)]"
+                            )}>
+                            {profile}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="flex items-center gap-3 mt-1">
+                        <span className="text-[10px] font-mono text-[var(--theme-muted)] uppercase tracking-widest select-none">Vol</span>
+                        <input type="range" min="0" max="1" step="0.1" value={soundVolume}
+                          onChange={(e) => { const val = parseFloat(e.target.value); setSoundVolume(val); setTimeout(() => playClickSound(soundProfile, val), 10); }}
+                          className="w-full h-1 bg-[var(--theme-border)] rounded-full appearance-none cursor-pointer focus:outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[var(--theme-fg)]"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-
-            {/* Footer */}
-            <div className="mt-8 pt-6 border-t border-[var(--theme-border)] flex flex-col gap-3 font-mono text-[var(--theme-muted)] uppercase tracking-widest" style={{ fontSize: 'var(--typo-footer)' }}>
-              <p>© {new Date().getFullYear()} {contact.footerCopyright || 'TOMI ABE STUDIO'}</p>
-              <p className="border-b border-[var(--theme-border)] pb-8">{contact.footerTagline || 'Objectivity · Clarity · Precision'}</p>
-              <button onClick={scrollToTop} className="mt-2 text-xs font-mono uppercase tracking-widest flex items-center gap-2 hover:text-[var(--theme-fg)] transition-colors cursor-pointer w-fit">
-                <ChevronUp className="w-4 h-4"/> {labels.backToTop}
-              </button>
-            </div>
-
-          </div>
-        </aside>
-      </main>
-
-      <div className="md:hidden flex justify-center py-6 border-t border-[var(--theme-border)]">
-        <button onClick={scrollToTop} className="flex items-center gap-2 hover:text-[var(--theme-fg)] text-[var(--theme-muted)] text-xs font-mono uppercase tracking-widest transition-colors cursor-pointer">
-          <ChevronUp className="w-4 h-4"/> {labels.backToTop}
-        </button>
-      </div>
-
-      {/* Mobile Footer */}
-      <footer className="md:hidden border-t border-[var(--theme-border)] py-8 px-6 text-center font-mono text-[var(--theme-muted)] uppercase tracking-widest flex flex-col gap-2" style={{ fontSize: 'var(--typo-footer)' }}>
-        <p>© {new Date().getFullYear()} {contact.footerCopyright || 'TOMI ABE STUDIO'}</p>
-        <p>{contact.footerTagline || 'Objectivity · Clarity · Precision'}</p>
-      </footer>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Updates Drawer */}
       <AnimatePresence>
