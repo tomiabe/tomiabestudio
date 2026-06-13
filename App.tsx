@@ -547,7 +547,6 @@ export default function App() {
   const [soundProfile, setSoundProfile] = useLocalStorage<'modern' | 'mechanical' | 'soft'>('tomi_soundProfile', 'modern');
   const [soundVolume, setSoundVolume] = useLocalStorage<number>('tomi_soundVolume', 1.0);
   const [gridVariant, setGridVariant] = useState<GridVariant>(DEFAULT_SETTINGS.gridSettings!.variant);
-  const effectiveVariant = settings.gridSettings?.enabled ? gridVariant : 'off';
   const [showAllWork, setShowAllWork] = useState(false);
   const [showAllUpdates, setShowAllUpdates] = useState(false);
   const [colorMode, setColorMode] = useLocalStorage<'color' | 'monochrome'>('tomi_colorMode', 'color');
@@ -791,6 +790,7 @@ export default function App() {
   // ── Derived data ──
   const { metadata, navigation, hero, about, contact, socialLinks, projects, updates } = siteData;
   const settings = siteData.uiSettings ?? DEFAULT_SETTINGS;
+  const effectiveVariant = settings.gridSettings?.enabled ? gridVariant : 'off';
   const typography = settings.typography ?? DEFAULT_SETTINGS.typography;
   const labels: UILabels = { ...DEFAULT_UI_LABELS, ...(settings.uiLabels ?? {}) };
   const layout = settings.layout ?? DEFAULT_SETTINGS.layout;
