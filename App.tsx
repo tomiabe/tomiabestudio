@@ -988,7 +988,7 @@ export default function App() {
 
           {/* HERO */}
           {vis.hero && <section id="hero" className="relative overflow-hidden flex flex-col gap-6 pt-4 text-center items-center">
-            <AnimatedLines />
+            <AnimatedLines opacity={0.12} />
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1290,7 +1290,7 @@ export default function App() {
 
           {/* CONTACT SECTION */}
           {vis.contact && <section id="contact" className="relative overflow-hidden scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-10 text-center items-center justify-center">
-            <AnimatedLines opacity={0.035} />
+            <AnimatedLines opacity={0.09} />
             <h2 className="relative text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
             <p className="relative text-[var(--theme-muted)] max-w-xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 
