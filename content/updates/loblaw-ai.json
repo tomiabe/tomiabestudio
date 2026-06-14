@@ -1,10 +1,11 @@
 {
-  "id": "loblaw-ai",
   "title": "AI Prompting Power with Tomi Abe",
-  "date": "March 2024",
-  "description": "Advanced prompting and generative workflow training for Loblaw Digital's AI Committee \u2014 strategies for using generative AI tools to create superior work.",
-  "image": "/images/updates/loblaw-ai.jpg",
+  "id": "loblaw-ai",
   "order": 3,
   "visible": true,
-  "content": "<p>In a webinar hosted by Loblaw Digital's AI Committee, I shared my strategies for using generative AI tools and prompting techniques to create superior creative and design work.</p><p>The session covered advanced prompting frameworks, practical generative workflow techniques, and how to integrate AI tools into real professional practice without losing craft or judgment.</p><p><a href=\"https://drive.google.com/file/d/19Dnit0-O3oby2g_uE2JaOKr53Etykn85/view\" target=\"_blank\" rel=\"noreferrer\">View session materials \u2192</a></p>"
+  "date": "March 2024",
+  "description": "Advanced prompting and generative workflow training for Loblaw Digital's AI Committee.",
+  "image": "/images/updates/loblaw-ai.jpg",
+  "directLink": false,
+  "content": "<p>In a webinar hosted by Loblaw Digital's AI Committee, I shared my strategies for using generative AI tools and prompting techniques to create superior creative and design work.</p><p>The session covered advanced prompting frameworks, practical generative workflow techniques, and how to integrate AI tools into real professional practice without losing craft or judgment.</p><p><a target=\"_blank\" rel=\"noreferrer\" href=\"https://drive.google.com/file/d/19Dnit0-O3oby2g_uE2JaOKr53Etykn85/view\">Watch session →</a></p>"
 }
