@@ -182,7 +182,7 @@
     "sidebarNetwork": "Network"
   },
   "gridSettings": {
-    "variant": "c",
+    "variant": "b",
     "enabled": true
   }
 }

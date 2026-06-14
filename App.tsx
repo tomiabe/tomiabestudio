@@ -386,7 +386,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
     updatesDrawerTitleTabletPx: 36,
     workCardTitleTabletPx: 24,
   },
-  layout: { workItemsPerPage: 6, updatesItemsPerPage: 6, siteMaxWidth: 1100, infoImageRatio: 6, infoDetailsRatio: 4 },
+  layout: { workItemsPerPage: 6, updatesItemsPerPage: 6, siteMaxWidth: 1100, infoImageRatio: 4, infoDetailsRatio: 6 },
   clock: { locale: 'en-US', hour12: true, timezone: 'short' },
   uiLabels: DEFAULT_UI_LABELS,
   visibility: {
@@ -725,8 +725,8 @@ export default function App() {
   const typography = settings.typography ?? DEFAULT_SETTINGS.typography;
   const labels: UILabels = { ...DEFAULT_UI_LABELS, ...(settings.uiLabels ?? {}) };
   const layout = settings.layout ?? DEFAULT_SETTINGS.layout;
-  const infoImageRatio = layout.infoImageRatio ?? 5;
-  const infoDetailsRatio = layout.infoDetailsRatio ?? 5;
+  const infoImageRatio = layout.infoImageRatio ?? 4;
+  const infoDetailsRatio = layout.infoDetailsRatio ?? 6;
   const clockSettings = settings.clock ?? DEFAULT_SETTINGS.clock;
   const workItemsPerPage = layout.workItemsPerPage ?? 6;
   const vis = { ...DEFAULT_SETTINGS.visibility, ...(settings.visibility ?? {}) };
@@ -1167,7 +1167,7 @@ export default function App() {
           {vis.info && <section id="info" className="scroll-mt-32 border-t border-[var(--theme-border)] pt-12 pb-12 flex flex-col gap-16">
             <h2 className="text-sm font-mono uppercase tracking-widest text-[var(--theme-muted)]" style={{ fontSize: 'var(--typo-section-heading)' }}>{labels.infoSectionHeading}</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-[4fr_6fr] gap-12">
               <img
                 src={about.imageUrl || 'https://picsum.photos/seed/tomiabe/800/1000?grayscale'}
                 alt={about.name}
@@ -1273,9 +1273,9 @@ export default function App() {
       </main>
 
       {/* Site Footer */}
-      <footer className="w-full border-t border-[var(--theme-border)] mt-0">
+      <footer className="w-full border-t border-[var(--theme-border)] mt-0 flex flex-col items-center gap-8">
         {/* Network */}
-        <div className="mx-auto w-full px-6 pt-16 pb-6 flex flex-wrap justify-center gap-x-8 gap-y-3" style={{ maxWidth: 'var(--site-max-width)' }}>
+        <div className="mx-auto w-full px-6 pt-16 flex flex-wrap justify-center gap-x-8 gap-y-3" style={{ maxWidth: 'var(--site-max-width)' }}>
           {socialLinks.map((link, idx) => (
             <a key={idx} href={link.url} target="_blank" rel="noreferrer"
               onClick={() => triggerSound()}
@@ -1285,7 +1285,7 @@ export default function App() {
           ))}
         </div>
         {/* Tagline + Copyright */}
-        <div className="mx-auto w-full px-6 pb-16 flex flex-col items-center gap-2 text-center font-mono uppercase tracking-widest text-[var(--theme-muted)]" style={{ maxWidth: 'var(--site-max-width)', fontSize: 'var(--typo-footer)' }}>
+        <div className="mx-auto w-full px-6 pb-16 flex flex-col items-center gap-8 text-center font-mono uppercase tracking-widest text-[var(--theme-muted)]" style={{ maxWidth: 'var(--site-max-width)', fontSize: 'var(--typo-footer)' }}>
           <p>{contact.footerTagline || 'Objectivity · Clarity · Precision'}</p>
           <p>© {new Date().getFullYear()} {contact.footerCopyright || 'TOMI ABE STUDIO'}</p>
         </div>
@@ -1305,11 +1305,11 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Floating: Settings button */}
+      {/* Floating: Settings button — hidden on mobile, in menu */}
       <button
         onClick={() => { triggerSound(); setSettingsPanelOpen(true); }}
         aria-label="Open settings"
-        className="fixed bottom-[4.5rem] right-6 z-40 w-10 h-10 flex items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm"
+        className="hidden md:flex fixed bottom-[4.5rem] right-6 z-40 w-10 h-10 items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
           <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>

@@ -741,7 +741,7 @@ content:
             label: Grid Style
             type: select
             options:
-              values: [a, b, c, d, e, off]
+              values: [b, off]
           - name: enabled
             label: Show Grid
             type: boolean
