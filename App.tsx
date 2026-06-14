@@ -774,8 +774,44 @@ export default function App() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleCopyUpdateLink = () => { triggerSound(); navigator.clipboard.writeText(window.location.href); setCopiedUpdate(true); setTimeout(() => setCopiedUpdate(false), 2000); };
-  const handleCopyProjectLink = () => { triggerSound(); navigator.clipboard.writeText(window.location.href); setCopiedProject(true); setTimeout(() => setCopiedProject(false), 2000); };
+  const handleCopyUpdateLink = () => {
+    triggerSound();
+    const url = window.location.href;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(() => {
+        setCopiedUpdate(true);
+        setTimeout(() => setCopiedUpdate(false), 2000);
+      });
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      setCopiedUpdate(true);
+      setTimeout(() => setCopiedUpdate(false), 2000);
+    }
+  };
+  const handleCopyProjectLink = () => {
+    triggerSound();
+    const url = window.location.href;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(() => {
+        setCopiedProject(true);
+        setTimeout(() => setCopiedProject(false), 2000);
+      });
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      setCopiedProject(true);
+      setTimeout(() => setCopiedProject(false), 2000);
+    }
+  };
 
   const filteredProjects = projects.filter(p => {
     if (selectedCategories.length === 0) return true;
@@ -1427,7 +1463,7 @@ export default function App() {
               <div className="p-4 border-b border-[var(--theme-border)] flex justify-between items-center shrink-0">
                 <button onClick={handleCopyUpdateLink} className="px-4 py-2 border border-[var(--theme-border)] hover:bg-[var(--theme-fg)] hover:text-[var(--theme-bg)] transition-colors rounded-full cursor-pointer flex items-center gap-2 text-xs font-mono uppercase tracking-widest">
                   {copiedUpdate ? <Check className="w-4 h-4"/> : <Copy className="w-4 h-4"/>}
-                  <span className="hidden sm:inline">{copiedUpdate ? 'Copied' : 'Share'}</span>
+                  <span className="hidden sm:inline">{copiedUpdate ? 'Copied' : 'Copy link'}</span>
                 </button>
                 <button onClick={() => { triggerSound(); setSelectedUpdate(null); }} className="p-2 border border-[var(--theme-border)] hover:bg-[var(--theme-fg)] hover:text-[var(--theme-bg)] transition-colors rounded-full cursor-pointer">
                   <X className="w-5 h-5"/>
@@ -1495,7 +1531,7 @@ export default function App() {
               <div className="p-4 border-b border-[var(--theme-border)] flex justify-between items-center shrink-0">
                 <button onClick={handleCopyProjectLink} className="px-4 py-2 border border-[var(--theme-border)] hover:bg-[var(--theme-fg)] hover:text-[var(--theme-bg)] transition-colors rounded-full cursor-pointer flex items-center gap-2 text-xs font-mono uppercase tracking-widest">
                   {copiedProject ? <Check className="w-4 h-4"/> : <Copy className="w-4 h-4"/>}
-                  <span className="hidden sm:inline">{copiedProject ? 'Copied' : 'Share'}</span>
+                  <span className="hidden sm:inline">{copiedProject ? 'Copied' : 'Copy link'}</span>
                 </button>
                 <div className="flex gap-2 items-center">
                   {selectedProject.link && (
