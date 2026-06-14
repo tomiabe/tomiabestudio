@@ -39,7 +39,6 @@ content:
         type: rich-text
         options:
           format: html
-          switcher: true
       - name: categories
         label: Disciplines / Tags
         type: select
@@ -72,7 +71,6 @@ content:
             type: rich-text
             options:
               format: html
-              switcher: true
           - name: image
             label: Panel Image
             type: image
@@ -111,7 +109,6 @@ content:
         type: rich-text
         options:
           format: html
-          switcher: true
       - name: image
         label: Cover Image
         type: image
@@ -132,7 +129,6 @@ content:
             type: rich-text
             options:
               format: html
-              switcher: true
 
   # ─────────────────────────────────────────────────────────────────────────────
   # HOME PAGE
@@ -152,13 +148,11 @@ content:
             type: rich-text
             options:
               format: html
-              switcher: true
           - name: description
             label: Description
             type: rich-text
             options:
               format: html
-              switcher: true
       - name: labels
         label: Content Labels
         type: object
@@ -211,13 +205,11 @@ content:
             type: rich-text
             options:
               format: html
-              switcher: true
           - name: bio
             label: Main Bio
             type: rich-text
             options:
               format: html
-              switcher: true
       - name: operatingModels
         label: Operating Models
         type: object
@@ -234,7 +226,6 @@ content:
             type: rich-text
             options:
               format: html
-              switcher: true
       - name: focusAreas
         label: Focus Areas
         type: object
@@ -251,7 +242,6 @@ content:
             type: rich-text
             options:
               format: html
-              switcher: true
       - name: speaking
         label: Speaking & Mentorship
         type: object
@@ -261,7 +251,6 @@ content:
             type: rich-text
             options:
               format: html
-              switcher: true
           - name: engagements
             label: Selected Engagements
             type: object
@@ -284,7 +273,6 @@ content:
                 type: rich-text
                 options:
                   format: html
-                  switcher: true
               - name: link
                 label: Link
                 type: string
@@ -300,13 +288,11 @@ content:
             type: rich-text
             options:
               format: html
-              switcher: true
           - name: description
             label: Text
             type: rich-text
             options:
               format: html
-              switcher: true
           - name: email
             label: Email
             type: string
