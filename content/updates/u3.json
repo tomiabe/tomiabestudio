@@ -4,10 +4,7 @@
   "title": "Loblaw Digital Training",
   "description": "Delivered advanced prompting and generative workflow training for their internal AI committee.",
   "image": "https://picsum.photos/seed/u3/400/300",
-  "content": [
-    "Delivered an intensive internal workshop for the design engineering teams on integrating generative AI directly into their internal rapid-prototyping workflows.",
-    "The hands-on session explored structuring complex system prompts, component generation, and rigorous AI safety rails when deploying internal tools."
-  ],
+  "content": "<p>Delivered an intensive internal workshop for the design engineering teams on integrating generative AI directly into their internal rapid-prototyping workflows.</p><p>The hands-on session explored structuring complex system prompts, component generation, and rigorous AI safety rails when deploying internal tools.</p>",
   "order": 4,
   "visible": false
 }

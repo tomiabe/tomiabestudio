@@ -4,9 +4,7 @@
   "title": "Systems Design Keynote",
   "description": "Presented approaches to modular design systems for large-scale e-commerce platforms.",
   "image": "https://picsum.photos/seed/u4/400/300",
-  "content": [
-    "Keynote presentation focusing on the maintenance and scaling of component libraries when shared across distinct platforms and product squads."
-  ],
+  "content": "<p>Keynote presentation focusing on the maintenance and scaling of component libraries when shared across distinct platforms and product squads.</p>",
   "order": 3,
   "visible": false
 }
