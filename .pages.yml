@@ -741,7 +741,9 @@ content:
             label: Grid Style
             type: select
             options:
-              values: [b, off]
+              values:
+                - { value: b, label: Spotlight }
+                - { value: off, label: Off }
           - name: enabled
             label: Show Grid
             type: boolean
