@@ -213,8 +213,11 @@ content:
               format: html
               switcher: true
           - name: bio
-            label: Main Bio (Supports Styles)
-            type: markdown
+            label: Main Bio
+            type: rich-text
+            options:
+              format: html
+              switcher: true
       - name: operatingModels
         label: Operating Models
         type: object

@@ -1183,9 +1183,7 @@ export default function App() {
                   <p className="text-xl font-medium text-[var(--theme-fg)]" style={{ fontSize: 'var(--typo-info-lead)' }}>
                     {about.lead}
                   </p>
-                  <div className="whitespace-pre-wrap text-base" style={{ fontSize: 'var(--typo-info-bio)' }}>
-                    {about.bio}
-                  </div>
+                  <div className="whitespace-pre-wrap text-base" style={{ fontSize: 'var(--typo-info-bio)' }} dangerouslySetInnerHTML={{ __html: about.bio }} />
                 </div>
               </div>
             </div>
