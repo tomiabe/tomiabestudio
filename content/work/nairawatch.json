@@ -1,7 +1,7 @@
 {
   "title": "NairaWatch",
   "id": "nairawatch",
-  "order": 6,
+  "order": 7,
   "visible": true,
   "description": "Tracking Nigeria's parallel market in real time by blending official rates with AI-interpreted signals into a clear, decision-ready FX dashboard.",
   "categories": [

@@ -1,7 +1,7 @@
 {
   "title": "Urban Climate Signals",
   "id": "urban-climate-signals",
-  "order": 11,
+  "order": 1,
   "visible": true,
   "role": "Product & Data Lead",
   "description": "Turning live urban heat and air quality data into a decision-ready climate dashboard that helps city leaders see how infrastructure, pollution, and policy levers shape city conditions and SDG resilience scores.",
