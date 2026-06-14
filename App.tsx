@@ -12,7 +12,6 @@ function cn(...inputs: (string | undefined | null | false)[]) {
 type ThemeMode = 'morning' | 'noon' | 'evening' | 'system';
 type GridVariant = 'b' | 'off';
 type GridScope = 'hero' | 'contact';
-const GRID_LABELS: Record<GridVariant, string> = { b: 'Spotlight', off: 'Off' };
 
 // ─── Data Types ────────────────────────────────────────────────────────────────
 
@@ -1593,20 +1592,6 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Grid Variant Toggle */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-        <button
-          onClick={() => {
-            triggerSound();
-            const order: GridVariant[] = ['b', 'off'];
-            setGridVariant(order[(order.indexOf(gridVariant) + 1) % order.length]);
-          }}
-          className="px-4 py-2 border border-[var(--theme-border)] bg-[var(--theme-bg)]/80 backdrop-blur-md rounded-full text-[11px] font-mono uppercase tracking-widest text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-fg)] transition-colors cursor-pointer shadow-sm flex items-center gap-2"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--theme-fg)]" />
-          Grid: {GRID_LABELS[gridVariant]}
-        </button>
-      </div>
     </div>
   );
 }
