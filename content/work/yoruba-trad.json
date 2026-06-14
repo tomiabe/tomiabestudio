@@ -1,13 +1,15 @@
 {
-  "title": "Yoruba Trad Wedding",
-  "id": "yoruba-trad",
+  "title": "Urban Climate Signals",
+  "id": "urban-climate-signals",
   "order": 11,
-  "visible": false,
-  "description": "Exploring Yoruba ceremony, symbolism, and color through AI-animated storytelling that translates cultural detail into a vivid, modern visual narrative.",
+  "visible": true,
+  "role": "Product & Data Lead",
+  "description": "Turning live urban heat and air quality data into a decision-ready climate dashboard that helps city leaders see how infrastructure, generators, and policy levers shape real-time conditions and SDG resilience scores.",
   "categories": [
-    "Art",
-    "Content"
+    "Data",
+    "Product"
   ],
-  "image": "/images/lab/TradWedding.png",
-  "isFullBleed": true
+  "image": "/images/urbanclimate.jpg",
+  "link": "https://susbridge.github.io/urbanclimate/",
+  "isFullBleed": false
 }
