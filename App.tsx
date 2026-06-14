@@ -1439,7 +1439,7 @@ export default function App() {
                 <div className="max-w-3xl mx-auto flex flex-col gap-6">
                   <img
                     src={selectedUpdate.image}
-                    className={cn("w-full h-auto aspect-video object-cover rounded-xl border border-[var(--theme-border)]", colorMode === 'monochrome' ? "grayscale" : "")}
+                    className={cn("w-full rounded-xl border border-[var(--theme-border)]", colorMode === 'monochrome' ? "grayscale" : "")}
                     referrerPolicy="no-referrer"
                     alt={selectedUpdate.title}
                   />
