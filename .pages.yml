@@ -120,7 +120,13 @@ content:
         label: Body Paragraphs
         type: list
         label_field: value
-        fields: [{ name: value, label: Paragraph, type: text }]
+        fields:
+          - name: value
+            label: Paragraph
+            type: rich-text
+            options:
+              format: html
+              switcher: true
 
   # ─────────────────────────────────────────────────────────────────────────────
   # HOME PAGE
