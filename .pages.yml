@@ -36,7 +36,10 @@ content:
         type: string
       - name: description
         label: Short Excerpt
-        type: text
+        type: rich-text
+        options:
+          format: html
+          switcher: true
       - name: categories
         label: Disciplines / Tags
         type: select
@@ -105,7 +108,10 @@ content:
         type: string
       - name: description
         label: Excerpt
-        type: text
+        type: rich-text
+        options:
+          format: html
+          switcher: true
       - name: image
         label: Cover Image
         type: image
@@ -143,7 +149,10 @@ content:
         fields:
           - name: headline
             label: Headline
-            type: text
+            type: rich-text
+            options:
+              format: html
+              switcher: true
           - name: description
             label: Description
             type: rich-text
@@ -199,7 +208,10 @@ content:
             type: image
           - name: lead
             label: Core Statement (First line)
-            type: text
+            type: rich-text
+            options:
+              format: html
+              switcher: true
           - name: bio
             label: Main Bio (Supports Styles)
             type: markdown
@@ -216,7 +228,10 @@ content:
             type: string
           - name: description
             label: Description
-            type: text
+            type: rich-text
+            options:
+              format: html
+              switcher: true
       - name: focusAreas
         label: Focus Areas
         type: object
@@ -230,14 +245,20 @@ content:
             type: string
           - name: description
             label: Description
-            type: text
+            type: rich-text
+            options:
+              format: html
+              switcher: true
       - name: speaking
         label: Speaking & Mentorship
         type: object
         fields:
           - name: description
             label: Section Intro
-            type: text
+            type: rich-text
+            options:
+              format: html
+              switcher: true
           - name: engagements
             label: Selected Engagements
             type: object
@@ -257,7 +278,10 @@ content:
                 type: string
               - name: description
                 label: Details
-                type: text
+                type: rich-text
+                options:
+                  format: html
+                  switcher: true
               - name: link
                 label: Link
                 type: string
@@ -270,10 +294,16 @@ content:
         fields:
           - name: headline
             label: Headline
-            type: text
+            type: rich-text
+            options:
+              format: html
+              switcher: true
           - name: description
             label: Text
-            type: text
+            type: rich-text
+            options:
+              format: html
+              switcher: true
           - name: email
             label: Email
             type: string
