@@ -763,3 +763,10 @@ content:
           - name: enabled
             label: Show Grid
             type: boolean
+          - name: opacity
+            label: Grid Opacity
+            type: number
+            options:
+              min: 0
+              max: 100
+              step: 5

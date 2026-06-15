@@ -185,6 +185,7 @@ interface SiteSettings {
     variant: GridVariant;
     enabled: boolean;
     scope: GridScope;
+    opacity: number;
   };
   // label overrides from home.json and info.json
   _homeLabels?: UILabels;
@@ -403,6 +404,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
     variant: 'b',
     enabled: true,
     scope: 'general',
+    opacity: 100,
   },
 };
 
@@ -421,29 +423,32 @@ const DEFAULT_DATA: SiteData = {
 
 // ─── Grid Overlay ─────────────────────────────────────────────────────────────
 
-function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mousePos: { x: number; y: number } }) {
+function GridOverlay({ variant, mousePos: { x, y }, opacity }: { variant: GridVariant; mousePos: { x: number; y: number }; opacity: number }) {
   switch (variant) {
-    case 'b':
+    case 'b': {
+      const line = Math.round(opacity * 0.12 / 100 * 1000) / 1000;
+      const spot = Math.round(opacity * 0.2 / 100 * 1000) / 1000;
       return (
         <div
           className="absolute inset-x-0 top-0 pointer-events-none"
           style={{
             bottom: -30,
             backgroundImage: [
-              'linear-gradient(rgba(128,128,128,0.07) 1px, transparent 1px)',
-              'linear-gradient(90deg, rgba(128,128,128,0.07) 1px, transparent 1px)',
-              `radial-gradient(circle 100px at ${x * 100}% ${y * 100}%, rgba(128,128,128,0.14) 0%, transparent 70%)`,
+              `linear-gradient(rgba(128,128,128,${line}) 1px, transparent 1px)`,
+              `linear-gradient(90deg, rgba(128,128,128,${line}) 1px, transparent 1px)`,
+              `radial-gradient(circle 100px at ${x * 100}% ${y * 100}%, rgba(128,128,128,${spot}) 0%, transparent 70%)`,
             ].join(','),
             backgroundSize: '40px 40px, 40px 40px, 100% 100%',
           }}
         />
       );
+    }
     default:
       return null;
   }
 }
 
-function GridSection({ variant, children, className, id, sectionClassName }: { variant: GridVariant; children: React.ReactNode; className?: string; id?: string; sectionClassName?: string }) {
+function GridSection({ variant, children, className, id, sectionClassName, opacity }: { variant: GridVariant; children: React.ReactNode; className?: string; id?: string; sectionClassName?: string; opacity?: number }) {
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   return (
     <section
@@ -458,7 +463,7 @@ function GridSection({ variant, children, className, id, sectionClassName }: { v
       <div className={className} style={{ position: 'relative', zIndex: 1 }}>
         {children}
       </div>
-      <GridOverlay variant={variant} mousePos={mousePos} />
+      <GridOverlay variant={variant} mousePos={mousePos} opacity={opacity ?? 100} />
     </section>
   );
 }
@@ -992,7 +997,7 @@ export default function App() {
         <div className="flex flex-col gap-32">
 
           {/* HERO */}
-          {vis.hero && <GridSection variant={effectiveVariant} id="hero" className="flex flex-col gap-8 pt-4 text-center items-center">
+          {vis.hero && <GridSection variant={effectiveVariant} id="hero" className="flex flex-col gap-8 pt-4 text-center items-center" opacity={settings.gridSettings?.opacity}>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1291,7 +1296,7 @@ export default function App() {
           </section>}
 
           {/* CONTACT SECTION */}
-          {vis.contact && <GridSection variant={effectiveVariant} id="contact" sectionClassName="scroll-mt-32" className="border-t border-[var(--theme-border)] py-24 flex flex-col gap-8 text-center items-center justify-center">
+          {vis.contact && <GridSection variant={effectiveVariant} id="contact" sectionClassName="scroll-mt-32" className="border-t border-[var(--theme-border)] py-24 flex flex-col gap-8 text-center items-center justify-center" opacity={settings.gridSettings?.opacity}>
             <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05] max-w-4xl" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
             <p className="text-[var(--theme-muted)] max-w-2xl md:max-w-3xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 

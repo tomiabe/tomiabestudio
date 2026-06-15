@@ -183,6 +183,7 @@
   },
   "gridSettings": {
     "variant": "b",
-    "enabled": true
+    "enabled": true,
+    "opacity": 100
   }
 }
