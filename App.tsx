@@ -454,8 +454,10 @@ function GridSection({ variant, children, className, id }: { variant: GridVarian
       className={className}
       style={{ position: 'relative', overflow: 'hidden' }}
     >
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        {children}
+      </div>
       <GridOverlay variant={variant} mousePos={mousePos} />
-      {children}
     </section>
   );
 }
