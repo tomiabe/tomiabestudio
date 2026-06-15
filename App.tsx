@@ -426,8 +426,9 @@ function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mo
     case 'b':
       return (
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-x-0 top-0 pointer-events-none"
           style={{
+            bottom: -30,
             backgroundImage: [
               'linear-gradient(rgba(128,128,128,0.07) 1px, transparent 1px)',
               'linear-gradient(90deg, rgba(128,128,128,0.07) 1px, transparent 1px)',
@@ -442,7 +443,7 @@ function GridOverlay({ variant, mousePos: { x, y } }: { variant: GridVariant; mo
   }
 }
 
-function GridSection({ variant, children, className, id }: { variant: GridVariant; children: React.ReactNode; className?: string; id?: string }) {
+function GridSection({ variant, children, className, id, sectionClassName }: { variant: GridVariant; children: React.ReactNode; className?: string; id?: string; sectionClassName?: string }) {
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   return (
     <section
@@ -451,10 +452,10 @@ function GridSection({ variant, children, className, id }: { variant: GridVarian
         const r = e.currentTarget.getBoundingClientRect();
         setMousePos({ x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height });
       }}
-      className={className}
-      style={{ position: 'relative', overflow: 'hidden' }}
+      className={sectionClassName}
+      style={{ position: 'relative' }}
     >
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      <div className={className} style={{ position: 'relative', zIndex: 1 }}>
         {children}
       </div>
       <GridOverlay variant={variant} mousePos={mousePos} />
@@ -1290,7 +1291,7 @@ export default function App() {
           </section>}
 
           {/* CONTACT SECTION */}
-          {vis.contact && <GridSection variant={effectiveVariant} id="contact" className="scroll-mt-32 border-t border-[var(--theme-border)] py-24 flex flex-col gap-8 text-center items-center justify-center">
+          {vis.contact && <GridSection variant={effectiveVariant} id="contact" sectionClassName="scroll-mt-32" className="border-t border-[var(--theme-border)] py-24 flex flex-col gap-8 text-center items-center justify-center">
             <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05] max-w-4xl" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
             <p className="text-[var(--theme-muted)] max-w-2xl md:max-w-3xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
 
