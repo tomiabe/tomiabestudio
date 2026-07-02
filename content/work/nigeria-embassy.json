@@ -1,7 +1,7 @@
 {
   "title": "Nigeria Embassy Finder",
   "id": "nigeria-embassy",
-  "order": 8,
+  "order": 9,
   "visible": true,
   "description": "Turning scattered consular information into a single, searchable directory for Nigerian embassies, missions, and visa centers at home and abroad.",
   "categories": [
