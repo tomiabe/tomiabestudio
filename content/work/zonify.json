@@ -3,7 +3,7 @@
   "id": "zonify",
   "order": 8,
   "visible": true,
-  "role": "Creator",
+  "role": "",
   "description": "Turning global time differences into a clear, interactive world clock for planning, coordination, and decision-making across regions.",
   "categories": [
     "Product"
