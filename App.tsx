@@ -1003,18 +1003,16 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               style={{ fontSize: 'var(--typo-hero-title)' }}
               className="text-4xl sm:text-5xl md:text-7xl font-sans tracking-tight leading-[1.05] font-medium max-w-4xl"
-            >
-              {hero.headline}
-            </motion.h1>
+              dangerouslySetInnerHTML={{ __html: hero.headline || '' }}
+            />
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
               style={{ fontSize: 'var(--typo-hero-desc)' }}
               className="text-lg md:text-xl text-[var(--theme-muted)] max-w-2xl md:max-w-3xl leading-relaxed mt-4"
-            >
-              {hero.description}
-            </motion.p>
+              dangerouslySetInnerHTML={{ __html: hero.description || '' }}
+            />
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -1225,9 +1223,7 @@ export default function App() {
                   <p className="text-sm font-mono uppercase tracking-wider text-[var(--theme-muted)]" style={{ fontSize: 'var(--typo-info-role)' }}>{about.role}</p>
                 </div>
                 <div className="flex flex-col gap-6 text-[var(--theme-muted)] leading-relaxed">
-                  <p className="text-xl font-medium text-[var(--theme-fg)]" style={{ fontSize: 'var(--typo-info-lead)' }}>
-                    {about.lead}
-                  </p>
+                  <p className="text-xl font-medium text-[var(--theme-fg)]" style={{ fontSize: 'var(--typo-info-lead)' }} dangerouslySetInnerHTML={{ __html: about.lead || '' }} />
                   <div className="whitespace-pre-wrap text-base" style={{ fontSize: 'var(--typo-info-bio)' }} dangerouslySetInnerHTML={{ __html: about.bio }} />
                 </div>
               </div>
@@ -1239,7 +1235,7 @@ export default function App() {
                 {about.operatingModels.map((model, i) => (
                   <div key={i} className="p-6 border border-[var(--theme-border)] rounded-2xl bg-[var(--theme-bg)] flex flex-col gap-3 hover:border-[var(--theme-muted)] transition-colors cursor-pointer">
                     <h4 className="font-medium text-sm">{model.title}</h4>
-                    <p className="text-sm text-[var(--theme-muted)] leading-relaxed">{model.description}</p>
+                    <p className="text-sm text-[var(--theme-muted)] leading-relaxed" dangerouslySetInnerHTML={{ __html: model.description || '' }} />
                   </div>
                 ))}
               </div>
@@ -1255,7 +1251,7 @@ export default function App() {
                       <Icon className="w-6 h-6 text-[var(--theme-muted)]" strokeWidth={1.5} />
                       <div className="flex flex-col gap-2">
                         <h4 className="font-medium text-base">{area.title}</h4>
-                        <p className="text-sm text-[var(--theme-muted)] leading-relaxed">{area.description}</p>
+                        <p className="text-sm text-[var(--theme-muted)] leading-relaxed" dangerouslySetInnerHTML={{ __html: area.description || '' }} />
                       </div>
                     </div>
                   );
@@ -1266,7 +1262,7 @@ export default function App() {
             {vis.speaking && <div className="flex flex-col gap-8 mt-8">
               <h3 className="text-xl font-medium tracking-tight border-b border-[var(--theme-border)] pb-4">{labels.speakingHeading}</h3>
               <div className="flex flex-col gap-6">
-                <p className="max-w-3xl text-sm md:text-base leading-relaxed text-[var(--theme-muted)]">{about.speaking.description}</p>
+                <p className="max-w-3xl text-sm md:text-base leading-relaxed text-[var(--theme-muted)]" dangerouslySetInnerHTML={{ __html: about.speaking.description || '' }} />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
                 {about.speaking.engagements.map((eng, i) => (
@@ -1277,7 +1273,7 @@ export default function App() {
                       <span>{eng.role}</span>
                     </div>
                     <h4 className="font-medium">{eng.title}</h4>
-                    <p className="text-sm text-[var(--theme-muted)] leading-relaxed">{eng.description}</p>
+                    <p className="text-sm text-[var(--theme-muted)] leading-relaxed" dangerouslySetInnerHTML={{ __html: eng.description || '' }} />
                     {eng.link && (
                       <a
                         href={eng.link}
@@ -1297,8 +1293,8 @@ export default function App() {
 
           {/* CONTACT SECTION */}
           {vis.contact && <GridSection variant={effectiveVariant} id="contact" sectionClassName="scroll-mt-32" className="border-t border-[var(--theme-border)] py-24 flex flex-col gap-8 text-center items-center justify-center" opacity={settings.gridSettings?.opacity}>
-            <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05] max-w-4xl" style={{ fontSize: 'var(--typo-contact-title)' }}>{contact.headline || "Let's create something coherent."}</h2>
-            <p className="text-[var(--theme-muted)] max-w-2xl md:max-w-3xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }}>{contact.description || "For project inquiries, collaborations, or speaking engagements."}</p>
+            <h2 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05] max-w-4xl" style={{ fontSize: 'var(--typo-contact-title)' }} dangerouslySetInnerHTML={{ __html: contact.headline || "Let&rsquo;s create something coherent." }} />
+            <p className="text-[var(--theme-muted)] max-w-2xl md:max-w-3xl md:text-lg" style={{ fontSize: 'var(--typo-contact-desc)' }} dangerouslySetInnerHTML={{ __html: contact.description || "For project inquiries, collaborations, or speaking engagements." }} />
 
             <button
               onClick={handleCopyEmail}
