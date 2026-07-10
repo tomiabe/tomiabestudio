@@ -1,35 +1,13 @@
 {
-  "id": "webhunt",
   "title": "WebHunt",
+  "id": "webhunt",
+  "order": 10,
+  "visible": true,
   "description": "Curating and systematizing standout web experiences into a digital gallery that showcases experimental interfaces, interaction patterns, and narrative-driven design.",
   "categories": [
     "Content"
   ],
-  "image": "/images/lab/WebHunt.jpg",
-  "link": "https://webhunt.tumblr.com",
-  "details": [
-    {
-      "heading": "The Challenge",
-      "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...",
-      "image": "https://picsum.photos/seed/webhunt_d1/800/500"
-    },
-    {
-      "heading": "Strategic Approach",
-      "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics...",
-      "image": "https://picsum.photos/seed/webhunt_d2/800/500"
-    },
-    {
-      "heading": "Design & Execution",
-      "text": "Execution required meticulous attention to typographic hierarchy...",
-      "image": "https://picsum.photos/seed/webhunt_d3/800/500"
-    },
-    {
-      "heading": "Results & Impact",
-      "text": "The final outcome significantly streamlined operational workflows...",
-      "image": "https://picsum.photos/seed/webhunt_d4/800/500"
-    }
-  ],
-  "order": 10,
-  "visible": true,
-  "useDrawer": false
+  "image": "/images/webhunt.png",
+  "link": "https://tomiabe.github.io/webhunt/",
+  "isFullBleed": false
 }
