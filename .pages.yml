@@ -384,6 +384,15 @@ content:
           - name: name
             label: Filter Name
             type: string
+      - name: workCardStyle
+        label: Work Card Style
+        type: select
+        options:
+          choices:
+            - value: row
+              label: "Row (image left, details right)"
+            - value: immersive
+              label: "Immersive (full-bleed overlay)"
       - name: workCardOverlay
         label: Work Card Overlay
         type: object

@@ -93,6 +93,7 @@ interface UILabels {
 interface SiteSettings {
   themeColors: ThemeColors;
   workFilters?: { name: string }[] | string[];
+  workCardStyle?: 'row' | 'immersive';
   workCardOverlay?: {
     baseOpacity?: number;
     hoverOpacity?: number;
@@ -325,6 +326,7 @@ const DEFAULT_UI_LABELS: UILabels = {
 const DEFAULT_SETTINGS: SiteSettings = {
   themeColors: DEFAULT_THEME_COLORS,
   workFilters: [{ name: 'Art' }, { name: 'Brand' }, { name: 'Content' }, { name: 'Data' }, { name: 'Product' }],
+  workCardStyle: 'row',
   workCardOverlay: { baseOpacity: 0.7, hoverOpacity: 0.8 },
   typography: {
     bodyFontUrl: '',
@@ -577,6 +579,7 @@ export default function App() {
         uiSettings: {
           themeColors: sd.themeColors || DEFAULT_THEME_COLORS,
           workFilters: sd.workFilters || DEFAULT_SETTINGS.workFilters,
+          workCardStyle: (sd.workCardStyle as 'row' | 'immersive') || DEFAULT_SETTINGS.workCardStyle,
           workCardOverlay: sd.workCardOverlay || DEFAULT_SETTINGS.workCardOverlay,
           typography: sd.typography || DEFAULT_SETTINGS.typography,
           layout: sd.layout || DEFAULT_SETTINGS.layout,
@@ -739,6 +742,7 @@ export default function App() {
   const clockSettings = settings.clock ?? DEFAULT_SETTINGS.clock;
   const workItemsPerPage = layout.workItemsPerPage ?? 6;
   const vis = { ...DEFAULT_SETTINGS.visibility, ...(settings.visibility ?? {}) };
+  const cardStyle: 'row' | 'immersive' = settings.workCardStyle ?? 'row';
   const updatesItemsPerPage = layout.updatesItemsPerPage ?? 6;
   // ── Scroll lock when drawer open ──
   useEffect(() => {
@@ -1085,61 +1089,82 @@ export default function App() {
               )}
             </AnimatePresence>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-12">
+            <div className={cn("grid gap-6 pb-12", cardStyle === 'row' ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2")}>
               <AnimatePresence mode="popLayout">
-                {(showAllWork ? filteredProjects : filteredProjects.slice(0, workItemsPerPage)).map((project) => (
-                  <motion.a
-                    href={project.link || "#"}
-                    target={project.link && project.useDrawer !== true ? "_blank" : undefined}
-                    rel={project.link && project.useDrawer !== true ? "noreferrer" : undefined}
-                    onClick={e => {
-                      triggerSound();
-                      // Default behavior: go to the live link when present.
-                      // Only open the drawer when explicitly enabled, or when there's no link.
-                      const shouldUseDrawer = project.useDrawer === true || !project.link;
-                      if (shouldUseDrawer) {
-                        e.preventDefault();
-                        setSelectedProject(project);
-                      }
-                    }}
-                    layout
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.4 }}
-                    key={project.id}
-                    className={cn(
-                      "group relative flex flex-col justify-end min-h-[320px] sm:min-h-[400px] overflow-hidden rounded-2xl border border-[var(--theme-border)] bg-gray-100 dark:bg-gray-900",
-                      project.isFullBleed ? "md:col-span-2" : "col-span-1"
-                    )}
-                  >
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className={cn("absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105", colorMode === 'monochrome' ? "grayscale" : "")}
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-[rgba(0,0,0,var(--work-card-overlay))] transition-colors duration-500 group-hover:bg-[rgba(0,0,0,var(--work-card-overlay-hover))]" />
-                    <div className="relative z-10 p-6 sm:p-8 flex flex-col gap-2 text-white mt-auto">
-                      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-                        <h3 className="text-2xl font-medium tracking-tight text-left" style={{ fontSize: 'var(--typo-work-card-title)' }}>
-                          {project.title}
-                        </h3>
+                {(showAllWork ? filteredProjects : filteredProjects.slice(0, workItemsPerPage)).map((project) => {
+                  const cardHref = project.link || "#";
+                  const cardTarget = project.link && project.useDrawer !== true ? "_blank" : undefined;
+                  const cardRel = project.link && project.useDrawer !== true ? "noreferrer" : undefined;
+                  const handleCardClick = (e: React.MouseEvent) => {
+                    triggerSound();
+                    const shouldUseDrawer = project.useDrawer === true || !project.link;
+                    if (shouldUseDrawer) { e.preventDefault(); setSelectedProject(project); }
+                  };
+
+                  // ── Row: image left, details right ────────────────────────────
+                  if (cardStyle === 'row') return (
+                    <motion.a
+                      key={project.id} href={cardHref} target={cardTarget} rel={cardRel} onClick={handleCardClick}
+                      layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.98 }} transition={{ duration: 0.4 }}
+                      className="group col-span-1 flex flex-col sm:flex-row overflow-hidden rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-bg)] hover:border-[var(--theme-muted)] transition-colors min-h-[260px] sm:min-h-[440px]"
+                    >
+                      <div className="relative w-full sm:w-[52%] shrink-0 overflow-hidden min-h-[220px] sm:min-h-0">
+                        <img
+                          src={project.image} alt={project.title} referrerPolicy="no-referrer"
+                          className={cn("absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105", colorMode === 'monochrome' ? "grayscale" : "")}
+                        />
                       </div>
-                      <p className="text-gray-200 leading-snug text-sm sm:text-base max-w-2xl text-left" style={{ fontSize: 'var(--typo-work-card-excerpt)' }}>
-                        {project.description}
-                      </p>
-                      <div className="mt-4 pt-4 border-t border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left">
-                        <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-col justify-between p-6 sm:p-8 flex-1 min-w-0 gap-6">
+                        <div className="flex flex-wrap gap-1.5">
                           {project.categories.map(cat => (
-                            <span key={cat} className="text-[10px] uppercase tracking-widest px-2 py-1 rounded bg-white/20 backdrop-blur-sm text-white border border-white/10">{cat}</span>
+                            <span key={cat} className="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full border border-[var(--theme-border)] text-[var(--theme-muted)]">{cat}</span>
                           ))}
                         </div>
-                        {project.role && <span className="text-[10px] uppercase tracking-widest text-gray-300 w-fit">{project.role}</span>}
+                        <div className="flex flex-col gap-3">
+                          <h3 className="font-medium tracking-tight leading-tight text-[var(--theme-fg)]" style={{ fontSize: 'var(--typo-work-card-title)' }}>{project.title}</h3>
+                          <p className="text-[var(--theme-muted)] leading-relaxed" style={{ fontSize: 'var(--typo-work-card-excerpt)' }}>{project.description}</p>
+                        </div>
+                        <div className="pt-4 border-t border-[var(--theme-border)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                          {project.role && <span className="text-[10px] uppercase tracking-widest text-[var(--theme-muted)]">{project.role}</span>}
+                          <span className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-[var(--theme-fg)] group-hover:opacity-60 transition-opacity w-fit">
+                            {project.link ? 'View project' : 'Read more'} <ArrowUpRight className="w-3.5 h-3.5" />
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </motion.a>
-                ))}
+                    </motion.a>
+                  );
+
+                  // ── Immersive: full-bleed overlay ─────────────────────────────
+                  return (
+                    <motion.a
+                      href={cardHref} target={cardTarget} rel={cardRel} onClick={handleCardClick}
+                      layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.98 }} transition={{ duration: 0.4 }}
+                      key={project.id}
+                      className={cn(
+                        "group relative flex flex-col justify-end min-h-[320px] sm:min-h-[400px] overflow-hidden rounded-2xl border border-[var(--theme-border)] bg-gray-100 dark:bg-gray-900",
+                        project.isFullBleed ? "md:col-span-2" : "col-span-1"
+                      )}
+                    >
+                      <img src={project.image} alt={project.title} referrerPolicy="no-referrer"
+                        className={cn("absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105", colorMode === 'monochrome' ? "grayscale" : "")} />
+                      <div className="absolute inset-0 bg-[rgba(0,0,0,var(--work-card-overlay))] transition-colors duration-500 group-hover:bg-[rgba(0,0,0,var(--work-card-overlay-hover))]" />
+                      <div className="relative z-10 p-6 sm:p-8 flex flex-col gap-2 text-white mt-auto">
+                        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
+                          <h3 className="text-2xl font-medium tracking-tight text-left" style={{ fontSize: 'var(--typo-work-card-title)' }}>{project.title}</h3>
+                        </div>
+                        <p className="text-gray-200 leading-snug text-sm sm:text-base max-w-2xl text-left" style={{ fontSize: 'var(--typo-work-card-excerpt)' }}>{project.description}</p>
+                        <div className="mt-4 pt-4 border-t border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left">
+                          <div className="flex flex-wrap gap-2">
+                            {project.categories.map(cat => (
+                              <span key={cat} className="text-[10px] uppercase tracking-widest px-2 py-1 rounded bg-white/20 backdrop-blur-sm text-white border border-white/10">{cat}</span>
+                            ))}
+                          </div>
+                          {project.role && <span className="text-[10px] uppercase tracking-widest text-gray-300 w-fit">{project.role}</span>}
+                        </div>
+                      </div>
+                    </motion.a>
+                  );
+                })}
               </AnimatePresence>
               {filteredProjects.length === 0 && (
                 <div className="md:col-span-2 py-24 text-center text-[var(--theme-muted)] font-mono text-sm border border-dashed border-[var(--theme-border)] rounded-2xl">

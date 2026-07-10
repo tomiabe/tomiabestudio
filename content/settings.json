@@ -62,6 +62,7 @@
       "name": "Product"
     }
   ],
+  "workCardStyle": "row",
   "workCardOverlay": {
     "baseOpacity": 0.7,
     "hoverOpacity": 0.8
