@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { playClickSound } from './lib/audio';
-import { ArrowUpRight, Copy, Check, Sun, Moon, Sunrise, Menu, X, Filter, Compass, Layers, BarChart2, Globe, Cpu, Volume2, VolumeX, ArrowDown, ChevronUp } from 'lucide-react';
+import { ArrowUpRight, Copy, Check, Sun, Moon, Sunrise, Menu, X, Filter, Compass, Layers, BarChart2, Globe, Cpu, Bot, Volume2, VolumeX, ArrowDown, ChevronUp } from 'lucide-react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -880,7 +880,7 @@ export default function App() {
     </nav>
   );
 
-  const focusIcons = [Compass, Layers, BarChart2, Globe, Cpu];
+  const focusIcons = [Compass, Layers, BarChart2, Globe, Cpu, Bot];
 
   return (
     <div className="min-h-screen flex flex-col font-sans relative pt-16">

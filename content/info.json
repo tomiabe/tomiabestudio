@@ -40,6 +40,10 @@
     {
       "title": "Creative Technology & Interactive Media",
       "description": "Exploring and building experimental, emerging, and interactive digital experiences that extend how people engage with information, systems, and ideas beyond conventional interfaces."
+    },
+    {
+      "title": "Applied AI & Workflow Systems",
+      "description": "Building AI-powered tools, assistants, and workflows on top of existing products, data, and operations that turn manual, ad‑hoc work into intelligent, repeatable pipelines for faster, more confident decisions."
     }
   ],
   "speaking": {
