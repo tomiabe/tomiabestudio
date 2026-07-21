@@ -32,5 +32,7 @@
   ],
   "order": 14,
   "visible": true,
-  "useDrawer": false
+  "useDrawer": false,
+  "shortDescription": "Data-driven virtual aquarium",
+  "year": "2022"
 }

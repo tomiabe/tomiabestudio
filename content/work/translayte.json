@@ -3,7 +3,7 @@
   "id": "translayte",
   "order": 4,
   "role": "Growth Design Consultant",
-  "description": "Scaling a certified translation platform across borders by aligning UX, conversion, and trust signals in documentation\u2011heavy, regulation\u2011sensitive customer journeys.",
+  "description": "Scaling a certified translation platform across borders by aligning UX, conversion, and trust signals in documentation‑heavy, regulation‑sensitive customer journeys.",
   "categories": [
     "Product"
   ],
@@ -11,5 +11,7 @@
   "link": "https://translayte.com",
   "useDrawer": false,
   "isFullBleed": false,
-  "visible": true
+  "visible": true,
+  "shortDescription": "Cross-border translation platform",
+  "year": "2022"
 }

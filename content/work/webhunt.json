@@ -9,5 +9,7 @@
   ],
   "image": "/images/webhunt.png",
   "link": "https://tomiabe.github.io/webhunt/",
-  "isFullBleed": false
+  "isFullBleed": false,
+  "shortDescription": "Curated web inspiration gallery",
+  "year": "2022"
 }

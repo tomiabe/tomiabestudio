@@ -33,5 +33,7 @@
   ],
   "order": 5,
   "visible": true,
-  "useDrawer": false
+  "useDrawer": false,
+  "shortDescription": "Cooperative sustainable travel marketplace",
+  "year": "2022"
 }

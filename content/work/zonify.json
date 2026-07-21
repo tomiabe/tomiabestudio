@@ -10,5 +10,7 @@
   ],
   "image": "/images/zonify.png",
   "link": "https://tomiabe.github.io/zonify/",
-  "isFullBleed": false
+  "isFullBleed": false,
+  "shortDescription": "Global time coordination tool",
+  "year": "2022"
 }

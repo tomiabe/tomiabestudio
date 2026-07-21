@@ -1,9 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Sanchez&display=swap');
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/Satoshi-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/Satoshi-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/Satoshi-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/Satoshi-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/Satoshi-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/Satoshi-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/Satoshi-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/satoshi/Satoshi-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  
+  --font-heading: "Sanchez", serif;
+  --font-body: "Satoshi", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Satoshi", ui-monospace, monospace;
+
   --color-morning-bg: #fdfaf6;
   --color-morning-fg: #1c1917;
   --color-morning-muted: #78716c;
@@ -13,7 +72,7 @@
   --color-noon-fg: #09090b;
   --color-noon-muted: #71717a;
   --color-noon-border: #e4e4e7;
-  
+
   --color-evening-bg: #09090b;
   --color-evening-fg: #fafafa;
   --color-evening-muted: #a1a1aa;
@@ -50,34 +109,22 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--theme-bg);
+  background-color: transparent;
   color: var(--theme-fg);
 }
 
 body {
+  font-family: var(--font-body);
+  background-color: color-mix(in srgb, var(--theme-bg) 88%, transparent);
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-@keyframes grid-drift {
-  0% { background-position: 0px 0px; }
-  50% { background-position: 12px 8px; }
-  100% { background-position: 0px 0px; }
-}
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-.animate-grid-drift {
-  animation: grid-drift 5s ease-in-out infinite;
+.update-body p {
+  margin-bottom: 1em;
 }
-
-@keyframes grid-pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-.animate-grid-pulse {
-  animation: grid-pulse 5s ease-in-out infinite;
-}
-
-/* Links inside update drawer body */
 .update-body a {
   color: var(--theme-fg);
   text-decoration: underline;
@@ -87,4 +134,15 @@ body {
 }
 .update-body a:hover {
   text-decoration-color: var(--theme-fg);
+}
+
+.hero-link {
+  font-weight: 500;
+  color: var(--theme-fg);
+  text-decoration: none;
+  transition: text-decoration-color 0.2s ease;
+}
+.hero-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

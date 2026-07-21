@@ -9,5 +9,7 @@
   ],
   "image": "/images/lab/SoundAtlas.png",
   "link": "https://tomiabe.github.io/soundatlas/",
-  "isFullBleed": false
+  "isFullBleed": false,
+  "shortDescription": "Location-aware music discovery",
+  "year": "2022"
 }

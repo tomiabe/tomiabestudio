@@ -10,5 +10,7 @@
   ],
   "image": "/images/lab/NairaWatch.jpg",
   "link": "https://tomiabe.github.io/nairawatch/",
-  "isFullBleed": false
+  "isFullBleed": false,
+  "shortDescription": "Nigeria FX tracking dashboard",
+  "year": "2022"
 }

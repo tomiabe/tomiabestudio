@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "agentation": "^3.0.2",
     "clsx": "^2.1.1",
     "lucide-react": "^0.562.0",
     "motion": "^12.38.0",

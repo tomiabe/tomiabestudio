@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { playClickSound } from './lib/audio';
-import { ArrowUpRight, ArrowRight, Sun, Moon, Sunrise, Monitor, Copy, Check, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Sun, Moon, Sunrise, Monitor, Copy, Check, ChevronRight, Linkedin, Twitter, Instagram, Github, Menu, X } from 'lucide-react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -40,6 +40,8 @@ export default function App() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [activeFilter, setActiveFilter] = useState<string>('All');
   const [activeInfoSection, setActiveInfoSection] = useState<string>('About');
+  const [showMobileInfo, setShowMobileInfo] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [allProjects, setAllProjects] = useState<Project[]>([]);
   const [updates, setUpdates] = useState<Update[]>([]);
@@ -317,26 +319,86 @@ export default function App() {
 
   const isHome = activeSection === 'home';
 
-  // ── MOBILE NAV ──
-  const MobileNav = () => (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[var(--theme-border)] bg-[var(--theme-bg)]/90 backdrop-blur-md md:hidden">
-      <div className="flex items-center justify-around h-14">
-        {navItems.map(item => (
-          <button key={item.key} onClick={() => handleNav(item.key)}
-            className={cn("flex flex-col items-center gap-0.5 text-xs font-[family-name:var(--font-body)] uppercase tracking-wider px-3 py-1 transition-colors cursor-pointer",
-              activeSection === item.key ? "text-[var(--theme-fg)]" : "text-[var(--theme-muted)]"
-            )}>
-            <span>{item.label}</span>
-          </button>
-        ))}
-      </div>
+  // ── MOBILE HEADER + MENU ──
+  const MobileHeader = () => (
+    <div className="md:hidden fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 h-14 bg-[var(--theme-bg)]/90 backdrop-blur-md border-b border-[var(--theme-border)]">
+      <span className="text-sm font-[family-name:var(--font-heading)] text-[var(--theme-fg)]">TOMI ABE STUDIO</span>
+      <button onClick={() => setMobileMenuOpen(true)}
+        className="p-2 text-[13px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:opacity-60 transition-opacity tracking-wider cursor-pointer">
+        MENU
+      </button>
     </div>
+  );
+
+  const MobileMenu = () => (
+    <AnimatePresence>
+      {mobileMenuOpen && (
+        <>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 bg-black/20 md:hidden"
+            onClick={() => setMobileMenuOpen(false)} />
+          <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="fixed top-0 right-0 bottom-0 z-50 w-full bg-[var(--theme-bg)] md:hidden p-6 flex flex-col gap-6">
+            <div className="flex items-center justify-end">
+              <button onClick={() => setMobileMenuOpen(false)}
+                className="p-2 text-[var(--theme-fg)] hover:opacity-60 transition-opacity cursor-pointer">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <nav className="flex flex-col gap-1">
+              {navItems.map(item => (
+                <button key={item.key} onClick={() => { handleNav(item.key); setMobileMenuOpen(false); }}
+                  className={cn("text-left text-[15px] py-2.5 px-3 rounded-lg transition-all font-[family-name:var(--font-heading)] cursor-pointer",
+                    activeSection === item.key
+                      ? "bg-[var(--theme-fg)] text-[var(--theme-bg)]"
+                      : "text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:bg-[var(--theme-fg)]/[0.05]"
+                  )}>
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+            <div className="mt-auto flex flex-col gap-4">
+              <button onClick={handleCopyEmail}
+                className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] transition-colors cursor-pointer text-left">
+                {contact?.email || 'studio@tomiabe.com'}
+                {copied
+                  ? <Check className="w-3 h-3 text-green-500 flex-shrink-0" />
+                  : <Copy className="w-3 h-3 flex-shrink-0" />}
+              </button>
+              <div className="flex items-center gap-3">
+                {socialLinks.map((link: SocialLink) => {
+                  const iconMap: Record<string, React.ElementType> = { LinkedIn: Linkedin, Twitter: Twitter, Instagram: Instagram, Github: Github };
+                  const Icon = iconMap[link.name];
+                  return Icon ? (
+                    <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
+                      className="text-[var(--theme-muted)] hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
+                      <Icon className="w-4 h-4" />
+                    </a>
+                  ) : null;
+                })}
+              </div>
+              <div className="flex gap-2">
+                {([['morning', Sunrise], ['noon', Sun], ['evening', Moon], ['system', Monitor]] as const).map(([mode, Icon]) => (
+                  <button key={mode} onClick={() => { triggerSound(); setTheme(mode); }}
+                    className={cn("p-2 rounded-lg border transition-colors cursor-pointer",
+                      theme === mode ? "border-[var(--theme-fg)] text-[var(--theme-fg)]" : "border-[var(--theme-border)] text-[var(--theme-muted)] hover:border-[var(--theme-muted)]"
+                    )}>
+                    <Icon className="w-4 h-4" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 
   return (
     <div className="min-h-screen flex font-[family-name:var(--font-body)] bg-[var(--theme-bg)] text-[var(--theme-fg)]">
       {/* ── COLUMN 1: SIDEBAR ── */}
-      <aside className="hidden md:flex flex-col w-56 lg:w-64 flex-none border-r border-[var(--theme-border)] h-screen sticky top-0 p-6 justify-between">
+      <aside className="hidden md:flex flex-col w-56 lg:w-64 flex-none md:border-r border-[var(--theme-border)] h-screen sticky top-0 p-6 justify-between">
         <div className="flex flex-col gap-10">
           <div>
             <span className="text-sm font-[family-name:var(--font-heading)] text-[var(--theme-fg)]">
@@ -359,6 +421,27 @@ export default function App() {
         </div>
 
         <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
+            <button onClick={handleCopyEmail}
+              className="group inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] transition-colors cursor-pointer text-left">
+              {contact?.email || 'studio@tomiabe.com'}
+              {copied
+                ? <Check className="w-3 h-3 text-green-500 flex-shrink-0" />
+                : <Copy className="w-3 h-3 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />}
+            </button>
+            <div className="flex items-center gap-3">
+              {socialLinks.map((link: SocialLink) => {
+                const iconMap: Record<string, React.ElementType> = { LinkedIn: Linkedin, Twitter: Twitter, Instagram: Instagram, Github: Github };
+                const Icon = iconMap[link.name];
+                return Icon ? (
+                  <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
+                    className="text-[var(--theme-muted)] hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
+                    <Icon className="w-4 h-4" />
+                  </a>
+                ) : null;
+              })}
+            </div>
+          </div>
           <div className="text-[13px] font-[family-name:var(--font-body)] text-[var(--theme-muted)] tracking-wider border-t border-[var(--theme-border)] pt-3">
             {currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true, timeZoneName: 'short' })}
           </div>
@@ -376,13 +459,12 @@ export default function App() {
       </aside>
 
       {/* ── COLUMN 2 + 3: CONTENT ── */}
-      <main className="flex-1 min-h-screen overflow-y-auto hide-scrollbar pb-20 md:pb-0">
+      <main className="flex-1 min-h-screen overflow-y-auto hide-scrollbar pt-14 md:pt-0">
         <AnimatePresence mode="wait">
           {/* ── HOME ── */}
           {isHome && (
             <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
               <div className="px-6 md:px-10 lg:px-14 pt-10 md:pt-6 pb-16 w-full md:max-w-[75%]">
-                <p className="text-sm font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-6 md:hidden">TOMI ABE STUDIO</p>
                 <h1 className="text-3xl md:text-4xl lg:text-[42px] font-[family-name:var(--font-heading)] leading-[1.15] text-[var(--theme-fg)] mb-6"
                   dangerouslySetInnerHTML={{ __html: hero?.headline || '<p>Turning complex systems into clear products, brands, and stories.</p>' }} />
                 <p className="text-[17px] leading-relaxed text-[var(--theme-muted)] mb-8"
@@ -468,9 +550,11 @@ export default function App() {
           {/* ── WORK / PROJECTS ── */}
           {(activeSection === 'work' || activeSection === 'projects') && (
             <motion.div key={activeSection} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
-              className="flex h-screen">
-              {/* Col 2: List */}
-              <div className="w-[300px] flex-none border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6">
+              className="flex md:h-screen">
+              {/* Col 2: List - hide on mobile when viewing detail */}
+              <div className={cn("w-full md:w-[380px] flex-none md:border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6",
+                selectedItem ? "hidden md:block" : ""
+              )}>
                 <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-6">
                   {activeSection === 'work' ? 'Work' : 'Projects'}
                 </h2>
@@ -504,46 +588,52 @@ export default function App() {
               </div>
 
               {/* Col 3: Detail */}
-              <div className="hidden md:flex flex-1 overflow-y-auto hide-scrollbar px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-16">
+              <div className={cn("flex-1 overflow-y-auto hide-scrollbar px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-8",
+                selectedItem ? "flex" : "hidden md:flex"
+              )}>
                 <div className="max-w-2xl w-full">
-                {selectedItem ? (
-                  <>
-                    <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">{selectedItem.title}</h2>
-                    {selectedItem.shortDescription && <p className="text-[15px] text-[var(--theme-muted)] mb-2">{selectedItem.shortDescription}</p>}
-                    {(selectedItem.role || selectedItem.year) && (
-                      <p className="text-[14px] font-medium opacity-60 mb-3">
-                        {selectedItem.role}{selectedItem.role && selectedItem.year && ' · '}{selectedItem.year}
-                      </p>
-                    )}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {(selectedItem.categories || []).map((c: string) => (
-                        <span key={c} className="text-[13px] font-[family-name:var(--font-body)] px-2.5 py-1 rounded-full border border-[var(--theme-border)] text-[var(--theme-muted)]">{c}</span>
+                  <button onClick={() => { setSelectedItem(null); updateUrl(activeSection, activeFilter); }}
+                    className="md:hidden inline-flex items-center gap-1.5 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] mb-6 transition-colors cursor-pointer">
+                    <ArrowRight className="w-4 h-4 rotate-180" /> Back
+                  </button>
+                  {selectedItem ? (
+                    <div key={selectedItem.id}>
+                      <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">{selectedItem.title}</h2>
+                      {selectedItem.shortDescription && <p className="text-[15px] text-[var(--theme-muted)] mb-2">{selectedItem.shortDescription}</p>}
+                      {(selectedItem.role || selectedItem.year) && (
+                        <p className="text-[14px] font-medium opacity-60 mb-3">
+                          {selectedItem.role}{selectedItem.role && selectedItem.year && ' · '}{selectedItem.year}
+                        </p>
+                      )}
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {(selectedItem.categories || []).map((c: string) => (
+                          <span key={c} className="text-[13px] font-[family-name:var(--font-body)] px-2.5 py-1 rounded-full border border-[var(--theme-border)] text-[var(--theme-muted)]">{c}</span>
+                        ))}
+                      </div>
+                      {selectedItem.image && (
+                        <div className="rounded-lg mb-6 bg-[var(--theme-border)]">
+                          <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-auto rounded-lg" referrerPolicy="no-referrer" />
+                        </div>
+                      )}
+                      <p className="text-[16px] leading-relaxed text-[var(--theme-muted)] mb-8">{selectedItem.description}</p>
+                      {selectedItem.details?.map((d: ProjectDetail, i: number) => (
+                        <div key={i} className="mb-6">
+                          <h3 className="text-[15px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">{d.heading}</h3>
+                          <p className="text-[15px] leading-relaxed text-[var(--theme-muted)]">{d.text}</p>
+                        </div>
                       ))}
+                      {selectedItem.link && (
+                        <a href={selectedItem.link} target="_blank" rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 cursor-pointer mb-8">
+                          {siteData.settings?.uiLabels?.visitProject || 'Visit'} <ArrowUpRight className="w-4 h-4" />
+                        </a>
+                      )}
                     </div>
-                    {selectedItem.image && (
-                      <div className="rounded-lg mb-6 bg-[var(--theme-border)]">
-                        <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-auto rounded-lg" referrerPolicy="no-referrer" />
-                      </div>
-                    )}
-                    <p className="text-[16px] leading-relaxed text-[var(--theme-muted)] mb-8">{selectedItem.description}</p>
-                    {selectedItem.details?.map((d: ProjectDetail, i: number) => (
-                      <div key={i} className="mb-6">
-                        <h3 className="text-[15px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">{d.heading}</h3>
-                        <p className="text-[15px] leading-relaxed text-[var(--theme-muted)]">{d.text}</p>
-                      </div>
-                    ))}
-                    {selectedItem.link && (
-                      <a href={selectedItem.link} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 cursor-pointer mb-8">
-                        {siteData.settings?.uiLabels?.visitProject || 'Visit'} <ArrowUpRight className="w-4 h-4" />
-                      </a>
-                    )}
-                  </>
-                ) : (
-                  <div className="flex items-center justify-center h-full w-full">
-                    <p className="text-[15px] text-[var(--theme-muted)]">Select an item to view details</p>
-                  </div>
-                )}
+                  ) : (
+                    <div className="hidden md:flex items-center justify-center min-h-[50vh] w-full">
+                      <p className="text-[15px] text-[var(--theme-muted)]">Select an item to view details</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -552,9 +642,11 @@ export default function App() {
           {/* ── UPDATES ── */}
           {activeSection === 'thoughts' && (
             <motion.div key="thoughts" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
-              className="flex h-screen">
-              {/* Col 2: List */}
-              <div className="w-[300px] flex-none border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6">
+              className="flex md:h-screen">
+              {/* Col 2: List - hide on mobile when viewing detail */}
+              <div className={cn("w-full md:w-[380px] flex-none md:border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6",
+                selectedItem ? "hidden md:block" : ""
+              )}>
                 <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-6">Updates</h2>
                 <div className="flex flex-col gap-1">
                   {filteredUpdates.map((update) => (
@@ -568,40 +660,46 @@ export default function App() {
                       <p className={cn("text-[13px] font-[family-name:var(--font-body)]",
                         selectedItem?.id === update.id ? "text-[var(--theme-bg)]/60" : "text-[var(--theme-muted)]"
                       )}>{update.date}</p>
-                      <h3 className="text-[18px] font-[family-name:var(--font-heading)] mt-0.5">{update.title}</h3>
+                      <h3 className="text-[16px] font-[family-name:var(--font-heading)] mt-0.5">{update.title}</h3>
                     </button>
                   ))}
                 </div>
               </div>
 
               {/* Col 3: Detail */}
-              <div className="hidden md:flex flex-1 overflow-y-auto hide-scrollbar px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-16">
+              <div className={cn("flex-1 overflow-y-auto hide-scrollbar px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-8",
+                selectedItem ? "flex" : "hidden md:flex"
+              )}>
                 <div className="max-w-2xl w-full">
-                {selectedItem ? (
-                  <>
-                    <p className="text-[13px] text-[var(--theme-muted)] mb-2">{selectedItem.date}</p>
-                    <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-4">{selectedItem.title}</h2>
-                    {selectedItem.image && (
-                      <div className="rounded-lg mb-6 bg-[var(--theme-border)]">
-                        <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-auto rounded-lg" referrerPolicy="no-referrer" />
-                      </div>
-                    )}
-                    <p className="text-[16px] leading-relaxed text-[var(--theme-muted)] mb-6">{selectedItem.description}</p>
-                    {selectedItem.content && (
-                      <div className="update-body text-[16px] leading-relaxed text-[var(--theme-muted)]" dangerouslySetInnerHTML={{ __html: selectedItem.content }} />
-                    )}
-                    {selectedItem.link && (
-                      <a href={selectedItem.link} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 mt-6 cursor-pointer">
-                        Read more <ArrowUpRight className="w-4 h-4" />
-                      </a>
-                    )}
-                  </>
-                ) : (
-                  <div className="flex items-center justify-center h-full w-full">
-                    <p className="text-[15px] text-[var(--theme-muted)]">Select an update to read</p>
-                  </div>
-                )}
+                  <button onClick={() => { setSelectedItem(null); updateUrl('thoughts'); }}
+                    className="md:hidden inline-flex items-center gap-1.5 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] mb-6 transition-colors cursor-pointer">
+                    <ChevronRight className="w-4 h-4 rotate-180" /> Back
+                  </button>
+                  {selectedItem ? (
+                    <div key={selectedItem.id}>
+                      <p className="text-[13px] text-[var(--theme-muted)] mb-2">{selectedItem.date}</p>
+                      <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-4">{selectedItem.title}</h2>
+                      {selectedItem.image && (
+                        <div className="rounded-lg mb-6 bg-[var(--theme-border)]">
+                          <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-auto rounded-lg" referrerPolicy="no-referrer" />
+                        </div>
+                      )}
+                      <p className="text-[16px] leading-relaxed text-[var(--theme-muted)] mb-6">{selectedItem.description}</p>
+                      {selectedItem.content && (
+                        <div className="update-body text-[16px] leading-relaxed text-[var(--theme-muted)] mb-6" dangerouslySetInnerHTML={{ __html: selectedItem.content }} />
+                      )}
+                      {selectedItem.link && (
+                        <a href={selectedItem.link} target="_blank" rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 mt-6 mb-8 cursor-pointer">
+                          Read more <ArrowUpRight className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="hidden md:flex items-center justify-center min-h-[50vh] w-full">
+                      <p className="text-[15px] text-[var(--theme-muted)]">Select an update to read</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -610,14 +708,16 @@ export default function App() {
           {/* ── INFO ── */}
           {activeSection === 'info' && (
             <motion.div key="info" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
-              className="flex h-screen">
-              {/* Col 2: Section Index */}
-              <div className="w-[300px] flex-none border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6">
+              className="flex md:h-screen">
+              {/* Col 2: Section Index - hide on mobile when viewing a section */}
+              <div className={cn("w-full md:w-[380px] flex-none md:border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6",
+                showMobileInfo ? "hidden md:block" : ""
+              )}>
                 <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-6">Info</h2>
                 <nav className="flex flex-col gap-1">
                   {infoSections.map(section => (
                     <button key={section}
-                      onClick={() => { triggerSound(); setActiveInfoSection(section); updateUrl('info', undefined, undefined, section); }}
+                      onClick={() => { triggerSound(); setActiveInfoSection(section); setShowMobileInfo(true); updateUrl('info', undefined, undefined, section); }}
                       className={cn("text-left py-2.5 px-3 rounded-lg transition-all text-[15px] font-[family-name:var(--font-heading)] cursor-pointer",
                         activeInfoSection === section
                           ? "bg-[var(--theme-fg)] text-[var(--theme-bg)]"
@@ -630,21 +730,27 @@ export default function App() {
               </div>
 
               {/* Col 3: Content */}
-              <div className="hidden md:flex flex-1 overflow-y-auto hide-scrollbar px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-16">
-                <div className="max-w-2xl w-full">
+              <div className={cn("items-start flex-1 overflow-y-auto hide-scrollbar px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-8",
+                showMobileInfo ? "flex" : "hidden md:flex"
+              )}>
+                <div className="max-w-2xl w-full pb-8">
+                  <button onClick={() => { setShowMobileInfo(false); }}
+                    className="md:hidden inline-flex items-center gap-1.5 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] mb-6 transition-colors cursor-pointer">
+                    <ChevronRight className="w-4 h-4 rotate-180" /> Back
+                  </button>
                   {activeInfoSection === 'About' && about && (
                     <div>
-                      <div className="flex items-center gap-5 mb-8">
+                      <div className="flex flex-col gap-3 mb-8">
                         {about.imageUrl && (
                           <img src={about.imageUrl} alt={about.name}
-                            className="w-16 h-16 rounded-full object-cover" referrerPolicy="no-referrer" />
+                            className="w-[100px] h-[100px] rounded-full object-cover" referrerPolicy="no-referrer" />
                         )}
                         <div>
                           <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)]">{about.name}</h2>
                           <p className="text-[14px] font-[family-name:var(--font-body)] text-[var(--theme-muted)]">{about.role}</p>
                         </div>
                       </div>
-                      <p className="text-[16px] leading-relaxed text-[var(--theme-muted)] whitespace-pre-line">{about.bio}</p>
+                      <p className="text-[16px] leading-relaxed text-[var(--theme-muted)] whitespace-pre-line mb-8">{about.bio}</p>
                     </div>
                   )}
 
@@ -706,57 +812,38 @@ export default function App() {
           {/* ── CONTACT ── */}
           {activeSection === 'contact' && (
             <motion.div key="contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-              <div className="px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-16 max-w-2xl">
+              <div className="px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-8 max-w-2xl">
                 <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-4">Contact</h2>
-
-                {/* Big headline */}
-                <p className="text-[38px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] leading-[1.15] mb-10" style={{ textWrap: 'balance' } as React.CSSProperties}>
-                  {contact?.headline || "Let's create something coherent."}
+                <p className="text-[15px] leading-relaxed text-[var(--theme-muted)] mb-6">
+                  Typically responds within 1–3 business days. Reach out for any of the following.
                 </p>
-
-                {/* Reach out for */}
-                <p className="text-[15px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] mb-6">Reach out for</p>
                 <div className="flex flex-col gap-6 mb-8">
                   {[
                     { title: 'Project inquiries', desc: 'Brand, product, or digital system work across any stage or market.' },
                     { title: 'Speaking & training', desc: 'Talks, workshops, and facilitation on design, AI, and systems thinking.' },
                     { title: 'Collaborations', desc: 'Independent projects, research, and creative partnerships.' },
-                    { title: 'Mentorship', desc: 'Through MentorCruise or direct inquiry.' },
-                  ].map((item, i, arr) => (
-                    <div key={item.title} className={i < arr.length - 1 ? "border-b border-[var(--theme-border)] pb-6" : ""}>
+                  ].map(item => (
+                    <div key={item.title} className="border-b border-[var(--theme-border)] pb-6">
                       <p className="text-[16px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">{item.title}</p>
                       <p className="text-[15px] leading-relaxed text-[var(--theme-muted)]">{item.desc}</p>
                     </div>
                   ))}
-                </div>
-
-                {/* Response time — above the divider */}
-                <p className="text-[15px] text-[var(--theme-muted)] mb-8">
-                  Typically responds within 1–3 business days.
-                </p>
-
-                {/* Divider → email + social */}
-                <div className="border-t border-[var(--theme-border)] pt-6">
-                  <button onClick={handleCopyEmail}
-                    className="group inline-flex items-center gap-3 font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:opacity-60 transition-opacity cursor-pointer"
-                    style={{ fontSize: 'clamp(18px, 2vw, 26px)' }}>
-                    {contact?.email || 'studio@tomiabe.com'}
-                    {copied
-                      ? <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
-                      : <Copy className="w-4 h-4 text-[var(--theme-muted)] flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />}
-                  </button>
-                  <p className="text-[13px] text-[var(--theme-muted)] mt-1.5 mb-6">
-                    {copied ? 'Copied to clipboard' : 'Click to copy'}
-                  </p>
-                  <div className="flex flex-wrap gap-x-5 gap-y-2">
-                    {socialLinks.map((link: SocialLink) => (
-                      <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[15px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
-                        {link.name} <ArrowUpRight className="w-4 h-4" />
-                      </a>
-                    ))}
+                  <div className="border-b border-[var(--theme-border)] pb-6">
+                    <p className="text-[16px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">Mentorship</p>
+                    <p className="text-[15px] leading-relaxed text-[var(--theme-muted)]">
+                      Through <a href="https://mentorcruise.com/mentor/tomiabe/" target="_blank" rel="noopener noreferrer"
+                        className="text-[var(--theme-fg)] underline underline-offset-4 decoration-[var(--theme-border)] hover:decoration-[var(--theme-fg)] transition-[text-decoration-color]">MentorCruise</a> or direct inquiry.
+                    </p>
                   </div>
                 </div>
+                <button onClick={handleCopyEmail}
+                  className="inline-flex items-center gap-1.5 font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:opacity-60 transition-opacity cursor-pointer border-b border-dashed border-[var(--theme-border)] hover:border-[var(--theme-fg)] pb-0.5"
+                  style={{ fontSize: 'clamp(18px, 2vw, 26px)' }}>
+                  <span>{contact?.email || 'studio@tomiabe.com'}</span>
+                  {copied
+                    ? <Check className="w-4 h-4 text-green-500" />
+                    : <Copy className="w-4 h-4 text-[var(--theme-muted)]" />}
+                </button>
               </div>
             </motion.div>
           )}
@@ -772,7 +859,8 @@ export default function App() {
           </p>
         </div>
       </main>
-      <MobileNav />
+      <MobileHeader />
+      <MobileMenu />
     </div>
   );
 }

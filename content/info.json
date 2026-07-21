@@ -51,8 +51,8 @@
     "engagements": [
       {
         "title": "MentorCruise",
-        "year": "SINCE 2022",
-        "role": "MENTOR",
+        "year": "Since 2022",
+        "role": "Mentor",
         "description": "Ongoing global design mentorship through MentorCruise, supporting designers in advancing toward senior and leadership roles.",
         "link": "https://mentorcruise.com/mentor/tomiabe/",
         "ctaLabel": "Book me on MentorCruise"
@@ -60,25 +60,25 @@
       {
         "title": "Loblaw Digital",
         "year": "2024",
-        "role": "TRAINER",
+        "role": "Trainer",
         "description": "Advanced prompting and generative workflow training for internal AI committee."
       },
       {
         "title": "African Climate Stories",
         "year": "2024",
-        "role": "FACILITATOR",
+        "role": "Facilitator",
         "description": "AI-driven infographic design workshop helping sustainability advocates translate complex research into visual narratives."
       },
       {
         "title": "FITC E3 Conference",
         "year": "2024",
-        "role": "PANELIST",
+        "role": "Panelist",
         "description": "Ethical AI panel contributing to discussions on responsible automation and the future of work."
       },
       {
         "title": "Nairametrics",
         "year": "2020",
-        "role": "SPEAKER",
+        "role": "Speaker",
         "description": "Strategy session for creative entrepreneurs on navigating financial uncertainty."
       }
     ]

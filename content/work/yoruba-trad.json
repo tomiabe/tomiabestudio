@@ -3,7 +3,7 @@
   "id": "urban-climate-signals",
   "order": 1,
   "visible": true,
-  "role": "Product & Data Lead",
+  "role": "",
   "description": "Turning live urban heat and air quality data into a decision-ready dashboard that shows how infrastructure, pollution, and policy shape city conditions.",
   "categories": [
     "Data",
@@ -11,5 +11,7 @@
   ],
   "image": "/images/urbanclimate.jpg",
   "link": "https://susbridge.github.io/urbanclimate/",
-  "isFullBleed": false
+  "isFullBleed": false,
+  "shortDescription": "Urban climate data dashboard",
+  "year": "2022"
 }
