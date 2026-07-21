@@ -470,7 +470,7 @@ export default function App() {
             <motion.div key={activeSection} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
               className="flex h-screen">
               {/* Col 2: List */}
-              <div className="w-72 flex-none border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6">
+              <div className="w-[300px] flex-none border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6">
                 <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-6">
                   {activeSection === 'work' ? 'Work' : 'Projects'}
                 </h2>
@@ -554,7 +554,7 @@ export default function App() {
             <motion.div key="thoughts" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
               className="flex h-screen">
               {/* Col 2: List */}
-              <div className="w-72 flex-none border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6">
+              <div className="w-[300px] flex-none border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6">
                 <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-6">Updates</h2>
                 <div className="flex flex-col gap-1">
                   {filteredUpdates.map((update) => (
@@ -612,7 +612,7 @@ export default function App() {
             <motion.div key="info" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
               className="flex h-screen">
               {/* Col 2: Section Index */}
-              <div className="w-72 flex-none border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6">
+              <div className="w-[300px] flex-none border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6">
                 <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-6">Info</h2>
                 <nav className="flex flex-col gap-1">
                   {infoSections.map(section => (
@@ -707,11 +707,36 @@ export default function App() {
           {activeSection === 'contact' && (
             <motion.div key="contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
               <div className="px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-16 max-w-2xl">
-                <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">Contact</h2>
-                <p className="text-[17px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] mb-10 leading-relaxed">{contact?.headline || "Let's create something coherent."}</p>
+                <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-4">Contact</h2>
 
-                {/* Email — hero action */}
-                <div className="mb-2">
+                {/* Big headline */}
+                <p className="text-[38px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] leading-[1.15] mb-10" style={{ textWrap: 'balance' } as React.CSSProperties}>
+                  {contact?.headline || "Let's create something coherent."}
+                </p>
+
+                {/* Reach out for */}
+                <p className="text-[15px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] mb-6">Reach out for</p>
+                <div className="flex flex-col gap-6 mb-8">
+                  {[
+                    { title: 'Project inquiries', desc: 'Brand, product, or digital system work across any stage or market.' },
+                    { title: 'Speaking & training', desc: 'Talks, workshops, and facilitation on design, AI, and systems thinking.' },
+                    { title: 'Collaborations', desc: 'Independent projects, research, and creative partnerships.' },
+                    { title: 'Mentorship', desc: 'Through MentorCruise or direct inquiry.' },
+                  ].map((item, i, arr) => (
+                    <div key={item.title} className={i < arr.length - 1 ? "border-b border-[var(--theme-border)] pb-6" : ""}>
+                      <p className="text-[16px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">{item.title}</p>
+                      <p className="text-[15px] leading-relaxed text-[var(--theme-muted)]">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Response time — above the divider */}
+                <p className="text-[15px] text-[var(--theme-muted)] mb-8">
+                  Typically responds within 1–3 business days.
+                </p>
+
+                {/* Divider → email + social */}
+                <div className="border-t border-[var(--theme-border)] pt-6">
                   <button onClick={handleCopyEmail}
                     className="group inline-flex items-center gap-3 font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:opacity-60 transition-opacity cursor-pointer"
                     style={{ fontSize: 'clamp(18px, 2vw, 26px)' }}>
@@ -720,47 +745,18 @@ export default function App() {
                       ? <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
                       : <Copy className="w-4 h-4 text-[var(--theme-muted)] flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />}
                   </button>
-                  <p className="text-[13px] text-[var(--theme-muted)] mt-1.5">
+                  <p className="text-[13px] text-[var(--theme-muted)] mt-1.5 mb-6">
                     {copied ? 'Copied to clipboard' : 'Click to copy'}
                   </p>
-                </div>
-
-                {/* Social Links */}
-                <div className="flex flex-wrap gap-x-5 gap-y-2 mt-6 mb-10">
-                  {socialLinks.map((link: SocialLink) => (
-                    <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[13px] font-[family-name:var(--font-body)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
-                      {link.name} <ArrowUpRight className="w-3 h-3" />
-                    </a>
-                  ))}
-                </div>
-
-                {/* Reach out for — 2-col grid */}
-                <div className="border-t border-[var(--theme-border)] pt-6 mb-8">
-                  <p className="text-[12px] font-[family-name:var(--font-body)] text-[var(--theme-muted)] uppercase tracking-widest mb-5">Reach out for</p>
-                  <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-                    <div>
-                      <p className="text-[15px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-1">Project inquiries</p>
-                      <p className="text-[13px] text-[var(--theme-muted)] leading-relaxed">Brand, product, or digital system work across any stage or market.</p>
-                    </div>
-                    <div>
-                      <p className="text-[15px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-1">Speaking & training</p>
-                      <p className="text-[13px] text-[var(--theme-muted)] leading-relaxed">Talks, workshops, and facilitation on design, AI, and systems thinking.</p>
-                    </div>
-                    <div>
-                      <p className="text-[15px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-1">Collaborations</p>
-                      <p className="text-[13px] text-[var(--theme-muted)] leading-relaxed">Independent projects, research, and creative partnerships.</p>
-                    </div>
-                    <div>
-                      <p className="text-[15px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-1">Mentorship</p>
-                      <p className="text-[13px] text-[var(--theme-muted)] leading-relaxed">Through MentorCruise or direct inquiry.</p>
-                    </div>
+                  <div className="flex flex-wrap gap-x-5 gap-y-2">
+                    {socialLinks.map((link: SocialLink) => (
+                      <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-[15px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] transition-colors cursor-pointer">
+                        {link.name} <ArrowUpRight className="w-4 h-4" />
+                      </a>
+                    ))}
                   </div>
                 </div>
-
-                <p className="text-[13px] text-[var(--theme-muted)]">
-                  Typically responds within 1–3 business days.
-                </p>
               </div>
             </motion.div>
           )}
