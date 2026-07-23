@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
       // Use relative paths so the same build works on:
       // - https://tomiabe.github.io/tomiabestudio/
       // - https://studio.tomiabe.com/
-      base: './',
+      base: '/',
       server: {
         port: 3000,
         host: '0.0.0.0',
