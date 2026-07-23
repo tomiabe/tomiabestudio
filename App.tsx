@@ -130,7 +130,7 @@ function DesignSystemContent() {
       />
       <div className="p-2.5 border-t border-[var(--theme-border)] bg-stone-50 text-center">
         <a href="https://susinsight.com/design-system" target="_blank" rel="noopener noreferrer"
-          className="text-[12px] font-[500] text-[var(--theme-fg)] hover:underline underline-offset-4">
+          className="text-[12px] font-[500] text-[var(--theme-fg)] hover:underline underline-offset-4 inline-flex items-center gap-1 whitespace-nowrap">
           Open Full Design System <ArrowUpRight className="w-3 h-3" /></a>
       </div>
     </div>
@@ -465,7 +465,10 @@ export default function App() {
   // ── MOBILE HEADER + MENU ──
   const mobileHeader = (
     <div className="md:hidden fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 h-14 bg-[var(--theme-bg)]/90 backdrop-blur-md border-b border-[var(--theme-border)]">
-      <span className="text-sm font-[family-name:var(--font-heading)] text-[var(--theme-fg)]">TOMI ABE STUDIO</span>
+      <button onClick={() => { handleNav('home'); setMobileMenuOpen(false); }}
+        className="text-sm font-[family-name:var(--font-heading)] text-[var(--theme-fg)] text-left cursor-pointer">
+        TOMI ABE STUDIO
+      </button>
       <button onClick={() => setMobileMenuOpen(true)}
         className="p-2 text-[13px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:opacity-60 transition-opacity tracking-wider cursor-pointer">
         MENU
@@ -552,9 +555,10 @@ export default function App() {
       <aside className="hidden md:flex flex-col w-56 lg:w-64 flex-none md:border-r border-[var(--theme-border)] h-screen sticky top-0 p-6 justify-between">
         <div className="flex flex-col gap-10">
           <div>
-            <span className="text-sm font-[family-name:var(--font-heading)] text-[var(--theme-fg)]">
+            <button onClick={() => handleNav('home')}
+              className="text-sm font-[family-name:var(--font-heading)] text-[var(--theme-fg)] text-left cursor-pointer">
               TOMI ABE STUDIO
-            </span>
+            </button>
           </div>
           <nav className="flex flex-col gap-1">
             {navItems.map(item => (
@@ -610,7 +614,7 @@ export default function App() {
       </aside>
 
       {/* ── COLUMN 2 + 3: CONTENT ── */}
-      <main className="flex-1 min-h-screen overflow-y-auto hide-scrollbar pt-14 md:pt-0">
+      <main className="flex-1 min-h-screen overflow-y-auto hide-scrollbar pt-14 md:pt-0 flex flex-col">
         <AnimatePresence mode="wait">
           {/* ── HOME ── */}
           {isHome && (
@@ -1055,7 +1059,7 @@ export default function App() {
         </AnimatePresence>
 
         {/* ── FOOTER ── */}
-        <div className="px-6 md:px-8 lg:px-10 py-8 border-t border-[var(--theme-border)] flex flex-col md:flex-row items-center md:justify-between gap-2">
+        <div className="px-6 md:px-8 lg:px-10 py-8 border-t border-[var(--theme-border)] flex flex-col md:flex-row items-center md:justify-between gap-2 mt-auto">
           <p className="text-[13px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] tracking-wider">
             Objectivity · Clarity · Precision
           </p>
