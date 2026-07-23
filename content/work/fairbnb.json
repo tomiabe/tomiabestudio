@@ -1,39 +1,12 @@
 {
   "id": "fairbnb",
   "title": "Fairbnb",
-  "role": "Brand & Product Consultant",
-  "description": "Clarifying a cooperative travel marketplace's story so sustainable tourism, local impact, and booking flows feel transparent, intuitive, and trustworthy for all stakeholders.",
-  "categories": [
-    "Brand",
-    "Product"
-  ],
-  "image": "/images/work/Fairbnb.jpg",
-  "link": "https://fairbnb.coop",
-  "details": [
-    {
-      "heading": "The Challenge",
-      "text": "When approaching this project, the primary hurdle was synthesizing complex, divergent needs into a single, coherent system...",
-      "image": "https://picsum.photos/seed/fairbnb_d1/800/500"
-    },
-    {
-      "heading": "Strategic Approach",
-      "text": "Our strategy centered around deep alignment, moving beyond surface aesthetics...",
-      "image": "https://picsum.photos/seed/fairbnb_d2/800/500"
-    },
-    {
-      "heading": "Design & Execution",
-      "text": "Execution required meticulous attention to typographic hierarchy...",
-      "image": "https://picsum.photos/seed/fairbnb_d3/800/500"
-    },
-    {
-      "heading": "Results & Impact",
-      "text": "The final outcome significantly streamlined operational workflows...",
-      "image": "https://picsum.photos/seed/fairbnb_d4/800/500"
-    }
-  ],
-  "order": 5,
-  "visible": true,
-  "useDrawer": false,
+  "categories": ["Brand", "Product"],
   "shortDescription": "Cooperative sustainable travel marketplace",
-  "year": "2022"
+  "role": "Brand & Product Consultant",
+  "order": 5,
+  "year": "2022",
+  "image": "/images/work/Fairbnb.jpg",
+  "description": "Clarifying a cooperative travel marketplace's story so sustainable tourism, local impact, and booking flows feel transparent, intuitive, and trustworthy for all stakeholders.",
+  "link": "https://fairbnb.coop"
 }

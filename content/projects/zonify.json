@@ -1,0 +1,12 @@
+{
+  "id": "zonify",
+  "title": "Zonify",
+  "categories": ["Product"],
+  "shortDescription": "Global time coordination tool",
+  "role": "",
+  "order": 8,
+  "year": "2022",
+  "image": "/images/projects/zonify.png",
+  "description": "Turning global time differences into a clear, interactive world clock for planning, coordination, and decision-making across regions.",
+  "link": "https://tomiabe.github.io/zonify/"
+}

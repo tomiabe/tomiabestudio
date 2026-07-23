@@ -1,0 +1,12 @@
+{
+  "id": "jtf23",
+  "title": "JTF23",
+  "categories": ["Content"],
+  "shortDescription": "Interactive wedding story website",
+  "role": "",
+  "order": 13,
+  "year": "2022",
+  "image": "/images/projects/JTF.jpg",
+  "description": "Designing an intimate wedding website where interactive storytelling, photography, and micro-interactions trace a couple's journey as a living, personal archive.",
+  "link": "https://jtf.persona.co"
+}

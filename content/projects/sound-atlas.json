@@ -1,0 +1,12 @@
+{
+  "id": "sound-atlas",
+  "title": "Sound Atlas",
+  "categories": ["Product"],
+  "shortDescription": "Location-aware music discovery",
+  "role": "",
+  "order": 12,
+  "year": "2022",
+  "image": "/images/projects/SoundAtlas.png",
+  "description": "Mapping global music cultures through dynamic, city-aware playlists that reveal how location, movement, and listening habits shape evolving soundscapes.",
+  "link": "https://tomiabe.github.io/soundatlas/"
+}

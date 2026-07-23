@@ -1,17 +1,12 @@
 {
-  "title": "Translayte",
   "id": "translayte",
-  "order": 4,
-  "role": "Growth Design Consultant",
-  "description": "Scaling a certified translation platform across borders by aligning UX, conversion, and trust signals in documentation‑heavy, regulation‑sensitive customer journeys.",
-  "categories": [
-    "Product"
-  ],
-  "image": "/images/work/Translayte.jpg",
-  "link": "https://translayte.com",
-  "useDrawer": false,
-  "isFullBleed": false,
-  "visible": true,
+  "title": "Translayte",
+  "categories": ["Product"],
   "shortDescription": "Cross-border translation platform",
-  "year": "2022"
+  "role": "Growth Design Consultant",
+  "order": 4,
+  "year": "2022",
+  "image": "/images/work/Translayte.jpg",
+  "description": "Scaling a certified translation platform across borders by aligning UX, conversion, and trust signals in documentation‑heavy, regulation‑sensitive customer journeys.",
+  "link": "https://translayte.com"
 }

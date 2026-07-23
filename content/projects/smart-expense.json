@@ -1,0 +1,12 @@
+{
+  "id": "smart-expense",
+  "title": "Smart Expense Agent",
+  "categories": ["Product", "Data"],
+  "shortDescription": "AI expense analysis assistant",
+  "role": "",
+  "order": 11,
+  "year": "2022",
+  "image": "/images/projects/SmartExpense.jpg",
+  "description": "Using AI to read messy bank statements, surface hidden fees, and visualize everyday spending patterns as clear, actionable financial insight.",
+  "link": "https://smart-expense-agent.vercel.app/"
+}

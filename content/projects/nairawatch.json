@@ -1,0 +1,12 @@
+{
+  "id": "nairawatch",
+  "title": "NairaWatch",
+  "categories": ["Product", "Data"],
+  "shortDescription": "Nigeria FX tracking dashboard",
+  "role": "",
+  "order": 7,
+  "year": "2022",
+  "image": "/images/projects/NairaWatch.jpg",
+  "description": "Tracking Nigeria's parallel market in real time by blending official rates with AI-interpreted signals into a clear, decision-ready FX dashboard.",
+  "link": "https://tomiabe.github.io/nairawatch/"
+}

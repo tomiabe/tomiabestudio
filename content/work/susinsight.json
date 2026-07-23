@@ -14,5 +14,82 @@
   "link": "https://susinsight.com",
   "isFullBleed": false,
   "shortDescription": "Sustainability media insight platform",
-  "year": "2022"
+  "year": "2023–present",
+  "details": [
+    {
+      "heading": "Brand Identity",
+      "text": "Susinsight's visual identity had to feel authoritative yet approachable, a brand that could sit alongside global policy publications while remaining unmistakably African. I developed a logo system with light and dark variants, a green-centric palette drawn from the continent's landscapes, and a type pairing of Bricolage Grotesque for headlines with Manrope for body copy. Every decision was tested for WCAG AA contrast compliance, ensuring the brand was not just distinctive but accessible across every touchpoint.",
+      "type": "brand-identity",
+      "images": ["https://susinsight.com/images/pages/layout/logo-green.png", "https://susinsight.com/images/pages/layout/logo-white.png"]
+    },
+    {
+      "heading": "Creative Direction & Design",
+      "text": "Beyond the platform itself, I lead the full creative direction for Susinsight, shaping how the brand shows up across every channel. This includes editorial design for the website, data visualization and infographics that turn complex research into clear visuals, and the graphic assets that power social media, newsletters, and marketing materials. Every illustration, photo illustration, and editorial graphic is crafted to make sustainability intelligence more accessible and visually compelling.",
+      "type": "creative-feed",
+      "images": [
+        "https://i.pinimg.com/474x/92/8c/c6/928cc6d7810ad525f9f4c72549040620.jpg",
+        "https://i.pinimg.com/474x/a1/f4/e4/a1f4e44125a0a5b27d04431e7c46416a.jpg",
+        "https://i.pinimg.com/474x/2e/2b/01/2e2b01e14eeaeb9a55fdd393be420e7c.jpg",
+        "https://i.pinimg.com/474x/00/d2/af/00d2af0f21043be298b83bfefed7fe6e.jpg",
+        "https://i.pinimg.com/474x/ff/56/9a/ff569aecdb3b371c3d5b02c0a1466666.jpg",
+        "https://i.pinimg.com/474x/76/ee/f4/76eef470bfc9d1dbf51ecc3ee86718e9.jpg",
+        "https://i.pinimg.com/474x/51/90/69/5190699fedf507e330a31ec1f2c1267c.jpg",
+        "https://i.pinimg.com/474x/cb/3f/cb/cb3fcb45e9e4d3c74001b6dfc2ea61c3.jpg",
+        "https://i.pinimg.com/474x/ee/47/e6/ee47e66c7ca01ffff72c7d61a841f62f.jpg",
+        "https://i.pinimg.com/474x/ec/22/28/ec222885705130e38e544bd331d7ba6d.jpg",
+        "https://i.pinimg.com/474x/75/01/16/750116c9d4ff158f44ecb39ac809f416.jpg",
+        "https://i.pinimg.com/474x/68/4e/e9/684ee9f51c20625fc6162ffaba61a2ad.jpg",
+        "https://i.pinimg.com/474x/bf/41/23/bf4123c5123bcbe57c67804c2f0ea7df.jpg",
+        "https://i.pinimg.com/474x/b4/6e/e8/b46ee8dc16656e7e84b65d6eee95cde2.jpg",
+        "https://i.pinimg.com/474x/37/ce/13/37ce13c73ee8ac15b60a3a87a60ab741.jpg",
+        "https://i.pinimg.com/474x/53/9d/74/539d7490c51c2b8196188709092942f8.jpg",
+        "https://i.pinimg.com/474x/7a/55/32/7a553255fdc7f808ee98673ac6ed89c8.jpg",
+        "https://i.pinimg.com/474x/7d/9c/3c/7d9c3cb9e4d56111c52385fe538af45a.jpg",
+        "https://i.pinimg.com/474x/52/eb/de/52ebde873e70d55413bdfd3e8c11edc7.jpg",
+        "https://i.pinimg.com/474x/28/dd/3b/28dd3bac5aaa35e1028292e276caf984.jpg",
+        "https://i.pinimg.com/474x/4a/49/1d/4a491d885120bba611f49b4086235ab0.jpg",
+        "https://i.pinimg.com/474x/72/63/58/7263589636d3c62626516d40c177c6b5.jpg",
+        "https://i.pinimg.com/474x/45/24/1e/45241eb3c5f3c31f53613eda64a37cc7.jpg",
+        "https://susinsight.com/images/nigeria-federalism-crisis-centralisation-security-fiscal.jpg"
+      ]
+    },
+    {
+      "heading": "Platform Architecture",
+      "text": "The original Susinsight ran on a traditional WordPress setup that limited the custom editorial experiences the team wanted to build. I migrated to a headless architecture powered by Next.js, using markdown files managed through Pages CMS as the primary content source. This gave the editorial team a familiar git-based workflow while unlocking server-side rendering, a modern component-driven frontend, and deployment flexibility across Vercel and Cloudflare.",
+      "image": "https://cdn-images-1.medium.com/max/1024/1*9EyhrhrhMerDawEjZuEIYw.png",
+      "link": "https://medium.com/susinsight",
+      "linkLabel": "Read Susinsight Systems"
+    },
+    {
+      "heading": "Design System",
+      "text": "As the platform grew, maintaining visual consistency became critical. I built Susinsight's Design System, a comprehensive component library documenting foundations, components, and page templates. The system introduced a three-tier token hierarchy that moved from raw values to semantic tokens to component-level mappings, making it possible for AI coding assistants to generate new components that matched the existing design automatically. Every component was audited for keyboard navigation, ARIA patterns, and focus management, achieving WCAG AA compliance across the board.",
+      "type": "design-system"
+    },
+    {
+      "heading": "Editorial Features",
+      "text": "To differentiate Susinsight from traditional media platforms, I built custom editorial features designed to make sustainability journalism more engaging and navigable. A glossary provides clear, plain-language explanations of essential concepts. A data initiative section presents data-driven stories with embedded visualizations. An events calendar keeps readers informed about conferences and summits. An AI research assistant helps surface related content. Each feature was designed to pull readers deeper into the platform rather than pushing them out to third-party sources.",
+      "image": "/images/work/Susinsight/ask-susinsight.png",
+      "link": "https://susinsight.com/ask",
+      "linkLabel": "Ask Susinsight"
+    },
+    {
+      "heading": "Readership & Growth",
+      "text": "With the platform rebuilt, I turned to readership growth and audience engagement. A multi-context newsletter system with inline sidebar cards, full-width banner CTAs, and dedicated signup sections was integrated directly into the editorial workflow. Marketing pages for About, Vision, Partners, and Contact were designed to match the editorial experience, making every touchpoint feel consistent. An audio player with text-to-speech support and adjustable reading speeds made stories accessible to a wider audience.",
+      "image": "/images/work/Susinsight/newsletter-inline.png",
+      "link": "http://susinsight.substack.com/",
+      "linkLabel": "Susinsight Newsletter"
+    },
+    {
+      "heading": "Content Operations",
+      "text": "Sustainability journalism requires a deliberate publishing rhythm, and the workflow needed to match that pace. I set up a markdown-based editorial pipeline where writers and editors could draft, review, and publish stories directly through Pages CMS without developer intervention. The taxonomy system for organizing stories by SDGs, African regions, countries, and series was designed to be extensible, allowing the team to tag and filter content dynamically. Automated scripts handle post manifest generation and image optimization, keeping the build pipeline lean.",
+      "image": "/images/work/Susinsight/all-stories.png",
+      "scroll": true,
+      "link": "https://susinsight.com/stories",
+      "linkLabel": "Read Stories"
+    },
+    {
+      "heading": "Ongoing Collaboration",
+      "text": "This is not a handoff project. I continue to work on Susinsight as needs evolve, scoping and shipping new features iteratively. The design system receives regular updates as new component requirements emerge. Performance and accessibility improvements are made each quarter. Being embedded in the product's evolution means every decision is informed by real usage data and direct feedback from the team behind the platform."
+    }
+  ]
 }

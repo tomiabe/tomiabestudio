@@ -1,17 +1,12 @@
 {
-  "title": "Eze",
   "id": "eze",
-  "order": 6,
-  "visible": true,
-  "role": "Brand & Product Design Lead",
-  "description": "Building and leading an in-house design function for a YC-backed B2B marketplace, unifying interfaces, journeys, and brand for global electronics trade.",
-  "categories": [
-    "Brand",
-    "Product"
-  ],
-  "image": "/images/work/Eze.jpg",
-  "link": "https://ezewholesale.com",
-  "isFullBleed": false,
+  "title": "Eze",
+  "categories": ["Brand", "Product"],
   "shortDescription": "Global B2B electronics marketplace",
-  "year": "2022"
+  "role": "Brand & Product Design Lead",
+  "order": 6,
+  "year": "2022",
+  "image": "/images/work/Eze.jpg",
+  "description": "Building and leading an in-house design function for a YC-backed B2B marketplace, unifying interfaces, journeys, and brand for global electronics trade.",
+  "link": "https://ezewholesale.com"
 }

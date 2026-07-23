@@ -1,18 +1,12 @@
 {
-  "title": "WeCollect",
   "id": "wecollect",
-  "order": 2,
-  "role": "Brand & Digital Consultant",
-  "description": "Translating complex data infrastructure into a clear narrative, brand, and product story for offline capture and real‑time analytics across African markets.",
-  "categories": [
-    "Brand",
-    "Content"
-  ],
-  "image": "/images/work/WeCollect.jpg",
-  "link": "https://wecollect.tech",
-  "useDrawer": false,
-  "isFullBleed": false,
-  "visible": true,
+  "title": "WeCollect",
+  "categories": ["Brand", "Content"],
   "shortDescription": "Offline-first data infrastructure platform",
-  "year": "2022"
+  "role": "Brand & Digital Consultant",
+  "order": 2,
+  "year": "2022",
+  "image": "/images/work/WeCollect.jpg",
+  "description": "Translating complex data infrastructure into a clear narrative, brand, and product story for offline capture and real‑time analytics across African markets.",
+  "link": "https://wecollect.tech"
 }

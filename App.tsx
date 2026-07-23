@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { playClickSound } from './lib/audio';
-import { ArrowUpRight, ArrowRight, Sun, Moon, Sunrise, Monitor, Copy, Check, ChevronRight, Linkedin, Twitter, Instagram, Github, Menu, X } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Sun, Moon, Sunrise, Monitor, Copy, Check, ChevronRight, Linkedin, Instagram, Github, Menu, X } from 'lucide-react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
 
 function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
@@ -12,10 +20,122 @@ function cn(...inputs: (string | undefined | null | false)[]) {
 type ActiveSection = 'home' | 'work' | 'projects' | 'thoughts' | 'info' | 'contact';
 type ThemeMode = 'morning' | 'noon' | 'evening' | 'system';
 
-interface ProjectDetail { heading: string; text: string; image: string; }
+interface ProjectDetail { heading: string; text: string; image?: string; images?: string[]; type?: 'brand-identity' | 'creative-feed' | 'design-system'; }
 interface Project { id: string; title: string; role?: string; description: string; categories: string[]; link?: string; useDrawer?: boolean; image: string; details?: ProjectDetail[]; order?: number; visible?: boolean; }
 interface Update { id: string; date: string; title: string; description: string; image: string; link?: string; directLink?: boolean; content?: string; order?: number; visible?: boolean; }
 interface SocialLink { name: string; url: string; }
+
+function ImageFader({ images, alt, className }: { images: string[]; alt: string; className?: string }) {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    if (images.length < 2) return;
+    const timer = setInterval(() => setIndex(prev => (prev + 1) % images.length), 4000);
+    return () => clearInterval(timer);
+  }, [images]);
+
+  return (
+    <div className={`relative rounded-lg bg-[var(--theme-border)] overflow-hidden ${className || ''}`}>
+      <img src={images[0]} alt="" className="w-full h-auto rounded-lg invisible" referrerPolicy="no-referrer" />
+      {images.map((src, i) => (
+        <img key={src} src={src} alt={alt}
+          className="w-full h-auto rounded-lg absolute inset-0 transition-opacity duration-1000 object-top"
+          style={{ opacity: i === index ? 1 : 0 }}
+          referrerPolicy="no-referrer" />
+      ))}
+    </div>
+  );
+}
+
+function BrandIdentityContent({ images }: { images?: string[] }) {
+  const palette = [
+    { name: 'brand-primary', hex: '#3A8B72' },
+    { name: 'brand-dark', hex: '#2E6F5B' },
+    { name: 'brand-light', hex: '#F9FFE3' },
+    { name: 'brand-soft', hex: '#91C3B3' },
+  ];
+
+  return (
+    <div className="border border-[var(--theme-border)] rounded-xl p-4 space-y-5 mb-3">
+      {images && images.length >= 2 && (
+        <div className="space-y-2">
+          <div className="p-4 rounded-lg bg-white border border-[var(--theme-border)] flex items-center justify-center min-h-[60px]">
+            <img src={images[0]} alt="Susinsight logo (light background)" className="h-6 md:h-7 w-auto object-contain" referrerPolicy="no-referrer" />
+          </div>
+          <div className="p-4 rounded-lg flex items-center justify-center min-h-[60px]" style={{ backgroundColor: '#2E6F5B' }}>
+            <img src={images[1]} alt="Susinsight logo (dark background)" className="h-6 md:h-7 w-auto object-contain" referrerPolicy="no-referrer" />
+          </div>
+        </div>
+      )}
+      <div>
+        <p className="text-[12px] font-[600] text-[var(--theme-muted)] uppercase tracking-wider mb-3">Color Palette</p>
+        <div className="grid grid-cols-4 gap-3">
+          {palette.map(c => (
+            <div key={c.hex} className="flex flex-col items-center gap-1.5">
+              <div className="w-full aspect-square rounded-lg border border-[var(--theme-border)]" style={{ backgroundColor: c.hex }} />
+              <span className="text-[10px] font-mono text-[var(--theme-muted)]">{c.hex}</span>
+              <span className="text-[9px] text-[var(--theme-muted)] opacity-70 leading-tight text-center">{c.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <p className="text-[12px] font-[600] text-[var(--theme-muted)] uppercase tracking-wider mb-3">Typography</p>
+        <div className="space-y-2">
+          <div className="p-3 rounded-lg border border-[var(--theme-border)]">
+            <p className="text-[10px] text-[var(--theme-muted)] uppercase tracking-wider mb-1">Headings</p>
+            <p className="text-[18px] font-bold text-[var(--theme-fg)]" style={{ fontFamily: 'Bricolage Grotesque, serif' }}>Bricolage Grotesque</p>
+            <p className="text-[11px] text-[var(--theme-muted)]">Semibold · 48px–20px scale</p>
+          </div>
+          <div className="p-3 rounded-lg border border-[var(--theme-border)]">
+            <p className="text-[10px] text-[var(--theme-muted)] uppercase tracking-wider mb-1">Body</p>
+            <p className="text-[14px] text-[var(--theme-fg)]" style={{ fontFamily: 'Manrope, sans-serif' }}>Manrope</p>
+            <p className="text-[11px] text-[var(--theme-muted)]">Regular · 16px / 14px / 12px</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CreativeFeed({ images }: { images: string[] }) {
+  return (
+    <div className="mb-3">
+      {images.length > 0 && (
+        <div className="feed-mask-vertical overflow-hidden rounded-lg" style={{ maxHeight: '420px' }}>
+          <div className="animate-scroll-up">
+            <div className="grid grid-cols-3 gap-2 p-2">
+              {images.map((src, i) => (
+                <img key={`v-${i}`} src={src} alt="" className="w-full rounded-md" referrerPolicy="no-referrer" loading="lazy" />
+              ))}
+            </div>
+            <div className="grid grid-cols-3 gap-2 p-2">
+              {images.map((src, i) => (
+                <img key={`v-dup-${i}`} src={src} alt="" className="w-full rounded-md" referrerPolicy="no-referrer" loading="lazy" />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DesignSystemContent() {
+  return (
+    <div className="border border-[var(--theme-border)] rounded-xl overflow-hidden mb-3">
+      <img
+        src="/images/work/Susinsight/design-system.png"
+        alt="Susinsight Design System"
+        className="w-full"
+      />
+      <div className="p-2.5 border-t border-[var(--theme-border)] bg-stone-50 text-center">
+        <a href="https://susinsight.com/design-system" target="_blank" rel="noopener noreferrer"
+          className="text-[12px] font-[500] text-[var(--theme-fg)] hover:underline underline-offset-4">
+          Open full design system →</a>
+      </div>
+    </div>
+  );
+}
 
 function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -27,8 +147,6 @@ function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue] as const;
 }
 
-const CLIENT_WORK_IDS = ['susinsight', 'wecollect', 'zeproc', 'translayte', 'fairbnb', 'eze'];
-
 export default function App() {
   const [activeSection, setActiveSection] = useState<ActiveSection>('home');
   const [selectedItem, setSelectedItem] = useState<any>(null);
@@ -39,11 +157,14 @@ export default function App() {
   const [displayedTagline, setDisplayedTagline] = useState('Shaping Creative & Digital Systems');
   const [currentTime, setCurrentTime] = useState(new Date());
   const [activeFilter, setActiveFilter] = useState<string>('All');
-  const [activeInfoSection, setActiveInfoSection] = useState<string>('About');
+  const [activeInfoSection, setActiveInfoSection] = useState<string>('');
   const [showMobileInfo, setShowMobileInfo] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [listOpen, setListOpen] = useState(true);
 
-  const [allProjects, setAllProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [clientWork, setClientWork] = useState<Project[]>([]);
+  const [personalProjects, setPersonalProjects] = useState<Project[]>([]);
   const [updates, setUpdates] = useState<Update[]>([]);
   const [siteData, setSiteData] = useState<any>({});
 
@@ -53,28 +174,28 @@ export default function App() {
     const parts = path.split('/').filter(Boolean);
     
     if (parts.length === 0 || parts[0] === '') {
-      return { section: 'home' as ActiveSection, filter: 'All', itemId: null, infoSection: 'About' };
+      return { section: 'home' as ActiveSection, filter: 'All', itemId: null, infoSection: '' };
     }
     
     const section = parts[0] as ActiveSection;
     
     if (section === 'work' || section === 'projects') {
-      if (parts.length === 1) return { section, filter: 'All', itemId: null, infoSection: 'About' };
+      if (parts.length === 1) return { section, filter: 'All', itemId: null, infoSection: '' };
       // Check if second part is a filter or an item ID
       const possibleFilters = ['All', ...allCategories];
       if (possibleFilters.includes(parts[1])) {
-        return { section, filter: parts[1], itemId: null, infoSection: 'About' };
+        return { section, filter: parts[1], itemId: null, infoSection: '' };
       }
-      return { section, filter: 'All', itemId: parts[1], infoSection: 'About' };
+      return { section, filter: 'All', itemId: parts[1], infoSection: '' };
     }
     
     if (section === 'thoughts' || section === 'updates') {
-      if (parts.length === 1) return { section: 'thoughts', filter: 'All', itemId: null, infoSection: 'About' };
-      return { section: 'thoughts', filter: 'All', itemId: parts[1], infoSection: 'About' };
+      if (parts.length === 1) return { section: 'thoughts', filter: 'All', itemId: null, infoSection: '' };
+      return { section: 'thoughts', filter: 'All', itemId: parts[1], infoSection: '' };
     }
     
     if (section === 'info') {
-      if (parts.length === 1) return { section, filter: 'All', itemId: null, infoSection: 'About' };
+      if (parts.length === 1) return { section, filter: 'All', itemId: null, infoSection: '' };
       const infoSectionMap: Record<string, string> = {
         'about': 'About',
         'operating-model': 'Operating Model',
@@ -82,10 +203,10 @@ export default function App() {
         'speaking': 'Speaking & Mentorship',
         'elsewhere': 'Elsewhere'
       };
-      return { section, filter: 'All', itemId: null, infoSection: infoSectionMap[parts[1]] || 'About' };
+      return { section, filter: 'All', itemId: null, infoSection: infoSectionMap[parts[1]] || '' };
     }
     
-    return { section: section || 'home', filter: 'All', itemId: null, infoSection: 'About' };
+    return { section: section || 'home', filter: 'All', itemId: null, infoSection: '' };
   };
 
   const updateUrl = (section: ActiveSection, filter?: string, itemId?: string, infoSection?: string) => {
@@ -135,11 +256,11 @@ export default function App() {
     setActiveInfoSection(urlState.infoSection);
     
     if (urlState.itemId) {
-      const allItems = [...allProjects, ...updates];
+      const allItems = [...clientWork, ...personalProjects, ...updates];
       const item = allItems.find(i => i.id === urlState.itemId);
       if (item) setSelectedItem(item);
     }
-  }, [allProjects, updates]);
+  }, [clientWork, personalProjects, updates]);
 
   // URL routing - handle back/forward
   useEffect(() => {
@@ -151,7 +272,7 @@ export default function App() {
       setSelectedItem(null);
       
       if (urlState.itemId) {
-        const allItems = [...allProjects, ...updates];
+        const allItems = [...clientWork, ...personalProjects, ...updates];
         const item = allItems.find(i => i.id === urlState.itemId);
         if (item) setSelectedItem(item);
       }
@@ -159,13 +280,23 @@ export default function App() {
     
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, [allProjects, updates]);
+  }, [clientWork, personalProjects, updates]);
 
   // Clock
   useEffect(() => {
     const iv = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(iv);
   }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
 
   // Text scramble
   useEffect(() => {
@@ -213,14 +344,20 @@ export default function App() {
       const settingsMod = import.meta.glob('./content/settings.json', { eager: true });
       const homeMod = import.meta.glob('./content/home.json', { eager: true });
       const infoMod = import.meta.glob('./content/info.json', { eager: true });
-      const projectMods = import.meta.glob('./content/work/*.json', { eager: true });
+      const workMods = import.meta.glob('./content/work/*.json', { eager: true });
+      const projectMods = import.meta.glob('./content/projects/*.json', { eager: true });
       const updatesMods = import.meta.glob('./content/updates/*.json', { eager: true });
 
       const sd = (Object.values(settingsMod)[0] as any)?.default || {};
       const hd = (Object.values(homeMod)[0] as any)?.default || {};
       const id = (Object.values(infoMod)[0] as any)?.default || {};
 
-      const projs: Project[] = Object.values(projectMods)
+      const work: Project[] = Object.values(workMods)
+        .map((m: any) => m.default || m)
+        .filter((p: Project) => p.visible !== false)
+        .sort((a: Project, b: Project) => (a.order ?? 99) - (b.order ?? 99));
+
+      const projects: Project[] = Object.values(projectMods)
         .map((m: any) => m.default || m)
         .filter((p: Project) => p.visible !== false)
         .sort((a: Project, b: Project) => (a.order ?? 99) - (b.order ?? 99));
@@ -231,8 +368,10 @@ export default function App() {
         .sort((a: Update, b: Update) => (a.order ?? 99) - (b.order ?? 99));
 
       setSiteData({ settings: sd, home: hd, info: id });
-      setAllProjects(projs);
+      setClientWork(work);
+      setPersonalProjects(projects);
       setUpdates(upds);
+      setLoading(false);
 
       // Apply theme colors from CMS
       const themeData = sd.themeColors;
@@ -262,6 +401,7 @@ export default function App() {
         document.head.appendChild(link);
       }
     } catch (e) { console.error('Failed to load CMS data', e); }
+    setLoading(false);
   }, []);
 
   const triggerSound = () => { if (soundEnabled) playClickSound('modern'); };
@@ -272,8 +412,13 @@ export default function App() {
   const handleNav = (section: ActiveSection) => {
     triggerSound();
     setSelectedItem(null);
+    setListOpen(true);
     setActiveFilter('All');
     setActiveSection(section);
+    if (section === 'info') {
+      setActiveInfoSection('');
+      setShowMobileInfo(false);
+    }
     updateUrl(section);
   };
 
@@ -292,9 +437,7 @@ export default function App() {
   };
 
   const socialLinks: SocialLink[] = siteData.settings?.socialLinks || [];
-  const clientWork = allProjects.filter(p => CLIENT_WORK_IDS.includes(p.id));
-  const personalProjects = allProjects.filter(p => !CLIENT_WORK_IDS.includes(p.id));
-  const allCategories = [...new Set(allProjects.flatMap(p => p.categories || []))].sort();
+  const allCategories = [...new Set([...clientWork, ...personalProjects].flatMap(p => p.categories || []))].sort();
 
   const navItems: { key: ActiveSection; label: string }[] = [
     { key: 'home', label: 'Home' },
@@ -335,11 +478,11 @@ export default function App() {
       {mobileMenuOpen && (
         <>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/20 md:hidden"
+            className="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm md:hidden"
             onClick={() => setMobileMenuOpen(false)} />
           <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="fixed top-0 right-0 bottom-0 z-50 w-full bg-[var(--theme-bg)] md:hidden p-6 flex flex-col gap-6">
+            className="fixed top-0 right-0 bottom-0 z-50 w-[80%] max-w-sm bg-[var(--theme-bg)] md:hidden p-6 flex flex-col gap-6 shadow-xl">
             <div className="flex items-center justify-end">
               <button onClick={() => setMobileMenuOpen(false)}
                 className="p-2 text-[var(--theme-fg)] hover:opacity-60 transition-opacity cursor-pointer">
@@ -368,7 +511,7 @@ export default function App() {
               </button>
               <div className="flex items-center gap-3">
                 {socialLinks.map((link: SocialLink) => {
-                  const iconMap: Record<string, React.ElementType> = { LinkedIn: Linkedin, Twitter: Twitter, Instagram: Instagram, Github: Github };
+                  const iconMap: Record<string, React.ElementType> = { LinkedIn: Linkedin, Twitter: XIcon, Instagram: Instagram, Github: Github };
                   const Icon = iconMap[link.name];
                   return Icon ? (
                     <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
@@ -387,13 +530,27 @@ export default function App() {
                     <Icon className="w-4 h-4" />
                   </button>
                 ))}
-              </div>
+                </div>
+              {selectedItem && (
+                <button onClick={() => setListOpen(!listOpen)}
+                  className="hidden md:flex items-center justify-center w-6 h-6 mt-1 -mr-3 rounded border border-[var(--theme-border)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-muted)] transition-colors cursor-pointer flex-shrink-0 self-start bg-[var(--theme-bg)] z-10">
+                  <ChevronRight className={cn("w-3.5 h-3.5 transition-transform duration-300", listOpen && "-rotate-180")} />
+                </button>
+              )}
             </div>
           </motion.div>
         </>
       )}
     </AnimatePresence>
   );
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[var(--theme-bg)] text-[var(--theme-fg)]">
+        <span className="text-[13px] font-[family-name:var(--font-heading)] tracking-widest opacity-60">Loading</span>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex font-[family-name:var(--font-body)] bg-[var(--theme-bg)] text-[var(--theme-fg)]">
@@ -431,7 +588,7 @@ export default function App() {
             </button>
             <div className="flex items-center gap-3">
               {socialLinks.map((link: SocialLink) => {
-                const iconMap: Record<string, React.ElementType> = { LinkedIn: Linkedin, Twitter: Twitter, Instagram: Instagram, Github: Github };
+                const iconMap: Record<string, React.ElementType> = { LinkedIn: Linkedin, Twitter: XIcon, Instagram: Instagram, Github: Github };
                 const Icon = iconMap[link.name];
                 return Icon ? (
                   <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
@@ -469,7 +626,7 @@ export default function App() {
                   dangerouslySetInnerHTML={{ __html: hero?.headline || '<p>Turning complex systems into clear products, brands, and stories.</p>' }} />
                 <p className="text-[17px] leading-relaxed text-[var(--theme-muted)] mb-8"
                   dangerouslySetInnerHTML={{ __html: hero?.description || '' }} />
-                <button onClick={() => handleNav('work')}
+                <button onClick={() => handleNav('contact')}
                   className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline hover:underline-offset-4 transition-all cursor-pointer">
                   {labels?.heroCta || "Let's Work"} <ArrowRight className="w-4 h-4" />
                 </button>
@@ -552,15 +709,19 @@ export default function App() {
             <motion.div key={activeSection} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
               className="flex md:h-screen">
               {/* Col 2: List - hide on mobile when viewing detail */}
-              <div className={cn("w-full md:w-[380px] flex-none md:border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6",
+              <div className={cn(
+                "flex-none md:border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6 transition-all duration-300",
+                listOpen ? "w-full md:w-[380px]" : "md:w-0 md:overflow-hidden md:px-0",
                 selectedItem ? "hidden md:block" : ""
               )}>
-                <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-6">
-                  {activeSection === 'work' ? 'Work' : 'Projects'}
-                </h2>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)]">
+                    {activeSection === 'work' ? 'Work' : 'Projects'}
+                  </h2>
+                </div>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {['All', ...allCategories].map(cat => (
-                    <button key={cat} onClick={() => { triggerSound(); setActiveFilter(cat); setSelectedItem(null); updateUrl(activeSection, cat); }}
+                    <button key={cat} onClick={() => { triggerSound(); setActiveFilter(cat); setSelectedItem(null); setListOpen(true); updateUrl(activeSection, cat); }}
                       className={cn("px-3 py-1.5 text-[13px] font-[family-name:var(--font-body)] rounded-full border transition-colors cursor-pointer",
                         activeFilter === cat
                           ? "border-[var(--theme-fg)] text-[var(--theme-fg)]"
@@ -592,7 +753,7 @@ export default function App() {
                 selectedItem ? "flex" : "hidden md:flex"
               )}>
                 <div className="max-w-2xl w-full">
-                  <button onClick={() => { setSelectedItem(null); updateUrl(activeSection, activeFilter); }}
+                  <button onClick={() => { setSelectedItem(null); setListOpen(true); updateUrl(activeSection, activeFilter); }}
                     className="md:hidden inline-flex items-center gap-1.5 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] mb-6 transition-colors cursor-pointer">
                     <ArrowRight className="w-4 h-4 rotate-180" /> Back
                   </button>
@@ -615,10 +776,48 @@ export default function App() {
                           <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-auto rounded-lg" referrerPolicy="no-referrer" />
                         </div>
                       )}
-                      <p className="text-[16px] leading-relaxed text-[var(--theme-muted)] mb-8">{selectedItem.description}</p>
+                      <p className="text-[16px] font-[500] leading-relaxed text-[var(--theme-muted)] mb-8">{selectedItem.description}</p>
                       {selectedItem.details?.map((d: ProjectDetail, i: number) => (
                         <div key={i} className="mb-6">
                           <h3 className="text-[15px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">{d.heading}</h3>
+                          {d.type === 'brand-identity' ? (
+                            <BrandIdentityContent images={d.images} />
+                          ) : d.type === 'creative-feed' ? (
+                            <CreativeFeed images={d.images || []} />
+                          ) : d.type === 'design-system' ? (
+                            <DesignSystemContent />
+                          ) : d.images ? (
+                            <ImageFader images={d.images} alt={d.heading} className="mb-3" />
+                          ) : d.image && d.scroll ? (
+                            <div className="border border-[var(--theme-border)] rounded-xl overflow-hidden mb-3">
+                              <div className="feed-mask-vertical overflow-hidden" style={{ maxHeight: '420px' }}>
+                                <div className="animate-scroll-up">
+                                  <img src={d.image} alt={d.heading} className="w-full" referrerPolicy="no-referrer" />
+                                  <img src={d.image} alt="" className="w-full" referrerPolicy="no-referrer" />
+                                </div>
+                              </div>
+                              {(d.link || selectedItem.link) && (
+                                <div className="p-2.5 border-t border-[var(--theme-border)] bg-stone-50 text-center">
+                                  <a href={d.link || selectedItem.link} target="_blank" rel="noopener noreferrer"
+                                    className="text-[12px] font-[500] text-[var(--theme-fg)] hover:underline underline-offset-4 inline-flex items-center gap-1">
+                                    {d.linkLabel || siteData.settings?.uiLabels?.visitProject || 'Visit'} <ArrowUpRight className="w-3 h-3" />
+                                  </a>
+                                </div>
+                              )}
+                            </div>
+                          ) : d.image && (
+                            <div className="border border-[var(--theme-border)] rounded-xl overflow-hidden mb-3">
+                              <img src={d.image} alt={d.heading} className="w-full" referrerPolicy="no-referrer" />
+                              {(d.link || selectedItem.link) && (
+                                <div className="p-2.5 border-t border-[var(--theme-border)] bg-stone-50 text-center">
+                                  <a href={d.link || selectedItem.link} target="_blank" rel="noopener noreferrer"
+                                    className="text-[12px] font-[500] text-[var(--theme-fg)] hover:underline underline-offset-4 inline-flex items-center gap-1">
+                                    {d.linkLabel || siteData.settings?.uiLabels?.visitProject || 'Visit'} <ArrowUpRight className="w-3 h-3" />
+                                  </a>
+                                </div>
+                              )}
+                            </div>
+                          )}
                           <p className="text-[15px] leading-relaxed text-[var(--theme-muted)]">{d.text}</p>
                         </div>
                       ))}
@@ -635,7 +834,13 @@ export default function App() {
                     </div>
                   )}
                 </div>
-              </div>
+              {selectedItem && (
+                <button onClick={() => setListOpen(!listOpen)}
+                  className="hidden md:flex items-center justify-center w-6 h-6 mt-1 -mr-3 rounded border border-[var(--theme-border)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-muted)] transition-colors cursor-pointer flex-shrink-0 self-start bg-[var(--theme-bg)] z-10">
+                  <ChevronRight className={cn("w-3.5 h-3.5 transition-transform duration-300", listOpen && "-rotate-180")} />
+                </button>
+              )}
+            </div>
             </motion.div>
           )}
 
@@ -757,9 +962,9 @@ export default function App() {
                   {activeInfoSection === 'Operating Model' && operatingModels && (
                     <div>
                       <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-8">Operating Model</h2>
-                      <div className="flex flex-col gap-8">
+                      <div className="flex flex-col gap-6">
                         {operatingModels.map((m: any, i: number) => (
-                          <div key={i}>
+                          <div key={i} className="border-b border-[var(--theme-border)] pb-6 last:border-0">
                             <h3 className="text-[16px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">{m.title}</h3>
                             <p className="text-[15px] leading-relaxed text-[var(--theme-muted)]">{m.description}</p>
                           </div>
@@ -813,7 +1018,7 @@ export default function App() {
           {activeSection === 'contact' && (
             <motion.div key="contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
               <div className="px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-8 max-w-2xl">
-                <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-4">Contact</h2>
+                <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">Contact</h2>
                 <p className="text-[15px] leading-relaxed text-[var(--theme-muted)] mb-6">
                   Typically responds within 1–3 business days. Reach out for any of the following.
                 </p>
@@ -835,10 +1040,16 @@ export default function App() {
                         className="text-[var(--theme-fg)] underline underline-offset-4 decoration-[var(--theme-border)] hover:decoration-[var(--theme-fg)] transition-[text-decoration-color]">MentorCruise</a> or direct inquiry.
                     </p>
                   </div>
+                  {selectedItem && (
+                    <button onClick={() => setListOpen(!listOpen)}
+                      className="hidden md:flex items-center justify-center w-6 h-6 mt-1 -mr-3 rounded border border-[var(--theme-border)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-muted)] transition-colors cursor-pointer flex-shrink-0 self-start bg-[var(--theme-bg)] z-10">
+                      <ChevronRight className={cn("w-3.5 h-3.5 transition-transform duration-300", listOpen && "-rotate-180")} />
+                    </button>
+                  )}
                 </div>
                 <button onClick={handleCopyEmail}
-                  className="inline-flex items-center gap-1.5 font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:opacity-60 transition-opacity cursor-pointer border-b border-dashed border-[var(--theme-border)] hover:border-[var(--theme-fg)] pb-0.5"
-                  style={{ fontSize: 'clamp(18px, 2vw, 26px)' }}>
+                  className="inline-flex items-center gap-1.5 font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:opacity-60 transition-opacity cursor-pointer border-b border-dashed border-[var(--theme-border)] hover:border-[var(--theme-fg)] pb-0.5 mb-6"
+                  style={{ fontSize: '20px' }}>
                   <span>{contact?.email || 'studio@tomiabe.com'}</span>
                   {copied
                     ? <Check className="w-4 h-4 text-green-500" />
@@ -850,7 +1061,7 @@ export default function App() {
         </AnimatePresence>
 
         {/* ── FOOTER ── */}
-        <div className="px-6 md:px-8 lg:px-10 py-8 border-t border-[var(--theme-border)] flex items-center justify-between">
+        <div className="px-6 md:px-8 lg:px-10 py-8 border-t border-[var(--theme-border)] flex flex-col md:flex-row items-center md:justify-between gap-2">
           <p className="text-[13px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] tracking-wider">
             Objectivity · Clarity · Precision
           </p>

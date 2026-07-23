@@ -1,0 +1,12 @@
+{
+  "id": "nigeria-embassy",
+  "title": "Nigeria Embassy Finder",
+  "categories": ["Product", "Data"],
+  "shortDescription": "Nigeria consular search directory",
+  "role": "",
+  "order": 9,
+  "year": "2022",
+  "image": "/images/projects/NigeriaEmbassy.png",
+  "description": "Turning scattered consular information into a single, searchable directory for Nigerian embassies, missions, and visa centers at home and abroad.",
+  "link": "https://tomiabe.github.io/nigeria-embassy/"
+}

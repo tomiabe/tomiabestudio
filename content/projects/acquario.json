@@ -1,0 +1,12 @@
+{
+  "id": "acquario",
+  "title": "Acquario",
+  "categories": ["Art", "Data"],
+  "shortDescription": "Data-driven virtual aquarium",
+  "role": "",
+  "order": 14,
+  "year": "2022",
+  "image": "/images/projects/Acquario.jpg",
+  "description": "Visualizing aquatic migration through a multisensory, data-driven virtual aquarium that turns abstract movement patterns into tangible, exploratory simulations.",
+  "link": "https://editor.p5js.org/tomiabe/full/0iDmkljF2"
+}

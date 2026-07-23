@@ -135,6 +135,9 @@ body {
 .update-body a:hover {
   text-decoration-color: var(--theme-fg);
 }
+.update-body a + * {
+  margin-top: 1em;
+}
 
 .hero-link {
   font-weight: 500;
@@ -145,4 +148,18 @@ body {
 .hero-link:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+@keyframes scroll-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.animate-scroll-up {
+  animation: scroll-up 60s linear infinite;
+}
+
+.feed-mask-vertical {
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
 }
