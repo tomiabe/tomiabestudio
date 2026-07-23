@@ -131,7 +131,7 @@ function DesignSystemContent() {
       <div className="p-2.5 border-t border-[var(--theme-border)] bg-stone-50 text-center">
         <a href="https://susinsight.com/design-system" target="_blank" rel="noopener noreferrer"
           className="text-[12px] font-[500] text-[var(--theme-fg)] hover:underline underline-offset-4">
-          Open full design system →</a>
+          Open Full Design System <ArrowUpRight className="w-3 h-3" /></a>
       </div>
     </div>
   );
