@@ -58,7 +58,7 @@ function BrandIdentityContent({ images }: { images?: string[] }) {
     <div className="border border-[var(--theme-border)] rounded-xl p-4 space-y-5 mb-3">
       {images && images.length >= 2 && (
         <div className="space-y-2">
-          <div className="p-4 rounded-lg bg-white border border-[var(--theme-border)] flex items-center justify-center min-h-[60px]">
+          <div className="p-4 rounded-lg bg-[var(--theme-bg)] border border-[var(--theme-border)] flex items-center justify-center min-h-[60px]">
             <img src={images[0]} alt="Susinsight logo (light background)" className="h-6 md:h-7 w-auto object-contain" referrerPolicy="no-referrer" />
           </div>
           <div className="p-4 rounded-lg flex items-center justify-center min-h-[60px]" style={{ backgroundColor: '#2E6F5B' }}>
@@ -128,7 +128,7 @@ function DesignSystemContent() {
         alt="Susinsight Design System"
         className="w-full"
       />
-      <div className="p-2.5 border-t border-[var(--theme-border)] bg-stone-50 text-center">
+      <div className="p-2.5 border-t border-[var(--theme-border)] bg-[var(--theme-bg)] text-center">
         <a href="https://susinsight.com/design-system" target="_blank" rel="noopener noreferrer"
           className="text-[12px] font-[500] text-[var(--theme-fg)] hover:underline underline-offset-4 inline-flex items-center gap-1 whitespace-nowrap">
           Open Full Design System <ArrowUpRight className="w-3 h-3" /></a>
@@ -795,7 +795,7 @@ export default function App() {
                                 </div>
                               </div>
                               {(d.link || selectedItem.link) && (
-                                <div className="p-2.5 border-t border-[var(--theme-border)] bg-stone-50 text-center">
+                                <div className="p-2.5 border-t border-[var(--theme-border)] bg-[var(--theme-bg)] text-center">
                                   <a href={d.link || selectedItem.link} target="_blank" rel="noopener noreferrer"
                                     className="text-[12px] font-[500] text-[var(--theme-fg)] hover:underline underline-offset-4 inline-flex items-center gap-1">
                                     {d.linkLabel || siteData.settings?.uiLabels?.visitProject || 'Visit'} <ArrowUpRight className="w-3 h-3" />
@@ -807,7 +807,7 @@ export default function App() {
                             <div className="border border-[var(--theme-border)] rounded-xl overflow-hidden mb-3">
                               <img src={d.image} alt={d.heading} className="w-full" referrerPolicy="no-referrer" />
                               {(d.link || selectedItem.link) && (
-                                <div className="p-2.5 border-t border-[var(--theme-border)] bg-stone-50 text-center">
+                                <div className="p-2.5 border-t border-[var(--theme-border)] bg-[var(--theme-bg)] text-center">
                                   <a href={d.link || selectedItem.link} target="_blank" rel="noopener noreferrer"
                                     className="text-[12px] font-[500] text-[var(--theme-fg)] hover:underline underline-offset-4 inline-flex items-center gap-1">
                                     {d.linkLabel || siteData.settings?.uiLabels?.visitProject || 'Visit'} <ArrowUpRight className="w-3 h-3" />
