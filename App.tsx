@@ -463,7 +463,7 @@ export default function App() {
   const isHome = activeSection === 'home';
 
   // ── MOBILE HEADER + MENU ──
-  const MobileHeader = () => (
+  const mobileHeader = (
     <div className="md:hidden fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 h-14 bg-[var(--theme-bg)]/90 backdrop-blur-md border-b border-[var(--theme-border)]">
       <span className="text-sm font-[family-name:var(--font-heading)] text-[var(--theme-fg)]">TOMI ABE STUDIO</span>
       <button onClick={() => setMobileMenuOpen(true)}
@@ -473,7 +473,7 @@ export default function App() {
     </div>
   );
 
-  const MobileMenu = () => (
+  const mobileMenu = (
     <AnimatePresence>
       {mobileMenuOpen && (
         <>
@@ -531,12 +531,6 @@ export default function App() {
                   </button>
                 ))}
                 </div>
-              {selectedItem && (
-                <button onClick={() => setListOpen(!listOpen)}
-                  className="hidden md:flex items-center justify-center w-6 h-6 mt-1 -mr-3 rounded border border-[var(--theme-border)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] hover:border-[var(--theme-muted)] transition-colors cursor-pointer flex-shrink-0 self-start bg-[var(--theme-bg)] z-10">
-                  <ChevronRight className={cn("w-3.5 h-3.5 transition-transform duration-300", listOpen && "-rotate-180")} />
-                </button>
-              )}
             </div>
           </motion.div>
         </>
@@ -1018,7 +1012,7 @@ export default function App() {
           {activeSection === 'contact' && (
             <motion.div key="contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
               <div className="px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-8 max-w-2xl">
-                <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-2">Contact</h2>
+                <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-6">Contact</h2>
                 <p className="text-[15px] leading-relaxed text-[var(--theme-muted)] mb-6">
                   Typically responds within 1–3 business days. Reach out for any of the following.
                 </p>
@@ -1070,8 +1064,8 @@ export default function App() {
           </p>
         </div>
       </main>
-      <MobileHeader />
-      <MobileMenu />
+      {mobileHeader}
+      {mobileMenu}
     </div>
   );
 }
