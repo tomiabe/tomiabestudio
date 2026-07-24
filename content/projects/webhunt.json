@@ -6,7 +6,7 @@
   "role": "",
   "order": 10,
   "year": "2022",
-  "image": "/images/projects/WebHunt.jpg",
+  "image": "https://picsum.photos/seed/webhunt/800/600",
   "description": "Curating and systematizing standout web experiences into a digital gallery that showcases experimental interfaces, interaction patterns, and narrative-driven design.",
   "link": "https://tomiabe.github.io/webhunt/"
 }

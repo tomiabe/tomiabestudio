@@ -1,0 +1,11 @@
+{
+  "title": "Production WordPress Snippets Library",
+  "id": "wp-snippets",
+  "order": 4,
+  "visible": true,
+  "date": "February 2026",
+  "description": "Curated, production-ready WordPress PHP snippets for admin, performance, security, and block theme development.",
+  "image": "https://picsum.photos/seed/wp-snippets/800/600",
+  "directLink": false,
+  "content": "<p>I started pulling together a library of WordPress PHP snippets extracted from real client work — admin dashboard tweaks, performance optimisations, security hardening, block theme utilities. Each one is a standalone file solving a concrete problem: cloning posts with custom fields, stripping /category/ from taxonomy URLs, switching block theme style variations based on time of day, and lightweight cache control without a plugin.</p><p>The collection grew out of frustration with reaching for the same solutions across projects and finding them scattered across different repos, gists, and local files. Now they live in one place, tested on WordPress 6.x, ready to drop into any project.</p><p><a target=\"_blank\" rel=\"noreferrer\" href=\"https://github.com/tomiabe/wp-snippets\">Browse the snippets →</a></p>"
+}

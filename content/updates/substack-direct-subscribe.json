@@ -1,0 +1,11 @@
+{
+  "title": "Substack Direct Subscribe",
+  "id": "substack-direct-subscribe",
+  "order": 2,
+  "visible": true,
+  "date": "June 2026",
+  "description": "A lightweight, client-side React package for collecting Substack email subscriptions directly from your site — no server, no proxy, no backend.",
+  "image": "https://picsum.photos/seed/substack-direct/800/600",
+  "directLink": false,
+  "content": "<p>Substack blocks API requests from cloud and datacenter IPs — Vercel, Netlify, AWS — which means standard server-side subscription forms fail silently. The workaround is sending the request from the visitor's browser using <code>fetch</code> with <code>mode: 'no-cors'</code>, bypassing the block entirely.</p><p>I packaged this approach into a lightweight React component — <code>SubstackForm</code> and <code>SubstackPopup</code> — with proper idle, submitting, success, and error states. It works anywhere: Next.js, static sites, plain HTML. No backend, no webhooks, no proxy. Just the visitor's browser talking directly to Substack.</p><p><a target=\"_blank\" rel=\"noreferrer\" href=\"https://github.com/tomiabe/substack-direct-subscribe\">View on GitHub →</a></p>"
+}
