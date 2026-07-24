@@ -18,27 +18,25 @@
   "details": [
     {
       "heading": "Brand Identity",
-      "text": "Culerson's brand had to signal technical authority in the energy sector while remaining approachable to commercial and institutional decision-makers. I developed a logo system built around a bold, monolithic wordmark that projects stability and precision, paired with a deep navy and amber palette drawn from industrial energy environments. The type system uses a clean sans-serif for body text with heavier weights for technical content, ensuring readability across dense analytical materials. Every application was tested against the visual standards of the energy advisory space, where credibility is established through restraint and clarity rather than decorative flourish.",
+      "text": "Culerson is a minority-owned energy advisory firm founded in 2024, operating at the intersection of technical expertise and market credibility. I developed a visual identity that signals authority in the energy sector while remaining accessible to commercial and institutional decision-makers. The logo system uses a bold, monolithic wordmark paired with a deep navy and amber palette drawn from industrial energy environments — colours that translate across digital and print without losing impact. The type system pairs a clean sans-serif for body text with heavier weights for technical documentation, ensuring readability across dense analytical materials. Every brand application was tested against the visual standards of the energy advisory space, where credibility is established through precision and restraint.",
       "type": "brand-identity"
     },
     {
       "heading": "Digital Presence",
-      "text": "The website needed to communicate Culerson's full-service energy advisory capabilities across analytics, renewable integration, system optimisation, and performance monitoring. I designed a site structure that leads with the firm's core positioning and key achievements before guiding visitors through service areas, industry verticals, and thought leadership. The visual language balances data-rich content with clean editorial layouts, using subtle motion and scroll-triggered transitions to make technical information feel navigable rather than overwhelming. A prominent project discovery call CTA is threaded throughout, converting clarity into conversation.",
+      "text": "The website needed to position Culerson as a credible energy advisory partner across six core service areas — Technical Advisory, Renewable Integration, Microgrid Design, Energy Storage, AI-Driven Analytics, and Marketplace Solutions. I structured the site to lead with the firm's mission and key achievements before guiding visitors through service pillars, industry verticals, and thought leadership. The visual language balances data-rich content with clean editorial layouts, using subtle motion and scroll-triggered transitions to make technical information feel navigable rather than overwhelming. A project discovery call CTA is threaded throughout the experience, converting clarity into conversation.",
       "image": "https://culerson.susbridge.xyz/wp-content/uploads/2025/02/wind-turbines-with-solar-panels.jpg",
       "link": "https://culerson.susbridge.xyz",
       "linkLabel": "Visit Culerson"
     },
     {
-      "heading": "Content & Positioning",
-      "text": "Energy advisory is a credibility-driven market, and Culerson needed content that demonstrated expertise without overwhelming prospective clients with jargon. I developed a content framework organised around the firm's core service pillars, with insight articles and industry-specific pages that translate technical capability into commercial relevance. The editorial approach treats each piece of content as a decision-support tool, helping energy professionals understand how Culerson's analytics, forecasting, and risk optimisation work applies to real operational challenges. The positioning bridges the gap between deep technical competence and the strategic conversations that energy leaders need to have.",
+      "heading": "Content & Market Positioning",
+      "text": "In the energy advisory space, credibility is earned through demonstrated expertise. I developed a content framework that translates Culerson's technical capabilities — from AI-driven predictive analytics to distributed energy resource management — into commercial relevance for each target sector. The insights section positions the firm's leadership team as subject-matter authorities, with articles authored by the CEO and innovation consultant. Industry-specific pages for Retail, Construction, Financial Services, and the Public Sector function as dedicated landing experiences, tailoring messaging and use cases to each audience's operational realities. The positioning bridges the gap between deep technical competence and the strategic conversations that energy leaders need to have.",
       "link": "https://culerson.susbridge.xyz/insights/",
       "linkLabel": "Read Insights"
     },
     {
-      "heading": "Industry Verticals",
-      "text": "Culerson serves distinct sectors, each with its own energy challenges and decision-making context. I designed vertical-specific pages for Retail, Construction, Financial Services, and the Public Sector, tailoring the messaging, use cases, and service emphasis to each audience. Rather than a one-size-fits-all approach, each vertical page functions as a dedicated landing experience that speaks directly to the operational realities of that sector. This structure positions Culerson as a specialist partner rather than a generalist provider, strengthening relevance across institutional, commercial, and government stakeholders.",
-      "link": "https://culerson.susbridge.xyz",
-      "linkLabel": "Explore Verticals"
-    },
+      "heading": "Platform Architecture",
+      "text": "I built the site on a WordPress foundation with a custom theme architecture designed for the energy advisory context. The structure supports distinct content types — service pages, industry verticals, insight articles, team profiles — each with its own layout template while maintaining visual consistency across the platform. The editorial workflow allows the Culerson team to publish insights, update service offerings, and manage sector-specific content without developer intervention. Automated performance monitoring and image optimisation keep the site fast across markets, and the responsive design ensures the experience translates from desktop research to mobile consultation seamlessly."
+    }
   ]
 }
