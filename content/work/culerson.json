@@ -1,12 +1,48 @@
 {
-  "id": "culerson",
   "title": "Culerson",
-  "categories": ["Brand", "Content"],
-  "shortDescription": "Energy advisory platform",
-  "role": "Brand & Digital Consultant",
+  "id": "culerson",
   "order": 1,
-  "year": "2025",
+  "visible": true,
+  "role": "Brand & Digital Consultant",
+  "description": "Transforming advanced energy systems expertise into a clear, decision-ready advisory and digital presence for modern power transitions.",
+  "categories": [
+    "Brand",
+    "Content",
+    "Product"
+  ],
   "image": "/images/work/Culerson.jpg",
-  "description": "Developing brand and digital presence for an energy advisory platform, translating technical expertise in renewable energy and system optimization into a clear, credible market position across institutional and commercial audiences.",
-  "link": "https://culerson.susbridge.xyz"
+  "link": "https://culerson.susbridge.xyz",
+  "isFullBleed": false,
+  "shortDescription": "Energy advisory platform",
+  "year": "2025",
+  "details": [
+    {
+      "heading": "Brand Identity",
+      "text": "Culerson's brand had to signal technical authority in the energy sector while remaining approachable to commercial and institutional decision-makers. I developed a logo system built around a bold, monolithic wordmark that projects stability and precision, paired with a deep navy and amber palette drawn from industrial energy environments. The type system uses a clean sans-serif for body text with heavier weights for technical content, ensuring readability across dense analytical materials. Every application was tested against the visual standards of the energy advisory space, where credibility is established through restraint and clarity rather than decorative flourish.",
+      "type": "brand-identity"
+    },
+    {
+      "heading": "Digital Presence",
+      "text": "The website needed to communicate Culerson's full-service energy advisory capabilities across analytics, renewable integration, system optimisation, and performance monitoring. I designed a site structure that leads with the firm's core positioning and key achievements before guiding visitors through service areas, industry verticals, and thought leadership. The visual language balances data-rich content with clean editorial layouts, using subtle motion and scroll-triggered transitions to make technical information feel navigable rather than overwhelming. A prominent project discovery call CTA is threaded throughout, converting clarity into conversation.",
+      "image": "https://culerson.susbridge.xyz/wp-content/uploads/2025/02/wind-turbines-with-solar-panels.jpg",
+      "link": "https://culerson.susbridge.xyz",
+      "linkLabel": "Visit Culerson"
+    },
+    {
+      "heading": "Content & Positioning",
+      "text": "Energy advisory is a credibility-driven market, and Culerson needed content that demonstrated expertise without overwhelming prospective clients with jargon. I developed a content framework organised around the firm's core service pillars, with insight articles and industry-specific pages that translate technical capability into commercial relevance. The editorial approach treats each piece of content as a decision-support tool, helping energy professionals understand how Culerson's analytics, forecasting, and risk optimisation work applies to real operational challenges. The positioning bridges the gap between deep technical competence and the strategic conversations that energy leaders need to have.",
+      "link": "https://culerson.susbridge.xyz/insights/",
+      "linkLabel": "Read Insights"
+    },
+    {
+      "heading": "Industry Verticals",
+      "text": "Culerson serves distinct sectors, each with its own energy challenges and decision-making context. I designed vertical-specific pages for Retail, Construction, Financial Services, and the Public Sector, tailoring the messaging, use cases, and service emphasis to each audience. Rather than a one-size-fits-all approach, each vertical page functions as a dedicated landing experience that speaks directly to the operational realities of that sector. This structure positions Culerson as a specialist partner rather than a generalist provider, strengthening relevance across institutional, commercial, and government stakeholders.",
+      "link": "https://culerson.susbridge.xyz",
+      "linkLabel": "Explore Verticals"
+    },
+    {
+      "heading": "Ongoing Collaboration",
+      "text": "This engagement continues as Culerson's digital presence evolves alongside the firm's growing service offerings and market presence. The content library is being expanded with additional insight articles and sector-specific materials, and the brand system continues to be refined as new communication contexts emerge. Being embedded in the firm's development means every design and content decision is informed by real engagement data and direct feedback from the Culerson team, keeping the digital presence aligned with how the business actually operates and grows."
+    }
+  ]
 }
