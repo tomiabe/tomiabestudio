@@ -806,7 +806,7 @@ export default function App() {
                           ) : d.image && (
                             <div className="border border-[var(--theme-border)] rounded-xl overflow-hidden mb-3">
                               <img src={d.image} alt={d.heading} className="w-full" referrerPolicy="no-referrer" />
-                              {(d.link || selectedItem.link) && (
+                              {d.link !== '' && (d.link || selectedItem.link) && (
                                 <div className="p-2.5 border-t border-[var(--theme-border)] bg-[var(--theme-bg)] text-center">
                                   <a href={d.link || selectedItem.link} target="_blank" rel="noopener noreferrer"
                                     className="text-[12px] font-[500] text-[var(--theme-fg)] hover:underline underline-offset-4 inline-flex items-center gap-1">
