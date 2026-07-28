@@ -22,7 +22,7 @@ type ThemeMode = 'morning' | 'noon' | 'evening' | 'system';
 
 interface ProjectDetail { heading: string; text: string; image?: string; images?: string[]; type?: 'brand-identity' | 'creative-feed' | 'design-system'; }
 interface Project { id: string; title: string; role?: string; description: string; categories: string[]; link?: string; useDrawer?: boolean; image: string; details?: ProjectDetail[]; order?: number; visible?: boolean; }
-interface Update { id: string; date: string; title: string; description: string; image: string; link?: string; directLink?: boolean; content?: string; ctaLink?: string; ctaLabel?: string; videoUrl?: string; watchLabel?: string; order?: number; visible?: boolean; }
+interface Update { id: string; date: string; title: string; description: string; image: string; link?: string; directLink?: boolean; content?: string; ctaLink?: string; ctaLabel?: string; videoUrl?: string; watchLabel?: string; highlightsTitle?: string; highlightsContent?: string; order?: number; visible?: boolean; }
 interface Testimonial { quote: string; name: string; role: string; company: string; avatar?: string; }
 interface SocialLink { name: string; url: string; }
 
@@ -948,7 +948,7 @@ export default function App() {
                         <div className="update-body text-[16px] leading-relaxed text-[var(--theme-muted)] mb-6" dangerouslySetInnerHTML={{ __html: selectedItem.content }} />
                       )}
                       {selectedItem.videoUrl && (
-                        <div className="mt-8">
+                        <div className="mb-8">
                           {selectedItem.watchLabel && (
                             <p className="text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-3">{selectedItem.watchLabel}</p>
                           )}
@@ -959,6 +959,12 @@ export default function App() {
                             allowFullScreen
                           />
                         </div>
+                      )}
+                      {selectedItem.highlightsTitle && (
+                        <h4 className="text-[16px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-4">{selectedItem.highlightsTitle}</h4>
+                      )}
+                      {selectedItem.highlightsContent && (
+                        <div className="update-body text-[16px] leading-relaxed text-[var(--theme-muted)] mb-8" dangerouslySetInnerHTML={{ __html: selectedItem.highlightsContent }} />
                       )}
                       <div className="mb-8" />
                       {selectedItem.ctaLink ? (
