@@ -1,24 +1,3 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Examples 1 and 2 demonstrate the expected behavior, but since the current input only shows modifications to source/config files (JSON and CSS) without any build artifacts, dependencies, or temp files, no .gitignore rules are needed.
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+(content/updates/loblaw-ai.json and index.css are source files that should not be ignored)

@@ -89,6 +89,9 @@ body {
 .update-body a + * {
   margin-top: 1em;
 }
+.update-body p:last-child {
+  margin-bottom: 2rem;
+}
 
 .hero-link {
   font-weight: 500;
