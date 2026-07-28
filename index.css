@@ -93,10 +93,8 @@ body {
   line-height: 1.6;
 }
 .update-body ul li strong {
-  font-family: var(--font-body);
-  font-size: inherit;
-  font-weight: inherit;
-  color: inherit;
+  font-weight: 700;
+  color: var(--theme-fg);
 }
 .update-body ul ul {
   margin-top: 0.5em;
