@@ -903,7 +903,7 @@ export default function App() {
             <motion.div key="thoughts" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
               className="flex md:h-screen">
               {/* Col 2: List - hide on mobile when viewing detail */}
-              <div className={cn("w-full md:w-[380px] flex-none md:border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar px-6 pt-10 md:pt-6 pb-6",
+              <div className={cn("w-full md:w-[380px] flex-none md:border-r border-[var(--theme-border)] overflow-y-auto hide-scrollbar overscroll-y-contain px-6 pt-10 md:pt-6 pb-6",
                 selectedItem ? "hidden md:block" : ""
               )}>
                 <h2 className="text-2xl font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-6">Updates</h2>
@@ -926,7 +926,7 @@ export default function App() {
               </div>
 
               {/* Col 3: Detail */}
-              <div className={cn("flex-1 overflow-y-auto hide-scrollbar px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-8",
+              <div className={cn("flex-1 overflow-y-auto hide-scrollbar overscroll-y-contain px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-8",
                 selectedItem ? "flex" : "hidden md:flex"
               )}>
                 <div className={cn("max-w-2xl w-full", selectedItem && "min-h-full md:min-h-screen")}>
