@@ -95,11 +95,8 @@ body {
 .update-body ul li strong {
   font-family: var(--font-body);
   font-size: inherit;
-  font-weight: 600;
-  color: var(--theme-fg);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--theme-border);
+  font-weight: inherit;
+  color: inherit;
 }
 .update-body ul ul {
   margin-top: 0.5em;
