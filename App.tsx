@@ -22,7 +22,7 @@ type ThemeMode = 'morning' | 'noon' | 'evening' | 'system';
 
 interface ProjectDetail { heading: string; text: string; image?: string; images?: string[]; type?: 'brand-identity' | 'creative-feed' | 'design-system'; }
 interface Project { id: string; title: string; role?: string; description: string; categories: string[]; link?: string; useDrawer?: boolean; image: string; details?: ProjectDetail[]; order?: number; visible?: boolean; }
-interface Update { id: string; date: string; title: string; description: string; image: string; link?: string; directLink?: boolean; content?: string; ctaLink?: string; ctaLabel?: string; order?: number; visible?: boolean; }
+interface Update { id: string; date: string; title: string; description: string; image: string; link?: string; directLink?: boolean; content?: string; ctaLink?: string; ctaLabel?: string; videoUrl?: string; order?: number; visible?: boolean; }
 interface Testimonial { quote: string; name: string; role: string; company: string; avatar?: string; }
 interface SocialLink { name: string; url: string; }
 
@@ -946,6 +946,16 @@ export default function App() {
                       <p className="text-[16px] leading-relaxed font-[500] text-[var(--theme-muted)] mb-8">{selectedItem.description}</p>
                       {selectedItem.content && (
                         <div className="update-body text-[16px] leading-relaxed text-[var(--theme-muted)] mb-6" dangerouslySetInnerHTML={{ __html: selectedItem.content }} />
+                      )}
+                      {selectedItem.videoUrl && (
+                        <div className="mb-6">
+                          <iframe
+                            src={selectedItem.videoUrl}
+                            className="w-full aspect-video rounded-lg border border-[var(--theme-border)]"
+                            allow="autoplay"
+                            allowFullScreen
+                          />
+                        </div>
                       )}
                       {selectedItem.ctaLink ? (
                         <a href={selectedItem.ctaLink} target="_blank" rel="noopener noreferrer"
