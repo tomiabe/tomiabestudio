@@ -943,22 +943,22 @@ export default function App() {
                           <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-auto rounded-lg" referrerPolicy="no-referrer" />
                         </div>
                       )}
-                      <p className="text-[16px] leading-relaxed font-[500] text-[var(--theme-muted)] mb-6">{selectedItem.description}</p>
+                      <p className="text-[16px] leading-relaxed font-[500] text-[var(--theme-muted)] mb-8">{selectedItem.description}</p>
                       {selectedItem.content && (
                         <div className="update-body text-[16px] leading-relaxed text-[var(--theme-muted)] mb-6" dangerouslySetInnerHTML={{ __html: selectedItem.content }} />
                       )}
                       {selectedItem.ctaLink ? (
                         <a href={selectedItem.ctaLink} target="_blank" rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 mt-6 mb-8 cursor-pointer">
+                          className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 cursor-pointer mb-8">
                           {selectedItem.ctaLabel || 'Read more'} <ArrowUpRight className="w-4 h-4" />
                         </a>
                       ) : selectedItem.link ? (
                         <a href={selectedItem.link} target="_blank" rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 mt-6 mb-8 cursor-pointer">
+                          className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 cursor-pointer mb-8">
                           Read more <ArrowUpRight className="w-4 h-4" />
                         </a>
                       ) : (
-                        <div className="mt-8 mb-8" />
+                        <div className="mb-8" />
                       )}
                     </div>
                   ) : (
