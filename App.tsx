@@ -22,7 +22,7 @@ type ThemeMode = 'morning' | 'noon' | 'evening' | 'system';
 
 interface ProjectDetail { heading: string; text: string; image?: string; images?: string[]; type?: 'brand-identity' | 'creative-feed' | 'design-system'; }
 interface Project { id: string; title: string; role?: string; description: string; categories: string[]; link?: string; useDrawer?: boolean; image: string; details?: ProjectDetail[]; order?: number; visible?: boolean; }
-interface Update { id: string; date: string; title: string; description: string; image: string; link?: string; directLink?: boolean; content?: string; order?: number; visible?: boolean; }
+interface Update { id: string; date: string; title: string; description: string; image: string; link?: string; directLink?: boolean; content?: string; ctaLink?: string; ctaLabel?: string; order?: number; visible?: boolean; }
 interface Testimonial { quote: string; name: string; role: string; company: string; avatar?: string; }
 interface SocialLink { name: string; url: string; }
 
@@ -947,7 +947,12 @@ export default function App() {
                       {selectedItem.content && (
                         <div className="update-body text-[16px] leading-relaxed text-[var(--theme-muted)] mb-6" dangerouslySetInnerHTML={{ __html: selectedItem.content }} />
                       )}
-                      {selectedItem.link ? (
+                      {selectedItem.ctaLink ? (
+                        <a href={selectedItem.ctaLink} target="_blank" rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 mt-6 mb-8 cursor-pointer">
+                          {selectedItem.ctaLabel || 'Read more'} <ArrowUpRight className="w-4 h-4" />
+                        </a>
+                      ) : selectedItem.link ? (
                         <a href={selectedItem.link} target="_blank" rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 mt-6 mb-8 cursor-pointer">
                           Read more <ArrowUpRight className="w-4 h-4" />
