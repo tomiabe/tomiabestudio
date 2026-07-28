@@ -929,7 +929,7 @@ export default function App() {
               <div className={cn("flex-1 overflow-y-auto hide-scrollbar px-6 md:px-8 lg:px-10 pt-10 md:pt-6 pb-8",
                 selectedItem ? "flex" : "hidden md:flex"
               )}>
-                <div className="max-w-2xl w-full">
+                <div className={cn("max-w-2xl w-full", selectedItem && "min-h-full md:min-h-screen")}>
                   <button onClick={() => { setSelectedItem(null); updateUrl('thoughts'); }}
                     className="md:hidden inline-flex items-center gap-1.5 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-muted)] hover:text-[var(--theme-fg)] mb-6 transition-colors cursor-pointer">
                     <ChevronRight className="w-4 h-4 rotate-180" /> Back
@@ -947,11 +947,13 @@ export default function App() {
                       {selectedItem.content && (
                         <div className="update-body text-[16px] leading-relaxed text-[var(--theme-muted)] mb-6" dangerouslySetInnerHTML={{ __html: selectedItem.content }} />
                       )}
-                      {selectedItem.link && (
+                      {selectedItem.link ? (
                         <a href={selectedItem.link} target="_blank" rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 mt-6 mb-8 cursor-pointer">
                           Read more <ArrowUpRight className="w-4 h-4" />
                         </a>
+                      ) : (
+                        <div className="mt-8 mb-8" />
                       )}
                     </div>
                   ) : (
