@@ -948,7 +948,7 @@ export default function App() {
                         <div className="update-body text-[16px] leading-relaxed text-[var(--theme-muted)] mb-6" dangerouslySetInnerHTML={{ __html: selectedItem.content }} />
                       )}
                       {selectedItem.videoUrl && (
-                        <div className="mt-8 mb-8">
+                        <div className="mt-8">
                           {selectedItem.watchLabel && (
                             <p className="text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-3">{selectedItem.watchLabel}</p>
                           )}
@@ -960,6 +960,7 @@ export default function App() {
                           />
                         </div>
                       )}
+                      <div className="mb-8" />
                       {selectedItem.ctaLink ? (
                         <a href={selectedItem.ctaLink} target="_blank" rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] hover:underline underline-offset-4 cursor-pointer mb-8">
