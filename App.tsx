@@ -22,7 +22,7 @@ type ThemeMode = 'morning' | 'noon' | 'evening' | 'system';
 
 interface ProjectDetail { heading: string; text: string; image?: string; images?: string[]; type?: 'brand-identity' | 'creative-feed' | 'design-system'; }
 interface Project { id: string; title: string; role?: string; description: string; categories: string[]; link?: string; useDrawer?: boolean; image: string; details?: ProjectDetail[]; order?: number; visible?: boolean; }
-interface Update { id: string; date: string; title: string; description: string; image: string; link?: string; directLink?: boolean; content?: string; ctaLink?: string; ctaLabel?: string; videoUrl?: string; order?: number; visible?: boolean; }
+interface Update { id: string; date: string; title: string; description: string; image: string; link?: string; directLink?: boolean; content?: string; ctaLink?: string; ctaLabel?: string; videoUrl?: string; watchLabel?: string; order?: number; visible?: boolean; }
 interface Testimonial { quote: string; name: string; role: string; company: string; avatar?: string; }
 interface SocialLink { name: string; url: string; }
 
@@ -948,7 +948,10 @@ export default function App() {
                         <div className="update-body text-[16px] leading-relaxed text-[var(--theme-muted)] mb-6" dangerouslySetInnerHTML={{ __html: selectedItem.content }} />
                       )}
                       {selectedItem.videoUrl && (
-                        <div className="mb-6">
+                        <div className="mb-8">
+                          {selectedItem.watchLabel && (
+                            <p className="text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-3">{selectedItem.watchLabel}</p>
+                          )}
                           <iframe
                             src={selectedItem.videoUrl}
                             className="w-full aspect-video rounded-lg border border-[var(--theme-border)]"
