@@ -948,13 +948,13 @@ export default function App() {
                         <div className="update-body text-[16px] leading-relaxed text-[var(--theme-muted)] mb-6" dangerouslySetInnerHTML={{ __html: selectedItem.content }} />
                       )}
                       {selectedItem.videoUrl && (
-                        <div className="mb-8">
+                        <div className="mt-8 mb-8">
                           {selectedItem.watchLabel && (
                             <p className="text-[14px] font-[family-name:var(--font-heading)] text-[var(--theme-fg)] mb-3">{selectedItem.watchLabel}</p>
                           )}
                           <iframe
                             src={selectedItem.videoUrl}
-                            className="w-full aspect-video rounded-lg border border-[var(--theme-border)]"
+                            className="w-full aspect-video rounded-lg border border-[var(--theme-border)] block"
                             allow="autoplay"
                             allowFullScreen
                           />

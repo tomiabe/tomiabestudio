@@ -76,6 +76,36 @@ body {
   margin-bottom: 0.75em;
   color: var(--theme-fg);
 }
+.update-body h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: var(--theme-fg);
+}
+.update-body ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1em;
+}
+.update-body ul li {
+  margin-bottom: 0.75em;
+  line-height: 1.6;
+}
+.update-body ul li strong {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: var(--theme-fg);
+  display: block;
+  margin-bottom: 0.25em;
+}
+.update-body ul ul {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.update-body ul ul li {
+  margin-bottom: 0.5em;
+}
 .update-body a {
   color: var(--theme-fg);
   text-decoration: underline;
