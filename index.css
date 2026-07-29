@@ -96,6 +96,10 @@ body {
   font-weight: 700;
   color: var(--theme-fg);
 }
+.update-body strong {
+  font-weight: 700;
+  color: var(--theme-fg);
+}
 .update-body ul ul {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
